@@ -71,6 +71,7 @@ module.exports = function(grunt){
                     "style.css"
                 ],
                 "dest": "server/public/assets/styles/"
+
             },
             script: {
                 expand: true,
@@ -80,6 +81,7 @@ module.exports = function(grunt){
                     "*/*"
                 ],
                 "dest": "server/public/assets/scripts/"
+
             }
         }
     });
