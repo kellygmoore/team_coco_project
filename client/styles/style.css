@@ -1,0 +1,80 @@
+
+
+
+/*body {*/
+    /*background-color: #B23E44;*/
+    /*width: 1200px;*/
+    /*height: 1920px;*/
+/*}*/
+
+
+/*styles for default view*/
+.screen {
+    background-color: #B23E44;
+    width: 800px;
+    height: 1280px;
+}
+
+.room-name-div {
+    font-size: 58px;
+    text-shadow: 5px 5px 5px #55606F;
+    /*display: block;*/
+    /*width: 100%;*/
+    padding-top: 30px;
+    margin: auto;
+    text-align: center;
+    color: floralwhite;
+}
+
+.default-instruction-div {
+    margin-top: 250px;
+    background-color: floralwhite;
+    color: #55606F;
+    text-align: center;
+    font-size: 32px;
+    font-family: 'Nothing You Could Do', cursive, sans-serif;
+    width: 50%;
+    height: 125px;
+    float: right;
+    border: 2px solid black;
+}
+
+.bottom-div {
+    clear: both;
+    text-align: center;
+    font-size: 32px;
+    /*margin-top: 40px;*/
+    color: floralwhite;
+    /*border: 2px solid purple;*/
+    padding-top: 250px;
+    line-height: 0;
+}
+
+.bottom-div p {
+    padding-bottom: 0px;
+}
+
+.time {
+    font-size: 54px;
+    /*border: 1px dashed black;*/
+}
+
+/***************THE HEADER: THE TOP************/
+header {
+    /*display: inline-block;*/
+    width: 100%;
+    height: 400px;
+    border: 2px dashed red;
+}
+
+#theRoom {
+    width: 65%;
+    float: left;
+    border: 2px solid black;
+}
+
+.clock {
+    width: 35%;
+    float: right;
+    border: 2px solid blue;
+}
