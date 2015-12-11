@@ -20,8 +20,8 @@ myApp.controller('TimeCtrl', ["$scope", "$timeout", function($scope, $timeout) {
 //Controller for the CALENDAR ////////////////////////////////////////////////////////
 myApp.controller('CalendarCtrl', ["$scope", "$location", function($scope, $location){
     $scope.bambooDataArray = [8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6];
-
-
+    $scope.memberInRoom = "Santa Claus";
+    $scope.bookedTime = false;
 
 
 

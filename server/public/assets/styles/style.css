@@ -64,11 +64,12 @@ header {
     /*display: inline-block;*/
     width: 800px;
     height: 125px;
+    margin: 25px auto 0 auto;
     /*border: 2px dashed red;*/
 }
 
 #theRoom {
-    font-size: 32px;
+    font-size: 24px;
     text-align: left;
     height: 120px;
     /*width: 60%;*/
@@ -76,10 +77,12 @@ header {
     /*padding-bottom: 10px;*/
     /*margin: auto;*/
     /*border: 2px solid black;*/
+    line-height: 10px;
 }
 
 .clock {
     height: 120px;
+    /*border: 2px solid blue;*/
 }
 
 .clock p {
@@ -88,8 +91,9 @@ header {
     /*float: right;*/
     text-align: right;
     font-size: 28px;
+    line-height: 10px;
     /*margin: auto;*/
-    /*border: 2px solid blue;*/
+
 }
 
 
@@ -99,6 +103,7 @@ header {
 .screenCalendar {
     width: 800px;
     height: 1280px;
+    margin: 20px;
 }
 
 .repeatDiv {
@@ -128,7 +133,7 @@ header {
     border-radius: 20px;
     margin: 6px 5px 6px 5px;
     text-align: center;
-    background-color: whitesmoke;
+    background-color: white;
     /*vertical-align: middle;*/
 }
 
@@ -140,3 +145,12 @@ header {
 .listDiv {
     list-style-type: none;
 }
+
+.whoInRoom {
+    text-align: center;
+    font-size: 24px;
+    font-family: "Nothing You Could Do", Arial, sans-serif;
+    color: #F3B449;
+    margin-top: 11px;
+}
+

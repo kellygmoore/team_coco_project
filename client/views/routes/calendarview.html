@@ -9,9 +9,12 @@
                 <div class="timeHour">
                     <span>{{timeblock}}</span>
                 </div>
-                <div class="timeBoxBlock">
-                    <div class="timeSelectOval">
+                <div class="timeBoxBlock" ng-style="{'background-color': timeblock === 12 ?  '#FF5962': 'lightgray'}">
+                    <div class="timeSelectOval" ng-hide="timeblock === 12">
                         <span>Tap to Book</span>
+                    </div>
+                    <div class="whoInRoom" ng-show="timeblock === 12">
+                        <span>{{memberInRoom}}</span>
                     </div>
                 </div>
             </li>
