@@ -9,7 +9,7 @@ myApp.config(["$routeProvider", function($routeProvider){
         }).
         when('/calendarview', {
             templateUrl: "assets/views/routes/calendarview.html",
-            controller: "TimeCtrl"
+            //controller: "TimeCtrl"
         }).
         otherwise({
             redirectTo: 'defaultscreen'

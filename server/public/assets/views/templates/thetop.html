@@ -1,12 +1,12 @@
-<header>
+<header ng-controller="TimeCtrl" tk-soleil>
 
     <div id="theRoom">
-        <h1>The Library</h1>
+        <h1 tk-soleil>The Library</h1>
     </div>
 
     <div class="clock">
-        <p>{{clock | date:'MMM d'}}</p>
-        <p>{{clock | date: 'h:mm a'}}</p>
+        <p tk-soleil>{{clock | date:'MMM d'}}</p>
+        <p tk-soleil>{{clock | date: 'h:mm a'}}</p>
     </div>
 
 </header>

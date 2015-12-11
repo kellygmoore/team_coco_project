@@ -1,4 +1,24 @@
+<!--Include the header for the top of the page-->
+<div class="screenCalendar">
+<div ng-include="'/assets/views/templates/thetop.html'"></div>
 
-    <div ng-include="'/assets/views/templates/thetop.html'"></div>
+<div class="container tk-soleil" ng-controller="CalendarCtrl">
+    <div class="repeatDiv">
+        <ul ng-model="bambooDataArray" class="listDiv">
+            <li ng-repeat="timeblock in bambooDataArray" class="timeBlock">
+                <div class="timeHour">
+                    <span>{{timeblock}}</span>
+                </div>
+                <div class="timeBoxBlock">
+                    <div class="timeSelectOval">
+                        <span>Tap to Book</span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
 
+
+</div>
+</div>
 
