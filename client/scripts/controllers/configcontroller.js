@@ -3,6 +3,7 @@
  */
 myApp.controller('ConfigController', ["$scope","$http", function($scope,$http) {
 
+//this data populates the select option fields for the config file
     $scope.data = {
         selectLocation: null,
         availableLocations: [
