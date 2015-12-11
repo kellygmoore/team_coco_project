@@ -63,18 +63,18 @@
 header {
     /*display: inline-block;*/
     width: 100%;
-    height: 400px;
+    height: 125px;
     border: 2px dashed red;
 }
 
 #theRoom {
-    width: 65%;
+    width: 64%;
     float: left;
     border: 2px solid black;
 }
 
 .clock {
-    width: 35%;
+    width: 34%;
     float: right;
     border: 2px solid blue;
 }

@@ -5,11 +5,8 @@
     </div>
 
     <div class="clock">
-        <!--The time <iframe src="http://free.timeanddate.com/clock/i4z2o794/n159/ts1" frameborder="0" width="62" height="18"></iframe>-->
-        <!--{{timeNow}}-->
-        Current Time
-        <p>{{clock | date:'mediumDate'}}</p>
-        <p>{{clock | date: 'shortTime'}}</p>
+        <p>{{clock | date:'MMM d'}}</p>
+        <p>{{clock | date: 'h:mm a'}}</p>
     </div>
 
 </header>
