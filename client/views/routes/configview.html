@@ -1,0 +1,48 @@
+<div>
+    <h1>Set Up</h1>
+    <h2>Set Up Meeting Room</h2>
+
+    <!--form to select the COCO location and ROOM-->
+    <form>
+        <label for ="selectLocation">Location</label>
+    <select required name="selectLocation" id="selectLocation" ng-model="data.selectLocation">
+        <option ng-repeat="option in data.availableLocations" value="{{option.id}}">{{option.name}}</option>
+    </select><br>
+
+        <label for ="selectRoom">Room</label>
+        <select required name="selectRoom" id="selectRoom" ng-model="data.selectRoom">
+            <option ng-repeat="option in data.availableRooms" value="{{option.id}}">{{option.name}}</option>
+        </select>
+
+
+
+    <h2>Screen Timeouts</h2>
+
+
+        <label for ="calendarTimeout">Calendar Screen</label>
+        <select required name="calendarTimeout" id="calendarTimeout" ng-model="data.calendarTimeout">
+            <option value="15" >15 seconds</option>
+            <option value="30" >30 seconds</option>
+            <option value="60" >60 seconds</option>
+        </select><br>
+
+        <label for ="bookingTimeout">Booking Screen</label>
+        <select required name="bookingTimeout" id="bookingTimeout" ng-model="data.bookingTimeout">
+            <option value="15" >15 seconds</option>
+            <option value="30" >30 seconds</option>
+            <option value="60" >60 seconds</option>
+        </select><br>
+
+        <label for ="resultsTimeout">Results Screen</label>
+        <select required name="resultsTimeout" id="resultsTimeout" ng-model="data.resultsTimeout">
+            <option value="15" >15 seconds</option>
+            <option value="30" >30 seconds</option>
+            <option value="60" >60 seconds</option>
+        </select><br>
+
+
+    </form>
+
+    <button ng-click="saveSettings()" class="md-raised md-primary">Submit and Save Settings</button>
+
+</div>
