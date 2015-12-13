@@ -68,7 +68,8 @@ module.exports = function(grunt){
                 expand: true,
                 cwd: 'client/styles/',
                 src: [
-                    "style.css"
+                    "*.css",
+                    "*/*"
                 ],
                 "dest": "server/public/assets/styles/"
 

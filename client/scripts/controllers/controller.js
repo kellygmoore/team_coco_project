@@ -24,6 +24,7 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", function($scope, $locat
     //placeholder for who is in the room for that booked time//
     $scope.memberInRoom = "Santa Claus";
 
+
    //$scope.pastTime = false;
    // var rightNow, booked, middle;
    // var d = new Date();
