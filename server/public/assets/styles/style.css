@@ -59,6 +59,11 @@
     /*border: 1px dashed black;*/
 }
 
+.badge-in-form{
+    /*position: relative;*/
+    /*left:-9999px*/
+}
+
 /***************THE HEADER: THE TOP************/
 header {
     /*display: inline-block;*/

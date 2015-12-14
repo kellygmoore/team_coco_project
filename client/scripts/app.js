@@ -5,7 +5,8 @@ var myApp = angular.module("myApp", ['ngRoute']);
 myApp.config(["$routeProvider", function($routeProvider){
     $routeProvider.
         when('/defaultscreen',{
-            templateUrl: "assets/views/routes/defaultscreen.html"
+            templateUrl: "assets/views/routes/defaultscreen.html",
+            controller:"DefaultController"
         }).
         when('/calendarview', {
             templateUrl: "assets/views/routes/calendarview.html",
