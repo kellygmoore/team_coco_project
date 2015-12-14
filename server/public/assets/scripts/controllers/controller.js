@@ -126,6 +126,22 @@ function BookingTimeController($scope, $mdDialog) {
         hours: 0
     };
 
+    $scope.peopleAdd = function(){
+        $scope.meetingValues.people++;
+    };
+
+    $scope.peopleRemove= function(){
+        $scope.meetingValues.people--;
+    };
+
+    $scope.hourRemove= function(){
+        $scope.meetingValues.hours--;
+    };
+
+    $scope.hourAdd= function(){
+        $scope.meetingValues.hours++;
+    };
+
     console.log("Dialog controller");
     $scope.hide = function() {
         $mdDialog.hide();

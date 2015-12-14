@@ -13,19 +13,19 @@
                 <div class="add addHours">
                     {{meetingValues.hours}} hours
                     <md-button class="md-icon-button aria-label" ng-click="">
-                        <span aria-label="add"><ng-md-icon icon="add"></ng-md-icon></span>
+                        <span aria-label="add" ng-click="hourAdd()"><ng-md-icon icon="add"></ng-md-icon></span>
                     </md-button>
                     <md-button class="md-icon-button" ng-click="">
-                        <span aria-label="subtract"><ng-md-icon icon="remove"></span>
+                        <span aria-label="subtract" ng-click="hourRemove()"><ng-md-icon icon="remove"></span>
                     </md-button>
                 </div>
                 <div class="add addPeople">
                     {{meetingValues.people}} people
                     <md-button class="md-icon-button aria-label" ng-click="">
-                        <span aria-label="add"><ng-md-icon icon="add"></ng-md-icon></span>
+                        <span aria-label="add" ng-click="peopleAdd()"><ng-md-icon icon="add"></ng-md-icon></span>
                     </md-button>
                     <md-button class="md-icon-button" ng-click="">
-                        <span aria-label="subtract"><ng-md-icon icon="remove"></span>
+                        <span aria-label="subtract" ng-click="peopleRemove()"><ng-md-icon icon="remove"></span>
                     </md-button>
                 </div>
             </div>
