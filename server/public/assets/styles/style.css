@@ -197,3 +197,9 @@ table {
     display: inline;
 }
 
+.number{
+    font-size: xx-large;
+    color: blue;
+    font-weight: 600;
+}
+

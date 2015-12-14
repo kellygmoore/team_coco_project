@@ -122,8 +122,8 @@ function DialogController($scope, $mdDialog) {
 function BookingTimeController($scope, $mdDialog) {
 
     $scope.meetingValues = {
-        people: 0,
-        hours: 0
+        people: 2,
+        hours: 1
     };
 
     $scope.peopleAdd = function(){

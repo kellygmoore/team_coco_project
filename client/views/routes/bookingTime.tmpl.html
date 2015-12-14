@@ -11,20 +11,24 @@
             <div class="md-dialog-content">
                 <h2>Your meeting</h2>
                 <div class="add addHours">
-                    {{meetingValues.hours}} hours
-                    <md-button class="md-icon-button aria-label" ng-click="">
+                    <div class="number">{{meetingValues.hours}}
+                        <ng-pluralize count="meetingValues.hours"
+                                      when="{'one':'hour',
+                                      'other':'hours'}"></ng-pluralize>
+                    </div>
+                    <md-button class="md-icon-button aria-label">
                         <span aria-label="add" ng-click="hourAdd()"><ng-md-icon icon="add"></ng-md-icon></span>
                     </md-button>
-                    <md-button class="md-icon-button" ng-click="">
+                    <md-button class="md-icon-button">
                         <span aria-label="subtract" ng-click="hourRemove()"><ng-md-icon icon="remove"></span>
                     </md-button>
                 </div>
                 <div class="add addPeople">
-                    {{meetingValues.people}} people
-                    <md-button class="md-icon-button aria-label" ng-click="">
+                    <div class="number">{{meetingValues.people}} people</div>
+                    <md-button class="md-icon-button aria-label">
                         <span aria-label="add" ng-click="peopleAdd()"><ng-md-icon icon="add"></ng-md-icon></span>
                     </md-button>
-                    <md-button class="md-icon-button" ng-click="">
+                    <md-button class="md-icon-button">
                         <span aria-label="subtract" ng-click="peopleRemove()"><ng-md-icon icon="remove"></span>
                     </md-button>
                 </div>
