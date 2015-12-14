@@ -21,24 +21,39 @@ myApp.controller('ConfigController', ["$scope","$http", function($scope,$http) {
         resultsTimeout: null
     };
 
-
+//Whenever the Submit and Save Setting buttons is click the results are stored on to local host
     $scope.saveSettings=function(){
         if(typeof(Storage) !== "undefined") {
             // Code for localStorage/sessionStorage.
             localStorage.selectLocation=$scope.data.selectLocation;
             localStorage.selectRoom=$scope.data.selectRoom;
-            localStorage.calendarTimeout=$scope.data.calendarTimeout;
-            localStorage.boookingTimeout=$scope.data.bookingTimeout;
-            localStorage.resultsTimeout=$scope.data.resultsTimeout;
 
+            localStorage.calendarTimeout=convertSecondsToMs($scope.data.calendarTimeout);
+            localStorage.boookingTimeout=convertSecondsToMs($scope.data.bookingTimeout);
+            localStorage.resultsTimeout=convertSecondsToMs($scope.data.resultsTimeout);
+
+
+            // The setTimeout() method calls a function or evaluates an expression after a specified number of milliseconds.
+            // We still need to create a function that sends users back to the default page
+            // We need to set the set-time-out function to their appropriate pages and pull the time frame from the local storage of the browser
+            setTimeout(function(){ alert("Hello this is time", localStorage.calendarTimeout); }, localStorage.calendarTimeout);
+            //Tip: 1000 ms = 1 second.
 
         } else {
            console.log("here is localStorage",localStorage.selectLocation);
         }
 
-        console.log("selectlocation",$scope.data.selectLocation);
-        console.log("Select Room",$scope.data.selectRoom);
-        console.log("calendar time out",$scope.data.calendarTimeout);
+        //console.log("selectlocation",$scope.data.selectLocation);
+        //console.log("Select Room",$scope.data.selectRoom);
+        //console.log("calendar time out",$scope.data.calendarTimeout);
     };
 
+
+    //convert seconds to ms
+    function convertSecondsToMs(sec){
+        var ms= sec* 1000;
+        return ms;
+
+    };
 }]);
+
