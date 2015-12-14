@@ -8,9 +8,9 @@
 /*}*/
 
 
-/*styles for default view*/
+/*styles for default view*************************************/
 .screen {
-    background-color: #B23E44;
+    background-color: #25ae90;
     width: 800px;
     height: 1280px;
 }
@@ -31,19 +31,20 @@
     background-color: floralwhite;
     color: #55606F;
     text-align: center;
-    font-size: 32px;
+    font-size: 36px;
     font-family: 'Nothing You Could Do', cursive, sans-serif;
     width: 50%;
     height: 125px;
     float: right;
-    border: 2px solid black;
+    padding-top: 25px;
+    border: 1px solid #55606F;
+    box-shadow: -4px 4px 5px #55606F;
 }
 
 .bottom-div {
     clear: both;
     text-align: center;
-    font-size: 32px;
-    /*margin-top: 40px;*/
+    font-size: 48px;
     color: floralwhite;
     /*border: 2px solid purple;*/
     padding-top: 250px;
@@ -51,11 +52,12 @@
 }
 
 .bottom-div p {
-    padding-bottom: 0px;
+    padding-bottom: 0;
+    text-shadow: 4px 4px 3px #55606F;
 }
 
 .time {
-    font-size: 54px;
+    font-size: 100px;
     /*border: 1px dashed black;*/
 }
 
