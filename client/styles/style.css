@@ -252,3 +252,14 @@ table {
     border-radius: 10px;
 }
 
+
+/*Configuration Page*/
+#configForm{
+    padding-left:5%;
+    padding-right:5%;
+}
+
+#configHead{
+    background-color:#B23E44;
+}
+
