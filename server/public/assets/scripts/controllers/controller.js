@@ -4,6 +4,7 @@
 //Controller for the THETOP header clock/////////////////////////////////////////
 myApp.controller('TimeCtrl', ["$scope", "$timeout", function($scope, $timeout) {
 
+    $scope.bookingMember = "The Grinch";
     $scope.clock = "loading clock..."; // initialise the time variable
     $scope.tickInterval = 1000; //ms
 
@@ -23,7 +24,7 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", function($scope, $locat
     $scope.bambooDataArray = [8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6];
     //placeholder for who is in the room for that booked time//
     $scope.memberInRoom = "Santa Claus";
-
+}]);
 
    //$scope.pastTime = false;
    // var rightNow, booked, middle;
@@ -47,14 +48,40 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", function($scope, $locat
    // } else {
    //     $scope.pastTime = false;
    // }
+//Controller for RESERVATION view page///////////////////////////////////////////////
+myApp.controller('ReserveCtrl', ["$scope", "$location", function($scope, $location){
+    //change out to data from Bamboo
+    $scope.available = 10;
+    $scope.thisMeeting = 2;
+    $scope.balance = $scope.available - $scope.thisMeeting;
+    var chargeByHour = 25;
+    $scope.paymentDue = chargeByHour * $scope.thisMeeting;
+
+    $scope.nevermind = function(){
+        $location.path("/defaultscreen");
+    }
+}]);
+
+//Controller for DEFAULT screen view////////////////////////////////////////////////////
+myApp.controller('DefaultCtrl', ["$scope", "$location", function($scope, $location){
+//change out to data from Bamboo
+    $scope.roomName = "The Library";
+    $scope.timeLeftHr = 1;
+    $scope.timeLeftMin = 36;
+    $scope.nextMtgAt = "3:00";      //string or number?
+    $scope.roomBooked = true;
+
+    $scope.gotoCalendar = function(){
+        $location.path('/calendarview');
+    };
 
 
-
-
+    //if statement goes here to check if room is currently booked, then set roomBooked to true
 
 }]);
 
-    //}]);
+
+
 
 myApp.controller('AppCtrl', ['$scope', '$mdDialog', '$mdMedia', function($scope, $mdDialog, $mdMedia){
 
@@ -119,6 +146,7 @@ function DialogController($scope, $mdDialog) {
     };
 }
 
+<<<<<<< HEAD
 //This provides functionality for the booking window (bookingscreen.html).
 //It populates the modal with initial values and allows for incrementing
 //and decrementing those values. These values are then to be sent
@@ -146,3 +174,5 @@ function BookingTimeController($scope, $mdDialog) {
         $scope.meetingValues.hours++;
     };
 }
+=======
+>>>>>>> master

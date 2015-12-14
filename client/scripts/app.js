@@ -8,8 +8,7 @@ myApp.config(["$routeProvider", function($routeProvider){
             templateUrl: "assets/views/routes/defaultscreen.html"
         }).
         when('/calendarview', {
-            templateUrl: "assets/views/routes/calendarview.html",
-            //controller: "TimeCtrl"
+            templateUrl: "assets/views/routes/calendarview.html"
         }).
         when('/configview', {
             templateUrl: "assets/views/routes/configview.html",
@@ -18,6 +17,10 @@ myApp.config(["$routeProvider", function($routeProvider){
         when('/bookingscreen', {
             templateUrl: "assets/views/routes/bookingscreen.html",
             controller: "AppCtrl"
+        }).
+        when('/reservationview', {
+            templateUrl: "assets/views/routes/reservationview.html"
+            //controller: "ReserveCtrl"
         }).
         otherwise({
             redirectTo: 'defaultscreen'
