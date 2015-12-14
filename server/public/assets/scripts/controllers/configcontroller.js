@@ -54,6 +54,6 @@ myApp.controller('ConfigController', ["$scope","$http", function($scope,$http) {
         var ms= sec* 1000;
         return ms;
 
-    };
+    }
 }]);
 

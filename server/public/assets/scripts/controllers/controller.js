@@ -4,6 +4,7 @@
 //Controller for the THETOP header clock/////////////////////////////////////////
 myApp.controller('TimeCtrl', ["$scope", "$timeout", function($scope, $timeout) {
 
+    $scope.bookingMember = "The Grinch";
     $scope.clock = "loading clock..."; // initialise the time variable
     $scope.tickInterval = 1000; //ms
 
@@ -23,7 +24,7 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", function($scope, $locat
     $scope.bambooDataArray = [8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6];
     //placeholder for who is in the room for that booked time//
     $scope.memberInRoom = "Santa Claus";
-
+}]);
 
    //$scope.pastTime = false;
    // var rightNow, booked, middle;
@@ -48,11 +49,19 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", function($scope, $locat
    //     $scope.pastTime = false;
    // }
 
-
-
-
-
+myApp.controller('ReserveCtrl', ["$scope", "$location", function($scope, $location){
+    $scope.available = 10;
+    $scope.thisMeeting = 2;
+    $scope.balance = $scope.available - $scope.thisMeeting;
+    var chargeByHour = 25;
+    $scope.paymentDue = chargeByHour * $scope.thisMeeting;
 }]);
+
+
+
+
+
+//}]);
 
     //}]);
 
@@ -98,3 +107,4 @@ function DialogController($scope, $mdDialog) {
         $mdDialog.hide(answer);
     };
 }
+
