@@ -6,12 +6,12 @@ module.exports = function(grunt){
                 banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
             },
             app: {
-                src: 'client/scripts/*.js',
-                dest: 'server/public/assets/scripts/app.min.js'
+                src: 'client/scripts/app.js',
+                dest: 'server/public/assets/scripts/app.js'
             },
             controllers: {
-                src: 'client/scripts/controllers/*.js',
-                dest: 'server/public/assets/scripts/controllers/controller.min.js'
+                src: 'client/scripts/controllers/controller.js',
+                dest: 'server/public/assets/scripts/controllers/controller.js'
             },
             factories: {
                 src: 'client/scripts/factories/*.js',
@@ -45,6 +45,34 @@ module.exports = function(grunt){
                 ],
                 "dest": "server/public/vendors/"
             },
+            angularAnimate: {
+                expand: true,
+                cwd: 'node_modules/angular-animate',
+                src: [
+                    "angular-animate.min.js",
+                    "angular-animate.min.js.map"
+                ],
+                "dest": "server/public/vendors/"
+            },
+            angularAria: {
+                expand: true,
+                cwd: 'node_modules/angular-aria',
+                src: [
+                    "angular-aria.min.js",
+                    "angular-aria.min.js.map"
+                ],
+                "dest": "server/public/vendors/"
+            },
+            angularMaterial: {
+                expand: true,
+                cwd: 'node_modules/angular-material',
+                src: [
+                    "angular-material.min.js",
+                    "angular-material.min.css,",
+                    "angular-material.layouts.min.css"
+                ],
+                "dest": "server/public/vendors/"
+            },
             html: {
                 expand: true,
                 cwd: 'client/views/',
@@ -75,7 +103,7 @@ module.exports = function(grunt){
             },
             script: {
                 expand: true,
-                cwd: 'client/scritps/',
+                cwd: 'client/scripts/',
                 src: [
                     "*",
                     "*/*"
@@ -89,5 +117,5 @@ module.exports = function(grunt){
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-uglify');
 
-    grunt.registerTask('default', ['copy', 'uglify']);
+    grunt.registerTask('default', ['copy']);
 };
