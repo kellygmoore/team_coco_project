@@ -3,7 +3,6 @@
  */
 myApp.controller('ConfigController', ["$scope","$http", function($scope,$http) {
 
-//this data populates the select option fields for the config file
     $scope.data = {
         selectLocation: null,
         availableLocations: [
@@ -11,25 +10,50 @@ myApp.controller('ConfigController', ["$scope","$http", function($scope,$http) {
             {id: '2', name: 'COCO Location B'},
             {id: '3', name: 'COCO Location C'}
         ],
-        selectRoom:null,
-        availableRooms:[
+        selectRoom: null,
+        availableRooms: [
             {id: '11', name: 'Option Room 1'},
             {id: '12', name: 'Option Room 2'},
             {id: '13', name: 'Option Room 3'}
         ],
-        calenderTimeout:null,
-        bookingTimeout:null,
-        resultsTimeout:null
+        calendarTimeout: null,
+        bookingTimeout: null,
+        resultsTimeout: null
     };
 
-// Collect data input from what users selects
-// push information into factory
-// Still need to reroute when the button is clicked
-
+//Whenever the Submit and Save Setting buttons is click the results are stored on to local host
     $scope.saveSettings=function(){
-        console.log("selectlocation",$scope.data.selectLocation);
-        console.log("Select Room",$scope.data.selectRoom);
-        console.log("calendar time out",$scope.data.calendarTimeout);
+        if(typeof(Storage) !== "undefined") {
+            // Code for localStorage/sessionStorage.
+            localStorage.selectLocation=$scope.data.selectLocation;
+            localStorage.selectRoom=$scope.data.selectRoom;
+
+            localStorage.calendarTimeout=convertSecondsToMs($scope.data.calendarTimeout);
+            localStorage.boookingTimeout=convertSecondsToMs($scope.data.bookingTimeout);
+            localStorage.resultsTimeout=convertSecondsToMs($scope.data.resultsTimeout);
+
+
+            // The setTimeout() method calls a function or evaluates an expression after a specified number of milliseconds.
+            // We still need to create a function that sends users back to the default page
+            // We need to set the set-time-out function to their appropriate pages and pull the time frame from the local storage of the browser
+            setTimeout(function(){ alert("Hello this is time", localStorage.calendarTimeout); }, localStorage.calendarTimeout);
+            //Tip: 1000 ms = 1 second.
+
+        } else {
+           console.log("here is localStorage",localStorage.selectLocation);
+        }
+
+        //console.log("selectlocation",$scope.data.selectLocation);
+        //console.log("Select Room",$scope.data.selectRoom);
+        //console.log("calendar time out",$scope.data.calendarTimeout);
     };
 
+
+    //convert seconds to ms
+    function convertSecondsToMs(sec){
+        var ms= sec* 1000;
+        return ms;
+
+    };
 }]);
+
