@@ -99,11 +99,11 @@ $scope.showLogin = function(ev) {
         clickOutsideToClose:true,
         fullscreen: $mdMedia('sm') && $scope.customFullscreen
     })
-        .then(function(answer) {
-            $scope.status = 'You said the information was "' + answer + '".';
-        }, function() {
-            $scope.status = 'You cancelled the dialog.';
-        });
+        //.then(function(answer) {
+        //    $scope.status = 'You said the information was "' + answer + '".';
+        //}, function() {
+        //    $scope.status = 'You cancelled the dialog.';
+        //});
     $scope.$watch(function() {
         return $mdMedia('sm');
     }, function(sm) {

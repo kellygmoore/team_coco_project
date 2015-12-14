@@ -99,11 +99,11 @@ $scope.showLogin = function(ev) {
         clickOutsideToClose:true,
         fullscreen: $mdMedia('sm') && $scope.customFullscreen
     })
-        .then(function(answer) {
-            $scope.status = 'You said the information was "' + answer + '".';
-        }, function() {
-            $scope.status = 'You cancelled the dialog.';
-        });
+        //.then(function(answer) {
+        //    $scope.status = 'You said the information was "' + answer + '".';
+        //}, function() {
+        //    $scope.status = 'You cancelled the dialog.';
+        //});
     $scope.$watch(function() {
         return $mdMedia('sm');
     }, function(sm) {
@@ -113,7 +113,7 @@ $scope.showLogin = function(ev) {
 
 }]);
 
-function DialogController($scope, $mdDialog) {
+function DialogController($scope, $mdDialog, $http) {
     console.log("Dialog controller");
     $scope.hide = function() {
         $mdDialog.hide();
@@ -124,5 +124,24 @@ function DialogController($scope, $mdDialog) {
     $scope.answer = function(answer) {
         $mdDialog.hide(answer);
     };
+    $scope.submit = function(){
+
+        $http({
+            method: 'POST',
+            //fill in with API
+            url: '/someUrl'
+        }).then(function successCallback(response) {
+            // this callback will be called asynchronously
+            // when the response is available
+            if (response.status == 200) {
+                //redirect to calendar view logged in
+            }
+        }, function errorCallback(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+            //do we want to have a pop-up message here?
+        });
+
+    }
 }
 
