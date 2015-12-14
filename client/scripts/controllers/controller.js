@@ -119,6 +119,10 @@ function DialogController($scope, $mdDialog) {
     };
 }
 
+//This provides functionality for the booking window (bookingscreen.html).
+//It populates the modal with initial values and allows for incrementing
+//and decrementing those values. These values are then to be sent
+//to the server on submission to reserve the room.
 function BookingTimeController($scope, $mdDialog) {
 
     $scope.meetingValues = {
@@ -140,16 +144,5 @@ function BookingTimeController($scope, $mdDialog) {
 
     $scope.hourAdd= function(){
         $scope.meetingValues.hours++;
-    };
-
-    console.log("Dialog controller");
-    $scope.hide = function() {
-        $mdDialog.hide();
-    };
-    $scope.cancel = function() {
-        $mdDialog.cancel();
-    };
-    $scope.answer = function(answer) {
-        $mdDialog.hide(answer);
     };
 }
