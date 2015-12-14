@@ -75,7 +75,7 @@ module.exports = function(grunt){
             },
             script: {
                 expand: true,
-                cwd: 'client/scritps/',
+                cwd: 'client/scripts/',
                 src: [
                     "*",
                     "*/*"

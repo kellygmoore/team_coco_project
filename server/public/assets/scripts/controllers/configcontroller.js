@@ -21,7 +21,7 @@ myApp.controller('ConfigController', ["$scope","$http", function($scope,$http) {
         resultsTimeout: null
     };
 
-//Whenever the Submit and Save Setting buttons is click the results are stored on to local host
+
     $scope.saveSettings=function(){
         if(typeof(Storage) !== "undefined") {
             // Code for localStorage/sessionStorage.
@@ -36,9 +36,9 @@ myApp.controller('ConfigController', ["$scope","$http", function($scope,$http) {
            console.log("here is localStorage",localStorage.selectLocation);
         }
 
-        //console.log("selectlocation",$scope.data.selectLocation);
-        //console.log("Select Room",$scope.data.selectRoom);
-        //console.log("calendar time out",$scope.data.calendarTimeout);
+        console.log("selectlocation",$scope.data.selectLocation);
+        console.log("Select Room",$scope.data.selectRoom);
+        console.log("calendar time out",$scope.data.calendarTimeout);
     };
 
 }]);
