@@ -8,12 +8,15 @@ myApp.config(["$routeProvider", function($routeProvider){
             templateUrl: "assets/views/routes/defaultscreen.html"
         }).
         when('/calendarview', {
-            templateUrl: "assets/views/routes/calendarview.html",
-            //controller: "TimeCtrl"
+            templateUrl: "assets/views/routes/calendarview.html"
         }).
         when('/configview', {
             templateUrl: "assets/views/routes/configview.html",
             controller: "ConfigController"
+        }).
+        when('/reservationview', {
+            templateUrl: "assets/views/routes/reservationview.html"
+            //controller: "ReserveCtrl"
         }).
         otherwise({
             redirectTo: 'defaultscreen'
