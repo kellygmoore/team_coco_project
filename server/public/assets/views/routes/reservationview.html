@@ -21,8 +21,9 @@
                 <p>This meeting: <em>{{thisMeeting}} hours</em></p>
                 <p>Payment Due: <em>${{paymentDue}}</em></p>
             </div>
-            <div>
-                <button>Book It!</button>
+            <div class="bookItButton">
+                <button class="md-button" ng-click="nevermind()">Nevermind</button>
+                <button class="md-button md-raised">Book It!</button>
             </div>
         </div>
         <div ng-hide="false" class="chargeDiv">
