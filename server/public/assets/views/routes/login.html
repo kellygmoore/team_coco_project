@@ -1,0 +1,24 @@
+<md-dialog aria-label="Login"  ng-cloak>
+    <form>
+
+        <md-input-container>
+            <div class="md-dialog-content">
+                <h2>Login</h2>
+                <p>This is the email and password you created when you registered with COCO.</p>
+                <label>Email</label>
+                <input ng-model=person.email type="email">
+                <label>Password</label>
+                <input ng-model=person.password type="password">
+            </div>
+        </md-input-container>
+        <md-dialog-actions layout="row">
+            <md-button>
+                Cancel
+            </md-button>
+            <md-button>
+                Continue to booking
+            </md-button>
+            <span flex></span>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
