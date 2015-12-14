@@ -58,9 +58,11 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", function($scope, $locat
 
 myApp.controller('AppCtrl', ['$scope', '$mdDialog', '$mdMedia', function($scope, $mdDialog, $mdMedia){
 
-$scope.status = '  ';
+    $scope.status = '  ';
 
-$scope.customFullscreen = $mdMedia('sm');
+    $scope.customFullscreen = $mdMedia('sm');
+
+    //Holds the number of people and hours of the meeting
 
 $scope.showLogin = function(ev) {
     console.log("show advanced");
@@ -84,9 +86,46 @@ $scope.showLogin = function(ev) {
     });
 };
 
+    //Modal window for setting meeting time and number of people
+    $scope.showBooking = function(ev) {
+        console.log("show booking");
+        $mdDialog.show({
+            controller: BookingTimeController,
+            templateUrl: 'assets/views/routes/bookingTime.tmpl.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose:true,
+            fullscreen: $mdMedia('sm') && $scope.customFullscreen
+        });
+        $scope.$watch(function() {
+            return $mdMedia('sm');
+        }, function(sm) {
+            $scope.customFullscreen = (sm === true);
+        });
+    };
+
 }]);
 
 function DialogController($scope, $mdDialog) {
+    console.log("Dialog controller");
+    $scope.hide = function() {
+        $mdDialog.hide();
+    };
+    $scope.cancel = function() {
+        $mdDialog.cancel();
+    };
+    $scope.answer = function(answer) {
+        $mdDialog.hide(answer);
+    };
+}
+
+function BookingTimeController($scope, $mdDialog) {
+
+    $scope.meetingValues = {
+        people: 0,
+        hours: 0
+    };
+
     console.log("Dialog controller");
     $scope.hide = function() {
         $mdDialog.hide();

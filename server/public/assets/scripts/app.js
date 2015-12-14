@@ -18,9 +18,6 @@ myApp.config(["$routeProvider", function($routeProvider){
         when('/bookingscreen', {
             templateUrl: "assets/views/routes/bookingscreen.html",
             controller: "AppCtrl"
-        //}).when('/dialog1', {
-        //    templateUrl: "assets/views/routes/dialog1.tmpl.html",
-        //    controller: "AppCtrl"
         }).
         otherwise({
             redirectTo: 'defaultscreen'
