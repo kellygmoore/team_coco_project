@@ -1,7 +1,7 @@
 /**
  * Created by Zeo on 12/11/15.
  */
-myApp.controller('ConfigController', ["$scope","$http", function($scope,$http) {
+myApp.controller('ConfigController', ["$scope","$http","$location","$timeout", function($scope,$http,$location,$timeout) {
 
     $scope.data = {
         selectLocation: null,
@@ -36,7 +36,8 @@ myApp.controller('ConfigController', ["$scope","$http", function($scope,$http) {
             // The setTimeout() method calls a function or evaluates an expression after a specified number of milliseconds.
             // We still need to create a function that sends users back to the default page
             // We need to set the set-time-out function to their appropriate pages and pull the time frame from the local storage of the browser
-            setTimeout(function(){ alert("Hello this is time", localStorage.calendarTimeout); }, localStorage.calendarTimeout);
+            var path="/views/defaultscreen.html";
+            $timeout(function(){$location.path("/defaultscreen"); }, localStorage.calendarTimeout);
             //Tip: 1000 ms = 1 second.
 
         } else {
