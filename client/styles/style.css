@@ -211,7 +211,7 @@ table {
 
 .bookingHeader {
     background-color: #F3B449;
-    padding: 25px 0 20px 0;
+    padding: 25px 0 15px 0;
     border-bottom: 5px ridge #F3B449;
 }
 
@@ -244,5 +244,11 @@ table {
     height: 300px;
     padding-left: 20px;
     padding-top: 100px;
+}
+
+.md-raised {
+    width: 150px;
+    height: auto;
+    border-radius: 10px;
 }
 

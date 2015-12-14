@@ -56,6 +56,10 @@ myApp.controller('ReserveCtrl', ["$scope", "$location", function($scope, $locati
     $scope.balance = $scope.available - $scope.thisMeeting;
     var chargeByHour = 25;
     $scope.paymentDue = chargeByHour * $scope.thisMeeting;
+
+    $scope.nevermind = function(){
+        $location.path("/defaultscreen");
+    }
 }]);
 
 //Controller for DEFAULT screen view////////////////////////////////////////////////////
@@ -65,7 +69,11 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", function($scope, $locati
     $scope.timeLeftHr = 1;
     $scope.timeLeftMin = 36;
     $scope.nextMtgAt = "3:00";      //string or number?
-    $scope.roomBooked = false;
+    $scope.roomBooked = true;
+
+    $scope.gotoCalendar = function(){
+        $location.path('/calendarview');
+    };
 
 
     //if statement goes here to check if room is currently booked, then set roomBooked to true
