@@ -1,48 +1,63 @@
 <div>
+
+    <md-toolbar layout-align="center center" id="configHead">
     <h1>Set Up</h1>
-    <h2>Set Up Meeting Room</h2>
+    </md-toolbar>
+    <md-content layout="column"ng-cloak>
+
 
     <!--form to select the COCO location and ROOM-->
-    <form>
-        <label for ="selectLocation">Location</label>
-    <select required name="selectLocation" id="selectLocation" ng-model="data.selectLocation">
-        <option ng-repeat="option in data.availableLocations" value="{{option.id}}">{{option.name}}</option>
-    </select><br>
+    <form name="myForm" id="configForm">
+        <h4>Set Up Meeting Room</h4>
 
-        <label for ="selectRoom">Room</label>
-        <select required name="selectRoom" id="selectRoom" ng-model="data.selectRoom">
-            <option ng-repeat="option in data.availableRooms" value="{{option.id}}">{{option.name}}</option>
-        </select>
+        <md-input-container class="md-block">
+            <label for ="selectLocation">Location</label>
+            <md-select required name="selectLocation" id="selectLocation" ng-model="data.selectLocation">
+                 <md-option ng-repeat="option in data.availableLocations" value="{{option.id}}">{{option.name}}</md-option>
+            </md-select><br>
+        </md-input-container>
+
+        <md-input-container class="md-block">
+            <label for ="selectRoom">Room</label>
+            <md-select required name="selectRoom" id="selectRoom" ng-model="data.selectRoom">
+                <md-option ng-repeat="option in data.availableRooms" value="{{option.id}}">{{option.name}}</md-option>
+            </md-select>
+        </md-input-container>
 
 
 
-    <h2>Screen Timeouts</h2>
+    <h4>Screen Timeouts</h4>
 
+        <md-input-container class="md-block">
+            <label for ="calendarTimeout">Calendar Screen</label>
+                <md-select required name="calendarTimeout" id="calendarTimeout" ng-model="data.calendarTimeout">
+                    <md-option value="15" >15 seconds</md-option>
+                    <md-option value="30" >30 seconds</md-option>
+                    <md-option value="60" >60 seconds</md-option>
+                </md-select><br>
+        </md-input-container>
 
-        <label for ="calendarTimeout">Calendar Screen</label>
-        <select required name="calendarTimeout" id="calendarTimeout" ng-model="data.calendarTimeout">
-            <option value="15" >15 seconds</option>
-            <option value="30" >30 seconds</option>
-            <option value="60" >60 seconds</option>
-        </select><br>
+        <md-input-container class="md-block">
+            <label for ="bookingTimeout">Booking Screen</label>
+                <md-select required name="bookingTimeout" id="bookingTimeout" ng-model="data.bookingTimeout">
+                    <md-option value="15" >15 seconds</md-option>
+                    <md-option value="30" >30 seconds</md-option>
+                    <md-option value="60" >60 seconds</md-option>
+                </md-select><br>
+        </md-input-container>
 
-        <label for ="bookingTimeout">Booking Screen</label>
-        <select required name="bookingTimeout" id="bookingTimeout" ng-model="data.bookingTimeout">
-            <option value="15" >15 seconds</option>
-            <option value="30" >30 seconds</option>
-            <option value="60" >60 seconds</option>
-        </select><br>
-
-        <label for ="resultsTimeout">Results Screen</label>
-        <select required name="resultsTimeout" id="resultsTimeout" ng-model="data.resultsTimeout">
-            <option value="15" >15 seconds</option>
-            <option value="30" >30 seconds</option>
-            <option value="60" >60 seconds</option>
-        </select><br>
+         <md-input-container class="md-block">
+            <label for ="resultsTimeout">Results Screen</label>
+                <md-select required name="resultsTimeout" id="resultsTimeout" ng-model="data.resultsTimeout">
+                    <md-option value="15" >15 seconds</md-option>
+                    <md-option value="30" >30 seconds</md-option>
+                    <md-option value="60" >60 seconds</md-option>
+                </md-select><br>
+         </md-input-container>
 
 
     </form>
 
-    <button ng-click="saveSettings()" class="md-raised md-primary">Submit and Save Settings</button>
-
+    <md-button ng-click="saveSettings()" class="md-raised md-primary" ng-disabled="myForm.$invalid">Submit and Save Settings</md-button>
+</md-content>
 </div>

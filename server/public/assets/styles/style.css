@@ -244,3 +244,12 @@ table {
     padding-top: 100px;
 }
 
+/*Configuration Page*/
+#configForm{
+    padding-left:5%;
+    padding-right:5%;
+}
+
+#configHead{
+    background-color:#B23E44;
+}
