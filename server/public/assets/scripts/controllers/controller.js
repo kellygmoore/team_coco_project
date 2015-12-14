@@ -66,7 +66,7 @@ $scope.showLogin = function(ev) {
     console.log("show advanced");
     $mdDialog.show({
         controller: DialogController,
-        templateUrl: 'assets/views/routes/dialog1.tmpl.html',
+        templateUrl: 'assets/views/routes/login.html',
         parent: angular.element(document.body),
         targetEvent: ev,
         clickOutsideToClose:true,
