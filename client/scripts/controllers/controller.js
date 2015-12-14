@@ -85,9 +85,11 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", function($scope, $locati
 
 myApp.controller('AppCtrl', ['$scope', '$mdDialog', '$mdMedia', function($scope, $mdDialog, $mdMedia){
 
-$scope.status = '  ';
+    $scope.status = '  ';
 
-$scope.customFullscreen = $mdMedia('sm');
+    $scope.customFullscreen = $mdMedia('sm');
+
+    //Holds the number of people and hours of the meeting
 
 $scope.showLogin = function(ev) {
     console.log("show advanced");
@@ -110,6 +112,24 @@ $scope.showLogin = function(ev) {
         $scope.customFullscreen = (sm === true);
     });
 };
+
+    //Modal window for setting meeting time and number of people
+    $scope.showBooking = function(ev) {
+        console.log("show booking");
+        $mdDialog.show({
+            controller: BookingTimeController,
+            templateUrl: 'assets/views/routes/bookingTime.tmpl.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose:true,
+            fullscreen: $mdMedia('sm') && $scope.customFullscreen
+        });
+        $scope.$watch(function() {
+            return $mdMedia('sm');
+        }, function(sm) {
+            $scope.customFullscreen = (sm === true);
+        });
+    };
 
 }]);
 
@@ -145,3 +165,30 @@ function DialogController($scope, $mdDialog, $http) {
     }
 }
 
+//This provides functionality for the booking window (bookingscreen.html).
+//It populates the modal with initial values and allows for incrementing
+//and decrementing those values. These values are then to be sent
+//to the server on submission to reserve the room.
+function BookingTimeController($scope, $mdDialog) {
+
+    $scope.meetingValues = {
+        people: 2,
+        hours: 1
+    };
+
+    $scope.peopleAdd = function(){
+        $scope.meetingValues.people++;
+    };
+
+    $scope.peopleRemove= function(){
+        $scope.meetingValues.people--;
+    };
+
+    $scope.hourRemove= function(){
+        $scope.meetingValues.hours--;
+    };
+
+    $scope.hourAdd= function(){
+        $scope.meetingValues.hours++;
+    };
+}

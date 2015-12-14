@@ -202,6 +202,15 @@ table {
     margin-top: 50px; }
 
 
+.add{
+    display: inline;
+}
+
+.number {
+    font-size: xx-large;
+    color: blue;
+    font-weight: 600;
+}
 
 /*reservation view*******************************************/
 /*.charge {*/
@@ -274,4 +283,22 @@ table {
 .login p{
     text-align: center;
 }
+
+
+/*Configuration Page*/
+#configForm{
+    padding-left:5%;
+    padding-right:5%;
+}
+
+#configHead{
+    background-color:#B23E44;
+}
+
+#configSubmit{
+    width: 90%;
+    margin:auto;
+    /*background-color:#25ae90;*/
+}
+
 
