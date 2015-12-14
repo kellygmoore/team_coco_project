@@ -55,6 +55,6 @@ myApp.controller('ConfigController', ["$scope","$http","$location","$timeout", f
         var ms= sec* 1000;
         return ms;
 
-    };
+    }
 }]);
 

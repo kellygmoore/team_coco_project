@@ -2,7 +2,10 @@
 
     <div id="theRoom">
         <h1>The Library</h1>
-        <h3>Badge or <button type="submit">Log In</button></h3>
+        <div class="displayName">
+            <h3 ng-hide="true">Badge or <button type="submit">Log In</button></h3>
+            <h3 ng-hide="false">Member: <span class="bookingMember">{{bookingMember}}</span></h3>
+        </div>
     </div>
 
     <div class="clock">
