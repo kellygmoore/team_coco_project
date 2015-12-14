@@ -33,10 +33,10 @@ myApp.controller('ConfigController', ["$scope","$http","$location","$timeout", f
             localStorage.resultsTimeout=convertSecondsToMs($scope.data.resultsTimeout);
 
 
-            // The setTimeout() method calls a function or evaluates an expression after a specified number of milliseconds.
-            // We still need to create a function that sends users back to the default page
+            // The $timeout() method calls a function or evaluates an expression after a specified number of milliseconds.
+            // function that sends users back to the default page
             // We need to set the set-time-out function to their appropriate pages and pull the time frame from the local storage of the browser
-            var path="/views/defaultscreen.html";
+
             $timeout(function(){$location.path("/defaultscreen"); }, localStorage.calendarTimeout);
             //Tip: 1000 ms = 1 second.
 

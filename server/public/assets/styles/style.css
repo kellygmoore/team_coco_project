@@ -201,7 +201,16 @@ table {
     font-size: 0.8em;
     margin-top: 50px; }
 
-<<<<<<< HEAD
+
+.add{
+    display: inline;
+}
+
+.number {
+    font-size: xx-large;
+    color: blue;
+    font-weight: 600;
+}
 
 /*reservation view*******************************************/
 /*.charge {*/
@@ -257,7 +266,7 @@ table {
     border-radius: 10px;
 }
 
-=======
+
 /*****LOGIN MODAL*****/
 
 .loginButtons {
@@ -274,4 +283,21 @@ table {
 .login p{
     text-align: center;
 }
->>>>>>> feature_LOGIN
+
+
+/*Configuration Page*/
+#configForm{
+    padding-left:5%;
+    padding-right:5%;
+}
+
+#configHead{
+    background-color:#B23E44;
+}
+
+#configSubmit{
+    width: 90%;
+    margin:auto;
+    /*background-color:#25ae90;*/
+}
+
