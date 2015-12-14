@@ -246,14 +246,13 @@ table {
     padding-top: 100px;
 }
 
-<<<<<<< HEAD
 .md-raised {
     width: 150px;
     height: auto;
     border-radius: 10px;
 }
 
-=======
+
 /*Configuration Page*/
 #configForm{
     padding-left:5%;
@@ -263,4 +262,10 @@ table {
 #configHead{
     background-color:#B23E44;
 }
->>>>>>> feature_config_view
+
+#configSubmit{
+    width: 90%;
+    margin:auto;
+    /*background-color:#25ae90;*/
+}
+

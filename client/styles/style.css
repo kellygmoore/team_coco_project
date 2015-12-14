@@ -263,3 +263,9 @@ table {
     background-color:#B23E44;
 }
 
+#configSubmit{
+    width: 90%;
+    margin:auto;
+    /*background-color:#25ae90;*/
+}
+
