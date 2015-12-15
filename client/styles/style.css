@@ -1,6 +1,26 @@
 
 
+
 /*styles for DEFAULT view*************************************/
+
+
+/*body {*/
+    /*background-color: #B23E44;*/
+    /*width: 1200px;*/
+    /*height: 1920px;*/
+/*}*/
+
+/*button styling*/
+.md-button.md-raised:not([disabled]) {
+    background-color: #25ae90;
+    color: white;
+}
+
+.md-button.md-raised:hover {
+    color: black;
+}
+/*styles for default view*************************************/
+
 .screen {
     background-color: #25ae90;
     width: 800px;
@@ -341,3 +361,62 @@ button.button {
     /*background-color:#25ae90;*/
 }
 
+/*SUCCESS BOOKING MODAL*/
+
+.bookSuccess {
+    width: auto;
+    height: auto;
+    padding: 2%;
+    display: inline-block;
+    text-align: center;
+    border: 10px outset #25ae90;
+}
+
+.bookSuccess h2 {
+    color: #55606F;
+}
+
+
+/*.md-button.md-raised:not([disabled]) {*/
+    /*background-color: #25ae90;*/
+    /*color: white;*/
+/*}*/
+
+#bookSuccessButton{
+    background-color: #25ae90;
+    color: white;
+    width: 150px;
+    height: auto;
+    border: none;
+    border-radius: 10px;
+}
+#bookSuccessButton:hover {
+    background-color: white;
+    color: black;
+}
+
+/*/BOOKING FAILURE*/
+
+
+.bookFail {
+    width: auto;
+    height: auto;
+    padding: 2%;
+    display: inline-block;
+    text-align: center;
+    border: 10px outset #B23E44;
+}
+
+.bookFail h2{
+    color: #55606F;
+}
+
+#bookFailButton {
+    background-color: #B23E44;
+    color: white;
+}
+
+#bookFailButton:hover {
+    background-color: white;
+    color:black;
+}

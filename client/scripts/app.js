@@ -16,7 +16,7 @@ myApp.config(["$routeProvider", function($routeProvider){
         }).
         when('/bookingscreen', {
             templateUrl: "assets/views/routes/bookingscreen.html",
-            controller: "AppCtrl"
+            controller: 'AppCtrl'
         }).
         when('/reservationview', {
             templateUrl: "assets/views/routes/reservationview.html"
