@@ -2,7 +2,7 @@
  * Created by Zeo on 12/11/15.
  */
 myApp.controller('ConfigController', ["$scope","$http","$location","$timeout", function($scope,$http,$location,$timeout) {
-
+    console.log("config controller" );
     $scope.data = {
         selectLocation: null,
         availableLocations: [
@@ -21,7 +21,7 @@ myApp.controller('ConfigController', ["$scope","$http","$location","$timeout", f
         resultsTimeout: null
     };
 
-//Whenever the Submit and Save Setting buttons is click the results are stored on to local host
+//** *Whenever the Submit and Save Setting buttons is click the results are stored on to local host*/
     $scope.saveSettings=function(){
         if(typeof(Storage) !== "undefined") {
             // Code for localStorage/sessionStorage.
@@ -55,6 +55,78 @@ myApp.controller('ConfigController', ["$scope","$http","$location","$timeout", f
         var ms= sec* 1000;
         return ms;
 
+    };
+
+    $scope.auth = function() {
+        //Create the log in Variables
+        var emailAddress= 'bsmalls@iremote.com';
+        var password='t4h7pvWt';
+
+
+        var request = $http({
+            method: "POST",
+            url: "http://testing.bamboo.cocomsp.com/api/signIn",
+            data: "emailAddress=" + emailAddress + "&password=" + password,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+            }
+        });
+        // Store the data-dump of the FORM scope.
+        request.success(
+            function( response ) {
+                console.log("this is the auth response",response);
+                //$scope.cfdump = response;
+                $scope.test();
+            }
+        );
     }
+
+
+
+    $scope.test = function() {
+        var startDate="2015-12-08";
+        var endDate="2015-12-08";
+        var locationId="129";
+
+        //GET
+
+        var request = $http({
+            method: "GET",
+            url: "http://testing.bamboo.cocomsp.com/api/locations/"+locationId+"/meetings?start="+startDate+"&end="+endDate
+
+        });
+        // Store the data-dump of the FORM scope.
+        request.success(
+            function( response ) {
+                console.log("this is meeting room response",response);
+            }
+        );
+    };
+
+
+    $scope.signOut = function (){
+        var request = $http({
+            method: "GET",
+            url: "http://testing.bamboo.cocomsp.com/api/signOut"
+
+        });
+        // Store the data-dump of the FORM scope.
+        request.success(
+            function( response ) {
+                console.log("this is GET SignOut  response",response);
+            }
+        );
+
+    };
+
+//
+//    $scope.signOut();
+
+
+    $scope.auth();
+
+
 }]);
+
+
 
