@@ -208,6 +208,13 @@ table {
     height: 44%;
 }
 
+button.button {
+    height: 37px !important;
+    width: 55px !important;
+    border-radius: 37% !important;
+    box-shadow: 1px 1px 3px #888888;
+}
+
 .add{
     display: inline;
 }
