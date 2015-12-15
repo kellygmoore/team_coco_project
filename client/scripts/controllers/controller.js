@@ -81,9 +81,9 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", function($scope, $locati
 }]);
 
 
+//////*****CONTROLLER FOR MODAL WINDOWS: LOGIN/SUCCESSFUL BOOK & FAILED TO BOOK
 
-
-myApp.controller('AppCtrl', ['$scope', '$mdDialog', '$mdMedia', function($scope, $mdDialog, $mdMedia){
+myApp.controller('AppCtrl', ['$scope', '$mdDialog', '$mdMedia', '$location', function($scope, $mdDialog, $mdMedia, $location){
 
     $scope.status = '  ';
 
@@ -100,7 +100,7 @@ $scope.showLogin = function(ev) {
         targetEvent: ev,
         clickOutsideToClose:true,
         fullscreen: $mdMedia('sm') && $scope.customFullscreen
-    })
+    });
         //.then(function(answer) {
         //    $scope.status = 'You said the information was "' + answer + '".';
         //}, function() {
@@ -124,6 +124,45 @@ $scope.showLogin = function(ev) {
             clickOutsideToClose:true,
             fullscreen: $mdMedia('sm') && $scope.customFullscreen
         });
+        $scope.$watch(function() {
+            return $mdMedia('sm');
+        }, function(sm) {
+            $scope.customFullscreen = (sm === true);
+        });
+    };
+
+
+    //Modal if booking if successful
+    $scope.bookingSuccess = function(ev) {
+    console.log("show success booking");
+    $mdDialog.show({
+        controller: okController,
+        templateUrl: 'assets/views/routes/bookingSuccess.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true,
+        fullscreen: $mdMedia('sm') && $scope.customFullscreen
+    });
+
+    $scope.$watch(function() {
+        return $mdMedia('sm');
+    }, function(sm) {
+        $scope.customFullscreen = (sm === true);
+    });
+};
+
+    //Modal if booking fails
+    $scope.bookingFail = function(ev) {
+        console.log("show fail booking");
+        $mdDialog.show({
+            controller: okController,
+            templateUrl: 'assets/views/routes/bookingFail.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose:true,
+            fullscreen: $mdMedia('sm') && $scope.customFullscreen
+        });
+
         $scope.$watch(function() {
             return $mdMedia('sm');
         }, function(sm) {
@@ -191,4 +230,18 @@ function BookingTimeController($scope, $mdDialog) {
     $scope.hourAdd= function(){
         $scope.meetingValues.hours++;
     };
+}
+
+//This provides functionality in the booking success/failure modals(bookingSuccess.html & bookingFail.html).
+//When user clicks OK they will be redirected to the default screen.
+
+function okController ($scope, $location, $mdDialog) {
+    $scope.gotoDefault = function(){
+        console.log("OK is clicked");
+        $location.path('/defaultscreen');
+        $scope.cancel = function() {
+            $mdDialog.cancel();
+        };
+        $mdDialog.cancel();
+    }
 }
