@@ -230,7 +230,8 @@ table {
     font-size: larger;
 }
 
-.for{
+.for {
+    float: left;
     margin: 10% 1% 1% 8%;
 }
 
