@@ -21,33 +21,37 @@ myApp.controller('TimeCtrl', ["$scope", "$timeout", function($scope, $timeout) {
 //Controller for the CALENDAR ////////////////////////////////////////////////////////
 myApp.controller('CalendarCtrl', ["$scope", "$location", function($scope, $location){
     //dummy data for time hours that room can be booked//
-    $scope.bambooDataArray = [8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6];
+    //$scope.twelveHourClockArray = [];
+    $scope.bambooDataArray = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
+    //for(i=0; i<bambooDataArray.length; i++){
+    //    if(bambooDataArray[i] > 12){
+    //        $scope.twelveHourClockArray[i] = $bambooDataArray[i] - 12;
+    //    } else {
+    //        $scope.twelveHourClockArray[i] = $bambooDataArray[i];
+    //    }
+    //}
+
     //placeholder for who is in the room for that booked time//
     $scope.memberInRoom = "Santa Claus";
+
+    //function to see if timeblock on ng-repeat should be shaded like past time, passes in timeblock
+    $scope.checkPastTime = function(hour){
+
+        //var rightNowHour;
+        var dateNow = new Date();       //gets current date and time
+        console.log("DateNow: " + dateNow);
+        $scope.rightNowHour = dateNow.getHours();      //pulls the hours off of the current date and time
+        console.log("Rightnow: ", $scope.rightNowHour);
+
+        //if statement compares current hour to past hours, called from ng-repeat
+        if($scope.rightNowHour > hour){
+                return true;
+            }
+            return false;
+        }
 }]);
 
-   //$scope.pastTime = false;
-   // var rightNow, booked, middle;
-   // var d = new Date();
-   // var c = new Date();
-   // //console.log(d + " " + c);
-   //
-   // rightNow = d.getHours();
-   // //console.log("Rightnow: ", rightNow);
-   // middle = c.setHours(9);
-   // var next = new Date(middle);
-   // //console.log("middle: ", next);
-   // booked = next.getHours();
-   // //booked = middle.getHours();
-   // //console.log("booked: ", booked);
-   //
-   // console.log("right now: ", rightNow + "booked: ", booked);
-   //
-   // if (booked < rightNow) {
-   //     $scope.pastTime = true;
-   // } else {
-   //     $scope.pastTime = false;
-   // }
+
 //Controller for RESERVATION view page///////////////////////////////////////////////
 myApp.controller('ReserveCtrl', ["$scope", "$location", function($scope, $location){
     //change out to data from Bamboo

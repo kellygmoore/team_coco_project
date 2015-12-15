@@ -11,10 +11,10 @@
                     <td class="numHour">{{ timeblock }}</td>
                     <td class="timeslot" ng-style="{
             'background-color': timeblock === 12 ?  '#FF5962': 'lightgray',
-            'border-bottom': timeblock === 8 ? '3px dashed purple': '1px solid black',
-            'background-image': timeblock === 8 ? 'url(/assets/styles/images/graystripes.gif)' : 'none'
+            'border-top': timeblock === rightNowHour ? '3px dashed purple': '1px solid black',
+            'background-image': checkPastTime(timeblock) ? 'url(/assets/styles/images/graystripes.gif)' : 'none'
             }">
-                        <div class="timeSelectOval" ng-hide="timeblock === 12 || timeblock === 8">
+                        <div class="timeSelectOval" ng-hide="timeblock === 12 || checkPastTime(timeblock)">
                             <span>Tap to Book</span>
                         </div>
                         <div class="whoInRoom" ng-show="timeblock === 12">
@@ -24,34 +24,8 @@
                 </tr>
             </table>
         </div>
-
-<div ng-include="'/assets/views/templates/thetop.html'"></div>
-
-<div class="container" ng-controller="CalendarCtrl">
-
-    <div class="listDiv" ng-model="bambooDataArray">
-     <table>
-        <tr ng-repeat="timeblock in bambooDataArray">
-            <td class="numHour">{{ timeblock }}</td>
-            <td class="timeslot" ng-style="{
-            'background-color': timeblock === 12 ?  '#FF5962': 'lightgray',
-            'border-bottom': timeblock === 8 ? '3px dashed purple': '1px solid black',
-            'background-image': timeblock === 8 ? 'url(/assets/styles/images/stripes_background_gray.gif)' : 'none'
-            }">
-                <div class="timeSelectOval" ng-hide="timeblock === 12 || timeblock === 8">
-                    <span>Tap to Book</span>
-                </div>
-                <div class="whoInRoom" ng-show="timeblock === 12">
-                    <span>{{memberInRoom}}</span>
-                </div>
-            </td>
-        </tr>
-     </table>
+        </div>
     </div>
-</div>
-
-
-
 
 
         <!--Include the header for the top of the page-->
@@ -80,25 +54,5 @@
 
 
 <!--</div>-->
-<!--</div>-->
-
-
-<!--<div class="repeatDiv">-->
-<!--<ul ng-model="bambooDataArray" class="listDiv">-->
-<!--<li ng-repeat="timeblock in bambooDataArray" class="timeBlock">-->
-<!--<div class="timeHour">-->
-<!--<span>{{timeblock}}</span>-->
-<!--</div>-->
-<!--<div class="timeBoxBlock" ng-style="{'background-color': timeblock === 12 ?  '#FF5962': 'lightgray'}">-->
-<!--<div class="timeSelectOval" ng-hide="timeblock === 12 || timeblock === 8">-->
-
-<!--<span>Tap to Book</span>-->
-<!--</div>-->
-<!--<div class="whoInRoom" ng-show="timeblock === 12">-->
-<!--<span>{{memberInRoom}}</span>-->
-<!--</div>-->
-<!--</div>-->
-<!--</li>-->
-<!--</ul>-->
 <!--</div>-->
 
