@@ -7,7 +7,7 @@ myApp.config(["$routeProvider", function($routeProvider){
         when('/defaultscreen',{
             templateUrl: "assets/views/routes/defaultscreen.html"
         }).
-        when('/calendarview', {
+        when('/calendarview/', {
             templateUrl: "assets/views/routes/calendarview.html"
         }).
         when('/configview', {

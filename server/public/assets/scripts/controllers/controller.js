@@ -2,8 +2,20 @@
  * Created by kellygarskemoore on 12/10/15.
  */
 //Controller for the THETOP header clock/////////////////////////////////////////
-myApp.controller('TimeCtrl', ["$scope", "$timeout", function($scope, $timeout) {
+myApp.controller('TimeCtrl', ["$scope", "$timeout",  'SharedRoomData', function($scope, $timeout, SharedRoomData) {
 
+    $scope.room = [];
+    $scope.sharedRoomData = SharedRoomData;
+
+    if($scope.sharedRoomData.setRoomData() === undefined){
+        $scope.sharedRoomData.retrieveRoomData();
+    }
+
+    $scope.room = $scope.sharedRoomData.retrieveRoomData();
+
+    console.log("Shared room data: ", $scope.room);
+
+    /////////////////////////////
     $scope.bookingMember = "The Grinch";
     $scope.clock = "loading clock..."; // initialise the time variable
     $scope.tickInterval = 1000; //ms
@@ -23,33 +35,28 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", function($scope, $locat
     //dummy data for time hours that room can be booked//
     //$scope.twelveHourClockArray = [];
     $scope.bambooDataArray = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
-    //for(i=0; i<bambooDataArray.length; i++){
-    //    if(bambooDataArray[i] > 12){
-    //        $scope.twelveHourClockArray[i] = $bambooDataArray[i] - 12;
-    //    } else {
-    //        $scope.twelveHourClockArray[i] = $bambooDataArray[i];
-    //    }
-    //}
-
+    //$scope.bambooDataArray = [37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47];//minutes practice
     //placeholder for who is in the room for that booked time//
     $scope.memberInRoom = "Santa Claus";
 
     //function to see if timeblock on ng-repeat should be shaded like past time, passes in timeblock
     $scope.checkPastTime = function(hour){
 
-        //var rightNowHour;
         var dateNow = new Date();       //gets current date and time
-        console.log("DateNow: " + dateNow);
+        //console.log("DateNow: " + dateNow);
         $scope.rightNowHour = dateNow.getHours();      //pulls the hours off of the current date and time
-        console.log("Rightnow: ", $scope.rightNowHour);
+        //$scope.rightNowHour = dateNow.getMinutes();
+        //console.log("Rightnow: ", $scope.rightNowHour);
 
         //if statement compares current hour to past hours, called from ng-repeat
         if($scope.rightNowHour > hour){
                 return true;
             }
             return false;
-        }
+        };
 }]);
+
+
 
 
 //Controller for RESERVATION view page///////////////////////////////////////////////
@@ -65,6 +72,8 @@ myApp.controller('ReserveCtrl', ["$scope", "$location", function($scope, $locati
         $location.path("/defaultscreen");
     }
 }]);
+
+
 
 //Controller for DEFAULT screen view////////////////////////////////////////////////////
 myApp.controller('DefaultCtrl', ["$scope", "$location", function($scope, $location){
