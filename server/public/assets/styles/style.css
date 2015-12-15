@@ -1,14 +1,6 @@
 
 
-
-/*body {*/
-    /*background-color: #B23E44;*/
-    /*width: 1200px;*/
-    /*height: 1920px;*/
-/*}*/
-
-
-/*styles for default view*************************************/
+/*styles for DEFAULT view*************************************/
 .screen {
     background-color: #25ae90;
     width: 800px;
@@ -18,8 +10,6 @@
 .room-name-div {
     font-size: 58px;
     text-shadow: 5px 5px 5px #55606F;
-    /*display: block;*/
-    /*width: 100%;*/
     padding-top: 30px;
     margin: auto;
     text-align: center;
@@ -61,11 +51,11 @@
     /*border: 1px dashed black;*/
 }
 
-/***************THE HEADER: THE TOP************/
+/***************THE HEADER template: THE TOP******************************/
 header {
     /*display: inline-block;*/
     width: 800px;
-    height: 125px;
+    height: 175px;
     margin: 25px auto 0 auto;
     /*border: 2px dashed red;*/
 }
@@ -78,10 +68,7 @@ header {
     font-size: 24px;
     text-align: left;
     height: 120px;
-    /*width: 60%;*/
     float: left;
-    /*padding-bottom: 10px;*/
-    /*margin: auto;*/
     /*border: 2px solid black;*/
     line-height: 10px;
 }
@@ -93,9 +80,6 @@ header {
 }
 
 .clock p {
-    /*width: 30%;*/
-    /*margin-bottom: 10px;*/
-    /*float: right;*/
     text-align: right;
     font-size: 28px;
     line-height: 10px;
@@ -108,7 +92,7 @@ header {
 
 
 
-/*CALENDAR VIEW**********************/
+/*CALENDAR VIEW*******************************************/
 
 .screenCalendar {
     width: 800px;
@@ -129,7 +113,7 @@ header {
 }
 
 .timeBoxBlock {
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     width: 90%;
     height: 60px;
     display: inline-block;
@@ -164,8 +148,9 @@ header {
     margin-top: 11px;
 }
 
-table {
+table, th, td {
     border-collapse: collapse;
+    border: none;
 
 }
 
@@ -179,17 +164,11 @@ table {
 .timeslot {
     width: 700px;
     height: 60px;
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     background-color: lightgrey;
 }
 
-/*=======*/
-    /*width: 34%;*/
-    /*float: right;*/
-    /*border: 2px solid blue;*/
-/*}*/
-
-/*****************BOOKING VIEW*******************/
+/*****************BOOKING VIEW*************************************/
 
 .dialogdemoBasicUsage #popupContainer {
     position: relative; }
@@ -260,6 +239,7 @@ button.button {
     font-weight: 600;
 }
 
+<<<<<<< HEAD
 .plus{
     fill: #25ae90;
 }
@@ -273,6 +253,10 @@ button.button {
     /*font-size: 14px;*/
     /*color: #55606F;*/
 /*}*/
+=======
+/*RESERVATION view*******************************************/
+
+>>>>>>> feature_calendar
 .bookingBorder {
     border: 5px ridge #F3B449;
     width: 675px;
@@ -323,7 +307,7 @@ button.button {
 }
 
 
-/*****LOGIN MODAL*****/
+/*****LOGIN MODAL************************************/
 
 .loginButtons {
     margin:auto;
@@ -336,12 +320,12 @@ button.button {
     color: white;
 }
 
-.login p{
+.login p {
     text-align: center;
 }
 
 
-/*Configuration Page*/
+/*CONFIGURATION Page************************************/
 #configForm{
     padding-left:5%;
     padding-right:5%;
