@@ -1,8 +1,8 @@
 
 
-<<<<<<< HEAD
+
 /*styles for DEFAULT view*************************************/
-=======
+
 
 /*body {*/
     /*background-color: #B23E44;*/
@@ -20,7 +20,7 @@
     color: black;
 }
 /*styles for default view*************************************/
->>>>>>> feature_freshstart
+
 .screen {
     background-color: #25ae90;
     width: 800px;
@@ -259,7 +259,7 @@ button.button {
     font-weight: 600;
 }
 
-<<<<<<< HEAD
+
 .plus{
     fill: #25ae90;
 }
@@ -273,10 +273,10 @@ button.button {
     /*font-size: 14px;*/
     /*color: #55606F;*/
 /*}*/
-=======
+
 /*RESERVATION view*******************************************/
 
->>>>>>> feature_calendar
+
 .bookingBorder {
     border: 5px ridge #F3B449;
     width: 675px;
