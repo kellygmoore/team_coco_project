@@ -5,9 +5,9 @@
 /*}*/
 
 
-/*styles for default view*/
+/*styles for default view*************************************/
 .screen {
-    background-color: #B23E44;
+    background-color: #25ae90;
     width: 800px;
     height: 1280px;
 }
@@ -28,19 +28,20 @@
     background-color: floralwhite;
     color: #55606F;
     text-align: center;
-    font-size: 32px;
+    font-size: 36px;
     font-family: 'Nothing You Could Do', cursive, sans-serif;
     width: 50%;
     height: 125px;
     float: right;
-    border: 2px solid black;
+    padding-top: 25px;
+    border: 1px solid #55606F;
+    box-shadow: -4px 4px 5px #55606F;
 }
 
 .bottom-div {
     clear: both;
     text-align: center;
-    font-size: 32px;
-    /*margin-top: 40px;*/
+    font-size: 48px;
     color: floralwhite;
     /*border: 2px solid purple;*/
     padding-top: 250px;
@@ -48,11 +49,12 @@
 }
 
 .bottom-div p {
-    padding-bottom: 0px;
+    padding-bottom: 0;
+    text-shadow: 4px 4px 3px #55606F;
 }
 
 .time {
-    font-size: 54px;
+    font-size: 100px;
     /*border: 1px dashed black;*/
 }
 
@@ -63,6 +65,10 @@ header {
     height: 125px;
     margin: 25px auto 0 auto;
     /*border: 2px dashed red;*/
+}
+
+#login-button {
+    background-color: #25ae90;
 }
 
 #theRoom {
@@ -78,6 +84,7 @@ header {
 }
 
 .clock {
+
     height: 120px;
     /*border: 2px solid blue;*/
 }
@@ -89,8 +96,11 @@ header {
     text-align: right;
     font-size: 28px;
     line-height: 10px;
-    /*margin: auto;*/
+}
 
+.bookingMember {
+    font-style: bold;
+    color: #25ae90;
 }
 
 
@@ -169,3 +179,122 @@ table {
     border: 1px solid black;
     background-color: lightgrey;
 }
+
+/*=======*/
+    /*width: 34%;*/
+    /*float: right;*/
+    /*border: 2px solid blue;*/
+/*}*/
+
+/*****************BOOKING VIEW*******************/
+
+.dialogdemoBasicUsage #popupContainer {
+    position: relative; }
+.dialogdemoBasicUsage .footer {
+    width: 100%;
+    text-align: center;
+    margin-left: 20px; }
+.dialogdemoBasicUsage .footer, .dialogdemoBasicUsage .footer > code {
+    font-size: 0.8em;
+    margin-top: 50px; }
+
+
+.add{
+    display: inline;
+}
+
+.number {
+    font-size: xx-large;
+    color: blue;
+    font-weight: 600;
+}
+
+/*reservation view*******************************************/
+/*.charge {*/
+    /*font-size: 14px;*/
+    /*color: #55606F;*/
+/*}*/
+.bookingBorder {
+    border: 5px ridge #F3B449;
+    width: 675px;
+    margin: auto;
+}
+
+.bookingHeader {
+    background-color: #F3B449;
+    padding: 25px 0 15px 0;
+    border-bottom: 5px ridge #F3B449;
+}
+
+.bookingHeader h3 {
+    margin-top: 0;
+    text-align: center;
+    font-size: 32px;
+    text-shadow:
+    -1px -1px 0 white,
+    1px -1px 0 white,
+    -1px 1px 0 white,
+    1px 1px 0 white;
+}
+
+.bookingSummary {
+    font-size: 28px;
+    width: 400px;
+    text-align: right;
+    display: inline-block;
+    height: 300px;
+    float: left;
+}
+
+.chargeDiv {
+    font-size: 14px;
+    color: #55606F;
+    width: 175px;
+    text-align: left;
+    display: inline-block;
+    height: 300px;
+    padding-left: 20px;
+    padding-top: 100px;
+}
+
+.md-raised {
+    width: 150px;
+    height: auto;
+    border-radius: 10px;
+}
+
+
+/*****LOGIN MODAL*****/
+
+.loginButtons {
+    margin:auto;
+    display: inline-block;
+}
+
+
+.loginButtons #submit{
+    background-color: #25ae90;
+    color: white;
+}
+
+.login p{
+    text-align: center;
+}
+
+
+/*Configuration Page*/
+#configForm{
+    padding-left:5%;
+    padding-right:5%;
+}
+
+#configHead{
+    background-color:#B23E44;
+}
+
+#configSubmit{
+    width: 90%;
+    margin:auto;
+    /*background-color:#25ae90;*/
+}
+

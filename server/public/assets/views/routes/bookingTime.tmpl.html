@@ -1,0 +1,50 @@
+<!--This is the view for the booking window-->
+<!--Here the user can set the length of the meeting and the-->
+<!--Number of people in that meeting.-->
+<!--Functionality is provided by BookingTimeController in controller.js-->
+
+
+<md-dialog aria-label="Create your booking"  ng-cloak>
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <h2>Your meeting</h2>
+                <div class="add addHours">
+                    <div class="number">{{meetingValues.hours}}
+                        <ng-pluralize count="meetingValues.hours"
+                                      when="{'one':'hour',
+                                      'other':'hours'}"></ng-pluralize>
+                    </div>
+                    <md-button class="md-icon-button aria-label">
+                        <span aria-label="add" ng-click="hourAdd()"><ng-md-icon icon="add"></ng-md-icon></span>
+                    </md-button>
+                    <md-button class="md-icon-button">
+                        <span aria-label="subtract" ng-click="hourRemove()"><ng-md-icon icon="remove"></span>
+                    </md-button>
+                </div>
+                <div class="add addPeople">
+                    <div class="number">{{meetingValues.people}} people</div>
+                    <md-button class="md-icon-button aria-label">
+                        <span aria-label="add" ng-click="peopleAdd()"><ng-md-icon icon="add"></ng-md-icon></span>
+                    </md-button>
+                    <md-button class="md-icon-button">
+                        <span aria-label="subtract" ng-click="peopleRemove()"><ng-md-icon icon="remove"></span>
+                    </md-button>
+                </div>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <md-button>
+                Continue to booking
+            </md-button>
+            <span flex></span>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

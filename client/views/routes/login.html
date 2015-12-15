@@ -1,0 +1,46 @@
+<md-dialog class="login" aria-label="Login"  ng-cloak>
+    <form>
+
+
+            <div class="md-dialog-content">
+
+                <h2>Login</h2>
+
+                <p>This is the email and password you created when you registered with COCO.</p>
+
+                <md-input-container>
+                    <label>Email</label>
+                    <input ng-model=person.email type="email">
+                </md-input-container>
+
+                <md-input-container>
+                    <label>Password</label>
+                    <input ng-model=person.password type="password">
+                </md-input-container>
+
+            </div>
+
+        <md-dialog-actions class="loginButtons" layout="row">
+
+                <!--Will close modal window-->
+                <button id="cancel" class="md-button"  ng-click=cancel()>
+                CANCEL
+                </button>
+
+                <!--Will verify user email/pswd in Bamboo. -->
+                <!--If successful, direct to logged in calendar view.-->
+                <button id="submit" class="md-raised md-button" ng-submit=submit()>
+                Submit
+                </button>
+
+        </md-dialog-actions>
+
+            <span flex></span>
+
+            <p>Having trouble logging in?
+                <br>Use your badge or see the Community Manager for help.
+            </p>
+
+    </form>
+
+</md-dialog>

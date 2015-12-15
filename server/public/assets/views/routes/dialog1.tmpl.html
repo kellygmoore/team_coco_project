@@ -1,0 +1,42 @@
+<md-dialog aria-label="Create your booking"  ng-cloak>
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <!--<h2>Book your meeting</h2>-->
+                <!--<span flex></span>-->
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <h2>You are booking the {ROOM} from {time} to {time}</h2>
+                <div class="addHours">
+                    {#} hours
+                    <md-button class="md-icon-button" ng-click="">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    </md-button>
+                    <md-button class="md-icon-button" ng-click="">
+                        <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                    </md-button>
+                </div>
+                <div class="addPeople">
+                    {#} of people
+                    <md-button class="md-icon-button" ng-click="">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    </md-button>
+                    <md-button class="md-icon-button" ng-click="">
+                        <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                    </md-button>
+                </div>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <md-button>
+                Continue to booking
+            </md-button>
+            <span flex></span>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
