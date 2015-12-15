@@ -193,17 +193,27 @@ table {
 
 .dialogdemoBasicUsage #popupContainer {
     position: relative; }
+
 .dialogdemoBasicUsage .footer {
     width: 100%;
     text-align: center;
     margin-left: 20px; }
+
 .dialogdemoBasicUsage .footer, .dialogdemoBasicUsage .footer > code {
     font-size: 0.8em;
     margin-top: 50px; }
 
+.window{
+    width: 27%;
+    height: 44%;
+}
 
 .add{
     display: inline;
+}
+
+.addHours{
+    float:left;
 }
 
 .number {
