@@ -14,28 +14,27 @@
             </div>
         </md-toolbar>
         <md-dialog-content>
-            <div class="md-dialog-content">
+            <div class="md-dialog-content modal-body">
                 <h2>Your meeting</h2>
                 <div class="add addHours">
-                    <div class="number">{{meetingValues.hours}}
-                        <ng-pluralize count="meetingValues.hours"
-                                      when="{'one':'hour',
-                                      'other':'hours'}"></ng-pluralize>
-                    </div>
+                    <div class="number">{{meetingValues.hours}}</div>
+                    <p><ng-pluralize count="meetingValues.hours"
+                                     when="{'one':'hour',
+                                      'other':'hours'}"></ng-pluralize></p>
                     <md-button class="md-icon-button aria-label button ">
-                        <span aria-label="add" ng-click="hourAdd()"><ng-md-icon icon="add"></ng-md-icon></span>
+                        <span aria-label="add" ng-click="hourAdd()"><ng-md-icon icon="add" class="plus"></ng-md-icon></span>
                     </md-button>
                     <md-button class="md-icon-button button">
-                        <span aria-label="subtract" ng-click="hourRemove()"><ng-md-icon icon="remove"></span>
+                        <span aria-label="subtract" ng-click="hourRemove()"><ng-md-icon icon="remove" class="minus"></ng-md-icon></span>
                     </md-button>
                 </div>
                 <div class="add addPeople">
-                    <div class="number">{{meetingValues.people}} people</div>
+                    <div class="number">{{meetingValues.people}}</div><p>people</p>
                     <md-button class="md-icon-button aria-label button">
-                        <span aria-label="add" ng-click="peopleAdd()"><ng-md-icon icon="add"></ng-md-icon></span>
+                        <span aria-label="add" ng-click="peopleAdd()"><ng-md-icon icon="add" class="plus"></ng-md-icon></span>
                     </md-button>
                     <md-button class="md-icon-button button">
-                        <span aria-label="subtract" ng-click="peopleRemove()"><ng-md-icon icon="remove"></span>
+                        <span aria-label="subtract" ng-click="peopleRemove()"><ng-md-icon icon="remove" class="minus"></span>
                     </md-button>
                 </div>
             </div>
