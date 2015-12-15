@@ -182,10 +182,16 @@ function BookingTimeController($scope, $mdDialog) {
 
     $scope.peopleRemove= function(){
         $scope.meetingValues.people--;
+        while($scope.meetingValues.people < 1){
+            $scope.meetingValues.people = 1;
+        }
     };
 
     $scope.hourRemove= function(){
         $scope.meetingValues.hours--;
+        while($scope.meetingValues.hours < 0){
+            $scope.meetingValues.hours = 0;
+        }
     };
 
     $scope.hourAdd= function(){

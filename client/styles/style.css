@@ -207,6 +207,11 @@ table {
     width: 27%;
     height: 44%;
 }
+.window h2{
+    text-align: center;
+    color: #55606F;
+    margin: 2%;
+}
 
 .modal-body{
     text-align:center
