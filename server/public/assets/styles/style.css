@@ -204,23 +204,34 @@ table {
     margin-top: 50px; }
 
 .window{
-    width: 27%;
-    height: 44%;
+    width: 55%;
+    height: 43%;
 }
 .window h2{
+    font-size: xx-large;
     text-align: center;
     color: #55606F;
     margin: 2%;
 }
 
+.booking-form{
+    height: 95%;
+}
+
 .modal-body{
-    text-align:center
+    text-align:center;
+    padding: 31% 19%;
+    height: 100%;
 }
 
 .modal-body p{
     color: #55606F;
     font-weight: 600;
     font-size: larger;
+}
+
+.for{
+    margin: 10% 1% 1% 8%;
 }
 
 button.button {
@@ -236,6 +247,10 @@ button.button {
 
 .addHours{
     float:left;
+}
+
+.addPeople{
+    float:right;
 }
 
 .number {

@@ -5,7 +5,7 @@
 
 
 <md-dialog aria-label="Create your booking" class="window" ng-cloak>
-    <form>
+    <form class="booking-form">
         <md-toolbar>
             <div class="md-toolbar-tools">
                 <md-button class="md-icon-button" ng-click="cancel()">
@@ -13,9 +13,9 @@
                 </md-button>
             </div>
         </md-toolbar>
-        <md-dialog-content>
+        <md-dialog-content class="modal-body">
             <h2>Your meeting</h2>
-            <div class="md-dialog-content modal-body">
+            <div class="md-dialog-content">
                 <div class="add addHours">
                     <div class="number">{{meetingValues.hours}}</div>
                     <p><ng-pluralize count="meetingValues.hours"
@@ -28,6 +28,7 @@
                         <span aria-label="subtract" ng-click="hourRemove()"><ng-md-icon icon="remove" class="minus"></ng-md-icon></span>
                     </md-button>
                 </div>
+                <p class="for">for</p>
                 <div class="add addPeople">
                     <div class="number">{{meetingValues.people}}</div><p>people</p>
                     <md-button class="md-icon-button aria-label button">
@@ -40,10 +41,7 @@
             </div>
         </md-dialog-content>
     </form>
-    <md-dialog-actions layout="row">
-        <md-button>
-            Continue to booking
-        </md-button>
-        <span flex></span>
-    </md-dialog-actions>
+    <md-button>
+        Continue to booking
+    </md-button>
 </md-dialog>
