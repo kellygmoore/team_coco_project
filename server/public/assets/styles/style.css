@@ -133,14 +133,20 @@ table, th, td {
     box-shadow: 2px 2px 3px #55606F;
     border: 1px solid #55606F;
     border-radius: 20px;
-    margin: 6px 5px 6px 5px;
+    margin: auto;
     text-align: center;
+    width: 90%;
+    height: 75%;
     background-color: white;
 }
 
 .timeSelectOval span {
     font-family: "Nothing You Could Do", Arial, sans-serif;
     font-size: 28px;
+    display: block;
+    padding-top: 7px;
+    width: 200px;
+    margin: auto;
 }
 
 
