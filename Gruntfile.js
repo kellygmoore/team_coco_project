@@ -73,6 +73,15 @@ module.exports = function(grunt){
                 ],
                 "dest": "server/public/vendors/"
             },
+            angularMaterialIcons: {
+                expand: true,
+                cwd: 'node_modules/angular-material-icons',
+                src: [
+                    "angular-material-icons.min.js",
+                    "angular-material-icons.css"
+                ],
+                "dest": "server/public/vendors/"
+            },
             html: {
                 expand: true,
                 cwd: 'client/views/',
@@ -126,7 +135,7 @@ module.exports = function(grunt){
     });
 
     grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
+    //grunt.loadNpmTasks('grunt-contrib-uglify');
 
     grunt.registerTask('default', ['copy']);
 };
