@@ -39,17 +39,12 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
     if($scope.sharedBookedNameData.setBookedName() === undefined){
         $scope.sharedBookedNameData.retrieveBookedName();
     }
-
+    //placeholder for who is in the room for that booked time//
     $scope.memberInRoom = $scope.sharedBookedNameData.retrieveBookedName();
-
     console.log("Shared room data: ", $scope.room);
-
 
     //dummy data for time hours that room can be booked//
     $scope.bambooDataArray = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
-
-    //placeholder for who is in the room for that booked time//
-    //$scope.memberInRoom = "Santa Claus";
 
     //function to see if timeblock on ng-repeat should be shaded like past time, passes in timeblock
     $scope.checkPastTime = function(hour){
@@ -65,6 +60,12 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
             }
             return false;
         };
+
+    $scope.tapToBook = function(startHour){
+        $location.path("/reservationview");
+
+    }
+
 }]);
 
 

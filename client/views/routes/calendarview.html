@@ -15,7 +15,7 @@
                     'background-color': timeblock === 17 ?  '#FF5962': '#25ae90',
                     'border-top': timeblock === rightNowHour ? '3px dashed purple': 'none'
                     }">
-                        <div class="timeSelectOval" ng-hide="timeblock === 17 || checkPastTime(timeblock)">
+                        <div class="timeSelectOval" ng-click="tapToBook(timeblock)" ng-hide="timeblock === 17 || checkPastTime(timeblock)">
                             <span>Tap to Book</span>
                         </div>
                         <div class="whoInRoom" ng-show="timeblock === 17">

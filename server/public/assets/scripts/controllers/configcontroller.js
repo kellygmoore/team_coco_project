@@ -56,5 +56,57 @@ myApp.controller('ConfigController', ["$scope","$http","$location","$timeout", f
         return ms;
 
     }
+
+    $scope.authorize = function() {
+        //Create the log in Variables
+        var emailAddress= 'bsmalls@iremote.com';
+        var password='t4h7pvWt';
+
+        $http({
+            method: "POST",
+            url: "http://testing.bamboo.cocomsp.com/api/signIn",
+            data: "emailAddress=" + emailAddress + "&password=" + password,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+            }
+        }).success(
+            function( response ) {
+                console.log("this is the auth response", response);
+            }
+        );
+    };
+
+    $scope.getRoomsTest = function() {
+        var startDate="2015-12-08";
+        var endDate="2015-12-08";
+        var locationId="129";
+
+        //GET some meetings
+        $http({
+            method: "GET",
+            url: "http://testing.bamboo.cocomsp.com/api/locations/"+locationId+"/meetings?start="+startDate+"&end="+endDate,
+            withCredentials: true,
+            headers: {
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+            }
+        }).success(function( response ) {
+                console.log("This is meeting room response", response);
+            }
+        );
+    };
+
+
+    $scope.signOut = function (){
+        $http({
+            method: "GET",
+            url: "http://testing.bamboo.cocomsp.com/api/signOut"
+        }).success(function( response ) {
+                console.log("this is GET SignOut  response", response);
+            }
+        );
+
+    };
+
+
 }]);
 
