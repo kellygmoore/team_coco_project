@@ -10,15 +10,16 @@
                 <tr ng-repeat="timeblock in bambooDataArray">
                     <td class="numHour">{{ timeblock }}</td>
                     <td class="timeslot" ng-style="{
-            'background-color': timeblock === 12 ?  '#FF5962': 'lightgray',
-            'border-top': timeblock === rightNowHour ? '3px dashed purple': '1px solid black',
-            'background-image': checkPastTime(timeblock) ? 'url(/assets/styles/images/graystripes.gif)' : 'none'
-            }">
+                    'background-image': checkPastTime(timeblock) ? 'url(/assets/styles/images/graystripes.gif)' : 'none',
+                    'border' : checkPastTime(timeblock) ? 'none' : '1px solid black',
+                    'background-color': timeblock === 12 ?  '#FF5962': 'lightgray',
+                    'border-top': timeblock === rightNowHour ? '3px dashed purple': 'none'
+                    }">
                         <div class="timeSelectOval" ng-hide="timeblock === 12 || checkPastTime(timeblock)">
                             <span>Tap to Book</span>
                         </div>
                         <div class="whoInRoom" ng-show="timeblock === 12">
-                            <span>{{memberInRoom}}</span>
+                            <span>{{memberInRoom.firstName}} {{memberInRoom.lastName}}</span>
                         </div>
                     </td>
                 </tr>

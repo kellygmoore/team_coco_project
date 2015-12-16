@@ -1,6 +1,7 @@
 myApp.factory('SharedRoomData', ["$http", function($http){
     var meetingRoom = {};
-    console.log("In factory");
+
+    console.log("In room factory");
     //PRIVATE
     var roomData = function() {
         meetingRoom = {
@@ -17,6 +18,8 @@ myApp.factory('SharedRoomData', ["$http", function($http){
         };
         //console.log("MeetingRoom Private: ", meetingRoom);
     };
+
+
     //PUBLIC
     var publicRoom = {
         retrieveRoomData: function(){
@@ -27,6 +30,7 @@ myApp.factory('SharedRoomData', ["$http", function($http){
             //console.log("In roomData");
             return roomData();
         }
+
     };
 
     return publicRoom;

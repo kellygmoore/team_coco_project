@@ -32,13 +32,24 @@ myApp.controller('TimeCtrl', ["$scope", "$timeout",  'SharedRoomData', function(
     }]);
 
 //Controller for the CALENDAR ////////////////////////////////////////////////////////
-myApp.controller('CalendarCtrl', ["$scope", "$location", function($scope, $location){
+myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData', function($scope, $location, SharedBookedNameData){
+    $scope.memberInRoom = [];
+    $scope.sharedBookedNameData = SharedBookedNameData;
+
+    if($scope.sharedBookedNameData.setBookedName() === undefined){
+        $scope.sharedBookedNameData.retrieveBookedName();
+    }
+
+    $scope.memberInRoom = $scope.sharedBookedNameData.retrieveBookedName();
+
+    console.log("Shared room data: ", $scope.room);
+
+
     //dummy data for time hours that room can be booked//
-    //$scope.twelveHourClockArray = [];
     $scope.bambooDataArray = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
-    //$scope.bambooDataArray = [37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47];//minutes practice
+
     //placeholder for who is in the room for that booked time//
-    $scope.memberInRoom = "Santa Claus";
+    //$scope.memberInRoom = "Santa Claus";
 
     //function to see if timeblock on ng-repeat should be shaded like past time, passes in timeblock
     $scope.checkPastTime = function(hour){
@@ -46,7 +57,6 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", function($scope, $locat
         var dateNow = new Date();       //gets current date and time
         //console.log("DateNow: " + dateNow);
         $scope.rightNowHour = dateNow.getHours();      //pulls the hours off of the current date and time
-        //$scope.rightNowHour = dateNow.getMinutes();
         //console.log("Rightnow: ", $scope.rightNowHour);
 
         //if statement compares current hour to past hours, called from ng-repeat
