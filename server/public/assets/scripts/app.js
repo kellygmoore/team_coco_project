@@ -1,13 +1,13 @@
 console.log("hello");
 
-var myApp = angular.module("myApp", ['ngRoute', 'ngMaterial', 'ngAria', 'ngAnimate']);
+var myApp = angular.module("myApp", ['ngRoute', 'ngMaterial', 'ngAria', 'ngAnimate', 'ngMdIcons']);
 
 myApp.config(["$routeProvider", function($routeProvider){
     $routeProvider.
         when('/defaultscreen',{
             templateUrl: "assets/views/routes/defaultscreen.html"
         }).
-        when('/calendarview', {
+        when('/calendarview/', {
             templateUrl: "assets/views/routes/calendarview.html"
         }).
         when('/configview', {
@@ -16,15 +16,11 @@ myApp.config(["$routeProvider", function($routeProvider){
         }).
         when('/bookingscreen', {
             templateUrl: "assets/views/routes/bookingscreen.html",
-            controller: "AppCtrl"
+            controller: 'AppCtrl'
         }).
-        //}).when('/dialog1', {
-        //    templateUrl: "assets/views/routes/dialog1.tmpl.html",
-        //    controller: "AppCtrl"
         when('/reservationview', {
             templateUrl: "assets/views/routes/reservationview.html"
             //controller: "ReserveCtrl"
-
         }).
         otherwise({
             redirectTo: 'defaultscreen'
