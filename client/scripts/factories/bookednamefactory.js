@@ -20,7 +20,7 @@ myApp.factory('SharedBookedNameData', ["$http", function($http) {
                 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
             }
         }).then(function(response){
-                    data = response;
+                    data = response.data;
                     console.log("Async data response: ", data);
                 });
 
