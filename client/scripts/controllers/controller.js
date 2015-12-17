@@ -54,21 +54,65 @@ myApp.controller('TimeCtrl', ["$scope", "$timeout",  'SharedRoomData', function(
 //Controller for the CALENDAR ////////////////////////////////////////////////////////
 myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData', function($scope, $location, SharedBookedNameData){
     $scope.memberInRoom = [];
+    $scope.isRoomBooked = false;
     $scope.sharedBookedNameData = SharedBookedNameData;
+    //$scope.booking = [];
 
     if($scope.sharedBookedNameData.setBambooData() === undefined){
-        console.log("first set is undefined (in controller).");
+        //console.log("first set is undefined (in controller).");
         $scope.sharedBookedNameData.retrieveBambooData()
             .then(function() {
-                console.log("In then in controller");
+                //console.log("In then in controller");
                 $scope.booking = $scope.sharedBookedNameData.setBambooData();
                 console.log("response back (in then controller): ", $scope.booking);
+                var dateStartString = [];
+                var stringToHourStart = [];
+                var stringToMinStart = [];
+                var dateEndString = [];
+                var stringToHourEnd = [];
+                var stringToMinEnd = [];
+                var bookedName = [];
+
+                //if there are NO meetings, then nothing has to happen//////
+                if($scope.booking.length === 0){
+                    console.log("in first if where length is zero");
+                    return;
+                } else {
+                console.log("length of array: ", $scope.booking.length);
+                    for (i = 0; i < $scope.booking.length; i++) {
+                    console.log("Name of room: ", $scope.booking[i].meetingRoom.name);
+                        if ($scope.booking[i].meetingRoom.name === "Tap Room") {
+
+                            dateStartString[i] = $scope.booking[i].startDate;
+                            //console.log("Start: ", dateStartString[i]);
+                            stringToHourStart[i] = dateStartString[i].slice(11, 13);
+                            //console.log("hour: ", stringToHourStart[i]);
+                            stringToMinStart[i] = dateStartString[i].slice(14, 16);
+                            //console.log("min: ", stringToMinStart[i]);
+
+                            dateEndString[i] = $scope.booking[i].endDate;
+                            //console.log("end: ", dateEndString[i]);
+                            stringToHourEnd[i] = dateEndString[i].slice(11, 13);
+                            //console.log("hour: ", stringToHourEnd[i]);
+                            stringToMinEnd[i] = dateEndString[i].slice(14, 16);
+                            //console.log("min: ", stringToMinEnd[i]);
+
+                            bookedName[i] = $scope.booking[i].payor.fullName;
+                            console.log("Full name: ", bookedName[i]);
+                            console.log("Hour array: ", stringToHourStart);
+                        }
+                    }
+                }
             });
     } else {
-        console.log("In else on controller");
+        //console.log("In else on controller");
         $scope.booking = $scope.sharedBookedNameData.setBambooData();
         console.log("response back (in else controller): ", $scope.booking);
     }
+    //$scope.booking = $scope.sharedBookedNameData.setBambooData();
+
+    console.log("1st array returned here.");
+
 
 
 
