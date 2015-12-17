@@ -23,12 +23,29 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
         $scope.bookingData.retrieveBambooData()
                 .then(function(){
                     $scope.bookedData = $scope.bookingData.setBambooData();
-                    console.log("promise meeting data: ", $scope.bookedData)
+                    console.log("promise meeting data: ", $scope.bookedData);
+                $scope.updateMeetingTimesArray();
+                console.log("Meeting times array: ", $scope.meetingTimesArray);
                 });
     } else {
         $scope.bookedData = $scope.bookingData.setBambooData();
         console.log("promise meeting data: ", $scope.bookedData);
+        $scope.updateMeetingTimesArray();
+        console.log("Meeting times array: ", $scope.meetingTimesArray);
     }
+
+    $scope.updateMeetingTimesArray = function(){
+        $scope.bookedData.map(
+            function(obj) {
+                if(obj.meetingRoom.id === 1/*$scope.roomData.id*/){
+                    var meetTimeObj = {};
+                    meetTimeObj.startTime = obj.startDate.slice(11, 16);
+                    meetTimeObj.endTime = obj.endDate.slice(11, 16);
+                    $scope.meetingTimesArray.push(meetTimeObj);
+                }
+            }
+        );
+    };
 
     //if($scope.userService.userData() === undefined) {
     //    console.log("getting user list from user service");
