@@ -193,167 +193,11 @@ table, th, td {
     background-color: lightgrey;
 }
 
-/*****************BOOKING VIEW*************************************/
-
-/*.dialogdemoBasicUsage #popupContainer {*/
-/*position: relative; }*/
-
-/*.dialogdemoBasicUsage .footer {*/
-/*width: 100%;*/
-/*text-align: center;*/
-/*margin-left: 20px; }*/
-
-/*.dialogdemoBasicUsage .footer, .dialogdemoBasicUsage .footer > code {*/
-/*font-size: 0.8em;*/
-/*margin-top: 50px; }*/
-
-/*.window{*/
-/*width: 55%;*/
-/*height: 43%;*/
-/*}*/
-/*.window h2{*/
-/*font-size: xx-large;*/
-/*text-align: center;*/
-/*color: #55606F;*/
-/*margin: 2%;*/
-/*}*/
-
-/*.booking-form{*/
-/*height: 95%;*/
-/*}*/
-
-/*.modal-body{*/
-/*text-align:center;*/
-/*padding: 31% 19%;*/
-/*height: 100%;*/
-/*}*/
-
-/*.modal-body p{*/
-/*color: #55606F;*/
-/*font-weight: 600;*/
-/*font-size: larger;*/
-/*}*/
-
-/*.for {*/
-/*float: left;*/
-/*margin: 10% 1% 1% 8%;*/
-/*}*/
-
-/*button.button {*/
-/*height: 37px !important;*/
-/*width: 55px !important;*/
-/*border-radius: 37% !important;*/
-/*box-shadow: 1px 1px 3px #888888;*/
-/*}*/
-
-/*.add{*/
-/*display: inline;*/
-/*}*/
-
-
-
-
-/*.addHoursButton {*/
-    /*padding-top: 20px;*/
-    /*margin: 0 50px 0 50px;*/
-
-/*}*/
-
-/*.md-icon-button {*/
-    /*font-size: 48px;*/
-/*}*/
-
-/*.number {*/
-    /*/!*clear: left;*!/*/
-    /*text-align: center;*/
-/*}*/
-/*.minusHoursButton {*/
-    /*padding-top: 20px;*/
-    /*margin: 0 50px 0 50px;*/
-
-/*}*/
-
-/*.minutes button {*/
-    /*display: inline;*/
-/*}*/
-
-
-
-/*.number {*/
-    /*width: 200px;*/
-    /*height: 300px;*/
-    /*border: 3px solid red;*/
-/*}*/
-/*//////////////////////OLD CSS FOR BOOKING MODAL*/
-/*.dialogdemoBasicUsage #popupContainer {*/
-    /*position: relative; }*/
-
-/*.dialogdemoBasicUsage .footer {*/
-    /*width: 100%;*/
-    /*text-align: center;*/
-    /*margin-left: 20px; }*/
-
-/*.dialogdemoBasicUsage .footer, .dialogdemoBasicUsage .footer > code {*/
-    /*font-size: 0.8em;*/
-    /*margin-top: 50px; }*/
-
-/*.window{*/
-    /*width: 55%;*/
-    /*height: 43%;*/
-/*}*/
-/*.window h2{*/
-    /*font-size: xx-large;*/
-    /*text-align: center;*/
-    /*color: #55606F;*/
-    /*margin: 2%;*/
-/*}*/
-
-/*.booking-form{*/
-    /*height: 95%;*/
-/*}*/
-
-/*.modal-body{*/
-    /*text-align:center;*/
-    /*padding: 31% 19%;*/
-    /*height: 100%;*/
-/*}*/
-
-/*.modal-body p{*/
-    /*color: #55606F;*/
-    /*font-weight: 600;*/
-    /*font-size: larger;*/
-/*}*/
-
-/*.for {*/
-    /*float: left;*/
-    /*margin: 10% 1% 1% 8%;*/
-/*}*/
-
-/*button.button {*/
-    /*height: 37px !important;*/
-    /*width: 55px !important;*/
-    /*border-radius: 37% !important;*/
-    /*box-shadow: 1px 1px 3px #888888;*/
-/*}*/
-
-/*.add{*/
-    /*display: inline;*/
-/*}*/
-
-/*.addHours{*/
-    /*float:left;*/
-/*}*/
-
-/*.addPeople{*/
-    /*float:right;*/
-/*}*/
-
-
 /**************RESERVE-BOOK SCREEN**************/
 
 .reserveBook {
     /*border: 5px ridge #F3B449;*/
-    width: 66%;
+    width: 100%;
     margin: auto;
     background-color: #fcf0da;
 }
@@ -386,21 +230,12 @@ table, th, td {
     fill: #FF5962
 }
 
-
-
-/*reservation view*******************************************/
-/*.charge {*/
-    /*font-size: 14px;*/
-    /*color: #55606F;*/
-/*}*/
-
-/*RESERVATION view*******************************************/
-
 #reserveHeader {
     padding: 0 15px 0 15px;
     height: auto;
     background-color: #F3B449;
     width: auto;
+    margin-top: 0;
 
 }
 #bookingSummary {
@@ -420,39 +255,19 @@ table, th, td {
     margin-top: 0;
     text-align: center;
     font-size: 32px;
-    /*text-shadow:*/
-    /*-1px -1px 0 white,*/
-    /*1px -1px 0 white,*/
-    /*-1px 1px 0 white,*/
-    /*1px 1px 0 white;*/
+}
+
+.summaryDiv {
+    background-color: white;
 }
 
 .charge {
-    font-size: 18px;
+    font-size: 14px;
 }
 
 .bookItButton {
     padding-bottom: 10px;
 }
-/*.bookingSummary {*/
-    /*font-size: 28px;*/
-    /*width: 400px;*/
-    /*text-align: right;*/
-    /*display: inline-block;*/
-    /*height: 300px;*/
-    /*float: left;*/
-/*}*/
-
-/*.chargeDiv {*/
-    /*font-size: 14px;*/
-    /*color: #55606F;*/
-    /*width: 175px;*/
-    /*text-align: left;*/
-    /*display: inline-block;*/
-    /*height: 300px;*/
-    /*padding-left: 20px;*/
-    /*padding-top: 100px;*/
-/*}*/
 
 .md-raised {
     width: 150px;
@@ -554,3 +369,160 @@ table, th, td {
     background-color: white;
     color:black;
 }
+
+
+
+/*****************BOOKING VIEW*************************************/
+
+/*.dialogdemoBasicUsage #popupContainer {*/
+/*position: relative; }*/
+
+/*.dialogdemoBasicUsage .footer {*/
+/*width: 100%;*/
+/*text-align: center;*/
+/*margin-left: 20px; }*/
+
+/*.dialogdemoBasicUsage .footer, .dialogdemoBasicUsage .footer > code {*/
+/*font-size: 0.8em;*/
+/*margin-top: 50px; }*/
+
+/*.window{*/
+/*width: 55%;*/
+/*height: 43%;*/
+/*}*/
+/*.window h2{*/
+/*font-size: xx-large;*/
+/*text-align: center;*/
+/*color: #55606F;*/
+/*margin: 2%;*/
+/*}*/
+
+/*.booking-form{*/
+/*height: 95%;*/
+/*}*/
+
+/*.modal-body{*/
+/*text-align:center;*/
+/*padding: 31% 19%;*/
+/*height: 100%;*/
+/*}*/
+
+/*.modal-body p{*/
+/*color: #55606F;*/
+/*font-weight: 600;*/
+/*font-size: larger;*/
+/*}*/
+
+/*.for {*/
+/*float: left;*/
+/*margin: 10% 1% 1% 8%;*/
+/*}*/
+
+/*button.button {*/
+/*height: 37px !important;*/
+/*width: 55px !important;*/
+/*border-radius: 37% !important;*/
+/*box-shadow: 1px 1px 3px #888888;*/
+/*}*/
+
+/*.add{*/
+/*display: inline;*/
+/*}*/
+
+
+
+
+/*.addHoursButton {*/
+/*padding-top: 20px;*/
+/*margin: 0 50px 0 50px;*/
+
+/*}*/
+
+/*.md-icon-button {*/
+/*font-size: 48px;*/
+/*}*/
+
+/*.number {*/
+/*/!*clear: left;*!/*/
+/*text-align: center;*/
+/*}*/
+/*.minusHoursButton {*/
+/*padding-top: 20px;*/
+/*margin: 0 50px 0 50px;*/
+
+/*}*/
+
+/*.minutes button {*/
+/*display: inline;*/
+/*}*/
+
+
+
+/*.number {*/
+/*width: 200px;*/
+/*height: 300px;*/
+/*border: 3px solid red;*/
+/*}*/
+/*//////////////////////OLD CSS FOR BOOKING MODAL*/
+/*.dialogdemoBasicUsage #popupContainer {*/
+/*position: relative; }*/
+
+/*.dialogdemoBasicUsage .footer {*/
+/*width: 100%;*/
+/*text-align: center;*/
+/*margin-left: 20px; }*/
+
+/*.dialogdemoBasicUsage .footer, .dialogdemoBasicUsage .footer > code {*/
+/*font-size: 0.8em;*/
+/*margin-top: 50px; }*/
+
+/*.window{*/
+/*width: 55%;*/
+/*height: 43%;*/
+/*}*/
+/*.window h2{*/
+/*font-size: xx-large;*/
+/*text-align: center;*/
+/*color: #55606F;*/
+/*margin: 2%;*/
+/*}*/
+
+/*.booking-form{*/
+/*height: 95%;*/
+/*}*/
+
+/*.modal-body{*/
+/*text-align:center;*/
+/*padding: 31% 19%;*/
+/*height: 100%;*/
+/*}*/
+
+/*.modal-body p{*/
+/*color: #55606F;*/
+/*font-weight: 600;*/
+/*font-size: larger;*/
+/*}*/
+
+/*.for {*/
+/*float: left;*/
+/*margin: 10% 1% 1% 8%;*/
+/*}*/
+
+/*button.button {*/
+/*height: 37px !important;*/
+/*width: 55px !important;*/
+/*border-radius: 37% !important;*/
+/*box-shadow: 1px 1px 3px #888888;*/
+/*}*/
+
+/*.add{*/
+/*display: inline;*/
+/*}*/
+
+/*.addHours{*/
+/*float:left;*/
+/*}*/
+
+/*.addPeople{*/
+/*float:right;*/
+/*}*/

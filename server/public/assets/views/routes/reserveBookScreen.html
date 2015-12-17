@@ -15,7 +15,7 @@
 <div class="addAll" ng-controller="IncrementCtrl">
 
     <div class="title" layout="row" layout-align="center center">
-        <h1>Your Meeting</h1>
+        <h1>Your Meeting from  to </h1>
     </div>
 
     <div class="incrementDiv" layout="row" layout-align="space-around center">
@@ -32,7 +32,7 @@
 
         <div class="addButton">
             <md-button class="md-icon-button aria-label button">
-            <span aria-label="add" ng-click="hourAdd()">
+            <span aria-label="add" ng-click="hourAdd()" ng-click="addTime()">
                 <ng-md-icon icon="add" class="plus" size="60"></ng-md-icon>
             </span>
             </md-button>
@@ -102,7 +102,7 @@
     <div class="summaryHeader" layout="row" layout-align="center center">
     <h3>Booking Summary</h3>
     </div>
-        <div class="bookingSummary" layout="column" layout-align="space-around center">
+        <div class="summaryDiv" layout="column" layout-align="space-around center">
             <div ng-hide="true">
                 <p>Available: <em>{{available}}</em></p>
                 <p>This meeting: <em>{{thisMeeting}}</em></p>
