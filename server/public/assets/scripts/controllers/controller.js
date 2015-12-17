@@ -83,6 +83,9 @@ myApp.controller('ReserveCtrl', ["$scope", "$location", function($scope, $locati
     $scope.nevermind = function(){
         $location.path("/defaultscreen");
     }
+    $scope.goback = function(){
+        $location.path("/bookingscreen");
+    }
 }]);
 
 
