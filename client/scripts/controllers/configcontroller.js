@@ -107,6 +107,51 @@ myApp.controller('ConfigController', ["$scope","$http","$location","$timeout", f
 
     };
 
+
+
+    $scope.bookRoom = function() {
+        //Create the book Room Variables
+        // Start and end Times need to be in 24 hours
+        var startDate= "2015-12-17";
+        var startTime= "14:00:00";
+        var endDate="2015-12-17";
+        var endTime="14:30:00";
+        var meetingRoomId="1";
+        var numOfAttendees="3";
+        var description="Post Request from Development Code Prime";
+        var personId="19455";
+
+
+
+
+        $http({
+            method: "POST",
+            url: "http://testing.bamboo.cocomsp.com/api/meetings",
+            data: "startDate="+ startDate +"T"+startTime+"&endDate=" +endDate+"T" +endTime+ "&meetingRoomId="
+                    +meetingRoomId+"&numOfAttendees=" +numOfAttendees+ "&description="+description+ "&personId="+ personId,
+            withCredentials: true,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+            }
+        }).success(
+            function( response ) {
+                console.log("this is bookingroom response", response);
+            }
+        );
+    };
+
+    //POST https://members.explorecoco.com/api/meetings
+    //startDate - booking start date and time, formatted as YYYY-MM-DDTHH:mm:ss
+    //example: 2015-12-04T16:30:00
+    //endDate - booking end date and time, formatted as YYYY-MM-DDTHH:mm:ss
+    //meetingRoomId - meeting room ID
+    //numOfAttendees - number of people attending the meeting
+    //description - description of booking (i.e. name for meeting)
+    //personId - ID of the person creating the booking
+
+
+
+
 }]);
 
 
