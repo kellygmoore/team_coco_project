@@ -1,6 +1,6 @@
 
 myApp.factory('SharedBookedNameData', ["$http", function($http) {
-    console.log("In booked name factory");
+    //console.log("In booked name factory");
     var payor = {};
     var data = undefined;
 
