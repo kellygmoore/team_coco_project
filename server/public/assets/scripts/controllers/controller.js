@@ -82,23 +82,19 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
                     for (i = 0; i < $scope.booking.length; i++) {
                     console.log("Name of room: ", $scope.booking[i].meetingRoom.name);
                         if ($scope.booking[i].meetingRoom.name === "Tap Room") {
-
+                            console.log("i", i);
                             dateStartString[i] = $scope.booking[i].startDate;
-                            //console.log("Start: ", dateStartString[i]);
-                            stringToHourStart[i] = dateStartString[i].slice(11, 13);
-                            //console.log("hour: ", stringToHourStart[i]);
-                            stringToMinStart[i] = dateStartString[i].slice(14, 16);
-                            //console.log("min: ", stringToMinStart[i]);
+                            stringToHourStart.push(dateStartString[i].slice(11, 13));
+
+                            stringToMinStart.push(dateStartString[i].slice(14, 16));
+
 
                             dateEndString[i] = $scope.booking[i].endDate;
-                            //console.log("end: ", dateEndString[i]);
-                            stringToHourEnd[i] = dateEndString[i].slice(11, 13);
-                            //console.log("hour: ", stringToHourEnd[i]);
-                            stringToMinEnd[i] = dateEndString[i].slice(14, 16);
-                            //console.log("min: ", stringToMinEnd[i]);
+                            stringToHourEnd.push(dateEndString[i].slice(11, 13));
+                            stringToMinEnd.push(dateEndString[i].slice(14, 16));
 
-                            bookedName[i] = $scope.booking[i].payor.fullName;
-                            console.log("Full name: ", bookedName[i]);
+                            bookedName.push($scope.booking[i].payor.fullName);
+                            console.log("Full name: ", bookedName);
                             console.log("Hour array: ", stringToHourStart);
                         }
                     }
@@ -112,6 +108,7 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
     //$scope.booking = $scope.sharedBookedNameData.setBambooData();
 
     console.log("1st array returned here.");
+
 
 
 
