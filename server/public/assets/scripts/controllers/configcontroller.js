@@ -71,7 +71,7 @@ myApp.controller('ConfigController', ["$scope","$http","$location","$timeout", f
             }
         }).success(
             function( response ) {
-                console.log("this is the auth response", response);
+                console.log("this is the auth response");
             }
         );
     };
@@ -90,7 +90,7 @@ myApp.controller('ConfigController', ["$scope","$http","$location","$timeout", f
                 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
             }
         }).success(function( response ) {
-                console.log("This is meeting room response", response);
+                console.log("This is meeting room response");
             }
         );
     };
@@ -101,7 +101,7 @@ myApp.controller('ConfigController', ["$scope","$http","$location","$timeout", f
             method: "GET",
             url: "http://testing.bamboo.cocomsp.com/api/signOut"
         }).success(function( response ) {
-                console.log("this is GET SignOut  response", response);
+                console.log("this is GET SignOut  response");
             }
         );
 

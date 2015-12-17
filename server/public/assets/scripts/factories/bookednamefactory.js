@@ -1,27 +1,47 @@
 
 myApp.factory('SharedBookedNameData', ["$http", function($http) {
-    console.log("In booked name factory");
+    //console.log("In booked name factory");
     var payor = {};
+    var data = undefined;
 
 
-    //PRIVATE
-    var getMember = function(){
-        payor = {
-            id: 99999,
-            firstName: "Santa",
-            lastName: "Claus"
-        };
-        console.log("Payor: ", payor);
+    //PRIVATE//////////////////////////////////
+    var getCallResponse = function(){
+
+        var startDate="2015-12-17";  //this will need to be today's date
+        var endDate="2015-12-17";   //this will need to be today's date
+        var locationId="130";
+
+        var promise = $http({
+            method: "GET",
+            url: "http://testing.bamboo.cocomsp.com/api/locations/"+locationId+"/meetings?start="+startDate+"&end="+endDate,
+            withCredentials: true,
+            headers: {
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+            }
+        }).then(function(response){
+                    data = response.data;
+                    //console.log("Async data response: ", data);
+                });
+        return promise;
     };
 
 //PUBLIC
     var publicBookedName = {
-        retrieveBookedName: function () {
-            return payor;
+        retrieveBambooData: function(){
+            return getCallResponse();
         },
-        setBookedName: function () {
-            return getMember();
+        setBambooData: function(){
+            //console.log("data: ", data);
+          return data;
         }
+
+        //retrieveBookedName: function () {
+        //    return payor;
+        //},
+        //setBookedName: function () {
+        //    return getMember();
+        //}
     };
     return publicBookedName;
 }]);
