@@ -87,24 +87,6 @@ myApp.controller('ReserveCtrl', ["$scope", "$location", function($scope, $locati
 
 
 
-//Controller for DEFAULT screen view////////////////////////////////////////////////////
-myApp.controller('DefaultCtrl', ["$scope", "$location", function($scope, $location){
-//change out to data from Bamboo
-    $scope.roomName = "The Library";
-    $scope.timeLeftHr = 1;
-    $scope.timeLeftMin = 36;
-    $scope.nextMtgAt = "3:00";      //string or number?
-    $scope.roomBooked = true;
-
-    $scope.gotoCalendar = function(){
-        $location.path('/calendarview');
-    };
-
-
-    //if statement goes here to check if room is currently booked, then set roomBooked to true
-
-}]);
-
 
 //myApp.controller('AppCtrl', ['$scope', '$mdDialog', '$mdMedia', function($scope, $mdDialog, $mdMedia){
 //

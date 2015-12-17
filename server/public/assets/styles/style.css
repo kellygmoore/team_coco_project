@@ -338,6 +338,7 @@ button.button {
 
 #configHead{
     background-color:#B23E44;
+    text-shadow: 3px 3px 3px #55606f;
 }
 
 #configSubmit{
