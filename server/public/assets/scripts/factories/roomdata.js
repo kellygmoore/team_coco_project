@@ -1,7 +1,7 @@
 myApp.factory('SharedRoomData', ["$http", function($http){
     var meetingRoom = {};
 
-    console.log("In room factory");
+    //console.log("In room factory");
     //PRIVATE
     var roomData = function() {
         meetingRoom = {
