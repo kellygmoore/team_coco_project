@@ -52,7 +52,19 @@ myApp.controller('TimeCtrl', ["$scope", "$timeout",  'SharedRoomData', function(
     }]);
 
 //Controller for the CALENDAR ////////////////////////////////////////////////////////
-myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData', function($scope, $location, SharedBookedNameData){
+myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData', 'SharedTimeData', function($scope, $location, SharedBookedNameData, SharedTimeData){
+
+//SharedTimeData is a factory that holds start time selected with ng-click by the user on the calendar view
+    $scope.sharedTimeData = SharedTimeData;
+
+    $scope.tapToBook=function(hour){
+        $scope.sharedTimeData.setTimeData(hour);
+        $location.path("/reserveBookScreen");
+    };
+
+    $scope.startHour = $scope.sharedTimeData.retrieveTimeData();
+//////////
+
     $scope.memberInRoom = [];
     $scope.isRoomBooked = false;
     $scope.sharedBookedNameData = SharedBookedNameData;
@@ -138,10 +150,6 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
             }
             return false;
         };
-
-    $scope.tapToBook = function(startHour){
-        $location.path("/reservationview");
-    }
 
 }]);
 
