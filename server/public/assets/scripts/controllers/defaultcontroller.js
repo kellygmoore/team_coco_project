@@ -17,11 +17,12 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
     $scope.bootTime = Date.now();
     $scope.meetingTimeout = undefined;
     $scope.interMeetingTimeout = undefined;
+    $scope.stop = undefined;
 
 
     //Conditional to check and see if room data had been pulled into the roomData Factory.
     //If not it calls a method in the factory which hits the API and gets all the
-    //information for the room
+    //information for the room.
     if($scope.roomData.retrieveRoomData() === undefined){
         $scope.roomData.setRoomData();
         $scope.roomData.retrieveRoomData();
@@ -100,12 +101,13 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
     };
 
     $scope.activeMeetingLogic = function(){
+        var currentTime = Date.now();
         //console.log("active was reached");
         //console.log("Here is the meeting array: ", $scope.meetingTimesArray);
         $scope.roomBooked = true;
         //console.log("Is the room booked?",$scope.roomBooked);
         $scope.updateTime = function(){
-            var currentTime = new Date();
+            currentTime = new Date();
             $scope.timeLeftHr = (($scope.meetingTimesArray[0].end.hour - currentTime.getHours()));
             $scope.timeLeftMin = ($scope.meetingTimesArray[0].end.minute - currentTime.getMinutes());
             if($scope.timeLeftMin < 0){
@@ -113,15 +115,16 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
             }
         };
         $scope.updateTime();
-        $interval($scope.updateTime, 60000);
+        $scope.stop = $interval($scope.updateTime(), 60000);
         $scope.meetingTimeout = $timeout(
-            $scope.inActiveMeetingLogic, ($scope.meetingTimesArray[0].endTime - $scope.meetingTimesArray[0].startTime)
+            $scope.inActiveMeetingLogic, ($scope.meetingTimesArray[0].endTime - currentTime)
         )
     };
 
     $scope.inActiveMeetingLogic = function(){
         //console.log("Here is the meeting array: ", $scope.meetingTimesArray);
         //console.log("inactive was reached");
+        $interval.cancel($scope.stop);
         $scope.currentTime = Date.now();
         $scope.roomBooked = false;
         $scope.nextMtgAt = "" + ($scope.meetingTimesArray[0].start.hour)%12 + ":" + $scope.meetingTimesArray[0].start.minute +"";

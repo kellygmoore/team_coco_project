@@ -101,12 +101,13 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
     };
 
     $scope.activeMeetingLogic = function(){
+        var currentTime = Date.now();
         //console.log("active was reached");
         //console.log("Here is the meeting array: ", $scope.meetingTimesArray);
         $scope.roomBooked = true;
         //console.log("Is the room booked?",$scope.roomBooked);
         $scope.updateTime = function(){
-            var currentTime = new Date();
+            currentTime = new Date();
             $scope.timeLeftHr = (($scope.meetingTimesArray[0].end.hour - currentTime.getHours()));
             $scope.timeLeftMin = ($scope.meetingTimesArray[0].end.minute - currentTime.getMinutes());
             if($scope.timeLeftMin < 0){
@@ -116,7 +117,7 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
         $scope.updateTime();
         $scope.stop = $interval($scope.updateTime(), 60000);
         $scope.meetingTimeout = $timeout(
-            $scope.inActiveMeetingLogic, ($scope.meetingTimesArray[0].endTime - $scope.meetingTimesArray[0].startTime)
+            $scope.inActiveMeetingLogic, ($scope.meetingTimesArray[0].endTime - currentTime)//DOUBLE CHECK THIS LINE!
         )
     };
 
