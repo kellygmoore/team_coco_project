@@ -5,10 +5,10 @@ myApp.factory('SharedRoomData', ["$http", function($http){
     //PRIVATE
     var roomData = function() {
          meetingRoom = {
-            id: 4,
+            id: 2,
             name: "The Library",
             location: {
-                id: 134,
+                id: 129,
                 name: "Minneapolis, Downtown",
                 code: "MPLS_DT"
             },

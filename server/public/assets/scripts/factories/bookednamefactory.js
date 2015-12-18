@@ -8,8 +8,8 @@ myApp.factory('SharedBookedNameData', ["$http", function($http) {
     //PRIVATE//////////////////////////////////
     var getCallResponse = function(){
         console.log("In function getCallResponse");
-        var startDate="2015-12-08";
-        var endDate="2015-12-08";
+        var startDate="2015-12-18";
+        var endDate="2015-12-18";
         var locationId="129";
 
         var promise = $http({
