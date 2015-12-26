@@ -54,7 +54,7 @@ myApp.controller('TimeCtrl', ["$scope", "$timeout",  'SharedRoomData', function(
 //Controller for the CALENDAR ////////////////////////////////////////////////////////
 myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData', function($scope, $location, SharedBookedNameData){
     $scope.memberInRoom = [];
-    $scope.bookedColor = true;
+    $scope.bookedColor = false;
     //hours that room can be booked 8am - 5pm//
     $scope.bambooDataArray = [8, 9, 10, 11, 12, 13, 14, 15, 16];
 
@@ -82,36 +82,57 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
                     return;
                 } else {
                 console.log("length of array: ", $scope.booking.length);
+                    //loop over array of booked times to find matching room name
                     for (i = 0; i < $scope.booking.length; i++) {
                     //console.log("Name of room: ", $scope.booking[i].meetingRoom.name);
+                        //find room match, then push start times, end times, and name onto arrays
                         if ($scope.booking[i].meetingRoom.name === "Tap Room") {
                             //console.log("i", i);
+
                             dateStartString[i] = $scope.booking[i].startDate;
                             stringToHourStart.push(parseInt(dateStartString[i].slice(11, 13)));
-                            stringToMinStart.push(dateStartString[i].slice(14, 16));
+                            stringToMinStart.push(parseInt(dateStartString[i].slice(14, 16)));
 
                             dateEndString[i] = $scope.booking[i].endDate;
-                            stringToHourEnd.push(dateEndString[i].slice(11, 13));
-                            stringToMinEnd.push(dateEndString[i].slice(14, 16));
+                            stringToHourEnd.push(parseInt(dateEndString[i].slice(11, 13)));
+                            stringToMinEnd.push(parseInt(dateEndString[i].slice(14, 16)));
 
                             bookedName.push($scope.booking[i].payor.fullName);
-                            console.log("Full name: ", bookedName);
-                            console.log("Hour array: ", stringToHourStart);
-                            for(k=0; k<$scope.bambooDataArray.length; k++){
-                                console.log("In k loop.");
-                                for(j=0; j<stringToHourStart.length; j++){
-                                    console.log("In j loop.");
-                                    console.log(stringToHourStart[j]);
-                                    console.log($scope.bambooDataArray[k]);
-                                    if(stringToHourStart[j] === $scope.bambooDataArray[k]){
-                                        console.log("j: ", + j + " k: ", k);
-                                        console.log("bookedName: ", bookedName[j]);
-                                        $scope.memberInRoom = bookedName[j];
-                                        console.log("scope.memberinroom: ", $scope.memberInRoom);
-                                        $scope.bookedColor = false;
-                                    }
-                                }
-                            }
+                            //console.log("Full name array: ", bookedName);
+                            //console.log("Start Hour array: ", stringToHourStart);
+                            //console.log("End Hour array: ", stringToHourEnd);
+
+                            $scope.startArray = stringToHourStart;
+                            $scope.endArray = stringToHourEnd;
+                            $scope.nameInRoom = bookedName;
+
+                            $scope.bookedColor = function(hour) {
+                              for(j=0; j < $scope.startArray.length; j++) {
+                                  //console.log("compare startArray: ", $scope.startArray + " with hour: " + hour);
+                                  if($scope.startArray[j] === hour){
+                                      console.log("match hours here, ", hour);
+                                      return true;
+                              } else {
+                                      return false;
+                                  }
+                              }
+                            };
+
+                            //for(k=0; k<$scope.bambooDataArray.length; k++){
+                            //    console.log("In k loop.");
+                            //    for(j=0; j<stringToHourStart.length; j++){
+                            //        console.log("In j loop.");
+                            //        console.log(stringToHourStart[j]);
+                            //        console.log($scope.bambooDataArray[k]);
+                            //        if(stringToHourStart[j] === $scope.bambooDataArray[k]){
+                            //            console.log("j: ", + j + " k: ", k);
+                            //            console.log("bookedName: ", bookedName[j]);
+                            //            $scope.memberInRoom = bookedName[j];
+                            //            console.log("scope.memberinroom: ", $scope.memberInRoom);
+                            //            $scope.bookedColor = true;
+                            //        }
+                            //    }
+
 
                             //$scope.isHourBooked = function(hour) {
                             //    console.log("In isHourBooked function!", hour + " array: ", stringToHourStart);
