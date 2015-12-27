@@ -53,14 +53,25 @@ myApp.controller('TimeCtrl', ["$scope", "$timeout",  'SharedRoomData', function(
 
 //Controller for the CALENDAR ////////////////////////////////////////////////////////
 myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData', function($scope, $location, SharedBookedNameData){
-    $scope.memberInRoom = [];
+    //$scope.memberInRoom = [];
     $scope.bookedColor = false;
-    //hours that room can be booked 8am - 5pm//
-    $scope.bambooDataArray = [8, 9, 10, 11, 12, 13, 14, 15, 16];
+    //hours that room can be booked 8am - 5pm// needs to be 6pm for certain location
+    $scope.bambooDataArray = [
+        {milTime: 8, stdTime: 8},
+        {milTime: 9, stdTime: 9},
+        {milTime: 10, stdTime: 10},
+        {milTime: 11, stdTime: 11},
+        {milTime: 12, stdTime: 12},
+        {milTime: 13, stdTime: 1},
+        {milTime: 14, stdTime: 2},
+        {milTime: 15, stdTime: 3},
+        {milTime: 16, stdTime: 4}
+    ];
+        //9, 10, 11, 12, 13, 14, 15, 16];
 
     $scope.sharedBookedNameData = SharedBookedNameData;
     //$scope.booking = [];
-
+    //pull data from factory
     if($scope.sharedBookedNameData.setBambooData() === undefined){
         //console.log("first set is undefined (in controller).");
         $scope.sharedBookedNameData.retrieveBambooData()
@@ -68,6 +79,7 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
                 //console.log("In then in controller");
                 $scope.booking = $scope.sharedBookedNameData.setBambooData();
                 //console.log("response back (in then controller): ", $scope.booking);
+                //set variables to hold data in arrays
                 var dateStartString = [];
                 var stringToHourStart = [];
                 var stringToMinStart = [];
@@ -88,8 +100,9 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
                         //find room match, then push start times, end times, and name onto arrays
                         if ($scope.booking[i].meetingRoom.name === "Tap Room") {
                             //console.log("i", i);
-
+                            //pull off the start dates into array
                             dateStartString[i] = $scope.booking[i].startDate;
+                            //isolate the hour and minute in two arrays below
                             stringToHourStart.push(parseInt(dateStartString[i].slice(11, 13)));
                             stringToMinStart.push(parseInt(dateStartString[i].slice(14, 16)));
 
@@ -97,20 +110,24 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
                             stringToHourEnd.push(parseInt(dateEndString[i].slice(11, 13)));
                             stringToMinEnd.push(parseInt(dateEndString[i].slice(14, 16)));
 
+                            //save the names to new array
                             bookedName.push($scope.booking[i].payor.fullName);
                             //console.log("Full name array: ", bookedName);
                             //console.log("Start Hour array: ", stringToHourStart);
                             //console.log("End Hour array: ", stringToHourEnd);
 
+                            //add those 3 arrays to scope
                             $scope.startArray = stringToHourStart;
                             $scope.endArray = stringToHourEnd;
                             $scope.nameInRoom = bookedName;
 
+                            //function called from ng-repeat on calendarview.html to find booked hours
                             $scope.bookedColor = function(hour) {
                               for(j=0; j < $scope.startArray.length; j++) {
                                   //console.log("compare startArray: ", $scope.startArray + " with hour: " + hour);
                                   if($scope.startArray[j] === hour){
                                       console.log("match hours here, ", hour);
+                                      $scope.whoInRoom = $scope.nameInRoom[j];
                                       return true;
                               } else {
                                       return false;
@@ -118,31 +135,6 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
                               }
                             };
 
-                            //for(k=0; k<$scope.bambooDataArray.length; k++){
-                            //    console.log("In k loop.");
-                            //    for(j=0; j<stringToHourStart.length; j++){
-                            //        console.log("In j loop.");
-                            //        console.log(stringToHourStart[j]);
-                            //        console.log($scope.bambooDataArray[k]);
-                            //        if(stringToHourStart[j] === $scope.bambooDataArray[k]){
-                            //            console.log("j: ", + j + " k: ", k);
-                            //            console.log("bookedName: ", bookedName[j]);
-                            //            $scope.memberInRoom = bookedName[j];
-                            //            console.log("scope.memberinroom: ", $scope.memberInRoom);
-                            //            $scope.bookedColor = true;
-                            //        }
-                            //    }
-
-
-                            //$scope.isHourBooked = function(hour) {
-                            //    console.log("In isHourBooked function!", hour + " array: ", stringToHourStart);
-                            //    for (j = 0; j < stringToHourStart.length; j++) {
-                            //        if (stringToHourStart[j] === hour) {
-                            //            return true;
-                            //        }
-                            //        return false;
-                            //    }
-                            //}
                         }
                     }
                 }
@@ -153,8 +145,6 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
         console.log("response back (in else controller): ", $scope.booking);
     }
 
-
-    console.log("1st array returned here.");
 
     //function to see if timeblock on ng-repeat should be shaded like past time, passes in timeblock
     $scope.checkPastTime = function(hour){
@@ -171,6 +161,7 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
             return false;
         };
 
+    //when open hour block is tapped, sends the start time hour to reservationview page
     $scope.tapToBook = function(startHour){
         $location.path("/reservationview");
     }
