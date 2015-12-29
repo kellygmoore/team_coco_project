@@ -2,7 +2,7 @@
  * Created by samuelmoss on 12/17/15.
  */
 //Controller for DEFAULT screen view////////////////////////////////////////////////////
-myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "SharedBookedNameData", "$timeout", "$interval",function($scope, $location, SharedRoomData, SharedBookedNameData, $timeout, $interval){
+myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "SharedBookedNameData", "$timeout", "$interval", "dateFilter", function($scope, $location, SharedRoomData, SharedBookedNameData, $timeout, $interval, dateFilter){
 //change out to data from Bamboo
 
     //console.log("default controller works");
@@ -107,15 +107,16 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
         $scope.roomBooked = true;
         //console.log("Is the room booked?",$scope.roomBooked);
         $scope.updateTime = function(){
-            currentTime = new Date();
-            $scope.timeLeftHr = (($scope.meetingTimesArray[0].end.hour - currentTime.getHours()));
-            $scope.timeLeftMin = ($scope.meetingTimesArray[0].end.minute - currentTime.getMinutes());
+            console.log("Update time is being called");
+            currentTime = Date.now();
+            $scope.timeLeftHr = ($scope.meetingTimesArray[0].end.hour - dateFilter(currentTime, 'HH'));
+            $scope.timeLeftMin = ($scope.meetingTimesArray[0].end.minute - dateFilter(currentTime, 'mm'));
             if($scope.timeLeftMin < 0){
                 $scope.timeLeftMin+=60
             }
         };
         $scope.updateTime();
-        $scope.stop = $interval($scope.updateTime(), 60000);
+        $scope.stop = $interval($scope.updateTime, 60000);
         $scope.meetingTimeout = $timeout(
             $scope.inActiveMeetingLogic, ($scope.meetingTimesArray[0].endTime - currentTime)//DOUBLE CHECK THIS LINE!
         )
@@ -134,13 +135,6 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
         )
     };
 
-    $scope.adjustTimeLength = function(){
-        $scope.rawTime = "" + $scope.meetingTimesArray[0].end.minute + "";
-        if($scope.rawTime.length < 2){
-            $scope.rawTime = "0" + $scope.rawTime;
-        }
-        return $scope.rawTime;
-    };
 
     //$scope.timeCheck = $scope.compareTime(Date.prototype.getHours(), Date.prototype.getMinutes())) ? $scope.roomBooked = true : $scope.roomBooked = false;
 
@@ -170,7 +164,7 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
 
     $scope.hourFormat = function(nextMeetingHour){
       if(nextMeetingHour > 12){
-          return (nextMeetingHour - 11);
+          return (nextMeetingHour - 12);
       } else {
           return nextMeetingHour;
       }
