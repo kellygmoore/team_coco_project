@@ -23,6 +23,9 @@ myApp.config(["$routeProvider", function($routeProvider){
             templateUrl: "assets/views/routes/reservationview.html"
             //controller: "ReserveCtrl"
         }).
+        when('/reserveBookScreen', {
+            templateUrl: "assets/views/routes/reserveBookScreen.html"
+        }).
         otherwise({
             redirectTo: 'defaultscreen'
         })

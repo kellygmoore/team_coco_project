@@ -7,10 +7,17 @@ myApp.factory('SharedBookedNameData', ["$http", function($http) {
 
     //PRIVATE//////////////////////////////////
     var getCallResponse = function(){
+<<<<<<< HEAD
         console.log("In function getCallResponse");
         var startDate="2015-12-18";
         var endDate="2015-12-18";
         var locationId="129";
+=======
+
+        var startDate="2015-12-17";  //this will need to be today's date
+        var endDate="2015-12-17";   //this will need to be today's date
+        var locationId="130";
+>>>>>>> d387bba3ee3d501d545ae37ed20a27cb010eaa46
 
         var promise = $http({
             method: "GET",
@@ -21,26 +28,14 @@ myApp.factory('SharedBookedNameData', ["$http", function($http) {
             }
         }).then(function(response){
                     data = response.data;
+<<<<<<< HEAD
                     console.log("Async data response: ", data);
+=======
+                    //console.log("Async data response: ", data);
+>>>>>>> d387bba3ee3d501d545ae37ed20a27cb010eaa46
                 });
-
-    //
-    //        .success(function( response ) {
-    //            data = response.data;
-    //            console.log("This is meeting room response", data);
-    //        });
         return promise;
     };
-
-
-    //var getMember = function(){
-    //    payor = {
-    //        id: 99999,
-    //        firstName: "Santa",
-    //        lastName: "Claus"
-    //    };
-    //    console.log("Payor: ", payor);
-    //};
 
 //PUBLIC
     var publicBookedName = {
@@ -48,6 +43,7 @@ myApp.factory('SharedBookedNameData', ["$http", function($http) {
             return getCallResponse();
         },
         setBambooData: function(){
+            //console.log("data: ", data);
           return data;
         }
 
