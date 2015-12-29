@@ -127,7 +127,8 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
         $interval.cancel($scope.stop);
         $scope.currentTime = Date.now();
         $scope.roomBooked = false;
-        $scope.nextMtgAt = "" + $scope.timeFormat($scope.meetingTimesArray[0].start.hour) + ":" + $scope.meetingTimesArray[0].start.minute +"";
+        $scope.nextMtgAt = $scope.timeFormat($scope.meetingTimesArray[0].start);
+        //$scope.nextMtgAt = "" + $scope.hourFormat($scope.meetingTimesArray[0].start.hour) + ":" + $scope.meetingTimesArray[0].start.minute +"";
         $scope.meetingTimeout = $timeout(
             $scope.inActiveMeetingLogic, ($scope.meetingTimesArray[0].startTime - $scope.currentTime)
         )
@@ -163,12 +164,26 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
     //if statement goes here to check if room is currently booked, then set roomBooked to true
 
     //This function formats the hour from military time to standard.
-    $scope.timeFormat = function(nextMeetingHour){
+
+    $scope.timeFormat = function(timeObject){
+      return "" + $scope.hourFormat(timeObject.hour) + ":" + $scope.minuteFormat(timeObject.minute) + ""
+    };
+
+    $scope.hourFormat = function(nextMeetingHour){
       if(nextMeetingHour > 12){
           return (nextMeetingHour - 11);
       } else {
           return nextMeetingHour;
       }
+    };
+
+    $scope.minuteFormat = function(nextMeetingMinute){
+        stringyNextMeetingMinute = "" + nextMeetingMinute + "";
+        if(stringyNextMeetingMinute.length < 2){
+            return "0" + stringyNextMeetingMinute;
+        } else {
+            return stringyNextMeetingMinute;
+        }
     };
 
     $scope.gotoCalendar = function(){
