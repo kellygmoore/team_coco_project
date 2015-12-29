@@ -94,7 +94,7 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
                     console.log("in first if where length is zero");
                     return;
                 } else {
-                console.log("length of array: ", $scope.booking.length);
+                //console.log("length of array: ", $scope.booking.length);
                     //loop over array of booked times to find matching room name
                     for (i = 0; i < $scope.booking.length; i++) {
                     //console.log("Name of room: ", $scope.booking[i].meetingRoom.name);
@@ -114,7 +114,7 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
                             //save the names to new array
                             bookedName.push($scope.booking[i].payor.fullName);
                             //console.log("Full name array: ", bookedName);
-                            //console.log("Start Hour array: ", stringToHourStart);
+                            console.log("Start Hour array: ", stringToHourStart);
                             //console.log("End Hour array: ", stringToHourEnd);
 
                             //add those 3 arrays to scope
@@ -123,18 +123,32 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
                             $scope.nameInRoom = bookedName;
 
                             //function called from ng-repeat on calendarview.html to find booked hours
-                            $scope.bookedColor = function(hour) {
-                              for(j=0; j < $scope.startArray.length; j++) {
-                                  //console.log("compare startArray: ", $scope.startArray + " with hour: " + hour);
-                                  if($scope.startArray[j] === hour){
-                                      console.log("match hours here, ", hour);
-                                      $scope.whoInRoom = $scope.nameInRoom[j];
-                                      return true;
-                              } else {
-                                      return false;
-                                  }
-                              }
-                            };
+                            //$scope.bookedColor = function(hour) {
+                                for(j=0; j<$scope.bambooDataArray.length; j++){
+                                    for(k=0; k<$scope.startArray.length; k++) {
+                                        if($scope.startArray[k] === $scope.bambooDataArray[j].milTime) {
+                                            console.log("Found match: ", $scope.startArray[k] + ", " + $scope.bambooDataArray[j].milTime);
+                                            $scope.bambooDataArray[j].isBooked = true;
+                                            console.log("match true? ", $scope.bambooDataArray[j].isBooked);
+                                            $scope.whoInRoom = $scope.nameInRoom[k];
+                                        }
+                                        //else {
+                                        ////$scope.bambooDataArray.isBooked = true;
+                                        //    $scope.bambooDataArray[j].isBooked = false;
+                                        //}
+                                    }
+                                }
+
+                              //for(j=0; j < $scope.startArray.length; j++) {
+                              //    //console.log("compare startArray: ", $scope.startArray + " with hour: " + hour);
+                              //    if($scope.startArray[j] === hour){
+                              //        console.log("index j ", j + " match hours here, ", hour + " with booked time " + $scope.startArray[j]);
+                              //        $scope.whoInRoom = $scope.nameInRoom[j];
+                              //        console.log("indexOf: ", $scope.bambooDataArray.indexOf(hour));
+                              //        //$scope.bambooDataArray.indexOf(hour).isBooked = true;
+                              //        return true;
+
+                            //};
 
                         }
                     }
