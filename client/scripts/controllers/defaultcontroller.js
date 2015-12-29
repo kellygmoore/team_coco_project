@@ -163,8 +163,7 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
     //};
     //if statement goes here to check if room is currently booked, then set roomBooked to true
 
-    //This function formats the hour from military time to standard.
-
+    //This series of functions formats the next meeting time from military time to standard.
     $scope.timeFormat = function(timeObject){
       return "" + $scope.hourFormat(timeObject.hour) + ":" + $scope.minuteFormat(timeObject.minute) + ""
     };
