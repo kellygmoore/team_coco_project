@@ -7,9 +7,9 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
 
     //console.log("default controller works");
     $scope.roomName = undefined;
-    $scope.timeLeftHr = 1;
-    $scope.timeLeftMin = 36;
-    $scope.nextMtgAt = "No Scheduled Meetings";      //string or number?
+    $scope.timeLeftHr = undefined;
+    $scope.timeLeftMin = undefined;
+    $scope.nextMtgAt = "No Meetings Scheduled";      //string or number?
     $scope.roomBooked = undefined;
     $scope.roomData = SharedRoomData;
     $scope.bookingData = SharedBookedNameData;
@@ -31,8 +31,8 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
     $scope.roomName = $scope.roomData.name;
 
     //Conditional to check and see if the booking data for the room has populated.
-    //If not it calls as method in the bookingData factory to hit the API and pulls down
-    //all the data for the meeting for the day.
+    //If not it calls a method in the bookingData factory to hit the API and pulls down
+    //all the data for the meetings for the day.
     if($scope.bookingData.setBambooData() === undefined) {
         $scope.bookingData.retrieveBambooData()
                 .then(function(){
@@ -127,7 +127,7 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
         $interval.cancel($scope.stop);
         $scope.currentTime = Date.now();
         $scope.roomBooked = false;
-        $scope.nextMtgAt = "" + ($scope.meetingTimesArray[0].start.hour)%12 + ":" + $scope.meetingTimesArray[0].start.minute +"";
+        $scope.nextMtgAt = "" + $scope.hourFormat($scope.meetingTimesArray[0].start.hour) + ":" + $scope.meetingTimesArray[0].start.minute +"";
         $scope.meetingTimeout = $timeout(
             $scope.inActiveMeetingLogic, ($scope.meetingTimesArray[0].startTime - $scope.currentTime)
         )
@@ -161,6 +161,15 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
     //
     //};
     //if statement goes here to check if room is currently booked, then set roomBooked to true
+
+    //This function formats the hour from military time to standard.
+    $scope.hourFormat = function(nextMeetingHour){
+      if(nextMeetingHour > 12){
+          return (nextMeetingHour - 11);
+      } else {
+          return nextMeetingHour;
+      }
+    };
 
     $scope.gotoCalendar = function(){
         $location.path('/calendarview');
