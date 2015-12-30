@@ -32,21 +32,25 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
 
     $scope.roomName = $scope.roomData.name;
 
-    //Conditional to check and see if the booking data for the room has populated.
-    //If not it calls a method in the bookingData factory to hit the API and pulls down
-    //all the data for the meetings for the day.
-    if($scope.bookingData.setBambooData() === undefined) {
+
+    //This function updates the meeting time factory with the
+    //meeting times from the Bamboo meeting API then continues on to
+    //the meeting time switch. This function is called at the end
+    //of every meeting and before every meeting.
+    $scope.updateMeetingTimeData = function(){
         $scope.bookingData.retrieveBambooData()
-                .then(function(){
-                    $scope.bookedData = $scope.bookingData.setBambooData();
-                $scope.updateMeetingTimesArray();
-                $scope.meetingTimeSwitch();
-                });
-    } else {
-        $scope.bookedData = $scope.bookingData.setBambooData();
-        $scope.updateMeetingTimesArray();
-        $scope.meetingTimeSwitch();
-    }
+        .then(function(){
+            $scope.bookedData = $scope.bookingData.setBambooData();
+            $scope.updateMeetingTimesArray();
+            $scope.meetingTimeSwitch();
+            }
+        );
+    };
+
+
+    //Starts the script.
+    $scope.updateMeetingTimeData();
+
 
     //Function which searches through all the meeting for the locations,
     //pulls out all those which are for the room the tablet has been configured to,
@@ -88,10 +92,10 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
         }
         currentTime = Date.now();
         console.log("Meeting times array: ", $scope.meetingTimesArray);
-        while(currentTime > $scope.meetingTimesArray[0].endTime){
+        if($scope.meetingTimesArray[0]){
+            while(currentTime > $scope.meetingTimesArray[0].endTime){
             $scope.meetingTimesArray.shift();
-        }
-        if (currentTime > $scope.meetingTimesArray[0].startTime){
+            }
             $scope.activeMeetingLogic();
         } else {
             $scope.inActiveMeetingLogic();
@@ -114,7 +118,7 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
         $scope.updateTime();
         stop = $interval($scope.updateTime, 60000);
         meetingTimeout = $timeout(
-            $scope.meetingTimeSwitch, $scope.meetingLength());
+            $scope.updateMeetingTimeData, $scope.meetingLength());
     };
 
     $scope.inActiveMeetingLogic = function(){
@@ -122,7 +126,7 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
         $scope.roomBooked = false;
         $scope.nextMtgAt = $scope.meetingTimesArray[0]?$scope.timeFormat($scope.meetingTimesArray[0].start):"No Upcoming Meetings";
         $scope.meetingTimeout = $timeout(
-            $scope.meetingTimeSwitch, ($scope.meetingTimesArray[0].startTime - currentTime)
+            $scope.updateMeetingTimeData, ($scope.meetingTimesArray[0].startTime - currentTime)
         )
     };
 
