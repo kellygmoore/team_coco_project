@@ -9,7 +9,7 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
     $scope.roomName = undefined;
     $scope.timeLeftHr = undefined;
     $scope.timeLeftMin = undefined;
-    $scope.nextMtgAt = "No Meetings Scheduled";      //string or number?
+    $scope.nextMtgAt = "No Upcoming Meetings";
     $scope.roomBooked = undefined;
     $scope.roomData = SharedRoomData;
     $scope.bookingData = SharedBookedNameData;
@@ -17,7 +17,9 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
     $scope.bootTime = Date.now();
     $scope.meetingTimeout = undefined;
     $scope.interMeetingTimeout = undefined;
-    $scope.stop = undefined;
+    var stop, meetingTimeout;
+    var currentTime = undefined;
+
 
 
     //Conditional to check and see if room data had been pulled into the roomData Factory.
@@ -37,16 +39,12 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
         $scope.bookingData.retrieveBambooData()
                 .then(function(){
                     $scope.bookedData = $scope.bookingData.setBambooData();
-                    //console.log("promise meeting data: ", $scope.bookedData);
                 $scope.updateMeetingTimesArray();
-                //console.log("Meeting times array: ", $scope.meetingTimesArray);
                 $scope.meetingTimeSwitch();
                 });
     } else {
         $scope.bookedData = $scope.bookingData.setBambooData();
-        //console.log("promise meeting data: ", $scope.bookedData);
         $scope.updateMeetingTimesArray();
-        //console.log("Meeting times array: ", $scope.meetingTimesArray);
         $scope.meetingTimeSwitch();
     }
 
@@ -62,8 +60,6 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
                     $scope.meetTimeObj.end = {};
                     var startTime = new Date(obj.startDate);
                     var endTime = new Date(obj.endDate);
-                    //meetTimeObj.startTime = {};
-                    //meetTimeObj.endTime = {};
                     $scope.meetTimeObj.startTime = startTime.getTime();
                     $scope.meetTimeObj.endTime = endTime.getTime();
                     $scope.meetTimeObj.elapse = $scope.meetTimeObj.endTime - $scope.meetTimeObj.startTime;
@@ -72,7 +68,6 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
                     $scope.meetTimeObj.end.hour = parseInt(obj.endDate.slice(11, 13));
                     $scope.meetTimeObj.end.minute = parseInt(obj.endDate.slice(14, 16));
                     $scope.meetingTimesArray.unshift($scope.meetTimeObj);
-                    console.log("meeting times array is reached");
                 }
             }
         );
@@ -85,29 +80,30 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
     //otherwise it sets itself to inactive mode.
     //This allows the script to be booted at any time and immediately update.
     $scope.meetingTimeSwitch = function(){
-        while($scope.bootTime > $scope.meetingTimesArray[0].endTime){
+        if(stop){
+            $timeout.cancel(stop);
+        }
+        if(meetingTimeout){
+            $interval.cancel(meetingTimeout);
+        }
+        currentTime = Date.now();
+        console.log("Meeting times array: ", $scope.meetingTimesArray);
+        while(currentTime > $scope.meetingTimesArray[0].endTime){
             $scope.meetingTimesArray.shift();
         }
-        console.log("Boot time: ", $scope.bootTime);
-        console.log("Next start time: ", $scope.meetingTimesArray[0].startTime);
-
-        if ($scope.bootTime > $scope.meetingTimesArray[0].startTime){
-            console.log("The if at switch is hit");
+        if (currentTime > $scope.meetingTimesArray[0].startTime){
             $scope.activeMeetingLogic();
         } else {
-            console.log("The else at switch is hit");
             $scope.inActiveMeetingLogic();
         }
     };
 
     $scope.activeMeetingLogic = function(){
-        var currentTime = Date.now();
-        //console.log("active was reached");
-        //console.log("Here is the meeting array: ", $scope.meetingTimesArray);
         $scope.roomBooked = true;
-        //console.log("Is the room booked?",$scope.roomBooked);
+        $scope.meetingLength = function(){
+            return $scope.meetingTimesArray[0].endTime - currentTime;
+        };
         $scope.updateTime = function(){
-            console.log("Update time is being called");
             currentTime = Date.now();
             $scope.timeLeftHr = ($scope.meetingTimesArray[0].end.hour - dateFilter(currentTime, 'HH'));
             $scope.timeLeftMin = ($scope.meetingTimesArray[0].end.minute - dateFilter(currentTime, 'mm'));
@@ -116,22 +112,17 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
             }
         };
         $scope.updateTime();
-        $scope.stop = $interval($scope.updateTime, 60000);
-        $scope.meetingTimeout = $timeout(
-            $scope.inActiveMeetingLogic, ($scope.meetingTimesArray[0].endTime - currentTime)//DOUBLE CHECK THIS LINE!
-        )
+        stop = $interval($scope.updateTime, 60000);
+        meetingTimeout = $timeout(
+            $scope.meetingTimeSwitch, $scope.meetingLength());
     };
 
     $scope.inActiveMeetingLogic = function(){
-        //console.log("Here is the meeting array: ", $scope.meetingTimesArray);
-        //console.log("inactive was reached");
-        $interval.cancel($scope.stop);
-        $scope.currentTime = Date.now();
+        currentTime = Date.now();
         $scope.roomBooked = false;
-        $scope.nextMtgAt = $scope.timeFormat($scope.meetingTimesArray[0].start);
-        //$scope.nextMtgAt = "" + $scope.hourFormat($scope.meetingTimesArray[0].start.hour) + ":" + $scope.meetingTimesArray[0].start.minute +"";
+        $scope.nextMtgAt = $scope.meetingTimesArray[0]?$scope.timeFormat($scope.meetingTimesArray[0].start):"No Upcoming Meetings";
         $scope.meetingTimeout = $timeout(
-            $scope.inActiveMeetingLogic, ($scope.meetingTimesArray[0].startTime - $scope.currentTime)
+            $scope.meetingTimeSwitch, ($scope.meetingTimesArray[0].startTime - currentTime)
         )
     };
 
