@@ -5,14 +5,14 @@
 
     <div class="container" ng-controller="CalendarCtrl">
 
-        <div class="listDiv" ng-model="bambooDataArray">
+        <div class="listDiv" ng-model="timeArray">
             <table>
-                <tr ng-repeat="timeblock in bambooDataArray">
+                <tr ng-repeat="timeblock in timeArray">
                     <td class="numHour">{{ timeblock.stdTime }}</td>
                     <td class="timeslot" ng-style="{
-                    'background-image': checkPastTime(timeblock.milTime) ? 'url(/assets/styles/images/gray1.jpg)' : 'none',
+                    'background-color': checkPastTime(timeblock.milTime) ? '#55606F' : 'none',
                     'border-bottom' : checkPastTime(timeblock.milTime) ? 'none' : '1px solid black',
-                    'background-color': timeblock.isBooked ?  '#FF5962': '#25ae90',
+                    'background-image': timeblock.isBooked ? 'linear-gradient(0deg, #FF5962, #FF5962 25%, #25ae90 25%)' : '#25ae90',
                     'border-top': timeblock.milTime === rightNowHour ? '3px dashed purple': 'none'
                     }">
                         <div class="timeSelectOval" ng-click="tapToBook(timeblock.milTime)" ng-hide="timeblock.isBooked || checkPastTime(timeblock.milTime)">
@@ -24,6 +24,10 @@
                     </td>
                 </tr>
             </table>
+            <div>
+                <p>gradient practice</p>
+                <!--url(/assets/styles/images/gray1.jpg)-->
+            </div>
         </div>
         </div>
     </div>

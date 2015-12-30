@@ -7,7 +7,7 @@
 
         <div class="listDiv" ng-model="bambooDataArray">
             <table>
-                <tr ng-repeat="timeblock in bambooDataArray">
+                <tr ng-repeat="timeblock in timeArray">
                     <td class="numHour">{{ timeblock }}</td>
                     <td class="timeslot" ng-style="{
                     'background-image': checkPastTime(timeblock) ? 'url(/assets/styles/images/gray1.jpg)' : 'none',

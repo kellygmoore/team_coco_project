@@ -57,7 +57,7 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
     $scope.bookedColor = false;
     //hours that room can be booked 8am - 5pm// needs to be 6pm for certain location
     //use milTime for comparing and logic, use stdTime for display on calendar
-    $scope.bambooDataArray = [
+    $scope.timeArray = [
         {milTime: 8, stdTime: 8},
         {milTime: 9, stdTime: 9},
         {milTime: 10, stdTime: 10},
@@ -88,7 +88,7 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
                 var stringToHourEnd = [];
                 var stringToMinEnd = [];
                 var bookedName = [];
-                //console.log("In .then, here is bamboodata: ", $scope.bambooDataArray);
+                //console.log("In .then, here is bamboodata: ", $scope.timeArray);
                 //if there are NO meetings, then nothing has to happen//////
                 if($scope.booking.length === 0){
                     console.log("in first if where length is zero");
@@ -124,31 +124,24 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
 
                             //function called from ng-repeat on calendarview.html to find booked hours
                             //$scope.bookedColor = function(hour) {
-                                for(j=0; j<$scope.bambooDataArray.length; j++){
+                                for(j=0; j<$scope.timeArray.length; j++){
                                     for(k=0; k<$scope.startArray.length; k++) {
-                                        if($scope.startArray[k] === $scope.bambooDataArray[j].milTime) {
-                                            console.log("Found match: ", $scope.startArray[k] + ", " + $scope.bambooDataArray[j].milTime);
-                                            $scope.bambooDataArray[j].isBooked = true;
-                                            console.log("match true? ", $scope.bambooDataArray[j].isBooked);
+                                        if($scope.startArray[k] === $scope.timeArray[j].milTime) {
+                                            console.log("Found match: ", $scope.startArray[k] + ", " + $scope.timeArray[j].milTime);
+                                            $scope.timeArray[j].isBooked = true;
+                                            console.log("match true? ", $scope.timeArray[j].isBooked);
                                             $scope.whoInRoom = $scope.nameInRoom[k];
                                         }
                                         //else {
-                                        ////$scope.bambooDataArray.isBooked = true;
-                                        //    $scope.bambooDataArray[j].isBooked = false;
+                                        ////$scope.timeArray.isBooked = true;
+                                        //    $scope.timeArray[j].isBooked = false;
                                         //}
                                     }
                                 }
+                            $scope.addClass = function(){
+                                return "newStyle";
+                            }
 
-                              //for(j=0; j < $scope.startArray.length; j++) {
-                              //    //console.log("compare startArray: ", $scope.startArray + " with hour: " + hour);
-                              //    if($scope.startArray[j] === hour){
-                              //        console.log("index j ", j + " match hours here, ", hour + " with booked time " + $scope.startArray[j]);
-                              //        $scope.whoInRoom = $scope.nameInRoom[j];
-                              //        console.log("indexOf: ", $scope.bambooDataArray.indexOf(hour));
-                              //        //$scope.bambooDataArray.indexOf(hour).isBooked = true;
-                              //        return true;
-
-                            //};
 
                         }
                     }
