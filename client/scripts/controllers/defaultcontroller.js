@@ -105,7 +105,7 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
         };
         $scope.updateTime = function(){
             currentTime = Date.now();
-            $scope.timeLeftHr = ($scope.meetingTimesArray[0].end.hour - dateFilter(currentTime, 'HH'));
+            $scope.timeLeftHr = ($scope.meetingTimesArray[0].end.hour - dateFilter(currentTime, 'HH') - 1);
             $scope.timeLeftMin = ($scope.meetingTimesArray[0].end.minute - dateFilter(currentTime, 'mm'));
             if($scope.timeLeftMin < 0){
                 $scope.timeLeftMin+=60
