@@ -3,16 +3,9 @@
     <md-toolbar layout-align="center center" id="configHead">
     <h1>Set Up</h1>
     </md-toolbar>
-    <md-content layout="column"ng-cloak>
+    <md-content layout="column" ng-cloak>
 
-    <form name="auth" id="testingForm">
-        <button ng-click="authorize()">Sign In</button>
-        <button ng-click="getRoomsTest()">Get Rooms Test</button>
-        <button ng-click="signOut()">Sign Out</button>
-        <button ng-click="bookRoom()">bookRoom</button>
-        <button ng-click="editMeetingRoomBooking()">edit the booking room</button>
-        <button ng-click="getMemberMeetingRoomHours()">Get Member Meeting Room Hours</button>
-    </form>
+
 
 
     <!--form to select the COCO location and ROOM-->
@@ -20,19 +13,34 @@
         <h4>Set Up Meeting Room</h4>
 
         <md-input-container class="md-block">
-            <label for ="selectLocation">Location</label>
-            <md-select required name="selectLocation" id="selectLocation" ng-model="data.selectLocation">
-                 <md-option ng-repeat="option in data.availableLocations" value="{{option.id}}">{{option.name}}</md-option>
+            <label>Location</label>
+            <md-select ng-model="selectLocation" ng-change="locationSelected()">
+                 <md-option ng-repeat="room in availableLocation" value="{{room.id}}">{{room.name}}</md-option>
             </md-select><br>
         </md-input-container>
 
-        <md-input-container class="md-block">
-            <label for ="selectRoom">Room</label>
-            <md-select required name="selectRoom" id="selectRoom" ng-model="data.selectRoom">
-                <md-option ng-repeat="option in data.availableRooms" value="{{option.id}}">{{option.name}}</md-option>
-            </md-select>
-        </md-input-container>
 
+
+
+
+
+        <!-- want to add objects so i can send more than one key value property-->
+        <!--<md-input-container class="md-block">-->
+            <label>Room</label>
+            <select ng-model="selectRoom" ng-options="option.name for option in availableRoom" value="{{option}}">
+                <!--<option ng-repeat="option in availableRoom" value="{{option}}">{{option.name}}</option>-->
+                <!--<md-option ></md-option>-->
+                <!--ng-change="roomSelected()"-->
+
+                <!---->
+            </select>
+        <!--</md-input-container>-->
+
+        <!--//Example-->
+        <!--<select name="mySelect" id="mySelect"-->
+                <!--ng-options="option.name for option in data.availableOptions track by option.id"-->
+                <!--ng-model="data.selectedOption"></select>-->
+        <!-- value="{{option.id}}"-->
 
 
     <h4>Screen Timeouts</h4>
@@ -43,7 +51,7 @@
                     <md-option value="15" >15 seconds</md-option>
                     <md-option value="30" >30 seconds</md-option>
                     <md-option value="60" >60 seconds</md-option>
-                </md-select><br>
+                </md-select> <br>
         </md-input-container>
 
         <md-input-container class="md-block">
@@ -52,7 +60,7 @@
                     <md-option value="15" >15 seconds</md-option>
                     <md-option value="30" >30 seconds</md-option>
                     <md-option value="60" >60 seconds</md-option>
-                </md-select><br>
+                </md-select></br>
         </md-input-container>
 
          <md-input-container class="md-block">
@@ -61,7 +69,7 @@
                     <md-option value="15" >15 seconds</md-option>
                     <md-option value="30" >30 seconds</md-option>
                     <md-option value="60" >60 seconds</md-option>
-                </md-select><br>
+                </md-select>
          </md-input-container>
 
 

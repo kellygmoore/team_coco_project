@@ -73,13 +73,17 @@ myApp.controller('ReserveCtrl', ["$scope", "$location", function($scope, $locati
         $location.path("/defaultscreen");
     }
 }]);
-
-
+////temp
+//localStorage.selectLocation=$scope.selectLocation;
+//localStorage.selectRoomId=$scope.selectRoom.id;
+//localStorage.selectRoomName=$scope.selectRoom.name;
 
 //Controller for DEFAULT screen view////////////////////////////////////////////////////
 myApp.controller('DefaultCtrl', ["$scope", "$location", function($scope, $location){
 //change out to data from Bamboo
-    $scope.roomName = "The Library";
+
+    console.log("here",localStorage.selectRoomName);
+    $scope.roomName =localStorage.selectRoomName;
     $scope.timeLeftHr = 1;
     $scope.timeLeftMin = 36;
     $scope.nextMtgAt = "3:00";      //string or number?

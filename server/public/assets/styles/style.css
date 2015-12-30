@@ -34,6 +34,7 @@
     margin: auto;
     text-align: center;
     color: floralwhite;
+    height:300px;g
 }
 
 .default-instruction-div {
@@ -57,12 +58,14 @@
     font-size: 48px;
     color: floralwhite;
     /*border: 2px solid purple;*/
-    padding-top: 250px;
+    /*padding-top: 250px;*/
     line-height: 0;
+    margin-top: 78%;
 }
 
 .bottom-div p {
     padding-bottom: 0;
+
     text-shadow: 4px 4px 3px #55606F;
 }
 
