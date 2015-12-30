@@ -2,7 +2,7 @@
  * Created by Zeo on 12/11/15.
  */
 myApp.controller('ConfigController', ["$scope","$http","$location","$timeout", function($scope,$http,$location,$timeout) {
-
+    console.log("config controller" );
     $scope.data = {
         selectLocation: null,
         availableLocations: [
@@ -21,8 +21,8 @@ myApp.controller('ConfigController', ["$scope","$http","$location","$timeout", f
         resultsTimeout: null
     };
 
-//Whenever the Submit and Save Setting buttons is click the results are stored on to local host
-    $scope.saveSettings=function(){
+//** *Whenever the Submit and Save Setting buttons is click the results are stored on to local host*/
+    $scope.saveSettings = function(){
         if(typeof(Storage) !== "undefined") {
             // Code for localStorage/sessionStorage.
             localStorage.selectLocation=$scope.data.selectLocation;
@@ -54,7 +54,99 @@ myApp.controller('ConfigController', ["$scope","$http","$location","$timeout", f
     function convertSecondsToMs(sec){
         var ms= sec* 1000;
         return ms;
+    };
 
-    }
+    $scope.authorize = function() {
+        //Create the log in Variables
+        var emailAddress= 'bsmalls@iremote.com';
+        var password='t4h7pvWt';
+
+        $http({
+            method: "POST",
+            url: "http://testing.bamboo.cocomsp.com/api/signIn",
+            data: "emailAddress=" + emailAddress + "&password=" + password,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+            }
+        }).success(
+            function( response ) {
+                console.log("this is the auth response");
+            }
+        );
+    };
+
+    $scope.getRoomsTest = function() {
+        var startDate="2015-12-08";
+        var endDate="2015-12-08";
+        var locationId="129";
+
+        //GET some meetings
+        $http({
+            method: "GET",
+            url: "http://testing.bamboo.cocomsp.com/api/locations/"+locationId+"/meetings?start="+startDate+"&end="+endDate,
+            withCredentials: true,
+            headers: {
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+            }
+        }).success(function( response ) {
+                console.log("This is meeting room response");
+            }
+        );
+    };
+
+
+    $scope.signOut = function (){
+        $http({
+            method: "GET",
+            url: "http://testing.bamboo.cocomsp.com/api/signOut"
+        }).success(function( response ) {
+                console.log("this is GET SignOut  response");
+            }
+        );
+
+    };
+
+
+    $scope.bookRoom = function() {
+        //Create the book Room Variables
+        // Start and end Times need to be in 24 hours
+        var startDate= "2015-12-17";
+        var startTime= "14:00:00";
+        var endDate="2015-12-17";
+        var endTime="14:30:00";
+        var meetingRoomId="1";
+        var numOfAttendees="3";
+        var description="Post Request from Development Code Prime";
+        var personId="19455";
+
+
+
+
+        $http({
+            method: "POST",
+            url: "http://testing.bamboo.cocomsp.com/api/meetings",
+            data: "startDate="+ startDate +"T"+startTime+"&endDate=" +endDate+"T" +endTime+ "&meetingRoomId="
+                    +meetingRoomId+"&numOfAttendees=" +numOfAttendees+ "&description="+description+ "&personId="+ personId,
+            withCredentials: true,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+            }
+        }).success(
+            function( response ) {
+                console.log("this is bookingroom response", response);
+            }
+        );
+    };
+
+    //POST https://members.explorecoco.com/api/meetings
+    //startDate - booking start date and time, formatted as YYYY-MM-DDTHH:mm:ss
+    //example: 2015-12-04T16:30:00
+    //endDate - booking end date and time, formatted as YYYY-MM-DDTHH:mm:ss
+    //meetingRoomId - meeting room ID
+    //numOfAttendees - number of people attending the meeting
+    //description - description of booking (i.e. name for meeting)
+    //personId - ID of the person creating the booking
 }]);
+
+
 

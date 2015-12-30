@@ -1,17 +1,20 @@
 <div ng-controller="DefaultCtrl">
 
-<div class="screen" ng-click="gotoCalendar()" ng-style="{'background-color': roomBooked === false ?  '#B23E44': '#25ae90'}">
+<div class="screen" ng-click="gotoCalendar()" ng-style="{'background-color': roomBooked ?  '#B23E44': '#25ae90'}">
 
     <div class="room-name-div tk-soleil"><h1>{{roomName}}</h1></div>
 
     <div class="default-instruction-div">Touch or badge in<br>to book</div>
 
     <div class="bottom-div">
-    <div class="free-in-div" ng-hide="true">
+    <div class="free-in-div" ng-show="roomBooked">
         <p>free in</p>
-        <p class="time">{{timeLeftHr}} hr {{timeLeftMin}} min</p>
+        <p class="time">
+            <span ng-show="timeLeftHr > 0">{{timeLeftHr}} hr </span>
+                {{timeLeftMin}} min
+        </p>
     </div>
-    <div class="next-mtg-div" ng-hide="false">
+    <div class="next-mtg-div" ng-hide="roomBooked">
         <p>next meeting at</p>
         <p class="time">{{nextMtgAt}}</p>
     </div>

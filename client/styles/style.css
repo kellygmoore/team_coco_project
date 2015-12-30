@@ -4,12 +4,6 @@
 /*styles for DEFAULT view*************************************/
 
 
-/*body {*/
-    /*background-color: #B23E44;*/
-    /*width: 1200px;*/
-    /*height: 1920px;*/
-/*}*/
-
 /*button styling*/
 .md-button.md-raised:not([disabled]) {
     background-color: #25ae90;
@@ -73,11 +67,15 @@
 
 /***************THE HEADER template: THE TOP******************************/
 header {
-    /*display: inline-block;*/
-    width: 800px;
-    height: 175px;
-    margin: 25px auto 0 auto;
+    width: 750px;
+    height: 115px;
+    margin: 10px auto 0 auto;
     /*border: 2px dashed red;*/
+}
+
+#reservationHeader {
+    width: 100%;
+    height: 10%;
 }
 
 #login-button {
@@ -85,28 +83,32 @@ header {
 }
 
 #theRoom {
-    font-size: 24px;
-    text-align: left;
-    height: 120px;
+    /*text-align: left;*/
+    height: 110px;
+    margin: 0 auto 0 50px;
+    width: 400px;
     float: left;
     /*border: 2px solid black;*/
     line-height: 10px;
 }
 
 .clock {
-
-    height: 120px;
+    height: 110px;
+    width: 150px;
+    display: inline-block;
+    float: right;
     /*border: 2px solid blue;*/
 }
 
 .clock p {
-    text-align: right;
-    font-size: 28px;
+    /*text-align: right;*/
+    /*margin: 0 50px 0 auto;*/
+    font-size: 20px;
     line-height: 10px;
 }
 
 .bookingMember {
-    font-style: bold;
+    font-weight: bold;
     color: #25ae90;
 }
 
@@ -120,145 +122,90 @@ header {
     margin: 20px;
 }
 
-.repeatDiv {
-    width: 100%;
+table, th, td {
+    border-collapse: collapse;
+    border: none;
+    outline: none;
 }
 
-.timeHour {
-    width: 5%;
-    display: inline-block;
-    height: 60px;
-    margin: 0;
-    font-size: 28px;
-}
-
-.timeBoxBlock {
-    /*border: 1px solid black;*/
-    width: 90%;
-    height: 60px;
-    display: inline-block;
-    margin: 0;
-    background-color: lightgrey;
+.listDiv {
+    list-style-type: none;
+    margin: auto;
+    width: 750px;
 }
 
 .timeSelectOval {
     box-shadow: 2px 2px 3px #55606F;
     border: 1px solid #55606F;
     border-radius: 20px;
-    margin: 6px 5px 6px 5px;
+    margin: auto;
     text-align: center;
+    width: 90%;
+    height: 75%;
     background-color: white;
-    /*vertical-align: middle;*/
 }
 
 .timeSelectOval span {
     font-family: "Nothing You Could Do", Arial, sans-serif;
     font-size: 28px;
+    display: block;
+    padding-top: 7px;
+    width: 200px;
+    margin: auto;
 }
 
-.listDiv {
-    list-style-type: none;
-}
 
 .whoInRoom {
     text-align: center;
-    font-size: 24px;
-    font-family: "Nothing You Could Do", Arial, sans-serif;
-    color: #F3B449;
-    margin-top: 11px;
-}
-
-table, th, td {
-    border-collapse: collapse;
-    border: none;
-
+    font-size: 18px;
+    /*font-family: "Nothing You Could Do", Arial, sans-serif;*/
+    color: #55606F;
+    margin: auto;
 }
 
 .numHour {
     width: 75px;
-    height: 60px;
+    height: 70px;
     font-size: 28px;
     text-align: center;
 }
 
 .timeslot {
-    width: 700px;
-    height: 60px;
-    /*border: 1px solid black;*/
+    width: 600px;
+    height: 70px;
+    border: 1px solid black;
     background-color: lightgrey;
 }
 
-/*****************BOOKING VIEW*************************************/
 
-.dialogdemoBasicUsage #popupContainer {
-    position: relative; }
+/**************RESERVE-BOOK SCREEN**************/
 
-.dialogdemoBasicUsage .footer {
+.reserveBook {
+    /*border: 5px ridge #F3B449;*/
     width: 100%;
-    text-align: center;
-    margin-left: 20px; }
-
-.dialogdemoBasicUsage .footer, .dialogdemoBasicUsage .footer > code {
-    font-size: 0.8em;
-    margin-top: 50px; }
-
-.window{
-    width: 55%;
-    height: 43%;
-}
-.window h2{
-    font-size: xx-large;
-    text-align: center;
-    color: #55606F;
-    margin: 2%;
+    margin: auto;
+    background-color: #fcf0da;
 }
 
-.booking-form{
-    height: 95%;
-}
+.incrementDiv {
+    /*border: 5px ridge #F3B449;*/
 
-.modal-body{
-    text-align:center;
-    padding: 31% 19%;
-    height: 100%;
 }
-
-.modal-body p{
-    color: #55606F;
-    font-weight: 600;
-    font-size: larger;
+.addAll{
+    margin: auto;
+    /*border: 5px ridge #F3B449;*/
+    background-color: white;
+    width: 66%;
 }
-
-.for {
-    float: left;
-    margin: 10% 1% 1% 8%;
-}
-
-button.button {
-    height: 37px !important;
-    width: 55px !important;
-    border-radius: 37% !important;
-    box-shadow: 1px 1px 3px #888888;
-}
-
-.add{
-    display: inline;
-}
-
-.addHours{
-    float:left;
-}
-
-.addPeople{
-    float:right;
-}
-
 .number {
     font-size: -webkit-xxx-large;
     color: #55606F;
     font-weight: 600;
+    border: 5px ridge #F3B449;
+    width: 15%;
+    height: 15%;
+    text-align: center;
 }
-
 
 .plus{
     fill: #25ae90;
@@ -268,56 +215,43 @@ button.button {
     fill: #FF5962
 }
 
-/*reservation view*******************************************/
-/*.charge {*/
-    /*font-size: 14px;*/
-    /*color: #55606F;*/
-/*}*/
+#reserveHeader {
+    padding: 0 15px 0 15px;
+    height: auto;
+    background-color: #F3B449;
+    width: auto;
+    margin-top: 0;
 
-/*RESERVATION view*******************************************/
-
-
-.bookingBorder {
+}
+#bookingSummary {
     border: 5px ridge #F3B449;
-    width: 675px;
+    width: 66%;
     margin: auto;
+    font-size: 28px
 }
 
-.bookingHeader {
+.summaryHeader {
     background-color: #F3B449;
-    padding: 25px 0 15px 0;
+    padding: 15px 0 0 0;
     border-bottom: 5px ridge #F3B449;
 }
 
-.bookingHeader h3 {
+.summaryHeader h3 {
     margin-top: 0;
     text-align: center;
     font-size: 32px;
-    text-shadow:
-    -1px -1px 0 white,
-    1px -1px 0 white,
-    -1px 1px 0 white,
-    1px 1px 0 white;
 }
 
-.bookingSummary {
-    font-size: 28px;
-    width: 400px;
-    text-align: right;
-    display: inline-block;
-    height: 300px;
-    float: left;
+.summaryDiv {
+    background-color: white;
 }
 
-.chargeDiv {
+.charge {
     font-size: 14px;
-    color: #55606F;
-    width: 175px;
-    text-align: left;
-    display: inline-block;
-    height: 300px;
-    padding-left: 20px;
-    padding-top: 100px;
+}
+
+.bookItButton {
+    padding-bottom: 10px;
 }
 
 .md-raised {
@@ -421,3 +355,160 @@ button.button {
     background-color: white;
     color:black;
 }
+
+
+
+/*****************BOOKING VIEW*************************************/
+
+/*.dialogdemoBasicUsage #popupContainer {*/
+/*position: relative; }*/
+
+/*.dialogdemoBasicUsage .footer {*/
+/*width: 100%;*/
+/*text-align: center;*/
+/*margin-left: 20px; }*/
+
+/*.dialogdemoBasicUsage .footer, .dialogdemoBasicUsage .footer > code {*/
+/*font-size: 0.8em;*/
+/*margin-top: 50px; }*/
+
+/*.window{*/
+/*width: 55%;*/
+/*height: 43%;*/
+/*}*/
+/*.window h2{*/
+/*font-size: xx-large;*/
+/*text-align: center;*/
+/*color: #55606F;*/
+/*margin: 2%;*/
+/*}*/
+
+/*.booking-form{*/
+/*height: 95%;*/
+/*}*/
+
+/*.modal-body{*/
+/*text-align:center;*/
+/*padding: 31% 19%;*/
+/*height: 100%;*/
+/*}*/
+
+/*.modal-body p{*/
+/*color: #55606F;*/
+/*font-weight: 600;*/
+/*font-size: larger;*/
+/*}*/
+
+/*.for {*/
+/*float: left;*/
+/*margin: 10% 1% 1% 8%;*/
+/*}*/
+
+/*button.button {*/
+/*height: 37px !important;*/
+/*width: 55px !important;*/
+/*border-radius: 37% !important;*/
+/*box-shadow: 1px 1px 3px #888888;*/
+/*}*/
+
+/*.add{*/
+/*display: inline;*/
+/*}*/
+
+
+
+
+/*.addHoursButton {*/
+/*padding-top: 20px;*/
+/*margin: 0 50px 0 50px;*/
+
+/*}*/
+
+/*.md-icon-button {*/
+/*font-size: 48px;*/
+/*}*/
+
+/*.number {*/
+/*/!*clear: left;*!/*/
+/*text-align: center;*/
+/*}*/
+/*.minusHoursButton {*/
+/*padding-top: 20px;*/
+/*margin: 0 50px 0 50px;*/
+
+/*}*/
+
+/*.minutes button {*/
+/*display: inline;*/
+/*}*/
+
+
+
+/*.number {*/
+/*width: 200px;*/
+/*height: 300px;*/
+/*border: 3px solid red;*/
+/*}*/
+/*//////////////////////OLD CSS FOR BOOKING MODAL*/
+/*.dialogdemoBasicUsage #popupContainer {*/
+/*position: relative; }*/
+
+/*.dialogdemoBasicUsage .footer {*/
+/*width: 100%;*/
+/*text-align: center;*/
+/*margin-left: 20px; }*/
+
+/*.dialogdemoBasicUsage .footer, .dialogdemoBasicUsage .footer > code {*/
+/*font-size: 0.8em;*/
+/*margin-top: 50px; }*/
+
+/*.window{*/
+/*width: 55%;*/
+/*height: 43%;*/
+/*}*/
+/*.window h2{*/
+/*font-size: xx-large;*/
+/*text-align: center;*/
+/*color: #55606F;*/
+/*margin: 2%;*/
+/*}*/
+
+/*.booking-form{*/
+/*height: 95%;*/
+/*}*/
+
+/*.modal-body{*/
+/*text-align:center;*/
+/*padding: 31% 19%;*/
+/*height: 100%;*/
+/*}*/
+
+/*.modal-body p{*/
+/*color: #55606F;*/
+/*font-weight: 600;*/
+/*font-size: larger;*/
+/*}*/
+
+/*.for {*/
+/*float: left;*/
+/*margin: 10% 1% 1% 8%;*/
+/*}*/
+
+/*button.button {*/
+/*height: 37px !important;*/
+/*width: 55px !important;*/
+/*border-radius: 37% !important;*/
+/*box-shadow: 1px 1px 3px #888888;*/
+/*}*/
+
+/*.add{*/
+/*display: inline;*/
+/*}*/
+
+/*.addHours{*/
+/*float:left;*/
+/*}*/
+
+/*.addPeople{*/
+/*float:right;*/
+/*}*/

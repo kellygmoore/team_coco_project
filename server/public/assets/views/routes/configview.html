@@ -6,6 +6,14 @@
     <md-content layout="column"ng-cloak>
 
 
+    <form name="auth" id="testingForm">
+        <button ng-click="authorize()">Sign In</button>
+        <button ng-click="getRoomsTest()">Get Rooms Test</button>
+        <button ng-click="signOut()">Sign Out</button>
+        <button ng-click="bookRoom()">bookRoom</button>
+    </form>
+
+
     <!--form to select the COCO location and ROOM-->
     <form name="myForm" id="configForm">
         <h4>Set Up Meeting Room</h4>

@@ -5,7 +5,8 @@ var myApp = angular.module("myApp", ['ngRoute', 'ngMaterial', 'ngAria', 'ngAnima
 myApp.config(["$routeProvider", function($routeProvider){
     $routeProvider.
         when('/defaultscreen',{
-            templateUrl: "assets/views/routes/defaultscreen.html"
+            templateUrl: "assets/views/routes/defaultscreen.html",
+            controller: "DefaultCtrl"
         }).
         when('/calendarview/', {
             templateUrl: "assets/views/routes/calendarview.html"
@@ -21,6 +22,9 @@ myApp.config(["$routeProvider", function($routeProvider){
         when('/reservationview', {
             templateUrl: "assets/views/routes/reservationview.html"
             //controller: "ReserveCtrl"
+        }).
+        when('/reserveBookScreen', {
+            templateUrl: "assets/views/routes/reserveBookScreen.html"
         }).
         otherwise({
             redirectTo: 'defaultscreen'

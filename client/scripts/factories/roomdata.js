@@ -1,13 +1,14 @@
 myApp.factory('SharedRoomData', ["$http", function($http){
-    var meetingRoom = {};
-    console.log("In factory");
+    var meetingRoom = undefined;
+
+    //console.log("In room factory");
     //PRIVATE
     var roomData = function() {
-        meetingRoom = {
-            id: 4,
+         meetingRoom = {
+            id: 2,
             name: "The Library",
             location: {
-                id: 134,
+                id: 129,
                 name: "Minneapolis, Downtown",
                 code: "MPLS_DT"
             },
@@ -17,6 +18,8 @@ myApp.factory('SharedRoomData', ["$http", function($http){
         };
         //console.log("MeetingRoom Private: ", meetingRoom);
     };
+
+
     //PUBLIC
     var publicRoom = {
         retrieveRoomData: function(){
@@ -27,6 +30,7 @@ myApp.factory('SharedRoomData', ["$http", function($http){
             //console.log("In roomData");
             return roomData();
         }
+
     };
 
     return publicRoom;
