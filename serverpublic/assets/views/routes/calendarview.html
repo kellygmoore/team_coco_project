@@ -1,0 +1,30 @@
+<!--Include the header for the top of the page-->
+<div class="screenCalendar">
+
+    <div ng-include="'/assets/views/templates/thetop.html'"></div>
+
+    <div class="container" ng-controller="CalendarCtrl">
+
+        <div class="listDiv" ng-model="bambooDataArray">
+            <table>
+                <tr ng-repeat="timeblock in timeArray">
+                    <td class="numHour">{{ timeblock }}</td>
+                    <td class="timeslot" ng-style="{
+                    'background-image': checkPastTime(timeblock) ? 'url(/assets/styles/images/gray1.jpg)' : 'none',
+                    'border-bottom' : checkPastTime(timeblock) ? 'none' : '1px solid black',
+                    'background-color': bookedColor ?  '#FF5962': '#25ae90',
+                    'border-top': timeblock === rightNowHour ? '3px dashed purple': 'none'
+                    }">
+                        <div class="timeSelectOval" ng-click="tapToBook(timeblock)" ng-hide="bookedColor || checkPastTime(timeblock)">
+                            <span>Tap to Book</span>
+                        </div>
+                        <div class="whoInRoom" ng-show="bookedColor">
+                            <span>{{memberInRoom}}</span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        </div>
+    </div>
+
