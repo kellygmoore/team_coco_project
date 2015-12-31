@@ -9,12 +9,9 @@
             <table>
                 <tr ng-repeat="timeblock in timeArray">
                     <td class="numHour">{{ timeblock.stdTime }}</td>
-                    <td class="timeslot" ng-style="{
-                    'background-color': checkPastTime(timeblock.milTime) ? '#55606F' : 'none',
-                    'border-bottom' : checkPastTime(timeblock.milTime) ? 'none' : '1px solid black',
-                    'background-image': timeblock.isBooked ? 'linear-gradient(0deg, #FF5962, #FF5962 25%, #25ae90 25%)' : '#25ae90',
-                    'border-top': timeblock.milTime === rightNowHour ? '3px dashed purple': 'none'
-                    }">
+                    <td class="timeslot" ng-class="getStyle()">
+
+
                         <div class="timeSelectOval" ng-click="tapToBook(timeblock.milTime)" ng-hide="timeblock.isBooked || checkPastTime(timeblock.milTime)">
                             <span>Tap to Book</span>
                         </div>
@@ -31,4 +28,12 @@
         </div>
         </div>
     </div>
+
+
+<!--ng-style="{-->
+<!--'background-color': checkPastTime(timeblock.milTime) ? '#55606F' : 'none',-->
+<!--'border-bottom' : checkPastTime(timeblock.milTime) ? 'none' : '1px solid black',-->
+<!--'background-image': timeblock.isBooked ? 'linear-gradient(0deg, #FF5962, #FF5962 25%, #25ae90 25%)' : '#25ae90',-->
+<!--'border-top': timeblock.milTime === rightNowHour ? '3px dashed purple': 'none'-->
+<!--}">-->
 
