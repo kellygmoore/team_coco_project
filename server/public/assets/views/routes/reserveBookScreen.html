@@ -1,6 +1,7 @@
 <div class="reserveBook" layout-align="center center">
 <header id="reserveHeader" ng-controller="TimeCtrl" layout="row" layout-align="space-between center">
 
+
     <div id="theRoom">
         <h1>{{room.name}}</h1>
     </div>
@@ -12,88 +13,114 @@
 
 </header>
 
-<div class="addAll" ng-controller="IncrementCtrl">
+<div class="addAll" ng-controller="CalendarCtrl">
 
-    <div class="title" layout="row" layout-align="center center">
-        <h1>Your Meeting from  to </h1>
-    </div>
+    <!--<div ng-controller="CalendarCtrl" class="title" layout="row" layout-align="center center">-->
+        <!--<h1 ng-show="true">Your Meeting from {{startHour}}:{{meetingValues.minutes}} to  </h1>-->
+        <!--&lt;!&ndash;<h1 ng-show="option in data.availableStartTime" value="{{option.startTime}} + {{option.minutes}}">Your Meeting from {{option.startTime + option.minutes}}:{{meetingValues.minutes}} to {{endHour}} </h1>&ndash;&gt;-->
+    <!--</div>-->
+    <h1>Book Your Meeting</h1>
 
-    <div class="incrementDiv" layout="row" layout-align="space-around center">
 
-        <div class="minusButton">
-            <md-button class="md-icon-button button">
-            <span aria-label="subtract" ng-click="hourRemove()">
-                <ng-md-icon icon="remove" class="minus" size="60"></ng-md-icon>
-            </span>
-            </md-button>
+    <!--//This is the drop-down menu to select start time for meeting-->
+    <!--//Placeholder will need to be accessed via factory from calendar view-->
+    <!--//Logic will be added to display time options based on start time selected on Calendar view-->
+
+    <div class="selectStartTime">
+    <md-input container class="md-block" ng-controller="CalendarCtrl">
+        <label for="selectStartTime"><h2>Start Time</h2></label>
+        <md-select required name="selectStartTime" id="selectStartTime" ng-model="data.selectStartTime" placeholder="" ng-change="changeTime()">
+            <md-option ng-repeat="option in data.availableStartTime" value="{{option.startTime}} + {{option.minutes}}">{{option.startTime + option.minutes}}</md-option>
+        </md-select>
+    </md-input>
         </div>
 
-        <div class="number">{{meetingValues.hours}}</div>
-
-        <div class="addButton">
-            <md-button class="md-icon-button aria-label button">
-            <span aria-label="add" ng-click="hourAdd()" ng-click="addTime()">
-                <ng-md-icon icon="add" class="plus" size="60"></ng-md-icon>
-            </span>
-            </md-button>
-        </div>
+    <div class="selectDuration">
+        <md-input container class="md-block" ng-controller="CalendarCtrl">
+            <label for="selectDuration"><h2>Duration</h2></label>
+            <md-select required name="selectDuration" id="selectDuration" ng-model="data.selectDuration">
+                <md-option ng-repeat="option in data.availableDuration" value="{{option.duration}}" + "minutes">{{option.duration}}  minutes</md-option>
+            </md-select>
+        </md-input>
     </div>
+    <br>
 
-    <div class="title" layout="row" layout-align="center center">
-        <h2>hours</h2>
-    </div>
+    <!--<div class="incrementDiv" layout="row" layout-align="space-around center">-->
 
-    <div class="incrementDiv" layout="row" layout-align="space-around center">
+        <!--<div class="minusButton">-->
+            <!--<md-button class="md-icon-button button">-->
+            <!--<span aria-label="subtract" ng-click="hourRemove()">-->
+                <!--<ng-md-icon icon="remove" class="minus" size="60"></ng-md-icon>-->
+            <!--</span>-->
+            <!--</md-button>-->
+        <!--</div>-->
 
-        <div class="minusButton">
-            <md-button class="md-icon-button button">
-            <span aria-label="subtract" ng-click="minuteRemove()">
-                <ng-md-icon icon="remove" class="minus" size="60"></ng-md-icon>
-            </span>
-            </md-button>
-        </div>
+        <!--<div class="number">{{meetingValues.hours}}</div>-->
 
-        <div class="number">{{meetingValues.minutes}}</div>
+        <!--<div class="addButton">-->
+            <!--<md-button class="md-icon-button aria-label button">-->
+            <!--<span aria-label="add" ng-click="hourAdd()">-->
+                <!--<ng-md-icon icon="add" class="plus" size="60"></ng-md-icon>-->
+            <!--</span>-->
+            <!--</md-button>-->
+        <!--</div>-->
+    <!--</div>-->
 
-        <div class="addButton">
-            <md-button class="md-icon-button aria-label button">
-            <span aria-label="add" ng-click="minuteAdd()">
-                <ng-md-icon icon="add" class="plus" size="60"></ng-md-icon>
-            </span>
-            </md-button>
-        </div>
+    <!--<div class="title" layout="row" layout-align="center center">-->
+        <!--<h2>hours</h2>-->
+    <!--</div>-->
 
-    </div>
+    <!--<div class="incrementDiv" layout="row" layout-align="space-around center">-->
 
-    <div class="title" layout="row" layout-align="center center">
-        <h2>minutes</h2>
-    </div>
+        <!--<div class="minusButton">-->
+            <!--<md-button class="md-icon-button button">-->
+            <!--<span aria-label="subtract" ng-click="minuteRemove()">-->
+                <!--<ng-md-icon icon="remove" class="minus" size="60"></ng-md-icon>-->
+            <!--</span>-->
+            <!--</md-button>-->
+        <!--</div>-->
 
-    <div class="incrementDiv" layout="row" layout-align="space-around center">
-    <!--<div class="addPeople" layout="row" layout-align="space-around center">-->
+        <!--<div class="number">{{meetingValues.minutes}}</div>-->
 
-        <div class="minusButton">
-                <md-button class="md-icon-button button">
-            <span aria-label="subtract" ng-click="peopleRemove()">
-                <ng-md-icon icon="remove" class="minus" size="60"></ng-md-icon>
-            </span>
-                </md-button>
-            </div>
+        <!--<div class="addButton">-->
+            <!--<md-button class="md-icon-button aria-label button">-->
+            <!--<span aria-label="add" ng-click="minuteAdd()">-->
+                <!--<ng-md-icon icon="add" class="plus" size="60"></ng-md-icon>-->
+            <!--</span>-->
+            <!--</md-button>-->
+        <!--</div>-->
 
-            <div class="number">{{meetingValues.people}}</div>
+    <!--</div>-->
 
-            <div class="addButton">
-                <md-button class="md-icon-button aria-label button">
-            <span aria-label="add" ng-click="peopleAdd()">
-                <ng-md-icon icon="add" class="plus" size="60"></ng-md-icon>
-            </span>
-                </md-button>
-            </div>
-        </div>
+    <!--<div class="title" layout="row" layout-align="center center">-->
+        <!--<h2>minutes</h2>-->
+    <!--</div>-->
 
-    <div class="title" layout="row" layout-align="center center">
-        <h2>people</h2>
-    </div>
+    <!--<div class="incrementDiv" layout="row" layout-align="space-around center">-->
+    <!--&lt;!&ndash;<div class="addPeople" layout="row" layout-align="space-around center">&ndash;&gt;-->
+
+        <!--<div class="minusButton">-->
+                <!--<md-button class="md-icon-button button">-->
+            <!--<span aria-label="subtract" ng-click="peopleRemove()">-->
+                <!--<ng-md-icon icon="remove" class="minus" size="60"></ng-md-icon>-->
+            <!--</span>-->
+                <!--</md-button>-->
+            <!--</div>-->
+
+            <!--<div class="number">{{meetingValues.people}}</div>-->
+
+            <!--<div class="addButton">-->
+                <!--<md-button class="md-icon-button aria-label button">-->
+            <!--<span aria-label="add" ng-click="peopleAdd()">-->
+                <!--<ng-md-icon icon="add" class="plus" size="60"></ng-md-icon>-->
+            <!--</span>-->
+                <!--</md-button>-->
+            <!--</div>-->
+        <!--</div>-->
+
+    <!--<div class="title" layout="row" layout-align="center center">-->
+        <!--<h2>people</h2>-->
+    <!--</div>-->
 
 
 </div>
