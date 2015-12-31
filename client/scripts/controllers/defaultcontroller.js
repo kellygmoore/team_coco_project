@@ -1,12 +1,13 @@
 /**
  * Created by samuelmoss on 12/17/15.
  */
+
 //Controller for DEFAULT screen view////////////////////////////////////////////////////
 myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "SharedBookedNameData", "$timeout", "$interval", "dateFilter", function($scope, $location, SharedRoomData, SharedBookedNameData, $timeout, $interval, dateFilter){
 //change out to data from Bamboo
 
-    //console.log("default controller works");
-    $scope.roomName = undefined;
+    console.log("name of room", localStorage.selectRoomName);
+    $scope.roomName =localStorage.selectRoomName;
     $scope.timeLeftHr = undefined;
     $scope.timeLeftMin = undefined;
     $scope.nextMtgAt = "No Upcoming Meetings";
@@ -25,12 +26,12 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
     //Conditional to check and see if room data had been pulled into the roomData Factory.
     //If not it calls a method in the factory which hits the API and gets all the
     //information for the room.
-    if($scope.roomData.retrieveRoomData() === undefined){
-        $scope.roomData.setRoomData();
-        $scope.roomData.retrieveRoomData();
-    }
+    //if($scope.roomData.retrieveRoomData() === undefined){
+    //    $scope.roomData.setRoomData();
+    //    $scope.roomData.retrieveRoomData();
+    //}
 
-    $scope.roomName = $scope.roomData.name;
+
 
 
     //This function updates the meeting time factory with the
@@ -51,14 +52,14 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
     //Starts the script.
     $scope.updateMeetingTimeData();
 
-
+    console.log("localstorageRoomId", localStorage.selectRoomId);
     //Function which searches through all the meeting for the locations,
     //pulls out all those which are for the room the tablet has been configured to,
     //Then formats them as numbers and pushed them to the meetingTimesArray for later use.
     $scope.updateMeetingTimesArray = function(){
         $scope.bookedData.map(
             function(obj) {
-                if(obj.meetingRoom.id === 2/*$scope.roomData.id*/){
+                if(obj.meetingRoom.id === parseInt(localStorage.selectRoomId)){
                     $scope.meetTimeObj = {};
                     $scope.meetTimeObj.start = {};
                     $scope.meetTimeObj.end = {};

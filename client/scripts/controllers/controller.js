@@ -163,6 +163,9 @@ myApp.controller('ReserveCtrl', ["$scope", "$location", function($scope, $locati
     }
 }]);
 
+
+
+
 //myApp.controller('AppCtrl', ['$scope', '$mdDialog', '$mdMedia', function($scope, $mdDialog, $mdMedia){
 //
 //    $scope.status = '  ';
