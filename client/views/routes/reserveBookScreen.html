@@ -13,12 +13,13 @@
 
 </header>
 
-<div class="addAll" ng-controller="IncrementCtrl">
+<div class="addAll" ng-controller="CalendarCtrl">
 
     <!--<div ng-controller="CalendarCtrl" class="title" layout="row" layout-align="center center">-->
         <!--<h1 ng-show="true">Your Meeting from {{startHour}}:{{meetingValues.minutes}} to  </h1>-->
         <!--&lt;!&ndash;<h1 ng-show="option in data.availableStartTime" value="{{option.startTime}} + {{option.minutes}}">Your Meeting from {{option.startTime + option.minutes}}:{{meetingValues.minutes}} to {{endHour}} </h1>&ndash;&gt;-->
     <!--</div>-->
+    <h1>Book Your Meeting</h1>
 
 
     <!--//This is the drop-down menu to select start time for meeting-->
@@ -38,7 +39,7 @@
         <md-input container class="md-block" ng-controller="CalendarCtrl">
             <label for="selectDuration"><h2>Duration</h2></label>
             <md-select required name="selectDuration" id="selectDuration" ng-model="data.selectDuration">
-                <md-option ng-repeat="option in data.availableDuration" value="{{option.duration}} + {{option.digits}}">{{option.duration + option.digits}}</md-option>
+                <md-option ng-repeat="option in data.availableDuration" value="{{option.duration}}" + "minutes">{{option.duration}}  minutes</md-option>
             </md-select>
         </md-input>
     </div>

@@ -202,6 +202,11 @@ table, th, td {
     background-color: white;
     width: 66%;
 }
+
+.addAll h1{
+    text-align: center;
+    padding: 10px;
+}
 .number {
     font-size: -webkit-xxx-large;
     color: #55606F;
