@@ -1,14 +1,14 @@
 myApp.factory('SharedRoomData', ["$http", function($http){
-    var meetingRoom = {};
+    var meetingRoom = undefined;
 
     //console.log("In room factory");
     //PRIVATE
     var roomData = function() {
-        meetingRoom = {
-            id: 4,
+         meetingRoom = {
+            id: 2,
             name: "The Library",
             location: {
-                id: 134,
+                id: 129,
                 name: "Minneapolis, Downtown",
                 code: "MPLS_DT"
             },

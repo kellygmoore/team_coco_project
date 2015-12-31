@@ -1,5 +1,5 @@
 
-myApp.factory('SharedBookedNameData', ["$http", function($http) {
+myApp.factory('SharedBookedNameData', ["$http", "dateFilter", function($http, dateFilter) {
     //console.log("In booked name factory");
     var payor = {};
     var data = undefined;
@@ -7,10 +7,11 @@ myApp.factory('SharedBookedNameData', ["$http", function($http) {
 
     //PRIVATE//////////////////////////////////
     var getCallResponse = function(){
-
-        var startDate="2015-12-17";  //this will need to be today's date
-        var endDate="2015-12-17";   //this will need to be today's date
-        var locationId="130";
+        var todayDate = dateFilter(Date.now(),'yyyy-MM-dd');
+        console.log("In function getCallResponse");
+        var startDate= todayDate;
+        var endDate= todayDate;
+        var locationId="129";
 
         var promise = $http({
             method: "GET",

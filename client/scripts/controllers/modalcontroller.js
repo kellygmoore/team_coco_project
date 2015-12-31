@@ -49,7 +49,7 @@ myApp.controller('AppCtrl', ['$scope', '$mdDialog', '$mdMedia', '$location', fun
     };
 
 
-    //Modal if booking if successful
+    //Modal displays if booking is successful
     $scope.bookingSuccess = function(ev) {
         console.log("show success booking");
         $mdDialog.show({
