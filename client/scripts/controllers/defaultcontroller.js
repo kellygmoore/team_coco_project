@@ -56,6 +56,7 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
     //pulls out all those which are for the room the tablet has been configured to,
     //Then formats them as numbers and pushed them to the meetingTimesArray for later use.
     $scope.updateMeetingTimesArray = function(){
+        $scope.meetingTimesArray = [];
         $scope.bookedData.map(
             function(obj) {
                 if(obj.meetingRoom.id === 2/*$scope.roomData.id*/){
