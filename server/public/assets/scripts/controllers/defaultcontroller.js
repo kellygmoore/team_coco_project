@@ -52,13 +52,8 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
     //Starts the script.
     $scope.updateMeetingTimeData();
 
-<<<<<<< HEAD
 
     //This function searches through all the meeting for the locations,>>>>>>> feature_default_screen_logic
-=======
-    //console.log("localstorageRoomId", localStorage.selectRoomId);
-    //Function which searches through all the meeting for the locations,
->>>>>>> 7970cebfe35cec235d610719581aa7ca684d9d22
     //pulls out all those which are for the room the tablet has been configured to,
     //Then formats them as numbers and pushed them to the meetingTimesArray for later use.
     $scope.updateMeetingTimesArray = function(){
