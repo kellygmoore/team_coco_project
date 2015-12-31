@@ -31,9 +31,9 @@ myApp.controller('TimeCtrl', ["$scope", "$timeout",  'SharedRoomData', function(
 
     }]);
 
-//Controller for the CALENDAR ////////////////////////////////////////////////////////
-myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData', function($scope, $location, SharedBookedNameData){
-    //$scope.memberInRoom = [];
+//Controller for the CALENDAR & RESERVE-BOOK-SCREEN////////////////////////////////////////////////////////
+myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData','SharedTimeData', function($scope, $location, SharedBookedNameData, SharedTimeData){
+
     $scope.bookedColor = false;
     //hours that room can be booked 8am - 5pm// needs to be 6pm for certain location
     //use milTime for comparing and logic, use stdTime for display on calendar
@@ -48,7 +48,6 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
         {milTime: 15, stdTime: 3},
         {milTime: 16, stdTime: 4}
     ];
-
 
     $scope.sharedBookedNameData = SharedBookedNameData;
     //$scope.booking = [];
@@ -146,11 +145,43 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
             return false;
         };
 
-    //when open hour block is tapped, sends the start time hour to reservationview page
-    $scope.tapToBook = function(startHour){
-        $location.path("/reservationview");
-    }
+    //RESERVEBOOK SCREEN
+    //SharedTimeData is a factory that holds start time selected with ng-click by the user on the calendar view
 
+    $scope.sharedTimeData = SharedTimeData;
+
+    $scope.tapToBook=function(hour){
+        $scope.sharedTimeData.setTimeData(hour);
+        $location.path("/reserveBookScreen");
+    };
+
+    //startHour variable holds start time of meeting
+    $scope.startHour = $scope.sharedTimeData.retrieveTimeData();
+
+    //The following populates the dropdown menus on the reserveBookScreen
+    $scope.data = {
+        selectStartTime: null,
+        availableStartTime: [
+            {startTime: $scope.startHour + ':', minutes: '00'},
+            {startTime: $scope.startHour + ':', minutes: '15'},
+            {startTime: $scope.startHour + ':', minutes: '30'},
+            {startTime: $scope.startHour + ':', minutes: '45'}
+        ],
+
+        selectDuration:null,
+        availableDuration: [
+            {duration:'15'},
+            {duration:'30'},
+            {duration:'45'},
+            {duration:'60'}
+        ]
+    };
+
+
+    $scope.changeTime = function(){
+        console.log("This is newTime", $scope.newTime);
+        $scope.newTime = $scope.data.availableStartTime.minutes + $scope.availableDuration.duration
+    };
 }]);
 
 
