@@ -11,7 +11,8 @@ myApp.factory('SharedBookedNameData', ["$http", "dateFilter", function($http, da
         console.log("In function getCallResponse");
         var startDate= todayDate;
         var endDate= todayDate;
-        var locationId="129";
+        var locationId=localStorage.selectLocation;
+        console.log("this is local storage location id",localStorage.selectLocation);
 
         var promise = $http({
             method: "GET",

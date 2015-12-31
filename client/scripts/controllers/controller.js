@@ -78,7 +78,7 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
                     for (i = 0; i < $scope.booking.length; i++) {
                     //console.log("Name of room: ", $scope.booking[i].meetingRoom.name);
                         //find room match, then push start times, end times, and name onto arrays
-                        if ($scope.booking[i].meetingRoom.name === "Tap Room") {
+                        if ($scope.booking[i].meetingRoom.name === localStorage.selectRoomName) {
                             //console.log("i", i);
                             //pull off the start dates into array
                             dateStartString[i] = $scope.booking[i].startDate;
@@ -179,7 +179,7 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
 
 
     $scope.changeTime = function(){
-        console.log("This is newTime", $scope.newTime);
+        //console.log("This is newTime", $scope.newTime);
         $scope.newTime = $scope.data.availableStartTime.minutes + $scope.availableDuration.duration
     };
 }]);
