@@ -9,10 +9,30 @@ myApp.controller('IncrementCtrl', ['$scope', 'SharedTimeData', function($scope, 
 
     $scope.sharedTimeData = SharedTimeData;
 
-    $scope.startHour = $scope.sharedTimeData.retrieveTimeData();
-    console.log("This is startHour incrementCtrl", $scope.startHour);
+    $scope.data = {
+        //selectStartTime: null,
+        //availableStartTime: [
+        //    {startTime: '10:00am'},
+        //    {startTime:'10:15am'},
+        //    {startTime:'10:30am'},
+        //    {startTime:'10:45am'}
+        //],
 
-    $scope.endHour = $scope.startHour.clickedHour+1;
+        //selectDuration:null,
+        //availableDuration: [
+        //    {duration:'15 minutes'},
+        //    {duration:'30 minutes'},
+        //    {duration:'45 minutes'},
+        //    {duration:'60 minutes'},
+        //]
+    };
+
+
+
+$scope.startHour = $scope.sharedTimeData.retrieveTimeData();
+    //console.log("This is startHour incrementCtrl", $scope.startHour);
+    //
+    //$scope.endHour = $scope.startHour.clickedHour+1;
 
     ///Global variable
     $scope.meetingValues = {
@@ -69,3 +89,5 @@ myApp.controller('IncrementCtrl', ['$scope', 'SharedTimeData', function($scope, 
     };
 
 }]);
+
+

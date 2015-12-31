@@ -11,7 +11,8 @@ myApp.factory('SharedTimeData', ["$http", function($http){
     var publicTime = {
         retrieveTimeData: function(){
             console.log("In retrieve, TimeData: ", meetingTime);
-            return meetingTime;
+
+            return meetingTime.clickedHour;
         },
         setTimeData: function(hour){
             meetingTime = {clickedHour: hour};

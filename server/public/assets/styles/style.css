@@ -187,6 +187,11 @@ table, th, td {
     background-color: #fcf0da;
 }
 
+.selectStartTime, .selectDuration {
+    width: 55%;
+    margin: auto;
+}
+
 .incrementDiv {
     /*border: 5px ridge #F3B449;*/
 

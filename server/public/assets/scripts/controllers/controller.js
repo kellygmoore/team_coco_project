@@ -63,6 +63,36 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
     };
 
     $scope.startHour = $scope.sharedTimeData.retrieveTimeData();
+
+    $scope.data = {
+        selectStartTime: null,
+        availableStartTime: [
+            {startTime: $scope.startHour + ':', minutes: '00'},
+            {startTime: $scope.startHour + ':', minutes: '15'},
+            {startTime: $scope.startHour + ':', minutes: '30'},
+            {startTime: $scope.startHour + ':', minutes: '45'}
+        ],
+
+        selectDuration:null,
+        availableDuration: [
+            {duration:'15', digits: 'minutes'},
+            {duration:'30 minutes'},
+            {duration:'45 minutes'},
+            {duration:'60 minutes'}
+        ]
+    };
+
+
+
+    //$scope.startTimeChange = function(){
+    //    $scope.newStartTime =
+    //}
+
+    $scope.changeTime = function(){
+        console.log("This is newTime", $scope.newTime);
+        $scope.newTime = $scope.data.availableStartTime.minutes + $scope.availableDuration.duration
+    };
+
 //////////
 
     $scope.memberInRoom = [];
