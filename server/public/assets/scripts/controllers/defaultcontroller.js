@@ -52,8 +52,8 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
     //Starts the script.
     $scope.updateMeetingTimeData();
 
-    console.log("localstorageRoomId", localStorage.selectRoomId);
-    //Function which searches through all the meeting for the locations,
+
+    //This function searches through all the meeting for the locations,>>>>>>> feature_default_screen_logic
     //pulls out all those which are for the room the tablet has been configured to,
     //Then formats them as numbers and pushed them to the meetingTimesArray for later use.
     $scope.updateMeetingTimesArray = function(){
@@ -79,11 +79,10 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
         );
     };
 
-    //This function pulls in the time when the script load, checks to see whether it is ahead of any meetings
-    //for the day,adjusts the meeting array accordingly then checks to see if
+    //This function pulls in the current time, checks to see whether it is ahead of any meetings
+    //for the day, adjusts the meeting array accordingly then checks to see if
     //there is an active meeting currently going on. If there is a meeting in session then
-    //it sets itself to the active meeting mode,
-    //otherwise it sets itself to inactive mode.
+    //the function switches to the active meeting mode/function otherwise it switches to the inactive mode/function.
     //This allows the script to be booted at any time and immediately update.
     $scope.meetingTimeSwitch = function(){
         if(stop){
@@ -106,6 +105,11 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
         }
     };
 
+    //This function runs when the current time is greater than the next meeting start time
+    //and less than the next meeting end time (i.e. there is a meeting currently going on.
+    //It makes the page red, calculates and displays the time until the meeting is over.
+    //It also sets a timeout which calculates the time left untill the meeting is over
+    // and runs the updateMeetingTimeData function.
     $scope.activeMeetingLogic = function(){
         $scope.roomBooked = true;
         $scope.meetingLength = function(){
@@ -125,6 +129,9 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
             $scope.updateMeetingTimeData, $scope.meetingLength());
     };
 
+    //This function runs when there is no active meeting (i.e. the current time is less than the
+    //next meeting's start time). This changes the page to a green color and sets a timeout to the differance
+    //between the current time and the next meeting start time.
     $scope.inActiveMeetingLogic = function(){
         currentTime = Date.now();
         $scope.roomBooked = false;
@@ -134,33 +141,12 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
         )
     };
 
-
-    //$scope.timeCheck = $scope.compareTime(Date.prototype.getHours(), Date.prototype.getMinutes())) ? $scope.roomBooked = true : $scope.roomBooked = false;
-
-
-    //if($scope.userService.userData() === undefined) {
-    //    console.log("getting user list from user service");
-    //    $scope.userService.userList()
-    //        .then(function() {
-    //            $scope.users = $scope.userService.userData();
-    //        });
-    //} else {
-    //    $scope.users = $scope.userService.userData();
-    //}
-
-
-    //console.log("Shared room data: ", $scope.room);
-
-    //$scope.meetingTimeCalc = function(){
-    //
-    //};
-    //if statement goes here to check if room is currently booked, then set roomBooked to true
-
-    //This series of functions formats the next meeting time from military time to standard.
+    //This series of functions formats the next meeting time.
     $scope.timeFormat = function(timeObject){
       return "" + $scope.hourFormat(timeObject.hour) + ":" + $scope.minuteFormat(timeObject.minute) + ""
     };
 
+    //Formats the hour from military time to standard time.
     $scope.hourFormat = function(nextMeetingHour){
       if(nextMeetingHour > 12){
           return (nextMeetingHour - 12);
@@ -169,6 +155,7 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
       }
     };
 
+    //Formats single digit minutes (i.e. '6') to prexif with 0 (i.e. '06')
     $scope.minuteFormat = function(nextMeetingMinute){
         stringyNextMeetingMinute = "" + nextMeetingMinute + "";
         if(stringyNextMeetingMinute.length < 2){
@@ -178,6 +165,7 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
         }
     };
 
+    //Routes to the calendar view.
     $scope.gotoCalendar = function(){
         $location.path('/calendarview');
     };
