@@ -6,7 +6,7 @@
 myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "SharedBookedNameData", "$timeout", "$interval", "dateFilter", function($scope, $location, SharedRoomData, SharedBookedNameData, $timeout, $interval, dateFilter){
 //change out to data from Bamboo
 
-    console.log("name of room", localStorage.selectRoomName);
+    //console.log("name of room", localStorage.selectRoomName);
     $scope.roomName =localStorage.selectRoomName;
     $scope.timeLeftHr = undefined;
     $scope.timeLeftMin = undefined;
@@ -52,8 +52,13 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
     //Starts the script.
     $scope.updateMeetingTimeData();
 
+<<<<<<< HEAD
 
     //This function searches through all the meeting for the locations,>>>>>>> feature_default_screen_logic
+=======
+    //console.log("localstorageRoomId", localStorage.selectRoomId);
+    //Function which searches through all the meeting for the locations,
+>>>>>>> 7970cebfe35cec235d610719581aa7ca684d9d22
     //pulls out all those which are for the room the tablet has been configured to,
     //Then formats them as numbers and pushed them to the meetingTimesArray for later use.
     $scope.updateMeetingTimesArray = function(){
@@ -92,7 +97,7 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
             $interval.cancel(meetingTimeout);
         }
         currentTime = Date.now();
-        console.log("Meeting times array: ", $scope.meetingTimesArray);
+        //console.log("Meeting times array: ", $scope.meetingTimesArray);
         if($scope.meetingTimesArray[0]){
             while(currentTime > $scope.meetingTimesArray[0].endTime){
             $scope.meetingTimesArray.shift();

@@ -6,7 +6,7 @@
 myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "SharedBookedNameData", "$timeout", "$interval", "dateFilter", function($scope, $location, SharedRoomData, SharedBookedNameData, $timeout, $interval, dateFilter){
 //change out to data from Bamboo
 
-    console.log("name of room", localStorage.selectRoomName);
+    //console.log("name of room", localStorage.selectRoomName);
     $scope.roomName =localStorage.selectRoomName;
     $scope.timeLeftHr = undefined;
     $scope.timeLeftMin = undefined;
@@ -92,7 +92,7 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
             $interval.cancel(meetingTimeout);
         }
         currentTime = Date.now();
-        console.log("Meeting times array: ", $scope.meetingTimesArray);
+        //console.log("Meeting times array: ", $scope.meetingTimesArray);
         if($scope.meetingTimesArray[0]){
             while(currentTime > $scope.meetingTimesArray[0].endTime){
             $scope.meetingTimesArray.shift();

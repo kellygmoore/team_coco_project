@@ -2,7 +2,7 @@
  * Created by Zeo on 12/11/15.
  */
 myApp.controller('ConfigController', ["$scope","$http","$location","$timeout", function($scope,$http,$location,$timeout) {
-    console.log("config controller" );
+    //console.log("config controller" );
 
 
     $scope.selectLocation= null;
@@ -19,7 +19,7 @@ myApp.controller('ConfigController', ["$scope","$http","$location","$timeout", f
             getRooms($scope.selectLocation);
             //$scope.rooms = $scope.data.availableRoom[$scope.data.selectLocation];
 
-            console.log("this is selected location", $scope.selectLocation);
+            //console.log("this is selected location", $scope.selectLocation);
 
     };
 ////Runs when user selects room
@@ -99,7 +99,7 @@ myApp.controller('ConfigController', ["$scope","$http","$location","$timeout", f
 
 
                 $scope.availableLocation=response;
-                console.log("location respone", $scope.availableLocation);
+                //console.log("location respone", $scope.availableLocation);
 
 
 
@@ -129,7 +129,7 @@ myApp.controller('ConfigController', ["$scope","$http","$location","$timeout", f
 
 
                 $scope.availableRoom=response.data;
-                console.log("room response", response.data);
+                //console.log("room response", response.data);
             },
             function errorCallback(response){
                 console.log("not working");
