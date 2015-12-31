@@ -92,8 +92,10 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
         }
         currentTime = Date.now();
         console.log("Meeting times array: ", $scope.meetingTimesArray);
-        while(currentTime > $scope.meetingTimesArray[0].endTime){
+        if($scope.meetingTimesArray[0]){
+            while(currentTime > $scope.meetingTimesArray[0].endTime){
             $scope.meetingTimesArray.shift();
+            }
         }
         if (currentTime > $scope.meetingTimesArray[0].startTime){
             $scope.activeMeetingLogic();
