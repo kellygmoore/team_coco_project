@@ -13,7 +13,7 @@
 
 </header>
 
-<div class="addAll" ng-controller="CalendarCtrl">
+<div class="addAll" ng-controller="ReserveBookCtrl">
 
     <!--<div ng-controller="CalendarCtrl" class="title" layout="row" layout-align="center center">-->
         <!--<h1 ng-show="true">Your Meeting from {{startHour}}:{{meetingValues.minutes}} to  </h1>-->
@@ -27,7 +27,7 @@
     <!--//Logic will be added to display time options based on start time selected on Calendar view-->
 
     <div class="selectStartTime">
-    <md-input container class="md-block" ng-controller="CalendarCtrl">
+    <md-input container class="md-block" ng-controller="ReserveBookCtrl">
         <label for="selectStartTime"><h2>Start Time</h2></label>
         <md-select required name="selectStartTime" id="selectStartTime" ng-model="data.selectStartTime" placeholder="" ng-change="changeTime()">
             <md-option ng-repeat="option in data.availableStartTime" value="{{option.startTime}} + {{option.minutes}}">{{option.startTime + option.minutes}}</md-option>
@@ -36,7 +36,7 @@
         </div>
 
     <div class="selectDuration">
-        <md-input container class="md-block" ng-controller="CalendarCtrl">
+        <md-input container class="md-block" ng-controller="ReserveBookCtrl">
             <label for="selectDuration"><h2>Duration</h2></label>
             <md-select required name="selectDuration" id="selectDuration" ng-model="data.selectDuration">
                 <md-option ng-repeat="option in data.availableDuration" value="{{option.duration}}" + "minutes">{{option.duration}}  minutes</md-option>
