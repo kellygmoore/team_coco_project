@@ -195,12 +195,20 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
         //console.log("DateNow: " + dateNow);
         $scope.rightNowHour = dateNow.getHours();      //pulls the hours off of the current date and time
         $scope.rightNowMinutes = dateNow.getMinutes();
+        $scope.pastTime = new Date();
+        $scope.pastTime.setHours(parseInt($scope.rightNowHour), parseInt($scope.rightNowMinutes));
+        console.log($scope.pastTime);
+
         //console.log("Rightnow hour: ", $scope.rightNowHour + " Rightnow Minutes: ", $scope.rightNowMinutes.toString());
-        $scope.pastTime = $scope.rightNowHour + ":" + ($scope.rightNowMinutes).toString();
+        //$scope.pastTime = $scope.rightNowHour + ":" + ($scope.rightNowMinutes).toString();
+        //Date.parse($scope.pastTime);
         //console.log("pastTime: ", $scope.pastTime);
         //if statement compares current hour to past hours, called from ng-repeat
-        if($scope.pastTime < hour){
-                console.log("$scope.pastTime: " + $scope.pastTime + "hour: ", hour);
+
+        console.log("$scope.pastTime: " + Date.parse($scope.pastTime) + ", hour: ", Date.parse(hour));
+
+        if(Date.parse($scope.pastTime) < Date.parse('01/01/16' + hour)){
+                //console.log("$scope.pastTime: " + Date.parse('01/01/16' + $scope.pastTime) + ", hour: ", Date.parse('01/01/16' + hour));
                 console.log("returning true");
                 return true;
             }
