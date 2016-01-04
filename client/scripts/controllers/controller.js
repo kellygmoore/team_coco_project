@@ -2,7 +2,10 @@
  * Created by kellygarskemoore on 12/10/15.
  */
 
-myApp.controller('TimeCtrl', ["$scope", "$timeout",  'SharedRoomData', function($scope, $timeout, SharedRoomData) {
+myApp.controller('TimeCtrl', ["$scope", "$timeout", "$location",  'SharedRoomData', function($scope, $timeout,$location, SharedRoomData) {
+
+    //Page will timeout back to default page based of config settings
+    $timeout(function(){$location.path("/defaultscreen"); },localStorage.boookingTimeout);
 
     //make call to factory to get shared data - here we are getting room name
     $scope.room = [];
@@ -32,7 +35,10 @@ myApp.controller('TimeCtrl', ["$scope", "$timeout",  'SharedRoomData', function(
     }]);
 
 //Controller for the CALENDAR & RESERVE-BOOK-SCREEN////////////////////////////////////////////////////////
-myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData','SharedTimeData', function($scope, $location, SharedBookedNameData, SharedTimeData){
+myApp.controller('CalendarCtrl', ["$scope","$timeout", "$location", 'SharedBookedNameData','SharedTimeData',  function($scope, $timeout, $location, SharedBookedNameData, SharedTimeData ){
+
+    //Page will timeout back to default page based of config settings
+    $timeout(function(){$location.path("/defaultscreen"); },localStorage.calendarTimeout);
 
     $scope.bookedColor = false;
     //hours that room can be booked 8am - 5pm// needs to be 6pm for certain location
@@ -187,6 +193,9 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
 
 //Controller for RESERVATION view page///////////////////////////////////////////////
 myApp.controller('ReserveCtrl', ["$scope", "$location", function($scope, $location){
+
+
+
     //change out to data from Bamboo
     $scope.available = 10;
     $scope.thisMeeting = 2;
