@@ -19,20 +19,20 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData',function($scope, 
 
     //The following populates the dropdown menus on the reserveBookScreen
     $scope.data = {
-        selectStartTime: null,
-        availableStartTime: [
-            {startTime: $scope.startHour + ':', minutes: '00'},
-            {startTime: $scope.startHour + ':', minutes: '15'},
-            {startTime: $scope.startHour + ':', minutes: '30'},
-            {startTime: $scope.startHour + ':', minutes: '45'}
-        ],
-
-        selectDuration:null,
-        availableDuration: [
-            {duration:'15'},
-            {duration:'30'},
-            {duration:'45'},
-            {duration:'60'}
-        ]
+        //selectStartTime: null,
+        //availableStartTime: [
+        //    {startTime: $scope.startHour + ':', minutes: '00'},
+        //    {startTime: $scope.startHour + ':', minutes: '15'},
+        //    {startTime: $scope.startHour + ':', minutes: '30'},
+        //    {startTime: $scope.startHour + ':', minutes: '45'}
+        //],
+        //
+        //selectDuration:null,
+        //availableDuration: [
+        //    {duration:'15'},
+        //    {duration:'30'},
+        //    {duration:'45'},
+        //    {duration:'60'}
+        //]
     };
 }]);

@@ -3,6 +3,7 @@ myApp.factory('SharedBookedNameData', ["$http", "dateFilter", function($http, da
     //console.log("In booked name factory");
     var payor = {};
     var data = undefined;
+    var meetingTimesArray = [];
 
 
     //PRIVATE//////////////////////////////////
@@ -23,7 +24,32 @@ myApp.factory('SharedBookedNameData', ["$http", "dateFilter", function($http, da
             }
         }).then(function(response){
                     data = response.data;
-                    //console.log("Async data response: ", data);
+
+            //This function searches through all the meeting for the locations, feature_default_screen_logic
+            //pulls out all those which are for the room the tablet has been configured to,
+            //Then formats them as numbers and pushes them to the meetingTimesArray for later use.
+            var updateMeetingTimesArray = function(){
+                data.map(
+                    function(obj) {
+                        if(obj.meetingRoom.id === parseInt(localStorage.selectRoomId)){
+                            var meetTimeObj = {};
+                            meetTimeObj.start = {};
+                            meetTimeObj.end = {};
+                            var startTime = new Date(obj.startDate);
+                            var endTime = new Date(obj.endDate);
+                            meetTimeObj.startTime = startTime.getTime();
+                            meetTimeObj.endTime = endTime.getTime();
+                            meetTimeObj.elapse = meetTimeObj.endTime - meetTimeObj.startTime;
+                            meetTimeObj.start.hour = parseInt(obj.startDate.slice(11, 13));
+                            meetTimeObj.start.minute = parseInt(obj.startDate.slice(14, 16));
+                            meetTimeObj.end.hour = parseInt(obj.endDate.slice(11, 13));
+                            meetTimeObj.end.minute = parseInt(obj.endDate.slice(14, 16));
+                            meetingTimesArray.unshift(meetTimeObj);
+                        }
+                    }
+                );
+            };
+              updateMeetingTimesArray();
                 });
         return promise;
     };
@@ -34,10 +60,9 @@ myApp.factory('SharedBookedNameData', ["$http", "dateFilter", function($http, da
             return getCallResponse();
         },
         setBambooData: function(){
-            //console.log("data: ", data);
-          return data;
+            console.log("formatted data: ", meetingTimesArray);
+          return meetingTimesArray;
         }
-
         //retrieveBookedName: function () {
         //    return payor;
         //},

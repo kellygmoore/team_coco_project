@@ -41,9 +41,9 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
     $scope.updateMeetingTimeData = function(){
         $scope.bookingData.retrieveBambooData()
         .then(function(){
-            $scope.bookedData = $scope.bookingData.setBambooData();
-            $scope.updateMeetingTimesArray();
+            $scope.meetingTimesArray = SharedBookedNameData.setBambooData();
             $scope.meetingTimeSwitch();
+                console.log("Here is the booked data: ", $scope.bookedData);
             }
         );
     };
@@ -53,31 +53,32 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
     $scope.updateMeetingTimeData();
 
 
-    //This function searches through all the meeting for the locations,>>>>>>> feature_default_screen_logic
-    //pulls out all those which are for the room the tablet has been configured to,
-    //Then formats them as numbers and pushed them to the meetingTimesArray for later use.
-    $scope.updateMeetingTimesArray = function(){
-        $scope.meetingTimesArray = [];
-        $scope.bookedData.map(
-            function(obj) {
-                if(obj.meetingRoom.id === parseInt(localStorage.selectRoomId)){
-                    $scope.meetTimeObj = {};
-                    $scope.meetTimeObj.start = {};
-                    $scope.meetTimeObj.end = {};
-                    var startTime = new Date(obj.startDate);
-                    var endTime = new Date(obj.endDate);
-                    $scope.meetTimeObj.startTime = startTime.getTime();
-                    $scope.meetTimeObj.endTime = endTime.getTime();
-                    $scope.meetTimeObj.elapse = $scope.meetTimeObj.endTime - $scope.meetTimeObj.startTime;
-                    $scope.meetTimeObj.start.hour = parseInt(obj.startDate.slice(11, 13));
-                    $scope.meetTimeObj.start.minute = parseInt(obj.startDate.slice(14, 16));
-                    $scope.meetTimeObj.end.hour = parseInt(obj.endDate.slice(11, 13));
-                    $scope.meetTimeObj.end.minute = parseInt(obj.endDate.slice(14, 16));
-                    $scope.meetingTimesArray.unshift($scope.meetTimeObj);
-                }
-            }
-        );
-    };
+
+    ////This function searches through all the meeting for the locations, feature_default_screen_logic
+    ////pulls out all those which are for the room the tablet has been configured to,
+    ////Then formats them as numbers and pushes them to the meetingTimesArray for later use.
+    //$scope.updateMeetingTimesArray = function(){
+    //    $scope.meetingTimesArray = [];
+    //    $scope.bookedData.map(
+    //        function(obj) {
+    //            if(obj.meetingRoom.id === parseInt(localStorage.selectRoomId)){
+    //                $scope.meetTimeObj = {};
+    //                $scope.meetTimeObj.start = {};
+    //                $scope.meetTimeObj.end = {};
+    //                var startTime = new Date(obj.startDate);
+    //                var endTime = new Date(obj.endDate);
+    //                $scope.meetTimeObj.startTime = startTime.getTime();
+    //                $scope.meetTimeObj.endTime = endTime.getTime();
+    //                $scope.meetTimeObj.elapse = $scope.meetTimeObj.endTime - $scope.meetTimeObj.startTime;
+    //                $scope.meetTimeObj.start.hour = parseInt(obj.startDate.slice(11, 13));
+    //                $scope.meetTimeObj.start.minute = parseInt(obj.startDate.slice(14, 16));
+    //                $scope.meetTimeObj.end.hour = parseInt(obj.endDate.slice(11, 13));
+    //                $scope.meetTimeObj.end.minute = parseInt(obj.endDate.slice(14, 16));
+    //                $scope.meetingTimesArray.unshift($scope.meetTimeObj);
+    //            }
+    //        }
+    //    );
+    //};
 
     //This function pulls in the current time, checks to see whether it is ahead of any meetings
     //for the day, adjusts the meeting array accordingly then checks to see if
