@@ -37,6 +37,10 @@ myApp.controller('TimeCtrl', ["$scope", "$timeout", "$location",  'SharedRoomDat
 //Controller for the CALENDAR & RESERVE-BOOK-SCREEN////////////////////////////////////////////////////////
 myApp.controller('CalendarCtrl', ["$scope","$timeout", "$location", 'SharedBookedNameData','SharedTimeData',  function($scope, $timeout, $location, SharedBookedNameData, SharedTimeData ){
 
+    var addHour5pm = {milTime:17, stdTime: 5};
+    var addHour6pm = {milTime:18, stdTime: 6};
+
+
     //Page will timeout back to default page based of config settings
     $timeout(function(){$location.path("/defaultscreen"); },localStorage.calendarTimeout);
 
@@ -54,6 +58,16 @@ myApp.controller('CalendarCtrl', ["$scope","$timeout", "$location", 'SharedBooke
         {milTime: 15, stdTime: 3},
         {milTime: 16, stdTime: 4}
     ];
+
+    // If location is downtown add an extra  2 hour to the start time
+    // 129 is the location id for Downtown , might need to be changed in production to match real location id
+    if (localStorage.selectLocation === '129'){
+        $scope.timeArray.push(addHour5pm);
+        $scope.timeArray.push(addHour6pm);
+        console.log("time array is",$scope.timeArray);
+    }else{
+        console.log("not happening bub, this ain't downtown");
+    }
 
     $scope.sharedBookedNameData = SharedBookedNameData;
     //$scope.booking = [];
