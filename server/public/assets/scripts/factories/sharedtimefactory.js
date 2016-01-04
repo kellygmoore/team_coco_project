@@ -1,5 +1,6 @@
 myApp.factory('SharedTimeData', ["$http", function($http){
     var meetingTime = {};
+    var bookedTimeArray = [];
 
     //console.log("In room factory");
     //PRIVATE
@@ -9,14 +10,18 @@ myApp.factory('SharedTimeData', ["$http", function($http){
 
     //PUBLIC
     var publicTime = {
-        retrieveTimeData: function(){
+        retrieveStartTime: function(){
             console.log("In retrieve, TimeData: ", meetingTime);
-
             return meetingTime.clickedHour;
         },
-        setTimeData: function(hour){
+        retrieveBookedTimes: function(){
+            console.log("bookedTimeArray: ", bookedTimeArray);
+            return bookedTimeArray;
+        },
+        setTimeData: function(hour, timeArray){
             meetingTime = {clickedHour: hour};
-            console.log("In retrieve, TimeData: ", meetingTime);
+            bookedTimeArray = timeArray;
+            //console.log("In retrieve, TimeData: ", meetingTime);
         }
 
     };

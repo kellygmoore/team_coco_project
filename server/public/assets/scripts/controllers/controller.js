@@ -117,7 +117,7 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
                             var findEndBookedTime = new Date();
                             var meetingTime = [];
                             var endMeetingTime = [];
-                            console.log("timeString: ", timeStringArray + ", " + endTimeStringArray);
+                            //console.log("timeString: ", timeStringArray + ", " + endTimeStringArray);
                             //convert times in arrays to milliseconds for comparison
                             for(q=0; q<timeStringArray.length; q++) {
 
@@ -224,12 +224,15 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
     $scope.sharedTimeData = SharedTimeData;
 
     $scope.tapToBook=function(hour){
-        $scope.sharedTimeData.setTimeData(hour);
+        $scope.sharedTimeData.setTimeData(hour, $scope.timeArray);
         $location.path("/reserveBookScreen");
     };
 
     //startHour variable holds start time of meeting
-    $scope.startHour = $scope.sharedTimeData.retrieveTimeData();
+    $scope.startHour = $scope.sharedTimeData.retrieveStartTime();
+    console.log("Start hour: ", $scope.startHour);
+    $scope.bookedArray = $scope.sharedTimeData.retrieveBookedTimes();
+    console.log("Booked Array: ", $scope.bookedArray);
 
     //The following populates the dropdown menus on the reserveBookScreen
     $scope.data = {
