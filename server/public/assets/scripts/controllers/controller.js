@@ -96,9 +96,7 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
         {milTime: "16:30", stdTime: "4:30", milsec: todaysDate.setHours(16, 30)},
         {milTime: "16:45", stdTime: "4:45", milsec: todaysDate.setHours(16, 45)}
     ];
-        //9, 10, 11, 12, 13, 14, 15, 16];
-    //console.log("sliced time: ", $scope.timeArray[3].milTime.slice(0,2));
-    //console.log("sliced time: ", $scope.timeArray[3].milTime.slice(3,5));
+
     console.log("Today's Date in milliseconds: ", $scope.timeArray[0].milsec);
     $scope.sharedBookedNameData = SharedBookedNameData;
     //$scope.booking = [];
@@ -114,11 +112,7 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
                 var dateStartString = [];
                 var timeStringArray = [];
                 var endTimeStringArray = [];
-                var stringToHourStart = [];
-                var stringToMinStart = [];
                 var dateEndString = [];
-                var stringToHourEnd = [];
-                var stringToMinEnd = [];
                 var bookedName = [];
 
                 //console.log("In .then, here is bamboodata: ", $scope.timeArray);
@@ -155,10 +149,7 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
                                 endMeetingTime[q] = Date.parse(findEndBookedTime);
                                 //console.log("End Meeting time in milliseconds: ", endMeetingTime);
 
-                                //while(meetingTime[q] <= endMeetingTime[q]) {
-                                //    meetingTime.push(meetingTime[q] + 900000);
-                                //    meetingTime[q] = meetingTime[q] + 900000;
-                                //}
+
                             }
 
 

@@ -19,7 +19,7 @@
                         <div class="timeSelectOval" ng-click="tapToBook(timeblock.milTime)" ng-hide="timeblock.isBooked || checkPastTime(timeblock.milTime)">
                             <span>Tap to Book</span>
                         </div>
-                        <div class="whoInRoom" ng-show="timeblock.isBooked">
+                        <div class="whoInRoom" ng-show="timeblock.isBooked && !checkPastTime(timeblock.milTime)">
                             <span>{{whoInRoom}}</span>
                         </div>
                     </td>
