@@ -3,7 +3,7 @@ myApp.factory('SharedBookedNameData', ["$http", "dateFilter", function($http, da
     //console.log("In booked name factory");
     var payor = {};
     var data = undefined;
-    var meetingTimesArray = [];
+    var formattedData = [];
 
 
     //PRIVATE//////////////////////////////////
@@ -29,6 +29,7 @@ myApp.factory('SharedBookedNameData', ["$http", "dateFilter", function($http, da
             //pulls out all those which are for the room the tablet has been configured to,
             //Then formats them as numbers and pushes them to the meetingTimesArray for later use.
             var updateMeetingTimesArray = function(){
+                formattedData = [];
                 data.map(
                     function(obj) {
                         if(obj.meetingRoom.id === parseInt(localStorage.selectRoomId)){
@@ -44,7 +45,7 @@ myApp.factory('SharedBookedNameData', ["$http", "dateFilter", function($http, da
                             meetTimeObj.start.minute = parseInt(obj.startDate.slice(14, 16));
                             meetTimeObj.end.hour = parseInt(obj.endDate.slice(11, 13));
                             meetTimeObj.end.minute = parseInt(obj.endDate.slice(14, 16));
-                            meetingTimesArray.unshift(meetTimeObj);
+                            formattedData.unshift(meetTimeObj);
                         }
                     }
                 );
@@ -60,8 +61,8 @@ myApp.factory('SharedBookedNameData', ["$http", "dateFilter", function($http, da
             return getCallResponse();
         },
         setBambooData: function(){
-            console.log("formatted data: ", meetingTimesArray);
-          return meetingTimesArray;
+            //console.log("formatted data: ",formattedData);
+          return formattedData;
         }
         //retrieveBookedName: function () {
         //    return payor;
