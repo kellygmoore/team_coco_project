@@ -96,7 +96,8 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
         {milTime: "16:45", stdTime: "4:45"}
     ];
         //9, 10, 11, 12, 13, 14, 15, 16];
-
+    //console.log("sliced time: ", $scope.timeArray[3].milTime.slice(0,2));
+    //console.log("sliced time: ", $scope.timeArray[3].milTime.slice(3,5));
     $scope.sharedBookedNameData = SharedBookedNameData;
     //$scope.booking = [];
     //pull data from factory
@@ -110,6 +111,7 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
                 //set variables to hold data in arrays
                 var dateStartString = [];
                 var timeStringArray = [];
+                var endTimeStringArray = [];
                 var stringToHourStart = [];
                 var stringToMinStart = [];
                 var dateEndString = [];
@@ -132,26 +134,17 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
                             //console.log("i", i);
                             //pull off the start dates into array
                             dateStartString[i] = $scope.booking[i].startDate;
-                            //isolate the hour and minute in two arrays below
-                            //stringToHourStart.push(dateStartString[i].slice(11, 13));
-                            //stringToMinStart.push(dateStartString[i].slice(14, 16));
+                            dateEndString[i] = $scope.booking[i].endDate;
                             timeStringArray.push(dateStartString[i].slice(11, 13) + ":" + dateStartString[i].slice(14, 16));
-                            //console.log("timeString: ", timeStringArray[i]);
-                            //timeString.push(stringToHourStart[i] + ":" + stringToMinStart[i]);
-
-                            //dateEndString[i] = $scope.booking[i].endDate;
-                            //stringToHourEnd.push(parseInt(dateEndString[i].slice(11, 13)));
-                            //stringToMinEnd.push(parseInt(dateEndString[i].slice(14, 16)));
+                            console.log("timeString: ", timeStringArray);
+                            endTimeStringArray.push(dateEndString[i].slice(11, 13) + ":" + dateEndString[i].slice(14, 16));
+                            console.log("endTimeString: ", endTimeStringArray);
 
                             //save the names to new array
                             bookedName.push($scope.booking[i].payor.fullName);
                             //console.log("Full name array: ", bookedName);
-                            //console.log("Start Hour array: ", stringToHourStart);
-                            //console.log("End Hour array: ", stringToHourEnd);
+                            //add those arrays to scope
 
-                            //add those 3 arrays to scope
-                            //$scope.startArray = stringToHourStart;
-                            //$scope.endArray = stringToHourEnd;
                             $scope.timeStringArray = timeStringArray;
                             $scope.nameInRoom = bookedName;
 
@@ -190,28 +183,30 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
     //function to see if timeblock on ng-repeat should be shaded like past time, passes in timeblock
     $scope.pastTime = "";
     $scope.checkPastTime = function(hour){
-        console.log("Hour (in checkPastTime: ", hour);
+        //console.log("Hour (in checkPastTime: ", hour);
         var dateNow = new Date();       //gets current date and time
         //console.log("DateNow: " + dateNow);
         $scope.rightNowHour = dateNow.getHours();      //pulls the hours off of the current date and time
         $scope.rightNowMinutes = dateNow.getMinutes();
+        $scope.rightNowTime = $scope.rightNowHour.toString() + ":" + $scope.rightNowMinutes.toString();
+        //console.log("rightNowTime: ", $scope.rightNowTime);
         $scope.pastTime = new Date();
         $scope.pastTime.setHours(parseInt($scope.rightNowHour), parseInt($scope.rightNowMinutes));
-        console.log("pastTime: ", $scope.pastTime);
+        //console.log("pastTime: ", $scope.pastTime);
         $scope.calendarTime = new Date();
-        $scope.calendarTime.setHours(parseInt(hour.slice(0,1)), parseInt(hour.slice(3,4)));
+        $scope.calendarTime.setHours(parseInt(hour.slice(0,2)), parseInt(hour.slice(3,5)));
         //console.log("calendarTime: ", $scope.calendarTime);
 
         //console.log("Rightnow hour: ", $scope.rightNowHour + " Rightnow Minutes: ", $scope.rightNowMinutes.toString());
-        //$scope.pastTime = $scope.rightNowHour + ":" + ($scope.rightNowMinutes).toString();
-        //Date.parse($scope.pastTime);
+
+
         //console.log("pastTime: ", $scope.pastTime);
         //if statement compares current hour to past hours, called from ng-repeat
 
         //console.log("$scope.pastTime: " + Date.parse($scope.pastTime) + ", hour: ", Date.parse(hour));
-        console.log("pastTime: ", Date.parse($scope.pastTime) + "calendarTime: ", Date.parse($scope.calendarTime));
-        if(Date.parse($scope.pastTime) < Date.parse($scope.calendarTime)){
-                //console.log("$scope.pastTime: " + Date.parse('01/01/16' + $scope.pastTime) + ", hour: ", Date.parse('01/01/16' + hour));
+        //console.log("pastTime: ", Date.parse($scope.pastTime) + "calendarTime: ", Date.parse($scope.calendarTime));
+        if(Date.parse($scope.pastTime) > Date.parse($scope.calendarTime)){
+                //console.log("$scope.pastTime: " + Date.parse('01/01/16' + $scope.pastTime) + ", hour: ", Date.parse('01/01/16' + $scope.calendarTime));
                 //console.log("returning true");
                 return true;
             }
