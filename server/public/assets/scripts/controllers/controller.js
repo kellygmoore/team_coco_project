@@ -58,14 +58,14 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
     //hours that room can be booked 8am - 5pm// needs to be 6pm for certain location
     //use milTime for comparing and logic, use stdTime for display on calendar
     $scope.timeArray = [
-        {milTime: "8:00", stdTime: "8:00"},
-        {milTime: "8:15", stdTime: "8:15"},
-        {milTime: "8:30", stdTime: "8:30"},
-        {milTime: "8:45", stdTime: "8:45"},
-        {milTime: "9:00", stdTime: "9:00"},
-        {milTime: "9:15", stdTime: "9:15"},
-        {milTime: "9:30", stdTime: "9:30"},
-        {milTime: "9:45", stdTime: "9:45"},
+        {milTime: "08:00", stdTime: "8:00"},
+        {milTime: "08:15", stdTime: "8:15"},
+        {milTime: "08:30", stdTime: "8:30"},
+        {milTime: "08:45", stdTime: "8:45"},
+        {milTime: "09:00", stdTime: "9:00"},
+        {milTime: "09:15", stdTime: "9:15"},
+        {milTime: "09:30", stdTime: "9:30"},
+        {milTime: "09:45", stdTime: "9:45"},
         {milTime: "10:00", stdTime: "10:00"},
         {milTime: "10:15", stdTime: "10:15"},
         {milTime: "10:30", stdTime: "10:30"},
@@ -136,7 +136,7 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
                             //stringToHourStart.push(dateStartString[i].slice(11, 13));
                             //stringToMinStart.push(dateStartString[i].slice(14, 16));
                             timeStringArray.push(dateStartString[i].slice(11, 13) + ":" + dateStartString[i].slice(14, 16));
-                            console.log("timeString: ", timeStringArray[i]);
+                            //console.log("timeString: ", timeStringArray[i]);
                             //timeString.push(stringToHourStart[i] + ":" + stringToMinStart[i]);
 
                             //dateEndString[i] = $scope.booking[i].endDate;
@@ -160,9 +160,9 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
                                 for(j=0; j<$scope.timeArray.length; j++){
                                     for(k=0; k<$scope.timeStringArray.length; k++) {
                                         if($scope.timeStringArray[k] === $scope.timeArray[j].milTime) {
-                                            console.log("Found match: ", $scope.timeStringArray[k] + ", " + $scope.timeArray[j].milTime);
+                                            //console.log("Found match: ", $scope.timeStringArray[k] + ", " + $scope.timeArray[j].milTime);
                                             $scope.timeArray[j].isBooked = true;
-                                            console.log("match true? ", $scope.timeArray[j].isBooked);
+                                            //console.log("match true? ", $scope.timeArray[j].isBooked);
                                             $scope.whoInRoom = $scope.nameInRoom[k];
                                         }
                                         //else {
@@ -190,14 +190,17 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
     //function to see if timeblock on ng-repeat should be shaded like past time, passes in timeblock
     $scope.pastTime = "";
     $scope.checkPastTime = function(hour){
-
+        console.log("Hour (in checkPastTime: ", hour);
         var dateNow = new Date();       //gets current date and time
         //console.log("DateNow: " + dateNow);
         $scope.rightNowHour = dateNow.getHours();      //pulls the hours off of the current date and time
         $scope.rightNowMinutes = dateNow.getMinutes();
         $scope.pastTime = new Date();
         $scope.pastTime.setHours(parseInt($scope.rightNowHour), parseInt($scope.rightNowMinutes));
-        console.log($scope.pastTime);
+        console.log("pastTime: ", $scope.pastTime);
+        $scope.calendarTime = new Date();
+        $scope.calendarTime.setHours(parseInt(hour.slice(0,1)), parseInt(hour.slice(3,4)));
+        //console.log("calendarTime: ", $scope.calendarTime);
 
         //console.log("Rightnow hour: ", $scope.rightNowHour + " Rightnow Minutes: ", $scope.rightNowMinutes.toString());
         //$scope.pastTime = $scope.rightNowHour + ":" + ($scope.rightNowMinutes).toString();
@@ -205,14 +208,14 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
         //console.log("pastTime: ", $scope.pastTime);
         //if statement compares current hour to past hours, called from ng-repeat
 
-        console.log("$scope.pastTime: " + Date.parse($scope.pastTime) + ", hour: ", Date.parse(hour));
-
-        if(Date.parse($scope.pastTime) < Date.parse('01/01/16' + hour)){
+        //console.log("$scope.pastTime: " + Date.parse($scope.pastTime) + ", hour: ", Date.parse(hour));
+        console.log("pastTime: ", Date.parse($scope.pastTime) + "calendarTime: ", Date.parse($scope.calendarTime));
+        if(Date.parse($scope.pastTime) < Date.parse($scope.calendarTime)){
                 //console.log("$scope.pastTime: " + Date.parse('01/01/16' + $scope.pastTime) + ", hour: ", Date.parse('01/01/16' + hour));
-                console.log("returning true");
+                //console.log("returning true");
                 return true;
             }
-        console.log("false hour: ", hour);
+        //console.log("false hour: ", hour);
             return false;
         };
 
