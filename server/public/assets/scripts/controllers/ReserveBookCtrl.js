@@ -75,7 +75,7 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
     //};
 
     //startHour variable holds start time of meeting
-    $scope.startHour = $scope.sharedTimeData.retrieveTimeData();
+    $scope.startHour = $scope.sharedTimeData.retrieveBookedTimes();
 
     $scope.constructTimeObject = function(time){
         //This function is going to be called every time there is a start time without a meeting in
