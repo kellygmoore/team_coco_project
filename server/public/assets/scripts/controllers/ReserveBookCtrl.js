@@ -4,7 +4,7 @@
 
 myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNameData', 'dateFilter', function($scope, SharedTimeData, SharedBookedNameData, dateFilter){
     //console.log("we are in the RBC");
-//RESERVEBOOK SCREEN
+    //RESERVEBOOK SCREEN
     //SharedTimeData is a factory that holds start time selected with ng-click by the user on the calendar view
 
     $scope.sharedTimeData = SharedTimeData;
@@ -26,7 +26,7 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
     };
 
     var startTimeSet = function() {
-        var currentHour = parseInt(dateFilter(Date.now(), 'hh'));
+        var currentHour = parseInt(dateFilter(Date.now(), 'HH'));
         var currentMinute = parseInt(dateFilter(Date.now(), 'mm'));
         switch (true) {
             case (currentMinute > 0 && currentMinute < 15):
@@ -45,7 +45,7 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
         }
         startTime.hour = currentHour;
         startTime.minute = currentMinute;
-    }
+    };
 
     startTimeSet();
 
@@ -86,8 +86,8 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
     $scope.constructTimeArray = function(meetingTimes){
         $scope.data.availableStartTime = [];
 
-        for(var i = startTime;i < endTime; i++){
-            $scope.constructTimeObject();
+        for(var i = startTime.hour ;i < endTime.hour ; i++){
+            $scope.constructTimeObject(i);
         }
         //We'll need to know: what time it is, how long until the building closes
         //and also all the times where meetings are being held.
