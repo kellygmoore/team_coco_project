@@ -179,37 +179,37 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
 
     //function to see if timeblock on ng-repeat should be shaded like past time, passes in timeblock
     $scope.pastTime = "";
-    $scope.checkPastTime = function(hour){
-        //console.log("Hour (in checkPastTime: ", hour);
-        var dateNow = new Date();       //gets current date and time
-        //console.log("DateNow: " + dateNow);
-        $scope.rightNowHour = dateNow.getHours();      //pulls the hours off of the current date and time
-        $scope.rightNowMinutes = dateNow.getMinutes();
-        $scope.rightNowTime = $scope.rightNowHour.toString() + ":" + $scope.rightNowMinutes.toString();
-        //console.log("rightNowTime: ", $scope.rightNowTime);
-        $scope.pastTime = new Date();
-        $scope.pastTime.setHours(parseInt($scope.rightNowHour), parseInt($scope.rightNowMinutes));
-        //console.log("pastTime: ", $scope.pastTime);
-        $scope.calendarTime = new Date();
-        $scope.calendarTime.setHours(parseInt(hour.slice(0,2)), parseInt(hour.slice(3,5)));
-        //console.log("calendarTime: ", $scope.calendarTime);
-
-        //console.log("Rightnow hour: ", $scope.rightNowHour + " Rightnow Minutes: ", $scope.rightNowMinutes.toString());
-
-
-        //console.log("pastTime: ", $scope.pastTime);
-        //if statement compares current hour to past hours, called from ng-repeat
-
-        //console.log("$scope.pastTime: " + Date.parse($scope.pastTime) + ", hour: ", Date.parse(hour));
-        //console.log("pastTime: ", Date.parse($scope.pastTime) + "calendarTime: ", Date.parse($scope.calendarTime));
-        if(Date.parse($scope.pastTime) > Date.parse($scope.calendarTime)){
-                //console.log("$scope.pastTime: " + Date.parse('01/01/16' + $scope.pastTime) + ", hour: ", Date.parse('01/01/16' + $scope.calendarTime));
-                //console.log("returning true");
-                return true;
-            }
-        //console.log("false hour: ", hour);
-            return false;
-        };
+    //$scope.checkPastTime = function(hour){
+    //    //console.log("Hour (in checkPastTime: ", hour);
+    //    var dateNow = new Date();       //gets current date and time
+    //    //console.log("DateNow: " + dateNow);
+    //    $scope.rightNowHour = dateNow.getHours();      //pulls the hours off of the current date and time
+    //    $scope.rightNowMinutes = dateNow.getMinutes();
+    //    $scope.rightNowTime = $scope.rightNowHour.toString() + ":" + $scope.rightNowMinutes.toString();
+    //    //console.log("rightNowTime: ", $scope.rightNowTime);
+    //    $scope.pastTime = new Date();
+    //    $scope.pastTime.setHours(parseInt($scope.rightNowHour), parseInt($scope.rightNowMinutes));
+    //    //console.log("pastTime: ", $scope.pastTime);
+    //    $scope.calendarTime = new Date();
+    //    $scope.calendarTime.setHours(parseInt(hour.slice(0,2)), parseInt(hour.slice(3,5)));
+    //    //console.log("calendarTime: ", $scope.calendarTime);
+    //
+    //    //console.log("Rightnow hour: ", $scope.rightNowHour + " Rightnow Minutes: ", $scope.rightNowMinutes.toString());
+    //
+    //
+    //    //console.log("pastTime: ", $scope.pastTime);
+    //    //if statement compares current hour to past hours, called from ng-repeat
+    //
+    //    //console.log("$scope.pastTime: " + Date.parse($scope.pastTime) + ", hour: ", Date.parse(hour));
+    //    //console.log("pastTime: ", Date.parse($scope.pastTime) + "calendarTime: ", Date.parse($scope.calendarTime));
+    //    if(Date.parse($scope.pastTime) > Date.parse($scope.calendarTime)){
+    //            //console.log("$scope.pastTime: " + Date.parse('01/01/16' + $scope.pastTime) + ", hour: ", Date.parse('01/01/16' + $scope.calendarTime));
+    //            //console.log("returning true");
+    //            return true;
+    //        }
+    //    //console.log("false hour: ", hour);
+    //        return false;
+    //    };
 
     ////RESERVEBOOK SCREEN
     ////SharedTimeData is a factory that holds start time selected with ng-click by the user on the calendar view

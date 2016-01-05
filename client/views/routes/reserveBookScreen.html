@@ -30,8 +30,8 @@
     <md-input container class="md-block">
         <label for="selectStartTime"><h2>Start Time</h2></label>
         <!--<md-select required name="selectStartTime" id="selectStartTime" ng-model="data.selectStartTime" placeholder="" ng-change="changeTime()">-->
-            <md-select required name="selectStartTime" id="selectStartTime" ng-model="data.selectStartTime">
-            <md-option ng-repeat="option in cleanArray" value="{{option.stdTime}}">{{option.stdTime}}</md-option>
+            <md-select required name="selectStartTime" id="selectStartTime" ng-model="data.selectStartTime" ng-change= cleanEndTime()>
+            <md-option ng-repeat="option in cleanArray" value="{{option}}">{{option.stdTime}}</md-option>
         </md-select>
     </md-input>
         </div>
@@ -40,7 +40,7 @@
         <md-input container class="md-block">
             <label for="selectEndTime"><h2>End Time</h2></label>
             <md-select required name="selectEndTime" id="selectEndTime" ng-model="data.selectEndTime">
-                <md-option ng-repeat="option in data.availableEndTime" value="{{option.stdTime}}" + "minutes">{{option.stdTime}}  minutes</md-option>
+                <md-option ng-repeat="option in availableEndTime" value="{{option.stdTime}}" + "minutes">{{option.stdTime}}  minutes</md-option>
             </md-select>
         </md-input>
     </div>

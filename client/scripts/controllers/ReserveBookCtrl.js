@@ -11,8 +11,10 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
     $scope.sharedBookedName = SharedBookedNameData;
     $scope.meetingTimesArray = undefined;
     $scope.cleanArray = undefined;
+    $scope.cleanEndArray = undefined;
     var startTime = {};
     var endTime = {};
+    var startIndex = 0;
 
     $scope.updateMeetingTimeData = function(){
         console.log("step 2");
@@ -79,13 +81,13 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
 
     $scope.allStartTimes = $scope.sharedTimeData.retrieveBookedTimes();
 
-    var cleanTime = function(dirtyArray){
+    var cleanStartTime = function(dirtyArray){
         $scope.cleanArray = [];
-            dirtyArray.map(
+        dirtyArray.map(
             function(obj){
-               if((obj.milsec > Date.now()) && (obj.isBooked === false)){
-                   $scope.cleanArray.push(obj);
-               }
+                if((obj.milsec > Date.now()) && (obj.isBooked === false)){
+                    $scope.cleanArray.push(obj);
+                }
             }
         )
     };
@@ -93,17 +95,50 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
 
 
 
-    //disableTime($scope.allStartTimes);
-    //console.log ("This is cleanArray", $scope.cleanArray);
-
     //The following populates the dropdown menus on the reserveBookScreen
     $scope.data = {
         selectStartTime: null,
-        cleanArray: cleanTime($scope.allStartTimes),
+        cleanArray: cleanStartTime($scope.allStartTimes),
         selectEndTime:null,
         availableEndTime: []
     };
 
+    $scope.cleanEndTime = function(dirtyArray){
+        $scope.cleanEndArray = [];
+        if($scope.data.selectStartTime!==null){
+            searchForStart(dirtyArray);
+            buildArray(dirtyArray);
+        }
+    };
+
+
+    var searchForStart = function(basicArray){
+        for(var i= 0; i<=basicArray.length; i++) {
+            if(basicArray[i].milsec === $scope.data.selectStartTime){
+                startIndex = i;
+                break;
+            }
+        }
+    };
+
+    var buildArray = function(allTimesArray){
+        for(var i=(startIndex+1); i<=allTimesArray.length; i++){
+        if(allTimesArray[i].isBooked===false){
+            $scope.cleanEndArray.push(allTimesArray[i]);
+        }else{
+            $scope.cleanEndArray.push(allTimesArray[i]);
+            break;
+        }
+    }
+    };
+
+
+    //disableTime($scope.allStartTimes);
+    //console.log ("This is cleanArray", $scope.cleanArray);
+
+
+
+    //console.log("CleanEndArray", $scope.cleanEndArray);
 
     $scope.constructTimeObject = function(time){
         //This function is going to be called every time there is a start time without a meeting in
