@@ -2,12 +2,6 @@ myApp.factory('SharedTimeData', ["$http", function($http){
     var meetingTime = {};
     var bookedTimeArray = [];
 
-    //console.log("In room factory");
-    //PRIVATE
-    //var timeData = {
-    //    meetingTime: ""
-    //};
-
     //PUBLIC
     var publicTime = {
         retrieveStartTime: function(){

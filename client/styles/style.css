@@ -181,16 +181,11 @@ table, th, td {
     /*background-color: #25ae90;*/
 /*}*/
 
-.newStyle {
+.timeslot {
     height: 40px;
     border: 1px dashed darkgreen;
     background-color: #25ae90;
     width: 600px;
-    /*background: linear-gradient(0deg, #25ae90,*/
-    /*#25ae90 25%,*/
-    /*#FF5962 25%,*/
-    /*#FF5962 75%,*/
-    /*#FF5962 75%);*/
 }
 
 /**************RESERVE-BOOK SCREEN**************/
