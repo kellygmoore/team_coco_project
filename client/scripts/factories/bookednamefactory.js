@@ -9,11 +9,11 @@ myApp.factory('SharedBookedNameData', ["$http", "dateFilter", function($http, da
     //PRIVATE//////////////////////////////////
     var getCallResponse = function(){
         var todayDate = dateFilter(Date.now(),'yyyy-MM-dd');
-        console.log("In function getCallResponse");
+        console.log("In factory, function getCallResponse");
         var startDate= todayDate;
         var endDate= todayDate;
         var locationId=localStorage.selectLocation;
-        console.log("this is local storage location id",localStorage.selectLocation);
+        //console.log("this is local storage location id",localStorage.selectLocation);
 
         var promise = $http({
             method: "GET",
@@ -24,13 +24,14 @@ myApp.factory('SharedBookedNameData', ["$http", "dateFilter", function($http, da
             }
         }).then(function(response){
                     data = response.data;
+                    dataDefault = response.data;
 
             //This function searches through all the meeting for the locations, feature_default_screen_logic
             //pulls out all those which are for the room the tablet has been configured to,
             //Then formats them as numbers and pushes them to the meetingTimesArray for later use.
             var updateMeetingTimesArray = function(){
                 formattedData = [];
-                data.map(
+                dataDefault.map(
                     function(obj) {
                         if(obj.meetingRoom.id === parseInt(localStorage.selectRoomId)){
                             var meetTimeObj = {};
@@ -61,8 +62,11 @@ myApp.factory('SharedBookedNameData', ["$http", "dateFilter", function($http, da
             return getCallResponse();
         },
         setBambooData: function(){
-            //console.log("formatted data: ",formattedData);
+            console.log("in public factory formatted data: ",formattedData);
           return formattedData;
+        },
+        setCalendarData: function(){
+            return data;
         }
         //retrieveBookedName: function () {
         //    return payor;

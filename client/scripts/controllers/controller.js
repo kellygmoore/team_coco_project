@@ -81,12 +81,12 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
     $scope.sharedBookedNameData = SharedBookedNameData;
     //$scope.booking = [];
     //pull data from factory
-    if($scope.sharedBookedNameData.setBambooData() === undefined){
+    if($scope.sharedBookedNameData.setCalendarData() === undefined){
         //console.log("first set is undefined (in controller).");
         $scope.sharedBookedNameData.retrieveBambooData()
             .then(function() {
-                //console.log("In then in controller");
-                $scope.booking = $scope.sharedBookedNameData.setBambooData();
+                console.log("In then in controller");
+                $scope.booking = $scope.sharedBookedNameData.setCalendarData();
                 //console.log("response back (in then controller): ", $scope.booking);
                 //set variables to hold data in arrays
                 var dateStartString = [];
@@ -101,7 +101,7 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
                     console.log("in first if where length is zero");
                     return;
                 } else {
-                //console.log("length of array: ", $scope.booking.length);
+                console.log("length of $scope.booking array: ", $scope.booking.length);
                     //loop over array of booked times to find matching room name
                     for (i = 0; i < $scope.booking.length; i++) {
                     //console.log("Name of room: ", $scope.booking[i].meetingRoom.name);
@@ -172,7 +172,7 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
             });
     } else {
         //console.log("In else on controller");
-        $scope.booking = $scope.sharedBookedNameData.setBambooData();
+        $scope.booking = $scope.sharedBookedNameData.setCalendarData();
         console.log("response back (in else controller): ", $scope.booking);
     }
 
