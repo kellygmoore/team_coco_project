@@ -37,9 +37,12 @@ myApp.controller('TimeCtrl', ["$scope", "$timeout", "$location",  'SharedRoomDat
 //Controller for the CALENDAR & RESERVE-BOOK-SCREEN////////////////////////////////////////////////////////
 
 myApp.controller('CalendarCtrl', ["$scope","$timeout", "$location", 'SharedBookedNameData','SharedTimeData',  function($scope, $timeout, $location, SharedBookedNameData, SharedTimeData ){
-
-    var addHour5pm = {milTime:17, stdTime: 5};
-    var addHour6pm = {milTime:18, stdTime: 6};
+    var todaysDate = new Date();
+    var addHour5pm = {milTime:"17:00", stdTime: "5:00", milsec:todaysDate.setHours(17,0), isBooked:false};
+    var addHour515pm = {milTime:"17:15", stdTime: "5:15", milsec:todaysDate.setHours(17,15), isBooked:false};
+    var addHour530pm = {milTime:"17:30", stdTime: "5:30", milsec:todaysDate.setHours(17,30), isBooked:false};
+    var addHour545pm = {milTime:"17:45", stdTime: "5:45", milsec:todaysDate.setHours(17,45), isBooked:false};
+    var addHour6pm = {milTime:"18:00", stdTime: "6:00", milsec:todaysDate.setHours(18,0), isBooked:false};
 
 
     //Page will timeout back to default page based of config settings
@@ -47,7 +50,7 @@ myApp.controller('CalendarCtrl', ["$scope","$timeout", "$location", 'SharedBooke
 
 
     $scope.bookedColor = false;
-    var todaysDate = new Date();
+
     //hours that room can be booked 8am - 5pm// needs to be 6pm for certain location
     //use milTime for comparing and logic, use stdTime for display on calendar
     $scope.timeArray = [
@@ -94,6 +97,9 @@ myApp.controller('CalendarCtrl', ["$scope","$timeout", "$location", 'SharedBooke
     // 129 is the location id for Downtown , might need to be changed in production to match real location id
     if (localStorage.selectLocation === '129'){
         $scope.timeArray.push(addHour5pm);
+        $scope.timeArray.push(addHour515pm);
+        $scope.timeArray.push(addHour530pm);
+        $scope.timeArray.push(addHour545pm);
         $scope.timeArray.push(addHour6pm);
         console.log("time array is",$scope.timeArray);
     }else{
