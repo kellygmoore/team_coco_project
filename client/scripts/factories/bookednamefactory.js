@@ -9,7 +9,7 @@ myApp.factory('SharedBookedNameData', ["$http", "dateFilter", function($http, da
     //PRIVATE//////////////////////////////////
     var getCallResponse = function(){
         var todayDate = dateFilter(Date.now(),'yyyy-MM-dd');
-        console.log("In factory, function getCallResponse");
+        //console.log("In factory, function getCallResponse");
         var startDate= todayDate;
         var endDate= todayDate;
         var locationId=localStorage.selectLocation;
@@ -62,7 +62,7 @@ myApp.factory('SharedBookedNameData', ["$http", "dateFilter", function($http, da
             return getCallResponse();
         },
         setBambooData: function(){
-            console.log("in public factory formatted data: ",formattedData);
+            //console.log("in public factory formatted data: ",formattedData);
           return formattedData;
         },
         setCalendarData: function(){
