@@ -9,7 +9,7 @@
             <table>
                 <tr ng-repeat="timeblock in timeArray">
                     <td class="numHour">{{ timeblock.stdTime }}</td>
-                    <td class="timeslot" /*ng-class="getStyle()"*/ ng-style="{
+                    <td class="timeslot" ng-style="{
                     'background-image': checkPastTime(timeblock.milTime) ? 'url(/assets/styles/images/gray1.jpg)' : 'none',
                     'border-bottom' : checkPastTime(timeblock.milTime) ? 'none' : '1px solid black',
                     'background-color': timeblock.isBooked ?  '#FF5962': '#25ae90',
