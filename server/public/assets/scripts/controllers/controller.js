@@ -217,7 +217,7 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
     $scope.sharedTimeData = SharedTimeData;
     //
     $scope.tapToBook=function(hour){
-        $scope.sharedTimeData.setTimeData(hour, $scope.timeArray);
+        $scope.sharedTimeData.setTimeData(hour, $scope.timeArray, $scope.booking[0].meetingRoom.maxOccupancy);
         $location.path("/reserveBookScreen");
     };
     //

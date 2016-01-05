@@ -13,6 +13,7 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
     var startTime = {};
     var endTime = {};
 
+
     $scope.updateMeetingTimeData = function(){
         console.log("step 2");
         $scope.sharedBookedName.retrieveBambooData()
@@ -76,6 +77,8 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
 
     //startHour variable holds start time of meeting
     $scope.startHour = $scope.sharedTimeData.retrieveBookedTimes();
+
+    console.log("Here is capacity: ", $scope.sharedTimeData.retrieveCapacity());
 
     $scope.constructTimeObject = function(time){
         //This function is going to be called every time there is a start time without a meeting in
