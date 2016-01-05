@@ -76,6 +76,7 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
     //};
 
     //startHour variable holds start time of meeting
+
     $scope.allStartTimes = $scope.sharedTimeData.retrieveBookedTimes();
 
     var disableTime = function(dirtyArray){
@@ -89,8 +90,19 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
         )
     };
 
-    disableTime($scope.allStartTimes);
-    console.log ("This is cleanArray", $scope.cleanArray);
+    //disableTime($scope.allStartTimes);
+    //console.log ("This is cleanArray", $scope.cleanArray);
+
+    //The following populates the dropdown menus on the reserveBookScreen
+    $scope.data = {
+        selectStartTime: null,
+        cleanArray: disableTime($scope.allStartTimes)
+        ,
+
+        selectEndTime:null,
+        availableEndTime: []
+    };
+
 
     $scope.constructTimeObject = function(time){
         //This function is going to be called every time there is a start time without a meeting in
@@ -114,22 +126,5 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
 
     //$scope.constructTimeArray(meetingTimesArray);
 
-    //The following populates the dropdown menus on the reserveBookScreen
-    $scope.data = {
-        selectStartTime: null,
-        availableStartTime: [
-            {startTime: $scope.startHour + ':', minutes: '00'},
-            {startTime: $scope.startHour + ':', minutes: '15'},
-            {startTime: $scope.startHour + ':', minutes: '30'},
-            {startTime: $scope.startHour + ':', minutes: '45'}
-        ],
 
-        selectDuration:null,
-        availableDuration: [
-            {duration:'15'},
-            {duration:'30'},
-            {duration:'45'},
-            {duration:'60'}
-        ]
-    };
 }]);

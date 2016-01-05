@@ -29,7 +29,8 @@
     <div class="selectStartTime">
     <md-input container class="md-block">
         <label for="selectStartTime"><h2>Start Time</h2></label>
-        <md-select required name="selectStartTime" id="selectStartTime" ng-model="data.selectStartTime" placeholder="" ng-change="changeTime()">
+        <!--<md-select required name="selectStartTime" id="selectStartTime" ng-model="data.selectStartTime" placeholder="" ng-change="changeTime()">-->
+            <md-select required name="selectStartTime" id="selectStartTime" ng-model="data.selectStartTime">
             <md-option ng-repeat="option in cleanArray" value="{{option.stdTime}}">{{option.stdTime}}</md-option>
         </md-select>
     </md-input>
@@ -37,9 +38,9 @@
 
     <div class="selectDuration">
         <md-input container class="md-block">
-            <label for="selectDuration"><h2>Duration</h2></label>
-            <md-select required name="selectDuration" id="selectDuration" ng-model="data.selectDuration">
-                <md-option ng-repeat="option in data.availableDuration" value="{{option.duration}}" + "minutes">{{option.duration}}  minutes</md-option>
+            <label for="selectEndTime"><h2>End Time</h2></label>
+            <md-select required name="selectEndTime" id="selectEndTime" ng-model="data.selectEndTime">
+                <md-option ng-repeat="option in data.availableEndTime" value="{{option.stdTime}}" + "minutes">{{option.stdTime}}  minutes</md-option>
             </md-select>
         </md-input>
     </div>
