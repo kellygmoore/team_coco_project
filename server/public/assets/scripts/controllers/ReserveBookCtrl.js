@@ -79,10 +79,11 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
     $scope.allStartTimes = $scope.sharedTimeData.retrieveBookedTimes();
 
     var disableTime = function(dirtyArray){
-        $scope.cleanArray = dirtyArray.map(
+        $scope.cleanArray = [];
+            dirtyArray.map(
             function(obj){
-               if(obj.milsec > Date.now() && obj.isBooked === false){
-                   return obj;
+               if((obj.milsec > Date.now()) && (obj.isBooked === false)){
+                   $scope.cleanArray.push(obj);
                }
             }
         )
