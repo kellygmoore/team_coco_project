@@ -220,39 +220,6 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
         $scope.sharedTimeData.setTimeData(hour, $scope.timeArray);
         $location.path("/reserveBookScreen");
     };
-<<<<<<< HEAD
-
-    //startHour variable holds start time of meeting
-    $scope.startHour = $scope.sharedTimeData.retrieveStartTime();
-    console.log("Start hour: ", $scope.startHour);
-    $scope.bookedArray = $scope.sharedTimeData.retrieveBookedTimes();
-    console.log("Booked Array: ", $scope.bookedArray);
-
-    //The following populates the dropdown menus on the reserveBookScreen
-    $scope.data = {
-        selectStartTime: null,
-        availableStartTime: [
-            {startTime: $scope.startHour + ':', minutes: '00'},
-            {startTime: $scope.startHour + ':', minutes: '15'},
-            {startTime: $scope.startHour + ':', minutes: '30'},
-            {startTime: $scope.startHour + ':', minutes: '45'}
-        ],
-
-        selectDuration:null,
-        availableDuration: [
-            {duration:'15'},
-            {duration:'30'},
-            {duration:'45'},
-            {duration:'60'}
-        ]
-    };
-
-
-    $scope.changeTime = function(){
-        //console.log("This is newTime", $scope.newTime);
-        $scope.newTime = $scope.data.availableStartTime.minutes + $scope.availableDuration.duration
-    };
-=======
     //
     ////startHour variable holds start time of meeting
     //$scope.startHour = $scope.sharedTimeData.retrieveTimeData();
@@ -281,7 +248,6 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
 //        //console.log("This is newTime", $scope.newTime);
 //        $scope.newTime = $scope.data.availableStartTime.minutes + $scope.availableDuration.duration
 //    };
->>>>>>> feature_reserve_book-logic
 }]);
 
 
