@@ -174,16 +174,9 @@ table, th, td {
     text-align: center;
 }
 
-/*.timeslot {*/
-    /*width: 600px;*/
-    /*/!*height: 70px;*!/*/
-    /*border: 1px solid black;*/
-    /*background-color: #25ae90;*/
-/*}*/
-
 .timeslot {
     height: 40px;
-    border: 1px dashed darkgreen;
+    border: 1px solid #565654;
     background-color: #25ae90;
     width: 600px;
 }

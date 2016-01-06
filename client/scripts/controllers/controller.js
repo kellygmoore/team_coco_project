@@ -33,51 +33,8 @@ myApp.controller('TimeCtrl', ["$scope", "$timeout",  'SharedRoomData', function(
 
 //Controller for the CALENDAR & RESERVE-BOOK-SCREEN////////////////////////////////////////////////////////
 myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData','SharedTimeData', function($scope, $location, SharedBookedNameData, SharedTimeData){
-    //$route.reload();
-    $scope.bookedColor = false;
-    var todaysDate = new Date();
-    //hours that room can be booked 8am - 5pm// needs to be 6pm for certain location
-    //use milTime for comparing and logic, use stdTime for display on calendar
-    $scope.timeArray = [
-        {milTime: "08:00", stdTime: "8:00", milsec: todaysDate.setHours(8), isBooked: false},
-        {milTime: "08:15", stdTime: "8:15", milsec: todaysDate.setHours(8, 15), isBooked: false},
-        {milTime: "08:30", stdTime: "8:30", milsec: todaysDate.setHours(8, 30), isBooked: false},
-        {milTime: "08:45", stdTime: "8:45", milsec: todaysDate.setHours(8, 45), isBooked: false},
-        {milTime: "09:00", stdTime: "9:00", milsec: todaysDate.setHours(9), isBooked: false},
-        {milTime: "09:15", stdTime: "9:15", milsec: todaysDate.setHours(9, 15), isBooked: false},
-        {milTime: "09:30", stdTime: "9:30", milsec: todaysDate.setHours(9, 30), isBooked: false},
-        {milTime: "09:45", stdTime: "9:45", milsec: todaysDate.setHours(9, 45), isBooked: false},
-        {milTime: "10:00", stdTime: "10:00", milsec: todaysDate.setHours(10), isBooked: false},
-        {milTime: "10:15", stdTime: "10:15", milsec: todaysDate.setHours(10, 15), isBooked: false},
-        {milTime: "10:30", stdTime: "10:30", milsec: todaysDate.setHours(10, 30), isBooked: false},
-        {milTime: "10:45", stdTime: "10:45", milsec: todaysDate.setHours(10, 45), isBooked: false},
-        {milTime: "11:00", stdTime: "11:00", milsec: todaysDate.setHours(11), isBooked: false},
-        {milTime: "11:15", stdTime: "11:15", milsec: todaysDate.setHours(11, 15), isBooked: false},
-        {milTime: "11:30", stdTime: "11:30", milsec: todaysDate.setHours(11, 30), isBooked: false},
-        {milTime: "11:45", stdTime: "11:45", milsec: todaysDate.setHours(11, 45), isBooked: false},
-        {milTime: "12:00", stdTime: "12:00", milsec: todaysDate.setHours(12), isBooked: false},
-        {milTime: "12:15", stdTime: "12:15", milsec: todaysDate.setHours(12, 15), isBooked: false},
-        {milTime: "12:30", stdTime: "12:30", milsec: todaysDate.setHours(12, 30), isBooked: false},
-        {milTime: "12:45", stdTime: "12:45", milsec: todaysDate.setHours(12, 45), isBooked: false},
-        {milTime: "13:00", stdTime: "1:00", milsec: todaysDate.setHours(13), isBooked: false},
-        {milTime: "13:15", stdTime: "1:15", milsec: todaysDate.setHours(13, 15), isBooked: false},
-        {milTime: "13:30", stdTime: "1:30", milsec: todaysDate.setHours(13, 30), isBooked: false},
-        {milTime: "13:45", stdTime: "1:45", milsec: todaysDate.setHours(13, 45), isBooked: false},
-        {milTime: "14:00", stdTime: "2:00", milsec: todaysDate.setHours(14), isBooked: false},
-        {milTime: "14:15", stdTime: "2:15", milsec: todaysDate.setHours(14, 15), isBooked: false},
-        {milTime: "14:30", stdTime: "2:30", milsec: todaysDate.setHours(14, 30), isBooked: false},
-        {milTime: "14:45", stdTime: "2:45", milsec: todaysDate.setHours(14, 45), isBooked: false},
-        {milTime: "15:00", stdTime: "3:00", milsec: todaysDate.setHours(15), isBooked: false},
-        {milTime: "15:15", stdTime: "3:15", milsec: todaysDate.setHours(15, 15), isBooked: false},
-        {milTime: "15:30", stdTime: "3:30", milsec: todaysDate.setHours(15, 30), isBooked: false},
-        {milTime: "15:45", stdTime: "3:45", milsec: todaysDate.setHours(15, 45), isBooked: false},
-        {milTime: "16:00", stdTime: "4:00", milsec: todaysDate.setHours(16), isBooked: false},
-        {milTime: "16:15", stdTime: "4:15", milsec: todaysDate.setHours(16, 15), isBooked: false},
-        {milTime: "16:30", stdTime: "4:30", milsec: todaysDate.setHours(16, 30), isBooked: false},
-        {milTime: "16:45", stdTime: "4:45", milsec: todaysDate.setHours(16, 45), isBooked: false}
-    ];
 
-    console.log("Today's Date in milliseconds: ", $scope.timeArray[0].milsec);
+    //console.log("Today's Date in milliseconds: ", $scope.timeArray[0].milsec);
     $scope.sharedBookedNameData = SharedBookedNameData;
     //$scope.booking = [];
     //pull data from factory
@@ -85,10 +42,22 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
         //console.log("first set is undefined (in controller).");
         $scope.sharedBookedNameData.retrieveBambooData()
             .then(function() {
-                console.log("In then in controller");
+                //console.log("In then in controller");
                 $scope.booking = $scope.sharedBookedNameData.setCalendarData();
+            });
+    } else {
+        //console.log("In else on controller");
+        $scope.booking = $scope.sharedBookedNameData.setCalendarData();
+        console.log("response back (in else controller): ", $scope.booking);
+    }
+
+
+    $scope.timeArray = $scope.sharedBookedNameData.setTime();
+
                 //console.log("response back (in then controller): ", $scope.booking);
                 //set variables to hold data in arrays
+                $scope.bookedColor = false;
+
                 var dateStartString = [];
                 var timeStringArray = [];
                 var endTimeStringArray = [];
@@ -101,39 +70,46 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
                     console.log("in first if where length is zero");
                     return;
                 } else {
-                console.log("length of $scope.booking array: ", $scope.booking.length);
+                //console.log("length of $scope.booking array: ", $scope.booking.length);
                     //loop over array of booked times to find matching room name
                     for (i = 0; i < $scope.booking.length; i++) {
-                    //console.log("Name of room: ", $scope.booking[i].meetingRoom.name);
+                        //console.log("Name of room: ", $scope.booking[i].meetingRoom.name);
                         //find room match, then push start times, end times, and name onto arrays
                         if ($scope.booking[i].meetingRoom.name === localStorage.selectRoomName) {
+                            //save the names to new array
+                            bookedName.push($scope.booking[i].payor.fullName);
                             //pull off the start dates into array
                             dateStartString[i] = $scope.booking[i].startDate;
+                            //console.log("StartDate: ", dateStartString[i]);
                             dateEndString[i] = $scope.booking[i].endDate;
+                            //console.log("EndDate: ", dateEndString[i]);
                             timeStringArray.push(dateStartString[i].slice(11, 13) + ":" + dateStartString[i].slice(14, 16));
                             endTimeStringArray.push(dateEndString[i].slice(11, 13) + ":" + dateEndString[i].slice(14, 16));
                             var findBookedTime = new Date();
                             var findEndBookedTime = new Date();
                             var meetingTime = [];
                             var endMeetingTime = [];
-                            //console.log("timeString: ", timeStringArray + ", " + endTimeStringArray);
+                            //console.log("timeString: ", timeStringArray + ", endString: " + endTimeStringArray);
                             //convert times in arrays to milliseconds for comparison
+
+                        }
+                    }
+                            console.log("timeStringArray.length: ", timeStringArray.length);
                             for(q=0; q<timeStringArray.length; q++) {
 
                                 findBookedTime.setHours(parseInt(timeStringArray[q].slice(0, 2)), parseInt(timeStringArray[q].slice(3, 5)));
+                                console.log("q: ", q + "findBookedTime: ", findBookedTime);
                                 meetingTime[q] = Date.parse(findBookedTime);
-                                //console.log("Meeting time in milliseconds: ", meetingTime);
+                                console.log("Meeting time in milliseconds: ", meetingTime[q]);
 
                                 findEndBookedTime.setHours(parseInt(endTimeStringArray[q].slice(0, 2)), parseInt(endTimeStringArray[q].slice(3, 5)));
+                                console.log(findEndBookedTime);
                                 endMeetingTime[q] = Date.parse(findEndBookedTime);
-                                //console.log("End Meeting time in milliseconds: ", endMeetingTime);
-
-
+                                //console.log("End Meeting time in milliseconds: ", endMeetingTime[q]);
                             }
 
 
-                            //save the names to new array
-                            bookedName.push($scope.booking[i].payor.fullName);
+
                             //console.log("Full name array: ", bookedName);
                             //add those arrays to scope
 
@@ -141,20 +117,29 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
                             $scope.endTimeStringArray = endTimeStringArray;
                             $scope.nameInRoom = bookedName;
 
-                            //function called from ng-repeat on calendarview.html to find booked hours
-                            //$scope.bookedColor = function(hour) {
+                            //as ng-repeat in calendarview.html is building calendar,
+                            //loops over timeArray and timeStringArray to find matched hours
+                            //for booked meeting times, if matched, styles the block red,
+                            //and continues to shade red until end time is reached
 
+                            console.log("timestringarray: ", $scope.timeStringArray);
+                            console.log("endtimestringarray: ", endTimeStringArray);
+                            console.log("timearray: ", $scope.timeArray);
                             for(k=0; k<$scope.timeStringArray.length; k++) {
                                 for(j=0; j<$scope.timeArray.length; j++){
 
                                         if($scope.timeStringArray[k] === $scope.timeArray[j].milTime) {
                                             //console.log("Found match: ", $scope.timeStringArray[k] + ", " + $scope.timeArray[j].milTime);
-                                            var d = 1;
-                                            while(endMeetingTime[k] >= $scope.timeArray[j+d].milsec){
+                                            //$scope.timeArray[j].isBooked = true;
+                                            var d = 0;
+                                            //console.log("end is: " + endMeetingTime[k]);
+                                            while(j + d < $scope.timeArray.length && endMeetingTime[k] > $scope.timeArray[j+d].milsec){
+                                                //console.log("booked time is " + $scope.timeArray[j+d].milsec);
                                                 $scope.timeArray[j+d].isBooked = true;
+                                                //console.log($scope.timeArray);
                                                 d++;
                                             }
-                                            $scope.timeArray[j].isBooked = true;
+
                                             //console.log("match true? ", $scope.timeArray[j].isBooked);
                                             $scope.whoInRoom = $scope.nameInRoom[k];
                                         }
@@ -167,14 +152,14 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
                                 }
 
                         }
-                    }
-                }
-            });
-    } else {
-        //console.log("In else on controller");
-        $scope.booking = $scope.sharedBookedNameData.setCalendarData();
-        console.log("response back (in else controller): ", $scope.booking);
-    }
+
+
+    //        });
+    //} else {
+    //    //console.log("In else on controller");
+    //    $scope.booking = $scope.sharedBookedNameData.setCalendarData();
+    //    console.log("response back (in else controller): ", $scope.booking);
+    //}
 
 
     //function to see if timeblock on ng-repeat should be shaded like past time, passes in timeblock
@@ -193,10 +178,7 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
         $scope.calendarTime = new Date();
         $scope.calendarTime.setHours(parseInt(hour.slice(0,2)), parseInt(hour.slice(3,5)));
         //console.log("calendarTime: ", $scope.calendarTime);
-
         //console.log("Rightnow hour: ", $scope.rightNowHour + " Rightnow Minutes: ", $scope.rightNowMinutes.toString());
-
-
         //console.log("pastTime: ", $scope.pastTime);
         //if statement compares current hour to past hours, called from ng-repeat
 
