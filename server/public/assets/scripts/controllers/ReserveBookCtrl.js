@@ -4,7 +4,7 @@
 
 myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNameData', 'dateFilter', 'TimeOut', function($scope, SharedTimeData, SharedBookedNameData, dateFilter,TimeOut){
     //console.log("we are in the RBC");
-//RESERVEBOOK SCREEN
+    //RESERVEBOOK SCREEN
     //SharedTimeData is a factory that holds start time selected with ng-click by the user on the calendar view
     TimeOut.endTimer();
 
@@ -13,6 +13,8 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
     $scope.meetingTimesArray = undefined;
     var startTime = {};
     var endTime = {};
+    var roomCapacity;
+
 
     $scope.updateMeetingTimeData = function(){
         console.log("step 2");
@@ -76,7 +78,11 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
     //};
 
     //startHour variable holds start time of meeting
-    $scope.startHour = $scope.sharedTimeData.retrieveTimeData();
+    $scope.startHour = $scope.sharedTimeData.retrieveBookedTimes();
+
+
+    //Pulls the room capacity from the shared time factory for use in limiting the room attendance.
+    roomCapacity = $scope.sharedTimeData.retrieveCapacity();
 
     $scope.constructTimeObject = function(time){
         //This function is going to be called every time there is a start time without a meeting in
