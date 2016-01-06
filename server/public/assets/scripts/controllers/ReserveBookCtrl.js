@@ -12,7 +12,9 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
     $scope.meetingTimesArray = undefined;
     var startTime = {};
     var endTime = {};
-    var roomCapacity;
+    //Pulls the room capacity from the shared time factory for use in limiting the room attendance.
+    var roomCapacity = $scope.sharedTimeData.retrieveCapacity();
+    $scope.stageArray = [];
 
 
     $scope.updateMeetingTimeData = function(){
@@ -79,11 +81,8 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
     //startHour variable holds start time of meeting
     $scope.startHour = $scope.sharedTimeData.retrieveBookedTimes();
 
-<<<<<<< HEAD
-=======
 
     //Pulls the room capacity from the shared time factory for use in limiting the room attendance.
->>>>>>> 4e67a2f7999b4357e7638c3432255ce7f1c0a281
     roomCapacity = $scope.sharedTimeData.retrieveCapacity();
 
     $scope.constructTimeObject = function(time){
@@ -106,7 +105,16 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
         //Return some array that we will set 'availableStartTime' to.
     };
 
-    //$scope.constructTimeArray(meetingTimesArray);
+    var constructCapacityObject = function(){
+        for(var i = 2; i <= roomCapacity; i++){
+            $scope.attendObject = {};
+            $scope.attendObject.attendees = (i).toString();
+            $scope.stageArray.push($scope.attendObject);
+        }
+    };
+    constructCapacityObject();
+    console.log("here is room cap: ", roomCapacity);
+    console.log("here is stage array: ", $scope.stageArray);
 
     //The following populates the dropdown menus on the reserveBookScreen
     $scope.data = {
@@ -117,13 +125,14 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
             {startTime: $scope.startHour + ':', minutes: '30'},
             {startTime: $scope.startHour + ':', minutes: '45'}
         ],
-
         selectDuration:null,
         availableDuration: [
             {duration:'15'},
             {duration:'30'},
             {duration:'45'},
             {duration:'60'}
-        ]
+        ],
+        selectAttendance: null,
+        availableCapacity: $scope.stageArray
     };
 }]);
