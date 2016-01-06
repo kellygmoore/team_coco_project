@@ -2,10 +2,11 @@
  * Created by samuelmoss on 1/4/16.
  */
 
-myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNameData', 'dateFilter', function($scope, SharedTimeData, SharedBookedNameData, dateFilter){
+myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNameData', 'dateFilter', 'TimeOut', function($scope, SharedTimeData, SharedBookedNameData, dateFilter,TimeOut){
     //console.log("we are in the RBC");
 //RESERVEBOOK SCREEN
     //SharedTimeData is a factory that holds start time selected with ng-click by the user on the calendar view
+    TimeOut.endTimer();
 
     $scope.sharedTimeData = SharedTimeData;
     $scope.sharedBookedName = SharedBookedNameData;

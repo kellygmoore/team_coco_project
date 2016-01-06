@@ -1,6 +1,6 @@
 console.log("hello");
 
-var myApp = angular.module("myApp", ['ngRoute', 'ngMaterial', 'ngAria', 'ngAnimate', 'ngMdIcons']);
+var myApp = angular.module("myApp", ['ngRoute', 'ngMaterial', 'ngAria', 'ngAnimate', 'ngMdIcons','ngTouch']);
 
 myApp.config(["$routeProvider", function($routeProvider){
     $routeProvider.

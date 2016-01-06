@@ -2,20 +2,14 @@
  * Created by kellygarskemoore on 12/10/15.
  */
 
-myApp.controller('TimeCtrl', ["$scope", "$timeout", "$location",  'SharedRoomData', function($scope, $timeout,$location, SharedRoomData) {
+myApp.controller('TimeCtrl', ["$scope", "$timeout", "$location", function($scope, $timeout,$location,TimeOut) {
 
     //Page will timeout back to default page based of config settings
-    $timeout(function(){$location.path("/defaultscreen"); },localStorage.boookingTimeout);
+
 
     //make call to factory to get shared data - here we are getting room name
-    $scope.room = [];
-    $scope.sharedRoomData = SharedRoomData;
+    $scope.room = localStorage.selectRoomName;
 
-    if($scope.sharedRoomData.setRoomData() === undefined){
-        $scope.sharedRoomData.retrieveRoomData();
-    }
-
-    $scope.room = $scope.sharedRoomData.retrieveRoomData();
 
     //console.log("Shared room data: ", $scope.room);
 
@@ -33,20 +27,24 @@ myApp.controller('TimeCtrl', ["$scope", "$timeout", "$location",  'SharedRoomDat
     $timeout(tick, $scope.tickInterval);
 
     }]);
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Controller for the CALENDAR & RESERVE-BOOK-SCREEN////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-myApp.controller('CalendarCtrl', ["$scope","$timeout", "$location", 'SharedBookedNameData','SharedTimeData',  function($scope, $timeout, $location, SharedBookedNameData, SharedTimeData ){
+    myApp.controller('CalendarCtrl', ['$scope','$timeout', '$location', 'SharedBookedNameData','SharedTimeData','TimeOut', function($scope, $timeout, $location, SharedBookedNameData, SharedTimeData,TimeOut ){
     var todaysDate = new Date();
     var addHour5pm = {milTime:"17:00", stdTime: "5:00", milsec:todaysDate.setHours(17,0), isBooked:false};
     var addHour515pm = {milTime:"17:15", stdTime: "5:15", milsec:todaysDate.setHours(17,15), isBooked:false};
     var addHour530pm = {milTime:"17:30", stdTime: "5:30", milsec:todaysDate.setHours(17,30), isBooked:false};
     var addHour545pm = {milTime:"17:45", stdTime: "5:45", milsec:todaysDate.setHours(17,45), isBooked:false};
-    var addHour6pm = {milTime:"18:00", stdTime: "6:00", milsec:todaysDate.setHours(18,0), isBooked:false};
 
 
-    //Page will timeout back to default page based of config settings
-    $timeout(function(){$location.path("/defaultscreen"); },localStorage.calendarTimeout);
+    // Start Timeout which send view back to default view
+    TimeOut.endTimer();
+     TimeOut.startTimerCalendar();
+
+        //console.log("what is timeout.endtimer",TimeOut);
+
 
 
     $scope.bookedColor = false;
@@ -100,7 +98,6 @@ myApp.controller('CalendarCtrl', ["$scope","$timeout", "$location", 'SharedBooke
         $scope.timeArray.push(addHour515pm);
         $scope.timeArray.push(addHour530pm);
         $scope.timeArray.push(addHour545pm);
-        $scope.timeArray.push(addHour6pm);
         console.log("time array is",$scope.timeArray);
     }else{
         console.log("not happening bub, this ain't downtown");
@@ -242,13 +239,32 @@ myApp.controller('CalendarCtrl', ["$scope","$timeout", "$location", 'SharedBooke
             return false;
         };
 
-    ////RESERVEBOOK SCREEN
+        //When page is active cancel timeout and reset it
+        //Page will timeout back to default page based of config settings
+        $scope.inactiveMouseTimeOut = function(){
+            TimeOut.endTimer();
+            TimeOut.startTimerCalendar();
+            console.log("Hey the mouse is moving");
+        };
+
+        $scope.inactiveTouchTimeOut = function(){
+            TimeOut.endTimer();
+            TimeOut.startTimerCalendar();
+            console.log("Hey clicking is happening");
+        };
+
+        //    startTimer= $timeout(function (){$location.path("/defaultscreen");}, 4000);
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////RESERVEBOOK SCREEN/
     ////SharedTimeData is a factory that holds start time selected with ng-click by the user on the calendar view
     //
     $scope.sharedTimeData = SharedTimeData;
     //
     $scope.tapToBook=function(hour){
         $scope.sharedTimeData.setTimeData(hour, $scope.timeArray);
+        //$timeout.cancel(startTimer);
         $location.path("/reserveBookScreen");
     };
     //
