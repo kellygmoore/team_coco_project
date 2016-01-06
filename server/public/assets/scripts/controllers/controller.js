@@ -33,49 +33,6 @@ myApp.controller('TimeCtrl', ["$scope", "$timeout",  'SharedRoomData', function(
 
 //Controller for the CALENDAR & RESERVE-BOOK-SCREEN////////////////////////////////////////////////////////
 myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData','SharedTimeData', function($scope, $location, SharedBookedNameData, SharedTimeData){
-    //$route.reload();
-    //$scope.bookedColor = false;
-    //var todaysDate = new Date();
-    ////hours that room can be booked 8am - 5pm// needs to be 6pm for certain location
-    ////use milTime for comparing and logic, use stdTime for display on calendar
-    //$scope.timeArray = [
-    //    {milTime: "08:00", stdTime: "8:00", milsec: todaysDate.setHours(8, 0), isBooked: false},
-    //    {milTime: "08:15", stdTime: "8:15", milsec: todaysDate.setHours(8, 15), isBooked: false},
-    //    {milTime: "08:30", stdTime: "8:30", milsec: todaysDate.setHours(8, 30), isBooked: false},
-    //    {milTime: "08:45", stdTime: "8:45", milsec: todaysDate.setHours(8, 45), isBooked: false},
-    //    {milTime: "09:00", stdTime: "9:00", milsec: todaysDate.setHours(9, 0), isBooked: false},
-    //    {milTime: "09:15", stdTime: "9:15", milsec: todaysDate.setHours(9, 15), isBooked: false},
-    //    {milTime: "09:30", stdTime: "9:30", milsec: todaysDate.setHours(9, 30), isBooked: false},
-    //    {milTime: "09:45", stdTime: "9:45", milsec: todaysDate.setHours(9, 45), isBooked: false},
-    //    {milTime: "10:00", stdTime: "10:00", milsec: todaysDate.setHours(10, 0), isBooked: false},
-    //    {milTime: "10:15", stdTime: "10:15", milsec: todaysDate.setHours(10, 15), isBooked: false},
-    //    {milTime: "10:30", stdTime: "10:30", milsec: todaysDate.setHours(10, 30), isBooked: false},
-    //    {milTime: "10:45", stdTime: "10:45", milsec: todaysDate.setHours(10, 45), isBooked: false},
-    //    {milTime: "11:00", stdTime: "11:00", milsec: todaysDate.setHours(11, 0), isBooked: false},
-    //    {milTime: "11:15", stdTime: "11:15", milsec: todaysDate.setHours(11, 15), isBooked: false},
-    //    {milTime: "11:30", stdTime: "11:30", milsec: todaysDate.setHours(11, 30), isBooked: false},
-    //    {milTime: "11:45", stdTime: "11:45", milsec: todaysDate.setHours(11, 45), isBooked: false},
-    //    {milTime: "12:00", stdTime: "12:00", milsec: todaysDate.setHours(12, 0), isBooked: false},
-    //    {milTime: "12:15", stdTime: "12:15", milsec: todaysDate.setHours(12, 15), isBooked: false},
-    //    {milTime: "12:30", stdTime: "12:30", milsec: todaysDate.setHours(12, 30), isBooked: false},
-    //    {milTime: "12:45", stdTime: "12:45", milsec: todaysDate.setHours(12, 45), isBooked: false},
-    //    {milTime: "13:00", stdTime: "1:00", milsec: todaysDate.setHours(13, 0), isBooked: false},
-    //    {milTime: "13:15", stdTime: "1:15", milsec: todaysDate.setHours(13, 15), isBooked: false},
-    //    {milTime: "13:30", stdTime: "1:30", milsec: todaysDate.setHours(13, 30), isBooked: false},
-    //    {milTime: "13:45", stdTime: "1:45", milsec: todaysDate.setHours(13, 45), isBooked: false},
-    //    {milTime: "14:00", stdTime: "2:00", milsec: todaysDate.setHours(14, 0), isBooked: false},
-    //    {milTime: "14:15", stdTime: "2:15", milsec: todaysDate.setHours(14, 15), isBooked: false},
-    //    {milTime: "14:30", stdTime: "2:30", milsec: todaysDate.setHours(14, 30), isBooked: false},
-    //    {milTime: "14:45", stdTime: "2:45", milsec: todaysDate.setHours(14, 45), isBooked: false},
-    //    {milTime: "15:00", stdTime: "3:00", milsec: todaysDate.setHours(15, 0), isBooked: false},
-    //    {milTime: "15:15", stdTime: "3:15", milsec: todaysDate.setHours(15, 15), isBooked: false},
-    //    {milTime: "15:30", stdTime: "3:30", milsec: todaysDate.setHours(15, 30), isBooked: false},
-    //    {milTime: "15:45", stdTime: "3:45", milsec: todaysDate.setHours(15, 45), isBooked: false},
-    //    {milTime: "16:00", stdTime: "4:00", milsec: todaysDate.setHours(16, 0), isBooked: false},
-    //    {milTime: "16:15", stdTime: "4:15", milsec: todaysDate.setHours(16, 15), isBooked: false},
-    //    {milTime: "16:30", stdTime: "4:30", milsec: todaysDate.setHours(16, 30), isBooked: false},
-    //    {milTime: "16:45", stdTime: "4:45", milsec: todaysDate.setHours(16, 45), isBooked: false}
-    //];
 
     //console.log("Today's Date in milliseconds: ", $scope.timeArray[0].milsec);
     $scope.sharedBookedNameData = SharedBookedNameData;
@@ -87,8 +44,6 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
             .then(function() {
                 //console.log("In then in controller");
                 $scope.booking = $scope.sharedBookedNameData.setCalendarData();
-
-
             });
     } else {
         //console.log("In else on controller");
@@ -102,47 +57,6 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
                 //console.log("response back (in then controller): ", $scope.booking);
                 //set variables to hold data in arrays
                 $scope.bookedColor = false;
-                //var todaysDate = new Date();
-                //hours that room can be booked 8am - 5pm// needs to be 6pm for certain location
-                //use milTime for comparing and logic, use stdTime for display on calendar
-                //$scope.timeArray = [
-                //    {milTime: "08:00", stdTime: "8:00", milsec: todaysDate.setHours(8, 0), isBooked: false},
-                //    {milTime: "08:15", stdTime: "8:15", milsec: todaysDate.setHours(8, 15), isBooked: false},
-                //    {milTime: "08:30", stdTime: "8:30", milsec: todaysDate.setHours(8, 30), isBooked: false},
-                //    {milTime: "08:45", stdTime: "8:45", milsec: todaysDate.setHours(8, 45), isBooked: false},
-                //    {milTime: "09:00", stdTime: "9:00", milsec: todaysDate.setHours(9, 0), isBooked: false},
-                //    {milTime: "09:15", stdTime: "9:15", milsec: todaysDate.setHours(9, 15), isBooked: false},
-                //    {milTime: "09:30", stdTime: "9:30", milsec: todaysDate.setHours(9, 30), isBooked: false},
-                //    {milTime: "09:45", stdTime: "9:45", milsec: todaysDate.setHours(9, 45), isBooked: false},
-                //    {milTime: "10:00", stdTime: "10:00", milsec: todaysDate.setHours(10, 0), isBooked: false},
-                //    {milTime: "10:15", stdTime: "10:15", milsec: todaysDate.setHours(10, 15), isBooked: false},
-                //    {milTime: "10:30", stdTime: "10:30", milsec: todaysDate.setHours(10, 30), isBooked: false},
-                //    {milTime: "10:45", stdTime: "10:45", milsec: todaysDate.setHours(10, 45), isBooked: false},
-                //    {milTime: "11:00", stdTime: "11:00", milsec: todaysDate.setHours(11, 0), isBooked: false},
-                //    {milTime: "11:15", stdTime: "11:15", milsec: todaysDate.setHours(11, 15), isBooked: false},
-                //    {milTime: "11:30", stdTime: "11:30", milsec: todaysDate.setHours(11, 30), isBooked: false},
-                //    {milTime: "11:45", stdTime: "11:45", milsec: todaysDate.setHours(11, 45), isBooked: false},
-                //    {milTime: "12:00", stdTime: "12:00", milsec: todaysDate.setHours(12, 0), isBooked: false},
-                //    {milTime: "12:15", stdTime: "12:15", milsec: todaysDate.setHours(12, 15), isBooked: false},
-                //    {milTime: "12:30", stdTime: "12:30", milsec: todaysDate.setHours(12, 30), isBooked: false},
-                //    {milTime: "12:45", stdTime: "12:45", milsec: todaysDate.setHours(12, 45), isBooked: false},
-                //    {milTime: "13:00", stdTime: "1:00", milsec: todaysDate.setHours(13, 0), isBooked: false},
-                //    {milTime: "13:15", stdTime: "1:15", milsec: todaysDate.setHours(13, 15), isBooked: false},
-                //    {milTime: "13:30", stdTime: "1:30", milsec: todaysDate.setHours(13, 30), isBooked: false},
-                //    {milTime: "13:45", stdTime: "1:45", milsec: todaysDate.setHours(13, 45), isBooked: false},
-                //    {milTime: "14:00", stdTime: "2:00", milsec: todaysDate.setHours(14, 0), isBooked: false},
-                //    {milTime: "14:15", stdTime: "2:15", milsec: todaysDate.setHours(14, 15), isBooked: false},
-                //    {milTime: "14:30", stdTime: "2:30", milsec: todaysDate.setHours(14, 30), isBooked: false},
-                //    {milTime: "14:45", stdTime: "2:45", milsec: todaysDate.setHours(14, 45), isBooked: false},
-                //    {milTime: "15:00", stdTime: "3:00", milsec: todaysDate.setHours(15, 0), isBooked: false},
-                //    {milTime: "15:15", stdTime: "3:15", milsec: todaysDate.setHours(15, 15), isBooked: false},
-                //    {milTime: "15:30", stdTime: "3:30", milsec: todaysDate.setHours(15, 30), isBooked: false},
-                //    {milTime: "15:45", stdTime: "3:45", milsec: todaysDate.setHours(15, 45), isBooked: false},
-                //    {milTime: "16:00", stdTime: "4:00", milsec: todaysDate.setHours(16, 0), isBooked: false},
-                //    {milTime: "16:15", stdTime: "4:15", milsec: todaysDate.setHours(16, 15), isBooked: false},
-                //    {milTime: "16:30", stdTime: "4:30", milsec: todaysDate.setHours(16, 30), isBooked: false},
-                //    {milTime: "16:45", stdTime: "4:45", milsec: todaysDate.setHours(16, 45), isBooked: false}
-                //];
 
                 var dateStartString = [];
                 var timeStringArray = [];
@@ -250,37 +164,34 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
 
     //function to see if timeblock on ng-repeat should be shaded like past time, passes in timeblock
     $scope.pastTime = "";
-    //$scope.checkPastTime = function(hour){
-    //    //console.log("Hour (in checkPastTime: ", hour);
-    //    var dateNow = new Date();       //gets current date and time
-    //    //console.log("DateNow: " + dateNow);
-    //    $scope.rightNowHour = dateNow.getHours();      //pulls the hours off of the current date and time
-    //    $scope.rightNowMinutes = dateNow.getMinutes();
-    //    $scope.rightNowTime = $scope.rightNowHour.toString() + ":" + $scope.rightNowMinutes.toString();
-    //    //console.log("rightNowTime: ", $scope.rightNowTime);
-    //    $scope.pastTime = new Date();
-    //    $scope.pastTime.setHours(parseInt($scope.rightNowHour), parseInt($scope.rightNowMinutes));
-    //    //console.log("pastTime: ", $scope.pastTime);
-    //    $scope.calendarTime = new Date();
-    //    $scope.calendarTime.setHours(parseInt(hour.slice(0,2)), parseInt(hour.slice(3,5)));
-    //    //console.log("calendarTime: ", $scope.calendarTime);
-    //
-    //    //console.log("Rightnow hour: ", $scope.rightNowHour + " Rightnow Minutes: ", $scope.rightNowMinutes.toString());
-    //
-    //
-    //    //console.log("pastTime: ", $scope.pastTime);
-    //    //if statement compares current hour to past hours, called from ng-repeat
-    //
-    //    //console.log("$scope.pastTime: " + Date.parse($scope.pastTime) + ", hour: ", Date.parse(hour));
-    //    //console.log("pastTime: ", Date.parse($scope.pastTime) + "calendarTime: ", Date.parse($scope.calendarTime));
-    //    if(Date.parse($scope.pastTime) > Date.parse($scope.calendarTime)){
-    //            //console.log("$scope.pastTime: " + Date.parse('01/01/16' + $scope.pastTime) + ", hour: ", Date.parse('01/01/16' + $scope.calendarTime));
-    //            //console.log("returning true");
-    //            return true;
-    //        }
-    //    //console.log("false hour: ", hour);
-    //        return false;
-    //    };
+    $scope.checkPastTime = function(hour){
+        //console.log("Hour (in checkPastTime: ", hour);
+        var dateNow = new Date();       //gets current date and time
+        //console.log("DateNow: " + dateNow);
+        $scope.rightNowHour = dateNow.getHours();      //pulls the hours off of the current date and time
+        $scope.rightNowMinutes = dateNow.getMinutes();
+        $scope.rightNowTime = $scope.rightNowHour.toString() + ":" + $scope.rightNowMinutes.toString();
+        //console.log("rightNowTime: ", $scope.rightNowTime);
+        $scope.pastTime = new Date();
+        $scope.pastTime.setHours(parseInt($scope.rightNowHour), parseInt($scope.rightNowMinutes));
+        //console.log("pastTime: ", $scope.pastTime);
+        $scope.calendarTime = new Date();
+        $scope.calendarTime.setHours(parseInt(hour.slice(0,2)), parseInt(hour.slice(3,5)));
+        //console.log("calendarTime: ", $scope.calendarTime);
+        //console.log("Rightnow hour: ", $scope.rightNowHour + " Rightnow Minutes: ", $scope.rightNowMinutes.toString());
+        //console.log("pastTime: ", $scope.pastTime);
+        //if statement compares current hour to past hours, called from ng-repeat
+
+        //console.log("$scope.pastTime: " + Date.parse($scope.pastTime) + ", hour: ", Date.parse(hour));
+        //console.log("pastTime: ", Date.parse($scope.pastTime) + "calendarTime: ", Date.parse($scope.calendarTime));
+        if(Date.parse($scope.pastTime) > Date.parse($scope.calendarTime)){
+                //console.log("$scope.pastTime: " + Date.parse('01/01/16' + $scope.pastTime) + ", hour: ", Date.parse('01/01/16' + $scope.calendarTime));
+                //console.log("returning true");
+                return true;
+            }
+        //console.log("false hour: ", hour);
+            return false;
+        };
 
     ////RESERVEBOOK SCREEN
     ////SharedTimeData is a factory that holds start time selected with ng-click by the user on the calendar view
