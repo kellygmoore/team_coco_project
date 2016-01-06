@@ -1,7 +1,26 @@
 myApp.factory('SharedTimeData', ["$http", function($http){
+
+    //PRIVATE
     var meetingTime = {};
     var bookedTimeArray = [];
     var roomCapacity;
+
+    //var getMemberResponse = function(){
+    //
+    //    var promise = $http({
+    //        method: "GET",
+    //        url: "http://testing.bamboo.cocomsp.com/api/me,
+    //        withCredentials: true,
+    //        headers: {
+    //            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    //        }
+    //    }).then(function(response){
+    //        data = response.data;
+
+
+
+
+
 
     //PUBLIC
     var publicTime = {
@@ -21,6 +40,12 @@ myApp.factory('SharedTimeData', ["$http", function($http){
             bookedTimeArray = timeArray;
             roomCapacity = capacity;
             //console.log("In retrieve, TimeData: ", meetingTime);
+        },
+        retrieveMemberData: function(){
+            return memberData;
+        },
+        setMemberData: function(){
+            return getMemberResponse();
         }
 
     };

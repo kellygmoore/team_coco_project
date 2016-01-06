@@ -2,7 +2,7 @@
  * Created by samuelmoss on 1/4/16.
  */
 
-myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNameData', 'dateFilter', function($scope, SharedTimeData, SharedBookedNameData, dateFilter){
+myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'SharedBookedNameData', 'dateFilter', function($scope, $location, SharedTimeData, SharedBookedNameData, dateFilter){
     //console.log("we are in the RBC");
     //RESERVEBOOK SCREEN
     //SharedTimeData is a factory that holds start time selected with ng-click by the user on the calendar view
@@ -79,11 +79,8 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
     //startHour variable holds start time of meeting
     $scope.startHour = $scope.sharedTimeData.retrieveBookedTimes();
 
-<<<<<<< HEAD
-=======
 
     //Pulls the room capacity from the shared time factory for use in limiting the room attendance.
->>>>>>> 4e67a2f7999b4357e7638c3432255ce7f1c0a281
     roomCapacity = $scope.sharedTimeData.retrieveCapacity();
 
     $scope.constructTimeObject = function(time){
@@ -126,4 +123,24 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
             {duration:'60'}
         ]
     };
+
+
+   //change out to data from Bamboo
+
+
+
+
+
+    $scope.available = 10;
+    $scope.thisMeeting = 2;
+    $scope.balance = $scope.available - $scope.thisMeeting;
+    var chargeByHour = 25;
+    $scope.paymentDue = chargeByHour * $scope.thisMeeting;
+
+    $scope.nevermind = function(){
+        $location.path("/defaultscreen");
+    };
+    //$scope.goback = function(){
+    //    $location.path("/bookingscreen");
+    //}
 }]);

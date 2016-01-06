@@ -233,19 +233,19 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
 }]);
 
 
-//Controller for RESERVATION view page///////////////////////////////////////////////
-myApp.controller('ReserveCtrl', ["$scope", "$location", function($scope, $location){
-    //change out to data from Bamboo
-    $scope.available = 10;
-    $scope.thisMeeting = 2;
-    $scope.balance = $scope.available - $scope.thisMeeting;
-    var chargeByHour = 25;
-    $scope.paymentDue = chargeByHour * $scope.thisMeeting;
-
-    $scope.nevermind = function(){
-        $location.path("/defaultscreen");
-    };
-    $scope.goback = function(){
-        $location.path("/bookingscreen");
-    }
-}]);
+////Controller for RESERVATION view page///////////////////////////////////////////////
+//myApp.controller('ReserveCtrl', ["$scope", "$location", function($scope, $location){
+//    //change out to data from Bamboo
+//    $scope.available = 10;
+//    $scope.thisMeeting = 2;
+//    $scope.balance = $scope.available - $scope.thisMeeting;
+//    var chargeByHour = 25;
+//    $scope.paymentDue = chargeByHour * $scope.thisMeeting;
+//
+//    $scope.nevermind = function(){
+//        $location.path("/defaultscreen");
+//    };
+//    $scope.goback = function(){
+//        $location.path("/bookingscreen");
+//    }
+//}]);
