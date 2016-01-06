@@ -82,7 +82,9 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
         $scope.cleanArray = [];
         dirtyArray.map(
             function(obj){
-                if((obj.milsec > Date.now()) && (obj.isBooked === false)){
+                //UNCOMMENT AT START OF DAY!!!
+                // if((obj.milsec > Date.now()) && (obj.isBooked === false))
+                    if((obj.isBooked === false)){
                     $scope.cleanArray.push(obj);
                 }
             }
@@ -92,8 +94,8 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
     $scope.data = {
         selectStartTime: null,
         cleanArray: cleanStartTime($scope.allStartTimes),
-        selectEndTime:null,
-        availableEndTime: []
+        //selectEndTime:null,
+        //availableEndTime: $scope.cleanEndArray
     };
 
     $scope.cleanEndTime = function(){
@@ -101,6 +103,7 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
         if($scope.data.selectStartTime!==null){
             searchForStart($scope.allStartTimes);
             //buildArray();
+
         }
     };
 
@@ -109,17 +112,29 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
         console.log("This is allStartTimes/basicArray", basicArray);
         //console.log("$scope.data.selectStartTime", $scope.data.selectStartTime);
         for(var i = 0; i< basicArray.length; i++) {
-            console.log("milsec value in index ", i, " of basic array=", basicArray[i].milsec);
-            console.log("milsec value of selected start time =", typeof $scope.data.selectStartTime);
-
-            console.log("Index basicArray index 18", basicArray[18]);
-            if((basicArray[i].milsec) == ($scope.data.selectStartTime.milsec)){
+            //console.log("milsec value in index ", i, " of basic array=", basicArray[i].milsec);
+            console.log("milsec value of selected start time =", $scope.data.selectStartTime);
+            //
+            //console.log("Index basicArray index 18", basicArray[18]);
+            if((basicArray[i].milsec) === ($scope.data.selectStartTime.milsec)){
                 console.log("I made a match!");
 
                 startIndex = i;
             }
         }
         console.log("this is start index", startIndex);
+
+        for(var i=(startIndex+1); i<basicArray.length; i++){
+            if(basicArray[i].isBooked===false){
+                $scope.cleanEndArray.push(basicArray[i]);
+            }else{
+                $scope.cleanEndArray.push(basicArray[i]);
+                break;
+            }
+        }
+        console.log("this is cleanEndArray", $scope.cleanEndArray);
+        $scope.selectEndTime = null;
+        $scope.availableEndTime = $scope.cleanEndArray;
     };
 
     //var searchForStart = function(selectedTime){
@@ -129,16 +144,17 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
     //    console.log("this is start index", startIndex);
     //};
 
-    var buildArray = function(allTimesArray){
-        for(var i=(startIndex+1); i<=allTimesArray.length; i++){
-        if(allTimesArray[i].isBooked===false){
-            $scope.cleanEndArray.push(allTimesArray[i]);
-        }else{
-            $scope.cleanEndArray.push(allTimesArray[i]);
-            break;
-        }
-    }
-    };
+    //var buildArray = function(allTimesArray){
+    //    console.log("This is allStartTimes/basicArray", allTimesArray);
+    //    for(var i=(startIndex+1); i<allTimesArray.length; i++){
+    //    if(allTimesArray[i].isBooked===false){
+    //        $scope.cleanEndArray.push(allTimesArray[i]);
+    //    }else{
+    //        $scope.cleanEndArray.push(allTimesArray[i]);
+    //        break;
+    //    }
+    //}
+    //};
 
 
     //disableTime($scope.allStartTimes);
