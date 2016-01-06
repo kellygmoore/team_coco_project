@@ -7,8 +7,11 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
     //RESERVEBOOK SCREEN
     //SharedTimeData is a factory that holds start time selected with ng-click by the user on the calendar view
 
+
+
     $scope.sharedTimeData = SharedTimeData;
     $scope.sharedBookedName = SharedBookedNameData;
+    $scope.allStartTimes = $scope.sharedBookedName.setTime();
     $scope.meetingTimesArray = undefined;
     $scope.cleanArray = undefined;
     $scope.cleanEndArray = undefined;
@@ -71,15 +74,9 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
         $scope.updateMeetingTimeData();
     }
 
+    //The following populates the dropdown menus on the reserveBookScreen
 
-    //$scope.tapToBook=function(hour){
-    //    $scope.sharedTimeData.setTimeData(hour);
-    //    $location.path("/reserveBookScreen");
-    //};
-
-    //startHour variable holds start time of meeting
-
-    $scope.allStartTimes = $scope.sharedTimeData.retrieveBookedTimes();
+    //$scope.allStartTimes = $scope.sharedTimeData.retrieveBookedTimes();
 
     var cleanStartTime = function(dirtyArray){
         $scope.cleanArray = [];
@@ -92,10 +89,6 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
         )
     };
 
-
-
-
-    //The following populates the dropdown menus on the reserveBookScreen
     $scope.data = {
         selectStartTime: null,
         cleanArray: cleanStartTime($scope.allStartTimes),
@@ -103,23 +96,38 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
         availableEndTime: []
     };
 
-    $scope.cleanEndTime = function(dirtyArray){
+    $scope.cleanEndTime = function(){
         $scope.cleanEndArray = [];
         if($scope.data.selectStartTime!==null){
-            searchForStart(dirtyArray);
-            buildArray(dirtyArray);
+            searchForStart($scope.allStartTimes);
+            //buildArray();
         }
     };
 
 
     var searchForStart = function(basicArray){
-        for(var i= 0; i<=basicArray.length; i++) {
-            if(basicArray[i].milsec === $scope.data.selectStartTime){
+        console.log("This is allStartTimes/basicArray", basicArray);
+        //console.log("$scope.data.selectStartTime", $scope.data.selectStartTime);
+        for(var i = 0; i< basicArray.length; i++) {
+            console.log("milsec value in index ", i, " of basic array=", basicArray[i].milsec);
+            console.log("milsec value of selected start time =", typeof $scope.data.selectStartTime);
+
+            console.log("Index basicArray index 18", basicArray[18]);
+            if((basicArray[i].milsec) == ($scope.data.selectStartTime.milsec)){
+                console.log("I made a match!");
+
                 startIndex = i;
-                break;
             }
         }
+        console.log("this is start index", startIndex);
     };
+
+    //var searchForStart = function(selectedTime){
+    //        if(selectedTime === $scope.data.selectStartTime){
+    //            startIndex = i;
+    //        }
+    //    console.log("this is start index", startIndex);
+    //};
 
     var buildArray = function(allTimesArray){
         for(var i=(startIndex+1); i<=allTimesArray.length; i++){
