@@ -43,6 +43,15 @@
             </md-select>
         </md-input>
     </div>
+
+    <div class="selectAttendance">
+        <md-input container class="md-block">
+            <label for="selectAttendance"><h2>Attendance</h2></label>
+            <md-select required name="selectAttendance" id="selectAttendance" ng-model="data.selectAttendance">
+                <md-option ng-repeat="option in data.availableDuration" value="{{option.duration}}" + "minutes">{{option.duration}}  minutes</md-option>
+            </md-select>
+        </md-input>
+    </div>
     <br>
 
     <!--<div class="incrementDiv" layout="row" layout-align="space-around center">-->

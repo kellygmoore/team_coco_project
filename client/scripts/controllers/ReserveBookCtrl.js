@@ -12,7 +12,8 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
     $scope.meetingTimesArray = undefined;
     var startTime = {};
     var endTime = {};
-    var roomCapacity;
+    //Pulls the room capacity from the shared time factory for use in limiting the room attendance.
+    var roomCapacity = $scope.sharedTimeData.retrieveCapacity();
 
 
     $scope.updateMeetingTimeData = function(){
@@ -78,10 +79,6 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
 
     //startHour variable holds start time of meeting
     $scope.startHour = $scope.sharedTimeData.retrieveBookedTimes();
-
-
-    //Pulls the room capacity from the shared time factory for use in limiting the room attendance.
-    roomCapacity = $scope.sharedTimeData.retrieveCapacity();
 
     $scope.constructTimeObject = function(time){
         //This function is going to be called every time there is a start time without a meeting in
