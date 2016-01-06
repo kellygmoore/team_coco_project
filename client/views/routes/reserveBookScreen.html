@@ -48,7 +48,7 @@
         <md-input container class="md-block">
             <label for="selectAttendance"><h2>Attendance</h2></label>
             <md-select required name="selectAttendance" id="selectAttendance" ng-model="data.selectAttendance">
-                <md-option ng-repeat="option in data.availableDuration" value="{{option.duration}}" + "minutes">{{option.duration}}  minutes</md-option>
+                <md-option ng-repeat="option in data.availableCapacity" value="{{option.attendees}}">{{option.attendees}}</md-option>
             </md-select>
         </md-input>
     </div>
