@@ -24,16 +24,6 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
 
 
 
-    //Conditional to check and see if room data had been pulled into the roomData Factory.
-    //If not it calls a method in the factory which hits the API and gets all the
-    //information for the room.
-    //if($scope.roomData.retrieveRoomData() === undefined){
-    //    $scope.roomData.setRoomData();
-    //    $scope.roomData.retrieveRoomData();
-    //}
-
-
-
 
     //This function updates the meeting time factory with the
     //meeting times from the Bamboo meeting API then continues on to
@@ -60,64 +50,44 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
 
 
 
-    ////This function searches through all the meeting for the locations, feature_default_screen_logic
-    ////pulls out all those which are for the room the tablet has been configured to,
-    ////Then formats them as numbers and pushes them to the meetingTimesArray for later use.
-    //$scope.updateMeetingTimesArray = function(){
-    //    $scope.meetingTimesArray = [];
-    //    $scope.bookedData.map(
-    //        function(obj) {
-    //            if(obj.meetingRoom.id === parseInt(localStorage.selectRoomId)){
-    //                $scope.meetTimeObj = {};
-    //                $scope.meetTimeObj.start = {};
-    //                $scope.meetTimeObj.end = {};
-    //                var startTime = new Date(obj.startDate);
-    //                var endTime = new Date(obj.endDate);
-    //                $scope.meetTimeObj.startTime = startTime.getTime();
-    //                $scope.meetTimeObj.endTime = endTime.getTime();
-    //                $scope.meetTimeObj.elapse = $scope.meetTimeObj.endTime - $scope.meetTimeObj.startTime;
-    //                $scope.meetTimeObj.start.hour = parseInt(obj.startDate.slice(11, 13));
-    //                $scope.meetTimeObj.start.minute = parseInt(obj.startDate.slice(14, 16));
-    //                $scope.meetTimeObj.end.hour = parseInt(obj.endDate.slice(11, 13));
-    //                $scope.meetTimeObj.end.minute = parseInt(obj.endDate.slice(14, 16));
-    //                $scope.meetingTimesArray.unshift($scope.meetTimeObj);
-    //            }
-    //        }
-    //    );
-    //};
-
     //This function pulls in the current time, checks to see whether it is ahead of any meetings
-    //for the day, adjusts the meeting array accordingly then checks to see if
+    //for the day, adjusts the meeting array to remove any past meetings then checks to see if
     //there is an active meeting currently going on. If there is a meeting in session then
     //the function switches to the active meeting mode/function otherwise it switches to the inactive mode/function.
+    //If there are not scheduled meeting in the future it goes to the 'no scheduled meeting' mode/function.
     //This allows the script to be booted at any time and immediately update.
-    $scope.meetingTimeSwitch = function(){
-        if(stop){
+    $scope.meetingTimeSwitch = function() {
+        if (stop) {
             $timeout.cancel(stop);
         }
-        if(meetingTimeout){
+        if (meetingTimeout) {
             $interval.cancel(meetingTimeout);
         }
         currentTime = Date.now();
-        //console.log("Meeting times array: ", $scope.meetingTimesArray);
-        if($scope.meetingTimesArray[0]){
-            while(currentTime > $scope.meetingTimesArray[0].endTime){
-            $scope.meetingTimesArray.shift();
+        if($scope.meetingTimesArray.length > 0) {
+            while (currentTime > $scope.meetingTimesArray[0].endTime) {
+                $scope.meetingTimesArray.shift();
+                if($scope.meetingTimesArray.length === 0){
+                    $scope.noScheduledMeetinglogic();
+                }
             }
-        }
-        if (currentTime > $scope.meetingTimesArray[0].startTime){
-            $scope.activeMeetingLogic();
+            if(currentTime > $scope.meetingTimesArray[0].startTime){
+                $scope.activeMeetingLogic();
+            } else {
+                $scope.inActiveMeetingLogic();
+            }
         } else {
-            $scope.inActiveMeetingLogic();
+            $scope.noScheduledMeetinglogic();
         }
     };
 
     //This function runs when the current time is greater than the next meeting start time
     //and less than the next meeting end time (i.e. there is a meeting currently going on.
     //It makes the page red, calculates and displays the time until the meeting is over.
-    //It also sets a timeout which calculates the time left untill the meeting is over
+    //It also sets a timeout which calculates the time left until the meeting is over
     // and runs the updateMeetingTimeData function.
     $scope.activeMeetingLogic = function(){
+        console.log("in active meeting logic");
         $scope.roomBooked = true;
         $scope.meetingLength = function(){
             return $scope.meetingTimesArray[0].endTime - currentTime;
@@ -131,7 +101,7 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
             }
         };
         $scope.updateTime();
-        stop = $interval($scope.updateTime, 60000);
+        stop = $interval($scope.updateTime, 300000);
         meetingTimeout = $timeout(
             $scope.updateMeetingTimeData, $scope.meetingLength());
     };
@@ -140,12 +110,21 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
     //next meeting's start time). This changes the page to a green color and sets a timeout to the differance
     //between the current time and the next meeting start time.
     $scope.inActiveMeetingLogic = function(){
+        console.log("in inactive meeting logic");
         currentTime = Date.now();
         $scope.roomBooked = false;
         $scope.nextMtgAt = $scope.meetingTimesArray[0]?$scope.timeFormat($scope.meetingTimesArray[0].start):"No Upcoming Meetings";
         $scope.meetingTimeout = $timeout(
             $scope.updateMeetingTimeData, ($scope.meetingTimesArray[0].startTime - currentTime)
         )
+    };
+
+    //This function kicks in if there are no scheduled meetings.
+    //It rechecks the API every 5 minutes in case there has been
+    //a meeting scheduled outside the app during that time.
+    $scope.noScheduledMeetinglogic = function(){
+        console.log("in no scheduled");
+        var stop = $timeout($scope.updateMeetingTimeData, 60000)
     };
 
     //This series of functions formats the next meeting time.

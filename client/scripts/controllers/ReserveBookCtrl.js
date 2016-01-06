@@ -79,6 +79,8 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
     //startHour variable holds start time of meeting
     $scope.startHour = $scope.sharedTimeData.retrieveBookedTimes();
 
+
+    //Pulls the room capacity from the shared time factory for use in limiting the room attendance.
     roomCapacity = $scope.sharedTimeData.retrieveCapacity();
 
     $scope.constructTimeObject = function(time){
