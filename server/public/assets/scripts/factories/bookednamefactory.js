@@ -65,7 +65,7 @@ myApp.factory('SharedBookedNameData', ["$http", "dateFilter", function($http, da
         timeArray.push(addHour515pm);
         timeArray.push(addHour530pm);
         timeArray.push(addHour545pm);
-        console.log("time array is",$scope.timeArray);
+
     }else{
         console.log("not happening bub, this ain't downtown");
     }
