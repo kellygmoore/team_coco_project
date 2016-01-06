@@ -18,6 +18,7 @@ myApp.controller('LoginCtrl', ["$scope", "$http", "$location", function($scope, 
         }).success(
             function( response ) {
                 console.log("this is the auth response", response);
+
             }
         );
     };
