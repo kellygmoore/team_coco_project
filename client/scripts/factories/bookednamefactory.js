@@ -4,11 +4,20 @@ myApp.factory('SharedBookedNameData', ["$http", "dateFilter", function($http, da
     var payor = {};
     var data = undefined;
     var formattedData = [];
+    var todaysDate = new Date();
+
+
+    var addHour5pm = {milTime:"17:00", stdTime: "5:00", milsec:todaysDate.setHours(17,0), isBooked:false};
+    var addHour515pm = {milTime:"17:15", stdTime: "5:15", milsec:todaysDate.setHours(17,15), isBooked:false};
+    var addHour530pm = {milTime:"17:30", stdTime: "5:30", milsec:todaysDate.setHours(17,30), isBooked:false};
+    var addHour545pm = {milTime:"17:45", stdTime: "5:45", milsec:todaysDate.setHours(17,45), isBooked:false};
+
+
 
 
     //hours that room can be booked 8am - 5pm// needs to be 6pm for certain location
     //use milTime for comparing and logic, use stdTime for display on calendar
-    var todaysDate = new Date();
+
     var timeArray = [
         {milTime: "08:00", stdTime: "8:00", milsec: todaysDate.setHours(8, 0), isBooked: false},
         {milTime: "08:15", stdTime: "8:15", milsec: todaysDate.setHours(8, 15), isBooked: false},
@@ -47,6 +56,19 @@ myApp.factory('SharedBookedNameData', ["$http", "dateFilter", function($http, da
         {milTime: "16:30", stdTime: "4:30", milsec: todaysDate.setHours(16, 30), isBooked: false},
         {milTime: "16:45", stdTime: "4:45", milsec: todaysDate.setHours(16, 45), isBooked: false}
     ];
+
+
+    // If location is downtown add an extra  2 hour to the start time
+    // 129 is the location id for Downtown , might need to be changed in production to match real location id
+    if (localStorage.selectLocation === '129'){
+       timeArray.push(addHour5pm);
+        timeArray.push(addHour515pm);
+        timeArray.push(addHour530pm);
+        timeArray.push(addHour545pm);
+
+    }else{
+        console.log("not happening bub, this ain't downtown");
+    }
 
     //PRIVATE//////////////////////////////////
     var getCallResponse = function(){

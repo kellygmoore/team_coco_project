@@ -2,17 +2,21 @@
  * Created by samuelmoss on 1/4/16.
  */
 
-myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'SharedBookedNameData', 'dateFilter', function($scope, $location, SharedTimeData, SharedBookedNameData, dateFilter){
+myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'SharedBookedNameData', 'dateFilter', 'TimeOut', function($scope, $location, SharedTimeData, SharedBookedNameData, dateFilter,TimeOut){
+
     //console.log("we are in the RBC");
     //RESERVEBOOK SCREEN
     //SharedTimeData is a factory that holds start time selected with ng-click by the user on the calendar view
+    TimeOut.endTimer();
 
     $scope.sharedTimeData = SharedTimeData;
     $scope.sharedBookedName = SharedBookedNameData;
     $scope.meetingTimesArray = undefined;
     var startTime = {};
     var endTime = {};
-    var roomCapacity;
+    //Pulls the room capacity from the shared time factory for use in limiting the room attendance.
+    var roomCapacity = $scope.sharedTimeData.retrieveCapacity();
+    $scope.stageArray = [];
 
 
     $scope.updateMeetingTimeData = function(){
@@ -57,7 +61,7 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
             endTime.hour = 6
         } else {
             endTime.hour = 5;
-        };
+        }
     };
 
     endTimeSet();
@@ -79,10 +83,6 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
     //startHour variable holds start time of meeting
     $scope.startHour = $scope.sharedTimeData.retrieveBookedTimes();
 
-
-    //Pulls the room capacity from the shared time factory for use in limiting the room attendance.
-    roomCapacity = $scope.sharedTimeData.retrieveCapacity();
-
     $scope.constructTimeObject = function(time){
         //This function is going to be called every time there is a start time without a meeting in
         //session and is going to construct and object consisting of a key of start time
@@ -103,7 +103,16 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
         //Return some array that we will set 'availableStartTime' to.
     };
 
-    //$scope.constructTimeArray(meetingTimesArray);
+    var constructCapacityObject = function(){
+        for(var i = 2; i <= roomCapacity; i++){
+            $scope.attendObject = {};
+            $scope.attendObject.attendees = (i).toString();
+            $scope.stageArray.push($scope.attendObject);
+        }
+    };
+    constructCapacityObject();
+    console.log("here is room cap: ", roomCapacity);
+    console.log("here is stage array: ", $scope.stageArray);
 
     //The following populates the dropdown menus on the reserveBookScreen
     $scope.data = {
@@ -114,14 +123,15 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
             {startTime: $scope.startHour + ':', minutes: '30'},
             {startTime: $scope.startHour + ':', minutes: '45'}
         ],
-
         selectDuration:null,
         availableDuration: [
             {duration:'15'},
             {duration:'30'},
             {duration:'45'},
             {duration:'60'}
-        ]
+        ],
+        selectAttendance: null,
+        availableCapacity: $scope.stageArray
     };
 
 

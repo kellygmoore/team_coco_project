@@ -33,7 +33,7 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
         $scope.bookingData.retrieveBambooData()
         .then(function(){
             $scope.meetingTimesArray = SharedBookedNameData.setBambooData();
-                console.log("Meetingtimesarray: ", $scope.meetingTimesArray[0]);
+                //console.log("Meetingtimesarray: ", $scope.meetingTimesArray[0]);
                 if($scope.meetingTimesArray[0] === undefined){
                     $scope.hasMeetings = true;
                 } else {

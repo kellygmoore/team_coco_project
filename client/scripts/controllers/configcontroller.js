@@ -1,8 +1,12 @@
 /**
  * Created by Zeo on 12/11/15.
  */
-myApp.controller('ConfigController', ["$scope","$http","$location","$timeout", function($scope,$http,$location,$timeout) {
+myApp.controller('ConfigController', ["$scope","$http","$location","TimeOut", function($scope,$http,$location,TimeOut) {
     //console.log("config controller" );
+
+    TimeOut.endTimer();
+
+
 
 
     $scope.selectLocation= null;
@@ -109,7 +113,6 @@ myApp.controller('ConfigController', ["$scope","$http","$location","$timeout", f
     };
 
 
-
 /// GET Room Ids Information from BAMBOO API
     function getRooms(locationid){
 
@@ -136,6 +139,36 @@ myApp.controller('ConfigController', ["$scope","$http","$location","$timeout", f
             });
 
     };
+
+
+
+    /// GET Member  Information from BAMBOO API
+
+    $scope.callMe = function(){
+        $http({
+            method: "GET",
+            url: "http://testing.bamboo.cocomsp.com/api/me ",
+            withCredentials: true,
+            headers: {
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+            }
+        }).success(function( response ) {
+
+
+
+                console.log("whats me",response);
+                //console.log("location respone", $scope.availableLocation);
+
+
+
+            }
+        );
+
+    };
+
+
+
+
 
 
 

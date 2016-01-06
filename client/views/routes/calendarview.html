@@ -3,7 +3,7 @@
 
     <div ng-include="'/assets/views/templates/thetop.html'"></div>
 
-    <div class="container" ng-controller="CalendarCtrl">
+    <div class="container" ng-controller="CalendarCtrl" ng-mousemove="inactiveMouseTimeOut()" ng-click="inactiveTouchTimeOut()">
 
         <div class="listDiv" ng-model="timeArray">
             <table>

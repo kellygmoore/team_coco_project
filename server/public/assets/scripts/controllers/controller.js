@@ -2,17 +2,14 @@
  * Created by kellygarskemoore on 12/10/15.
  */
 
-myApp.controller('TimeCtrl', ["$scope", "$timeout",  'SharedRoomData', function($scope, $timeout, SharedRoomData) {
+myApp.controller('TimeCtrl', ["$scope", "$timeout", "$location", function($scope, $timeout,$location,TimeOut) {
+
+    //Page will timeout back to default page based of config settings
+
 
     //make call to factory to get shared data - here we are getting room name
-    $scope.room = [];
-    $scope.sharedRoomData = SharedRoomData;
+    $scope.room = localStorage.selectRoomName;
 
-    if($scope.sharedRoomData.setRoomData() === undefined){
-        $scope.sharedRoomData.retrieveRoomData();
-    }
-
-    $scope.room = $scope.sharedRoomData.retrieveRoomData();
 
     //console.log("Shared room data: ", $scope.room);
 
@@ -30,11 +27,19 @@ myApp.controller('TimeCtrl', ["$scope", "$timeout",  'SharedRoomData', function(
     $timeout(tick, $scope.tickInterval);
 
     }]);
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Controller for the CALENDAR & RESERVE-BOOK-SCREEN////////////////////////////////////////////////////////
-myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData','SharedTimeData', function($scope, $location, SharedBookedNameData, SharedTimeData){
 
-    //console.log("Today's Date in milliseconds: ", $scope.timeArray[0].milsec);
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    myApp.controller('CalendarCtrl', ['$scope','$timeout', '$location', 'SharedBookedNameData','SharedTimeData','TimeOut', function($scope, $timeout, $location, SharedBookedNameData, SharedTimeData,TimeOut ){
+
+
+    // Start Timeout which send view back to default view
+    TimeOut.endTimer();
+     TimeOut.startTimerCalendar();
+        //console.log("what is timeout.endtimer",TimeOut);
+
     $scope.sharedBookedNameData = SharedBookedNameData;
     //$scope.booking = [];
     //pull data from factory
@@ -193,13 +198,33 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
             return false;
         };
 
-    ////RESERVEBOOK SCREEN
+        //When page is active cancel timeout and reset it
+        //Page will timeout back to default page based of config settings
+        $scope.inactiveMouseTimeOut = function(){
+            TimeOut.endTimer();
+            TimeOut.startTimerCalendar();
+            console.log("Hey the mouse is moving");
+        };
+
+        $scope.inactiveTouchTimeOut = function(){
+            TimeOut.endTimer();
+            TimeOut.startTimerCalendar();
+            console.log("Hey clicking is happening");
+        };
+
+        //    startTimer= $timeout(function (){$location.path("/defaultscreen");}, 4000);
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////RESERVEBOOK SCREEN/
     ////SharedTimeData is a factory that holds start time selected with ng-click by the user on the calendar view
     //
     $scope.sharedTimeData = SharedTimeData;
     //
     $scope.tapToBook=function(hour){
+
         $scope.sharedTimeData.setTimeData(hour, $scope.timeArray, $scope.booking[0].meetingRoom.maxOccupancy);
+
         $location.path("/reserveBookScreen");
     };
     //
@@ -232,20 +257,21 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
 //    };
 }]);
 
+//Controller for RESERVATION view page///////////////////////////////////////////////
+myApp.controller('ReserveCtrl', ["$scope", "$location", function($scope, $location){
 
-////Controller for RESERVATION view page///////////////////////////////////////////////
-//myApp.controller('ReserveCtrl', ["$scope", "$location", function($scope, $location){
-//    //change out to data from Bamboo
-//    $scope.available = 10;
-//    $scope.thisMeeting = 2;
-//    $scope.balance = $scope.available - $scope.thisMeeting;
-//    var chargeByHour = 25;
-//    $scope.paymentDue = chargeByHour * $scope.thisMeeting;
-//
-//    $scope.nevermind = function(){
-//        $location.path("/defaultscreen");
-//    };
-//    $scope.goback = function(){
-//        $location.path("/bookingscreen");
-//    }
-//}]);
+    //change out to data from Bamboo
+    $scope.available = 10;
+    $scope.thisMeeting = 2;
+    $scope.balance = $scope.available - $scope.thisMeeting;
+    var chargeByHour = 25;
+    $scope.paymentDue = chargeByHour * $scope.thisMeeting;
+
+    $scope.nevermind = function(){
+        $location.path("/defaultscreen");
+    };
+    $scope.goback = function(){
+        $location.path("/bookingscreen");
+    }
+}]);
+
