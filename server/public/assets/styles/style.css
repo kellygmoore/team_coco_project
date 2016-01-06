@@ -154,7 +154,7 @@ table, th, td {
     font-size: 18px;
     display: block;
     padding-top: 2px;
-    width: 200px;
+    /*width: 200px;*/
     margin: auto;
 }
 

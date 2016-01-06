@@ -18,6 +18,7 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
     $scope.bootTime = Date.now();
     $scope.meetingTimeout = undefined;
     $scope.interMeetingTimeout = undefined;
+    $scope.hasMeeting = false;
     var stop, meetingTimeout;
     var currentTime = undefined;
 
@@ -42,8 +43,13 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
         $scope.bookingData.retrieveBambooData()
         .then(function(){
             $scope.meetingTimesArray = SharedBookedNameData.setBambooData();
-            $scope.meetingTimeSwitch();
-                console.log("Here is the booked data: ", $scope.bookedData);
+                console.log("Meetingtimesarray: ", $scope.meetingTimesArray[0]);
+                if($scope.meetingTimesArray[0] === undefined){
+                    $scope.hasMeetings = true;
+                } else {
+                    $scope.meetingTimeSwitch();
+                    console.log("Here is the booked data: ", $scope.bookedData);
+                }
             }
         );
     };
