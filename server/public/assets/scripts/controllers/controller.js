@@ -34,48 +34,48 @@ myApp.controller('TimeCtrl', ["$scope", "$timeout",  'SharedRoomData', function(
 //Controller for the CALENDAR & RESERVE-BOOK-SCREEN////////////////////////////////////////////////////////
 myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData','SharedTimeData', function($scope, $location, SharedBookedNameData, SharedTimeData){
     //$route.reload();
-    $scope.bookedColor = false;
-    var todaysDate = new Date();
-    //hours that room can be booked 8am - 5pm// needs to be 6pm for certain location
-    //use milTime for comparing and logic, use stdTime for display on calendar
-    $scope.timeArray = [
-        {milTime: "08:00", stdTime: "8:00", milsec: todaysDate.setHours(8, 0), isBooked: false},
-        {milTime: "08:15", stdTime: "8:15", milsec: todaysDate.setHours(8, 15), isBooked: false},
-        {milTime: "08:30", stdTime: "8:30", milsec: todaysDate.setHours(8, 30), isBooked: false},
-        {milTime: "08:45", stdTime: "8:45", milsec: todaysDate.setHours(8, 45), isBooked: false},
-        {milTime: "09:00", stdTime: "9:00", milsec: todaysDate.setHours(9, 0), isBooked: false},
-        {milTime: "09:15", stdTime: "9:15", milsec: todaysDate.setHours(9, 15), isBooked: false},
-        {milTime: "09:30", stdTime: "9:30", milsec: todaysDate.setHours(9, 30), isBooked: false},
-        {milTime: "09:45", stdTime: "9:45", milsec: todaysDate.setHours(9, 45), isBooked: false},
-        {milTime: "10:00", stdTime: "10:00", milsec: todaysDate.setHours(10, 0), isBooked: false},
-        {milTime: "10:15", stdTime: "10:15", milsec: todaysDate.setHours(10, 15), isBooked: false},
-        {milTime: "10:30", stdTime: "10:30", milsec: todaysDate.setHours(10, 30), isBooked: false},
-        {milTime: "10:45", stdTime: "10:45", milsec: todaysDate.setHours(10, 45), isBooked: false},
-        {milTime: "11:00", stdTime: "11:00", milsec: todaysDate.setHours(11, 0), isBooked: false},
-        {milTime: "11:15", stdTime: "11:15", milsec: todaysDate.setHours(11, 15), isBooked: false},
-        {milTime: "11:30", stdTime: "11:30", milsec: todaysDate.setHours(11, 30), isBooked: false},
-        {milTime: "11:45", stdTime: "11:45", milsec: todaysDate.setHours(11, 45), isBooked: false},
-        {milTime: "12:00", stdTime: "12:00", milsec: todaysDate.setHours(12, 0), isBooked: false},
-        {milTime: "12:15", stdTime: "12:15", milsec: todaysDate.setHours(12, 15), isBooked: false},
-        {milTime: "12:30", stdTime: "12:30", milsec: todaysDate.setHours(12, 30), isBooked: false},
-        {milTime: "12:45", stdTime: "12:45", milsec: todaysDate.setHours(12, 45), isBooked: false},
-        {milTime: "13:00", stdTime: "1:00", milsec: todaysDate.setHours(13, 0), isBooked: false},
-        {milTime: "13:15", stdTime: "1:15", milsec: todaysDate.setHours(13, 15), isBooked: false},
-        {milTime: "13:30", stdTime: "1:30", milsec: todaysDate.setHours(13, 30), isBooked: false},
-        {milTime: "13:45", stdTime: "1:45", milsec: todaysDate.setHours(13, 45), isBooked: false},
-        {milTime: "14:00", stdTime: "2:00", milsec: todaysDate.setHours(14, 0), isBooked: false},
-        {milTime: "14:15", stdTime: "2:15", milsec: todaysDate.setHours(14, 15), isBooked: false},
-        {milTime: "14:30", stdTime: "2:30", milsec: todaysDate.setHours(14, 30), isBooked: false},
-        {milTime: "14:45", stdTime: "2:45", milsec: todaysDate.setHours(14, 45), isBooked: false},
-        {milTime: "15:00", stdTime: "3:00", milsec: todaysDate.setHours(15, 0), isBooked: false},
-        {milTime: "15:15", stdTime: "3:15", milsec: todaysDate.setHours(15, 15), isBooked: false},
-        {milTime: "15:30", stdTime: "3:30", milsec: todaysDate.setHours(15, 30), isBooked: false},
-        {milTime: "15:45", stdTime: "3:45", milsec: todaysDate.setHours(15, 45), isBooked: false},
-        {milTime: "16:00", stdTime: "4:00", milsec: todaysDate.setHours(16, 0), isBooked: false},
-        {milTime: "16:15", stdTime: "4:15", milsec: todaysDate.setHours(16, 15), isBooked: false},
-        {milTime: "16:30", stdTime: "4:30", milsec: todaysDate.setHours(16, 30), isBooked: false},
-        {milTime: "16:45", stdTime: "4:45", milsec: todaysDate.setHours(16, 45), isBooked: false}
-    ];
+    //$scope.bookedColor = false;
+    //var todaysDate = new Date();
+    ////hours that room can be booked 8am - 5pm// needs to be 6pm for certain location
+    ////use milTime for comparing and logic, use stdTime for display on calendar
+    //$scope.timeArray = [
+    //    {milTime: "08:00", stdTime: "8:00", milsec: todaysDate.setHours(8, 0), isBooked: false},
+    //    {milTime: "08:15", stdTime: "8:15", milsec: todaysDate.setHours(8, 15), isBooked: false},
+    //    {milTime: "08:30", stdTime: "8:30", milsec: todaysDate.setHours(8, 30), isBooked: false},
+    //    {milTime: "08:45", stdTime: "8:45", milsec: todaysDate.setHours(8, 45), isBooked: false},
+    //    {milTime: "09:00", stdTime: "9:00", milsec: todaysDate.setHours(9, 0), isBooked: false},
+    //    {milTime: "09:15", stdTime: "9:15", milsec: todaysDate.setHours(9, 15), isBooked: false},
+    //    {milTime: "09:30", stdTime: "9:30", milsec: todaysDate.setHours(9, 30), isBooked: false},
+    //    {milTime: "09:45", stdTime: "9:45", milsec: todaysDate.setHours(9, 45), isBooked: false},
+    //    {milTime: "10:00", stdTime: "10:00", milsec: todaysDate.setHours(10, 0), isBooked: false},
+    //    {milTime: "10:15", stdTime: "10:15", milsec: todaysDate.setHours(10, 15), isBooked: false},
+    //    {milTime: "10:30", stdTime: "10:30", milsec: todaysDate.setHours(10, 30), isBooked: false},
+    //    {milTime: "10:45", stdTime: "10:45", milsec: todaysDate.setHours(10, 45), isBooked: false},
+    //    {milTime: "11:00", stdTime: "11:00", milsec: todaysDate.setHours(11, 0), isBooked: false},
+    //    {milTime: "11:15", stdTime: "11:15", milsec: todaysDate.setHours(11, 15), isBooked: false},
+    //    {milTime: "11:30", stdTime: "11:30", milsec: todaysDate.setHours(11, 30), isBooked: false},
+    //    {milTime: "11:45", stdTime: "11:45", milsec: todaysDate.setHours(11, 45), isBooked: false},
+    //    {milTime: "12:00", stdTime: "12:00", milsec: todaysDate.setHours(12, 0), isBooked: false},
+    //    {milTime: "12:15", stdTime: "12:15", milsec: todaysDate.setHours(12, 15), isBooked: false},
+    //    {milTime: "12:30", stdTime: "12:30", milsec: todaysDate.setHours(12, 30), isBooked: false},
+    //    {milTime: "12:45", stdTime: "12:45", milsec: todaysDate.setHours(12, 45), isBooked: false},
+    //    {milTime: "13:00", stdTime: "1:00", milsec: todaysDate.setHours(13, 0), isBooked: false},
+    //    {milTime: "13:15", stdTime: "1:15", milsec: todaysDate.setHours(13, 15), isBooked: false},
+    //    {milTime: "13:30", stdTime: "1:30", milsec: todaysDate.setHours(13, 30), isBooked: false},
+    //    {milTime: "13:45", stdTime: "1:45", milsec: todaysDate.setHours(13, 45), isBooked: false},
+    //    {milTime: "14:00", stdTime: "2:00", milsec: todaysDate.setHours(14, 0), isBooked: false},
+    //    {milTime: "14:15", stdTime: "2:15", milsec: todaysDate.setHours(14, 15), isBooked: false},
+    //    {milTime: "14:30", stdTime: "2:30", milsec: todaysDate.setHours(14, 30), isBooked: false},
+    //    {milTime: "14:45", stdTime: "2:45", milsec: todaysDate.setHours(14, 45), isBooked: false},
+    //    {milTime: "15:00", stdTime: "3:00", milsec: todaysDate.setHours(15, 0), isBooked: false},
+    //    {milTime: "15:15", stdTime: "3:15", milsec: todaysDate.setHours(15, 15), isBooked: false},
+    //    {milTime: "15:30", stdTime: "3:30", milsec: todaysDate.setHours(15, 30), isBooked: false},
+    //    {milTime: "15:45", stdTime: "3:45", milsec: todaysDate.setHours(15, 45), isBooked: false},
+    //    {milTime: "16:00", stdTime: "4:00", milsec: todaysDate.setHours(16, 0), isBooked: false},
+    //    {milTime: "16:15", stdTime: "4:15", milsec: todaysDate.setHours(16, 15), isBooked: false},
+    //    {milTime: "16:30", stdTime: "4:30", milsec: todaysDate.setHours(16, 30), isBooked: false},
+    //    {milTime: "16:45", stdTime: "4:45", milsec: todaysDate.setHours(16, 45), isBooked: false}
+    //];
 
     //console.log("Today's Date in milliseconds: ", $scope.timeArray[0].milsec);
     $scope.sharedBookedNameData = SharedBookedNameData;
@@ -87,8 +87,63 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
             .then(function() {
                 //console.log("In then in controller");
                 $scope.booking = $scope.sharedBookedNameData.setCalendarData();
+
+
+            });
+    } else {
+        //console.log("In else on controller");
+        $scope.booking = $scope.sharedBookedNameData.setCalendarData();
+        console.log("response back (in else controller): ", $scope.booking);
+    }
+
+
+    $scope.timeArray = $scope.sharedBookedNameData.setTime();
+
                 //console.log("response back (in then controller): ", $scope.booking);
                 //set variables to hold data in arrays
+                $scope.bookedColor = false;
+                //var todaysDate = new Date();
+                //hours that room can be booked 8am - 5pm// needs to be 6pm for certain location
+                //use milTime for comparing and logic, use stdTime for display on calendar
+                //$scope.timeArray = [
+                //    {milTime: "08:00", stdTime: "8:00", milsec: todaysDate.setHours(8, 0), isBooked: false},
+                //    {milTime: "08:15", stdTime: "8:15", milsec: todaysDate.setHours(8, 15), isBooked: false},
+                //    {milTime: "08:30", stdTime: "8:30", milsec: todaysDate.setHours(8, 30), isBooked: false},
+                //    {milTime: "08:45", stdTime: "8:45", milsec: todaysDate.setHours(8, 45), isBooked: false},
+                //    {milTime: "09:00", stdTime: "9:00", milsec: todaysDate.setHours(9, 0), isBooked: false},
+                //    {milTime: "09:15", stdTime: "9:15", milsec: todaysDate.setHours(9, 15), isBooked: false},
+                //    {milTime: "09:30", stdTime: "9:30", milsec: todaysDate.setHours(9, 30), isBooked: false},
+                //    {milTime: "09:45", stdTime: "9:45", milsec: todaysDate.setHours(9, 45), isBooked: false},
+                //    {milTime: "10:00", stdTime: "10:00", milsec: todaysDate.setHours(10, 0), isBooked: false},
+                //    {milTime: "10:15", stdTime: "10:15", milsec: todaysDate.setHours(10, 15), isBooked: false},
+                //    {milTime: "10:30", stdTime: "10:30", milsec: todaysDate.setHours(10, 30), isBooked: false},
+                //    {milTime: "10:45", stdTime: "10:45", milsec: todaysDate.setHours(10, 45), isBooked: false},
+                //    {milTime: "11:00", stdTime: "11:00", milsec: todaysDate.setHours(11, 0), isBooked: false},
+                //    {milTime: "11:15", stdTime: "11:15", milsec: todaysDate.setHours(11, 15), isBooked: false},
+                //    {milTime: "11:30", stdTime: "11:30", milsec: todaysDate.setHours(11, 30), isBooked: false},
+                //    {milTime: "11:45", stdTime: "11:45", milsec: todaysDate.setHours(11, 45), isBooked: false},
+                //    {milTime: "12:00", stdTime: "12:00", milsec: todaysDate.setHours(12, 0), isBooked: false},
+                //    {milTime: "12:15", stdTime: "12:15", milsec: todaysDate.setHours(12, 15), isBooked: false},
+                //    {milTime: "12:30", stdTime: "12:30", milsec: todaysDate.setHours(12, 30), isBooked: false},
+                //    {milTime: "12:45", stdTime: "12:45", milsec: todaysDate.setHours(12, 45), isBooked: false},
+                //    {milTime: "13:00", stdTime: "1:00", milsec: todaysDate.setHours(13, 0), isBooked: false},
+                //    {milTime: "13:15", stdTime: "1:15", milsec: todaysDate.setHours(13, 15), isBooked: false},
+                //    {milTime: "13:30", stdTime: "1:30", milsec: todaysDate.setHours(13, 30), isBooked: false},
+                //    {milTime: "13:45", stdTime: "1:45", milsec: todaysDate.setHours(13, 45), isBooked: false},
+                //    {milTime: "14:00", stdTime: "2:00", milsec: todaysDate.setHours(14, 0), isBooked: false},
+                //    {milTime: "14:15", stdTime: "2:15", milsec: todaysDate.setHours(14, 15), isBooked: false},
+                //    {milTime: "14:30", stdTime: "2:30", milsec: todaysDate.setHours(14, 30), isBooked: false},
+                //    {milTime: "14:45", stdTime: "2:45", milsec: todaysDate.setHours(14, 45), isBooked: false},
+                //    {milTime: "15:00", stdTime: "3:00", milsec: todaysDate.setHours(15, 0), isBooked: false},
+                //    {milTime: "15:15", stdTime: "3:15", milsec: todaysDate.setHours(15, 15), isBooked: false},
+                //    {milTime: "15:30", stdTime: "3:30", milsec: todaysDate.setHours(15, 30), isBooked: false},
+                //    {milTime: "15:45", stdTime: "3:45", milsec: todaysDate.setHours(15, 45), isBooked: false},
+                //    {milTime: "16:00", stdTime: "4:00", milsec: todaysDate.setHours(16, 0), isBooked: false},
+                //    {milTime: "16:15", stdTime: "4:15", milsec: todaysDate.setHours(16, 15), isBooked: false},
+                //    {milTime: "16:30", stdTime: "4:30", milsec: todaysDate.setHours(16, 30), isBooked: false},
+                //    {milTime: "16:45", stdTime: "4:45", milsec: todaysDate.setHours(16, 45), isBooked: false}
+                //];
+
                 var dateStartString = [];
                 var timeStringArray = [];
                 var endTimeStringArray = [];
@@ -185,12 +240,12 @@ myApp.controller('CalendarCtrl', ["$scope", "$location", 'SharedBookedNameData',
                         }
 
 
-            });
-    } else {
-        //console.log("In else on controller");
-        $scope.booking = $scope.sharedBookedNameData.setCalendarData();
-        console.log("response back (in else controller): ", $scope.booking);
-    }
+    //        });
+    //} else {
+    //    //console.log("In else on controller");
+    //    $scope.booking = $scope.sharedBookedNameData.setCalendarData();
+    //    console.log("response back (in else controller): ", $scope.booking);
+    //}
 
 
     //function to see if timeblock on ng-repeat should be shaded like past time, passes in timeblock
