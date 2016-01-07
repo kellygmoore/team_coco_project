@@ -18,10 +18,6 @@ myApp.factory('SharedTimeData', ["$http", function($http){
     //        data = response.data;
 
 
-
-
-
-
     //PUBLIC
     var publicTime = {
         retrieveStartTime: function(){
@@ -40,13 +36,13 @@ myApp.factory('SharedTimeData', ["$http", function($http){
             bookedTimeArray = timeArray;
             roomCapacity = capacity;
             //console.log("In retrieve, TimeData: ", meetingTime);
-        },
-        retrieveMemberData: function(){
-            return memberData;
-        },
-        setMemberData: function(){
-            return getMemberResponse();
         }
+        //retrieveMemberData: function(){
+        //    return memberData;
+        //},
+        //setMemberData: function(){
+        //    return getMemberResponse();
+        //}
 
     };
 

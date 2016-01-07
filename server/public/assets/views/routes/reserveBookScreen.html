@@ -13,11 +13,10 @@
 
 <!--</header>-->
 
-<div class="addAll">
+<div class="selectTime">
 
     <!--<div ng-controller="CalendarCtrl" class="title" layout="row" layout-align="center center">-->
         <!--<h1 ng-show="true">Your Meeting from {{startHour}}:{{meetingValues.minutes}} to  </h1>-->
-        <!--&lt;!&ndash;<h1 ng-show="option in data.availableStartTime" value="{{option.startTime}} + {{option.minutes}}">Your Meeting from {{option.startTime + option.minutes}}:{{meetingValues.minutes}} to {{endHour}} </h1>&ndash;&gt;-->
     <!--</div>-->
     <h1>Book Your Meeting</h1>
 
@@ -27,21 +26,25 @@
     <!--//Logic will be added to display time options based on start time selected on Calendar view-->
 
     <div class="selectStartTime">
-    <md-input container class="md-block">
         <label for="selectStartTime"><h2>Start Time</h2></label>
-        <md-select required name="selectStartTime" id="selectStartTime" ng-model="data.selectStartTime" placeholder="" ng-change="changeTime()">
-            <md-option ng-repeat="option in data.availableStartTime" value="{{option.startTime}} + {{option.minutes}}">{{option.startTime + option.minutes}}</md-option>
-        </md-select>
-    </md-input>
+        <select required name="selectStartTime" id="selectStartTime"
+                ng-model="data.selectStartTime"
+                ng-options="option.stdTime for option in cleanArray"
+                value="{{option}}"
+                ng-change= cleanEndTime()
+                placeholder="">
+        </select>
         </div>
 
-    <div class="selectDuration">
-        <md-input container class="md-block">
-            <label for="selectDuration"><h2>Duration</h2></label>
-            <md-select required name="selectDuration" id="selectDuration" ng-model="data.selectDuration">
-                <md-option ng-repeat="option in data.availableDuration" value="{{option.duration}}" + "minutes">{{option.duration}}  minutes</md-option>
-            </md-select>
-        </md-input>
+    <div class="selectEndTime">
+            <label for="selectEndTime"><h2>End Time</h2></label>
+            <select required name="selectEndTime" id="selectEndTime"
+                    ng-model="data.selectEndTime"
+                    ng-options="option.stdTime for option in availableEndTime"
+                    value="{{option}}"
+                    placeholder="">
+                <!--<option ng-repeat="option in availableEndTime" value="{{option.stdTime}}" + "minutes">{{option.stdTime}}  minutes</md-option>-->
+            </select>
     </div>
 
     <div class="selectAttendance">

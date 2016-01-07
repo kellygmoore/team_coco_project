@@ -41,6 +41,7 @@ myApp.controller('TimeCtrl', ["$scope", "$timeout", "$location", function($scope
         //console.log("what is timeout.endtimer",TimeOut);
 
     $scope.sharedBookedNameData = SharedBookedNameData;
+
     //$scope.booking = [];
     //pull data from factory
     if($scope.sharedBookedNameData.setCalendarData() === undefined){
@@ -55,7 +56,6 @@ myApp.controller('TimeCtrl', ["$scope", "$timeout", "$location", function($scope
         $scope.booking = $scope.sharedBookedNameData.setCalendarData();
         console.log("response back (in else controller): ", $scope.booking);
     }
-
 
     $scope.timeArray = $scope.sharedBookedNameData.setTime();
 
@@ -135,6 +135,7 @@ myApp.controller('TimeCtrl', ["$scope", "$timeout", "$location", function($scope
 
                                         if($scope.timeStringArray[k] === $scope.timeArray[j].milTime) {
                                             //console.log("Found match: ", $scope.timeStringArray[k] + ", " + $scope.timeArray[j].milTime);
+
                                             //$scope.timeArray[j].isBooked = true;
                                             var d = 0;
                                             //console.log("end is: " + endMeetingTime[k]);
@@ -157,8 +158,6 @@ myApp.controller('TimeCtrl', ["$scope", "$timeout", "$location", function($scope
                                 }
 
                         }
-
-
     //        });
     //} else {
     //    //console.log("In else on controller");
@@ -227,34 +226,7 @@ myApp.controller('TimeCtrl', ["$scope", "$timeout", "$location", function($scope
 
         $location.path("/reserveBookScreen");
     };
-    //
-    ////startHour variable holds start time of meeting
-    //$scope.startHour = $scope.sharedTimeData.retrieveTimeData();
-    //
-    ////The following populates the dropdown menus on the reserveBookScreen
-    //$scope.data = {
-    //    selectStartTime: null,
-    //    availableStartTime: [
-    //        {startTime: $scope.startHour + ':', minutes: '00'},
-    //        {startTime: $scope.startHour + ':', minutes: '15'},
-    //        {startTime: $scope.startHour + ':', minutes: '30'},
-    //        {startTime: $scope.startHour + ':', minutes: '45'}
-    //    ],
-    //
-    //    selectDuration:null,
-    //    availableDuration: [
-    //        {duration:'15'},
-    //        {duration:'30'},
-    //        {duration:'45'},
-    //        {duration:'60'}
-    //    ]
-    //};
-    //
 
-//    $scope.changeTime = function(){
-//        //console.log("This is newTime", $scope.newTime);
-//        $scope.newTime = $scope.data.availableStartTime.minutes + $scope.availableDuration.duration
-//    };
 }]);
 
 //Controller for RESERVATION view page///////////////////////////////////////////////

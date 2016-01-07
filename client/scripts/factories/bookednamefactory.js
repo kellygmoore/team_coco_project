@@ -6,13 +6,15 @@ myApp.factory('SharedBookedNameData', ["$http", "dateFilter", function($http, da
     var formattedData = [];
     var todaysDate = new Date();
 
+    //hours that room can be booked 8am - 5pm// needs to be 6pm for certain location
+    //use milTime for comparing and logic, use stdTime for display on calendar
+
+    var todaysDate = new Date();
 
     var addHour5pm = {milTime:"17:00", stdTime: "5:00", milsec:todaysDate.setHours(17,0), isBooked:false};
     var addHour515pm = {milTime:"17:15", stdTime: "5:15", milsec:todaysDate.setHours(17,15), isBooked:false};
     var addHour530pm = {milTime:"17:30", stdTime: "5:30", milsec:todaysDate.setHours(17,30), isBooked:false};
     var addHour545pm = {milTime:"17:45", stdTime: "5:45", milsec:todaysDate.setHours(17,45), isBooked:false};
-
-
 
 
     //hours that room can be booked 8am - 5pm// needs to be 6pm for certain location
@@ -132,13 +134,13 @@ myApp.factory('SharedBookedNameData', ["$http", "dateFilter", function($http, da
         setCalendarData: function(){
             return data;
         },
+
         //retrieveTime: function(){
         //    return getTime();
         //},
         setTime: function(){
             return timeArray;
         }
-
 
         //retrieveBookedName: function () {
         //    return payor;
