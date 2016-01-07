@@ -195,16 +195,17 @@ table, th, td {
     background-color: #fcf0da;
 }
 
-.selectStartTime, .selectEndTime {
+.selectStartTime, .selectEndTime, .selectAttendance {
     width: 55%;
     margin: auto;
 }
 
 
 
-.selectStartTime select, .selectEndTime select{
+.selectStartTime select, .selectEndTime select, .selectAttendance select{
     width: 75%;
     border: double black 2px;
+    font-size: 40px;
 }
 
 .incrementDiv {

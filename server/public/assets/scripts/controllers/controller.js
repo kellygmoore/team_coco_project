@@ -230,6 +230,7 @@ myApp.controller('TimeCtrl', ["$scope", "$timeout", "$location", function($scope
 }]);
 
 //Controller for RESERVATION view page///////////////////////////////////////////////
+
 myApp.controller('ReserveCtrl', ["$scope", "$location", function($scope, $location){
 
     //change out to data from Bamboo
@@ -246,4 +247,5 @@ myApp.controller('ReserveCtrl', ["$scope", "$location", function($scope, $locati
         $location.path("/bookingscreen");
     }
 }]);
+
 
