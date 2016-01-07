@@ -25,9 +25,10 @@
     <div class="selectEndTime">
             <label for="selectEndTime"><h2>End Time</h2></label>
             <select required name="selectEndTime" id="selectEndTime"
-                    ng-model="data.selectEndTime"
+                    ng-model="selectEndTime"
                     ng-options="option.stdTime for option in availableEndTime"
                     value="{{option}}"
+                    ng-change=thisMeeting()
                     placeholder="">
             </select>
     </div>
@@ -39,28 +40,29 @@
                     ng-model="data.selectAttendance"
                     ng-options="option.attendees for option in data.availableCapacity"
                     value="{{option.attendees}}"
+                    >
             </select>
     </div>
     <br>
 </div>
 
-    <div id="bookingSummary" ng-controller="ReserveCtrl" layout-align="center center">
+    <div id="bookingSummary" layout-align="center center">
         <div class="summaryHeader" layout="row" layout-align="center center">
             <h3>Booking Summary</h3>
         </div>
         <div class="summaryDiv" layout="column" layout-align="space-around center">
             <div ng-hide="true">
                 <p>Available: <em>{{available}}</em></p>
-                <p>This meeting: <em>{{thisMeeting}}</em></p>
+                <p>This meeting: <em>{{meetingDuration}}</em></p>
                 <p>Balance: <em>{{balance}}</em></p>
             </div>
             <div ng-hide="true">
                 <p>Available: <em>{{available}}</em></p>
-                <p>This meeting: <em>{{thisMeeting}}</em></p>
+                <p>This meeting: <em>{{meetingDuration}}</em></p>
                 <p>Payment Due: <em>${{paymentDue}}</em></p>
             </div>
             <div ng-hide="false">
-                <p>This meeting: <em>{{thisMeeting}} hours</em></p>
+                <p>This meeting: <em>{{meetingDuration}} hours</em></p>
                 <p>Payment Due: <em>${{paymentDue}}</em>  <span class="charge">(charged to your credit card on file)</span>
                 </p>
             </div>

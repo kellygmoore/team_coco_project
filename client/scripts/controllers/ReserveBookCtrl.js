@@ -14,13 +14,14 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
     $scope.meetingTimesArray = undefined;
     $scope.cleanArray = undefined;
     $scope.cleanEndArray = undefined;
+    $scope.meetingDuration = undefined;
+    //$scope.selectEndTime = null;
     var startTime = {};
     var endTime = {};
 
     //Pulls the room capacity from the shared time factory for use in limiting the room attendance.
     var roomCapacity = $scope.sharedTimeData.retrieveCapacity();
     $scope.stageArray = [];
-
 
     var startIndex = 0;
 
@@ -66,7 +67,7 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
             endTime.hour = 6
         } else {
             endTime.hour = 5;
-        };
+        }
     };
 
     endTimeSet();
@@ -97,13 +98,6 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
         )
     };
 
-    //This is the model used for the start time dropdown menu
-    $scope.data = {
-        selectStartTime: null,
-        cleanArray: cleanStartTime($scope.allStartTimes),
-        selectAttendance: null,
-        availableCapacity: $scope.stageArray
-    };
 
     //The cleanEndTime function creates an array of available End Times
     //based on the start time selected in the drop down
@@ -117,16 +111,12 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
     };
 
     var searchForStart = function(basicArray) {
-        console.log("This is allStartTimes/basicArray", basicArray);
         //console.log("$scope.data.selectStartTime", $scope.data.selectStartTime);
         for (var i = 0; i < basicArray.length; i++) {
             //console.log("milsec value in index ", i, " of basic array=", basicArray[i].milsec);
-            console.log("milsec value of selected start time =", $scope.data.selectStartTime);
-            //
             //console.log("Index basicArray index 18", basicArray[18]);
             if ((basicArray[i].milsec) === ($scope.data.selectStartTime.milsec)) {
                 console.log("I made a match!");
-
                 startIndex = i;
             }
         }
@@ -136,7 +126,7 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
         //Start Index is the index point of the selectedStartTime
         //The loop will create a new array of objects
 
-        var buildArray = function(basicArray){
+    var buildArray = function(basicArray){
         for(var i=(startIndex+1); i<basicArray.length; i++){
             if(basicArray[i].isBooked===false){
                 $scope.cleanEndArray.push(basicArray[i]);
@@ -153,25 +143,25 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
 
 
 
-    $scope.constructTimeObject = function(time){
-        //This function is going to be called every time there is a start time without a meeting in
-        //session and is going to construct and object consisting of a key of start time
-        //then a value of the hour and the minutes.
-    };
-
-    $scope.constructTimeArray = function(meetingTimes){
-        $scope.data.availableStartTime = [];
-
-        for(var i = startTime.hour ;i < endTime.hour ; i++){
-            $scope.constructTimeObject(i);
-        }
-        //We'll need to know: what time it is, how long until the building closes
-        //and also all the times where meetings are being held.
-        //Then we are going to construct a start and end bound time and
-        //create a time object for each of these, skipping over all the times
-        //where a meeting is in session.
-        //Return some array that we will set 'availableStartTime' to.
-    };
+    //$scope.constructTimeObject = function(time){
+    //    //This function is going to be called every time there is a start time without a meeting in
+    //    //session and is going to construct and object consisting of a key of start time
+    //    //then a value of the hour and the minutes.
+    //};
+    //
+    //$scope.constructTimeArray = function(meetingTimes){
+    //    $scope.data.availableStartTime = [];
+    //
+    //    for(var i = startTime.hour ;i < endTime.hour ; i++){
+    //        $scope.constructTimeObject(i);
+    //    }
+    //    //We'll need to know: what time it is, how long until the building closes
+    //    //and also all the times where meetings are being held.
+    //    //Then we are going to construct a start and end bound time and
+    //    //create a time object for each of these, skipping over all the times
+    //    //where a meeting is in session.
+    //    //Return some array that we will set 'availableStartTime' to.
+    //};
 
     var constructCapacityObject = function(){
         for(var i = 2; i <= roomCapacity; i++){
@@ -183,5 +173,35 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
     constructCapacityObject();
     console.log("here is room cap: ", roomCapacity);
     console.log("here is stage array: ", $scope.stageArray);
+
+    //This is the model used for the start time & attendance dropdown menu
+    $scope.data = {
+        selectStartTime: null,
+        cleanArray: cleanStartTime($scope.allStartTimes),
+        selectAttendance: null,
+        availableCapacity: $scope.stageArray
+    };
+
+    //THIS CONTROLS THE BOOKING SUMMARY DIV ON RESERVEBOOK VIEW
+    $scope.available = 10;
+
+    $scope.thisMeeting = function(){
+        var durationMilliseconds;
+        durationMilliseconds = ($scope.selectEndTime.milsec) - ($scope.data.selectStartTime.milsec);
+        $scope.meetingDuration = ((durationMilliseconds)/3600000).toString();
+        console.log("This meeting is", $scope.meetingDuration, "long");
+    };
+    //$scope.meetingDuration = ($scope.selectEndTime.milsec) - ($scope.data.selectStartTime.milsec);
+
+    $scope.balance = $scope.available - $scope.thisMeeting;
+    var chargeByHour = 25;
+    $scope.paymentDue = chargeByHour * $scope.thisMeeting;
+
+    $scope.nevermind = function(){
+        $location.path("/defaultscreen");
+    };
+    $scope.goback = function(){
+        $location.path("/bookingscreen");
+    }
 
 }]);
