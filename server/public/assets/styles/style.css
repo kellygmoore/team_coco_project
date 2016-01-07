@@ -202,23 +202,31 @@ table, th, td {
     background-color: #fcf0da;
 }
 
-.selectStartTime, .selectDuration {
+.selectStartTime, .selectEndTime {
     width: 55%;
     margin: auto;
+}
+
+
+
+.selectStartTime select, .selectEndTime select{
+    width: 75%;
+    border: double black 2px;
 }
 
 .incrementDiv {
     /*border: 5px ridge #F3B449;*/
 
 }
-.addAll{
+.selectTime{
     margin: auto;
     /*border: 5px ridge #F3B449;*/
     background-color: white;
     width: 66%;
+    text-align: center;
 }
 
-.addAll h1{
+.selectTime h1{
     text-align: center;
     padding: 10px;
 }

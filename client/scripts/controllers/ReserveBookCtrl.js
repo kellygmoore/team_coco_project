@@ -7,8 +7,6 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
     //RESERVEBOOK SCREEN
     //SharedTimeData is a factory that holds start time selected with ng-click by the user on the calendar view
 
-
-
     $scope.sharedTimeData = SharedTimeData;
     $scope.sharedBookedName = SharedBookedNameData;
     $scope.allStartTimes = $scope.sharedBookedName.setTime();
@@ -76,14 +74,15 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
 
     //The following populates the dropdown menus on the reserveBookScreen
 
-    //$scope.allStartTimes = $scope.sharedTimeData.retrieveBookedTimes();
+   //The cleanStartTime function takes passes in the array of all available times for the room
+    //It takes out anytimes that are booked and makes a new array called cleanArray
+    //The cleanArray is used to display the available start times of a meeting
 
     var cleanStartTime = function(dirtyArray){
         $scope.cleanArray = [];
         dirtyArray.map(
             function(obj){
-                //UNCOMMENT AT START OF DAY!!!
-                // if((obj.milsec > Date.now()) && (obj.isBooked === false))
+                 if((obj.milsec > Date.now()) && (obj.isBooked === false))
                     if((obj.isBooked === false)){
                     $scope.cleanArray.push(obj);
                 }
@@ -91,13 +90,14 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
         )
     };
 
+    //This is the model used for the start time dropdown menu
     $scope.data = {
         selectStartTime: null,
         cleanArray: cleanStartTime($scope.allStartTimes),
-        //selectEndTime:null,
-        //availableEndTime: $scope.cleanEndArray
     };
 
+    //The cleanEndTime function creates an array of available End Times
+    //based on the start time selected in the drop down
     $scope.cleanEndTime = function(){
         $scope.cleanEndArray = [];
         if($scope.data.selectStartTime!==null){
@@ -106,7 +106,6 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
 
         }
     };
-
 
     var searchForStart = function(basicArray){
         console.log("This is allStartTimes/basicArray", basicArray);
@@ -123,7 +122,9 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
             }
         }
         console.log("this is start index", startIndex);
-
+        //This for loop loops through an array based on the startIndex point established above
+        //Start Index is the index point of the selectedStartTime
+        //The loop will create a new array of objects
         for(var i=(startIndex+1); i<basicArray.length; i++){
             if(basicArray[i].isBooked===false){
                 $scope.cleanEndArray.push(basicArray[i]);
@@ -132,37 +133,13 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
                 break;
             }
         }
-        console.log("this is cleanEndArray", $scope.cleanEndArray);
+        //console.log("this is cleanEndArray", $scope.cleanEndArray);
+
         $scope.selectEndTime = null;
         $scope.availableEndTime = $scope.cleanEndArray;
     };
 
-    //var searchForStart = function(selectedTime){
-    //        if(selectedTime === $scope.data.selectStartTime){
-    //            startIndex = i;
-    //        }
-    //    console.log("this is start index", startIndex);
-    //};
 
-    //var buildArray = function(allTimesArray){
-    //    console.log("This is allStartTimes/basicArray", allTimesArray);
-    //    for(var i=(startIndex+1); i<allTimesArray.length; i++){
-    //    if(allTimesArray[i].isBooked===false){
-    //        $scope.cleanEndArray.push(allTimesArray[i]);
-    //    }else{
-    //        $scope.cleanEndArray.push(allTimesArray[i]);
-    //        break;
-    //    }
-    //}
-    //};
-
-
-    //disableTime($scope.allStartTimes);
-    //console.log ("This is cleanArray", $scope.cleanArray);
-
-
-
-    //console.log("CleanEndArray", $scope.cleanEndArray);
 
     $scope.constructTimeObject = function(time){
         //This function is going to be called every time there is a start time without a meeting in
