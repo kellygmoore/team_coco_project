@@ -100,7 +100,9 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
     //This is the model used for the start time dropdown menu
     $scope.data = {
         selectStartTime: null,
-        cleanArray: cleanStartTime($scope.allStartTimes)
+        cleanArray: cleanStartTime($scope.allStartTimes),
+        selectAttendance: null,
+        availableCapacity: $scope.stageArray
     };
 
     //The cleanEndTime function creates an array of available End Times
@@ -109,29 +111,32 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
         $scope.cleanEndArray = [];
         if($scope.data.selectStartTime!==null){
             searchForStart($scope.allStartTimes);
-            //buildArray();
+            buildArray($scope.allStartTimes);
 
         }
     };
 
-    var searchForStart = function(basicArray){
+    var searchForStart = function(basicArray) {
         console.log("This is allStartTimes/basicArray", basicArray);
         //console.log("$scope.data.selectStartTime", $scope.data.selectStartTime);
-        for(var i = 0; i< basicArray.length; i++) {
+        for (var i = 0; i < basicArray.length; i++) {
             //console.log("milsec value in index ", i, " of basic array=", basicArray[i].milsec);
             console.log("milsec value of selected start time =", $scope.data.selectStartTime);
             //
             //console.log("Index basicArray index 18", basicArray[18]);
-            if((basicArray[i].milsec) === ($scope.data.selectStartTime.milsec)){
+            if ((basicArray[i].milsec) === ($scope.data.selectStartTime.milsec)) {
                 console.log("I made a match!");
 
                 startIndex = i;
             }
         }
         console.log("this is start index", startIndex);
+    };
         //This for loop loops through an array based on the startIndex point established above
         //Start Index is the index point of the selectedStartTime
         //The loop will create a new array of objects
+
+        var buildArray = function(basicArray){
         for(var i=(startIndex+1); i<basicArray.length; i++){
             if(basicArray[i].isBooked===false){
                 $scope.cleanEndArray.push(basicArray[i]);
@@ -178,26 +183,5 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
     constructCapacityObject();
     console.log("here is room cap: ", roomCapacity);
     console.log("here is stage array: ", $scope.stageArray);
-
-
-    //The following populates the dropdown menus on the reserveBookScreen
-    $scope.data = {
-        selectStartTime: null,
-        availableStartTime: [
-            {startTime: $scope.startHour + ':', minutes: '00'},
-            {startTime: $scope.startHour + ':', minutes: '15'},
-            {startTime: $scope.startHour + ':', minutes: '30'},
-            {startTime: $scope.startHour + ':', minutes: '45'}
-        ],
-        selectDuration:null,
-        availableDuration: [
-            {duration:'15'},
-            {duration:'30'},
-            {duration:'45'},
-            {duration:'60'}
-        ],
-        selectAttendance: null,
-        availableCapacity: $scope.stageArray
-    };
 
 }]);

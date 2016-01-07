@@ -1,18 +1,4 @@
 <div class="reserveBook" layout-align="center center">
-<!--<header id="reserveHeader" ng-controller="TimeCtrl" layout="row" layout-align="space-between center">-->
-
-
-    <!--<div id="theRoom">-->
-        <!--<h1>{{room.name}}</h1>-->
-    <!--</div>-->
-
-    <!--<div class="clock">-->
-        <!--<p>{{clock | date:'MMM d'}}</p>-->
-        <!--<p>{{clock | date: 'h:mm a'}}</p>-->
-    <!--</div>-->
-
-<!--</header>-->
-
 <div class="selectTime">
 
     <!--<div ng-controller="CalendarCtrl" class="title" layout="row" layout-align="center center">-->
@@ -43,20 +29,48 @@
                     ng-options="option.stdTime for option in availableEndTime"
                     value="{{option}}"
                     placeholder="">
-                <!--<option ng-repeat="option in availableEndTime" value="{{option.stdTime}}" + "minutes">{{option.stdTime}}  minutes</md-option>-->
             </select>
     </div>
 
     <div class="selectAttendance">
-        <md-input container class="md-block">
             <label for="selectAttendance"><h2>Attendance</h2></label>
-            <md-select required name="selectAttendance" id="selectAttendance" ng-model="data.selectAttendance">
-                <md-option ng-repeat="option in data.availableCapacity" value="{{option.attendees}}">{{option.attendees}}</md-option>
-            </md-select>
-        </md-input>
+            <select required name="selectAttendance"
+                    id="selectAttendance"
+                    ng-model="data.selectAttendance"
+                    ng-options="option.attendees for option in data.availableCapacity"
+                    value="{{option.attendees}}"
+            </select>
     </div>
     <br>
+</div>
 
+    <div id="bookingSummary" ng-controller="ReserveCtrl" layout-align="center center">
+        <div class="summaryHeader" layout="row" layout-align="center center">
+            <h3>Booking Summary</h3>
+        </div>
+        <div class="summaryDiv" layout="column" layout-align="space-around center">
+            <div ng-hide="true">
+                <p>Available: <em>{{available}}</em></p>
+                <p>This meeting: <em>{{thisMeeting}}</em></p>
+                <p>Balance: <em>{{balance}}</em></p>
+            </div>
+            <div ng-hide="true">
+                <p>Available: <em>{{available}}</em></p>
+                <p>This meeting: <em>{{thisMeeting}}</em></p>
+                <p>Payment Due: <em>${{paymentDue}}</em></p>
+            </div>
+            <div ng-hide="false">
+                <p>This meeting: <em>{{thisMeeting}} hours</em></p>
+                <p>Payment Due: <em>${{paymentDue}}</em>  <span class="charge">(charged to your credit card on file)</span>
+                </p>
+            </div>
+            <div class="bookItButton">
+                <button class="md-button" ng-click="nevermind()">Nevermind</button>
+                <button ng-controller="AppCtrl" ng-click="bookingSuccess()" class="md-button md-raised">Book It!</button>
+            </div>
+        </div>
+    </div>
+</div>
     <!--<div class="incrementDiv" layout="row" layout-align="space-around center">-->
 
         <!--<div class="minusButton">-->
@@ -133,34 +147,3 @@
     <!--<div class="title" layout="row" layout-align="center center">-->
         <!--<h2>people</h2>-->
     <!--</div>-->
-
-
-</div>
-
-<div id="bookingSummary" ng-controller="ReserveCtrl" layout-align="center center">
-    <div class="summaryHeader" layout="row" layout-align="center center">
-    <h3>Booking Summary</h3>
-    </div>
-        <div class="summaryDiv" layout="column" layout-align="space-around center">
-            <div ng-hide="true">
-                <p>Available: <em>{{available}}</em></p>
-                <p>This meeting: <em>{{thisMeeting}}</em></p>
-                <p>Balance: <em>{{balance}}</em></p>
-            </div>
-            <div ng-hide="true">
-                <p>Available: <em>{{available}}</em></p>
-                <p>This meeting: <em>{{thisMeeting}}</em></p>
-                <p>Payment Due: <em>${{paymentDue}}</em></p>
-            </div>
-            <div ng-hide="false">
-                <p>This meeting: <em>{{thisMeeting}} hours</em></p>
-                <p>Payment Due: <em>${{paymentDue}}</em>  <span class="charge">(charged to your credit card on file)</span>
-                </p>
-            </div>
-            <div class="bookItButton">
-                <button class="md-button" ng-click="nevermind()">Nevermind</button>
-                <button ng-controller="AppCtrl" ng-click="bookingSuccess()" class="md-button md-raised">Book It!</button>
-            </div>
-        </div>
-</div>
-</div>
