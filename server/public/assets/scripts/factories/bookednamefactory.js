@@ -1,7 +1,7 @@
 
 myApp.factory('SharedBookedNameData', ["$http", "dateFilter", function($http, dateFilter) {
     //console.log("In booked name factory");
-    var payor = {};
+
     var data = undefined;
     var formattedData = [];
     var todaysDate = new Date();
