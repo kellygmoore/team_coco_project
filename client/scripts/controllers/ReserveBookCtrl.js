@@ -136,6 +136,9 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
 
 
    //change out to data from Bamboo
+    $scope.sharedTimeData.setMemberData();
+
+
 
 
 
