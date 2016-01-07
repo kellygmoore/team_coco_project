@@ -210,8 +210,8 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
     if($scope.sharedTimeData.setMemberData() === undefined){
         //console.log("first set is undefined (in controller).");
         $scope.sharedTimeData.retrieveMemberData()
-            .then(function(data) {
-                console.log('retrieveMemberData:', data);
+            .then(function() {
+                //console.log('retrieveMemberData:', data);
                 $scope.memberDataArray = $scope.sharedTimeData.setMemberData();
                 console.log("In controller retrieve member: ", $scope.memberDataArray);
             });
