@@ -26,13 +26,13 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
     var startIndex = 0;
 
     $scope.updateMeetingTimeData = function(){
-        console.log("step 2");
+        //console.log("step 2");
         $scope.sharedBookedName.retrieveBambooData()
             .then(function(){
                 $scope.meetingTimesArray = undefined;
                 $scope.meetingTimesArray = $scope.sharedBookedName.setBambooData();
                 //$scope.meetingTimeSwitch();
-                console.log("Here is the booked data: ", $scope.meetingTimesArray);
+                //console.log("Here is the booked data: ", $scope.meetingTimesArray);
             }
         );
     };
@@ -72,8 +72,8 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
 
     endTimeSet();
 
-    console.log("start time: ", startTime);
-    console.log("end time: ", endTime);
+    //console.log("start time: ", startTime);
+    //console.log("end time: ", endTime);
 
 
     if ($scope.meetingTimesArray == undefined) {
@@ -116,20 +116,20 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
     };
 
     var searchForStart = function(basicArray){
-        console.log("This is allStartTimes/basicArray", basicArray);
+        //console.log("This is allStartTimes/basicArray", basicArray);
         //console.log("$scope.data.selectStartTime", $scope.data.selectStartTime);
         for(var i = 0; i< basicArray.length; i++) {
             //console.log("milsec value in index ", i, " of basic array=", basicArray[i].milsec);
-            console.log("milsec value of selected start time =", $scope.data.selectStartTime);
+            //console.log("milsec value of selected start time =", $scope.data.selectStartTime);
             //
             //console.log("Index basicArray index 18", basicArray[18]);
             if((basicArray[i].milsec) === ($scope.data.selectStartTime.milsec)){
-                console.log("I made a match!");
+                //console.log("I made a match!");
 
                 startIndex = i;
             }
         }
-        console.log("this is start index", startIndex);
+        //console.log("this is start index", startIndex);
         //This for loop loops through an array based on the startIndex point established above
         //Start Index is the index point of the selectedStartTime
         //The loop will create a new array of objects
@@ -177,8 +177,8 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
         }
     };
     constructCapacityObject();
-    console.log("here is room cap: ", roomCapacity);
-    console.log("here is stage array: ", $scope.stageArray);
+    //console.log("here is room cap: ", roomCapacity);
+    //console.log("here is stage array: ", $scope.stageArray);
 
 
     //The following populates the dropdown menus on the reserveBookScreen
@@ -204,7 +204,27 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
 
 
    //change out to data from Bamboo
-   // $scope.sharedTimeData.setMemberData();
+    $scope.memberDataArray = [];
+
+
+    if($scope.sharedTimeData.setMemberData() === undefined){
+        //console.log("first set is undefined (in controller).");
+        $scope.sharedTimeData.retrieveMemberData()
+            .then(function(data) {
+                console.log('retrieveMemberData:', data);
+                $scope.memberDataArray = $scope.sharedTimeData.setMemberData();
+                console.log("In controller retrieve member: ", $scope.memberDataArray);
+            });
+    } else {
+        //console.log("In else on controller");
+        $scope.memberDataArray = $scope.sharedTimeData.setMemberData();
+        console.log("response back (in else controller): ", $scope.memberDataArray);
+    }
+
+
+
+    //$scope.timeArray = $scope.sharedBookedNameData.setTime();
+
 
 
     $scope.available = 10;
