@@ -161,6 +161,7 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
     };
 
     //THIS CONTROLS THE BOOKING SUMMARY DIV ON RESERVEBOOK VIEW
+
     $scope.available = 10;
 
     $scope.thisMeeting = function(){
@@ -169,11 +170,10 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
         $scope.meetingDuration = ((durationMilliseconds)/3600000).toString();
         console.log("This meeting is", $scope.meetingDuration, "long");
     };
-    //$scope.meetingDuration = ($scope.selectEndTime.milsec) - ($scope.data.selectStartTime.milsec);
 
-    $scope.balance = $scope.available - $scope.thisMeeting;
+    $scope.balance = $scope.available - $scope.meetingDuration;
     var chargeByHour = 25;
-    $scope.paymentDue = chargeByHour * $scope.thisMeeting;
+    $scope.paymentDue = chargeByHour * $scope.meetingDuration;
 
     $scope.nevermind = function(){
         $location.path("/defaultscreen");
