@@ -141,28 +141,6 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
         $scope.availableEndTime = $scope.cleanEndArray;
     };
 
-
-
-    //$scope.constructTimeObject = function(time){
-    //    //This function is going to be called every time there is a start time without a meeting in
-    //    //session and is going to construct and object consisting of a key of start time
-    //    //then a value of the hour and the minutes.
-    //};
-    //
-    //$scope.constructTimeArray = function(meetingTimes){
-    //    $scope.data.availableStartTime = [];
-    //
-    //    for(var i = startTime.hour ;i < endTime.hour ; i++){
-    //        $scope.constructTimeObject(i);
-    //    }
-    //    //We'll need to know: what time it is, how long until the building closes
-    //    //and also all the times where meetings are being held.
-    //    //Then we are going to construct a start and end bound time and
-    //    //create a time object for each of these, skipping over all the times
-    //    //where a meeting is in session.
-    //    //Return some array that we will set 'availableStartTime' to.
-    //};
-
     var constructCapacityObject = function(){
         for(var i = 2; i <= roomCapacity; i++){
             $scope.attendObject = {};

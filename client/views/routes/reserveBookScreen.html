@@ -38,7 +38,7 @@
             <select required name="selectAttendance"
                     id="selectAttendance"
                     ng-model="data.selectAttendance"
-                    ng-options="option.attendees for option in data.availableCapacity"
+                    ng-options="option.attendees for option in stageArray"
                     value="{{option.attendees}}"
                     >
             </select>
