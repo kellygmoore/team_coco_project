@@ -102,6 +102,15 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
         return $scope.cleanArray;
     };
 
+    //function thisMeeting(){
+    //    var durationMilliseconds;
+    //    durationMilliseconds = ($scope.data.selectEndTime.milsec) - ($scope.data.selectStartTime.milsec);
+    //    $scope.meetingDuration = ((durationMilliseconds)/3600000).toString();
+    //    console.log("This meeting is", $scope.meetingDuration, "long");
+    //};
+    //
+    //$scope.updateMeetingInfo = thisMeeting;
+
     // uses side-effects to properly init $scope.cleanEndArray
     function initializeCleanEndArray(){
         $scope.cleanEndArray = [];
@@ -109,6 +118,7 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
 
         searchForStart($scope.allStartTimes, fullClickedHourObject);
         buildArray($scope.allStartTimes);
+
         //thisMeeting();
 
     };
@@ -197,6 +207,8 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
         $scope.meetingDuration = ((durationMilliseconds)/3600000).toString();
         console.log("This meeting is", $scope.meetingDuration, "long");
     };
+
+    //$scope.thisMeeting();
 
     $scope.balance = $scope.available - $scope.meetingDuration;
     var chargeByHour = 25;
