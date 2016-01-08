@@ -17,7 +17,7 @@
                 ng-model="data.selectStartTime"
                 ng-options="option.stdTime for option in cleanArray"
                 value="{{option}}"
-                ng-change= cleanEndTime()
+                ng-change="cleanEndTime()"
                 placeholder="">
         </select>
         </div>
@@ -28,7 +28,7 @@
                     ng-model="selectEndTime"
                     ng-options="option.stdTime for option in availableEndTime"
                     value="{{option}}"
-                    ng-change=thisMeeting()
+                    ng-change="thisMeeting()"
                     placeholder="">
             </select>
     </div>
@@ -52,16 +52,16 @@
         </div>
         <div class="summaryDiv" layout="column" layout-align="space-around center">
             <div ng-hide="true">
-                <p>Available: <em>{{available}}</em></p>
+                <p>Available: <em>{{availableMemberHours}}</em></p>
                 <p>This meeting: <em>{{meetingDuration}}</em></p>
                 <p>Balance: <em>{{balance}}</em></p>
             </div>
             <div ng-hide="true">
-                <p>Available: <em>{{available}}</em></p>
+                <p>Available: <em>{{availableMemberHours}}</em></p>
                 <p>This meeting: <em>{{meetingDuration}}</em></p>
                 <p>Payment Due: <em>${{paymentDue}}</em></p>
             </div>
-            <div ng-hide="false">
+            <div ng-show="showChargeMethod">
                 <p>This meeting: <em>{{meetingDuration}} hours</em></p>
                 <p>Payment Due: <em>${{paymentDue}}</em>  <span class="charge">(charged to your credit card on file)</span>
                 </p>

@@ -119,11 +119,11 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
             //console.log("milsec value in index ", i, " of basic array=", basicArray[i].milsec);
             //console.log("Index basicArray index 18", basicArray[18]);
             if ((basicArray[i].milsec) === ($scope.data.selectStartTime.milsec)) {
-                console.log("I made a match!");
+                //console.log("I made a match!");
                 startIndex = i;
             }
 
-        console.log("this is start index", startIndex);
+        //console.log("this is start index", startIndex);
 
 
             //console.log("milsec value of selected start time =", $scope.data.selectStartTime);
@@ -176,31 +176,10 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
         availableCapacity: $scope.stageArray
     };
 
-    //THIS CONTROLS THE BOOKING SUMMARY DIV ON RESERVEBOOK VIEW
 
-    $scope.available = 10;
-
-    $scope.thisMeeting = function(){
-        var durationMilliseconds;
-        durationMilliseconds = ($scope.selectEndTime.milsec) - ($scope.data.selectStartTime.milsec);
-        $scope.meetingDuration = ((durationMilliseconds)/3600000).toString();
-        console.log("This meeting is", $scope.meetingDuration, "long");
-    };
-
-    $scope.balance = $scope.available - $scope.meetingDuration;
-    var chargeByHour = 25;
-    $scope.paymentDue = chargeByHour * $scope.meetingDuration;
-
-    $scope.nevermind = function(){
-        $location.path("/defaultscreen");
-    };
-    $scope.goback = function(){
-        $location.path("/bookingscreen");
-    };
 
    //change out to data from Bamboo
-    $scope.memberDataArray = [];
-
+    $scope.memberDataArray = {};
 
     if($scope.sharedTimeData.setMemberData() === undefined){
         //console.log("first set is undefined (in controller).");
@@ -209,6 +188,13 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
                 //console.log('retrieveMemberData:', data);
                 $scope.memberDataArray = $scope.sharedTimeData.setMemberData();
                 console.log("In controller retrieve member: ", $scope.memberDataArray);
+                $scope.memberAvailableHour = $scope.memberDataArray.remainingIncludedHours;
+                console.log("memberavailablehour: ", $scope.memberAvailableHour);
+        //THIS CONTROLS THE BOOKING SUMMARY DIV ON RESERVEBOOK VIEW
+
+                if($scope.memberAvailableHour === 0){
+                    $scope.showChargeMethod = true;
+                }
             });
     } else {
         //console.log("In else on controller");
@@ -217,9 +203,26 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
     }
 
 
+    $scope.thisMeeting = function(){
+        var durationMilliseconds;
+        durationMilliseconds = ($scope.selectEndTime.milsec) - ($scope.data.selectStartTime.milsec);
+        $scope.meetingDuration = ((durationMilliseconds)/3600000);
+        console.log("This meeting is", $scope.meetingDuration, "long");
+        $scope.balance = $scope.memberAvailableHour - $scope.meetingDuration;
+        console.log("balance: ", $scope.balance);
+        var chargeByHour = 25;
+        $scope.paymentDue = chargeByHour * $scope.meetingDuration;
+        console.log("payment due", $scope.paymentDue);
+    };
 
-    //$scope.timeArray = $scope.sharedBookedNameData.setTime();
 
+
+    $scope.nevermind = function(){
+        $location.path("/defaultscreen");
+    };
+    $scope.goback = function(){
+        $location.path("/bookingscreen");
+    };
 
 
 }]);

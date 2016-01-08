@@ -124,7 +124,7 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
     //a meeting scheduled outside the app during that time.
     $scope.noScheduledMeetinglogic = function(){
         console.log("in no scheduled");
-        var stop = $timeout($scope.updateMeetingTimeData, 60000)
+        var stop = $timeout($scope.updateMeetingTimeData, 60000);
     };
 
     //This series of functions formats the next meeting time.
