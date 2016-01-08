@@ -143,7 +143,7 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
         //The loop will create a new array of objects
 
     var buildArray = function(basicArray){
-        for(var i=(startIndex+1); i<basicArray.length; i++){
+        for(var i = (startIndex + 1); i<basicArray.length; i++){
             if(basicArray[i].isBooked===false){
                 $scope.cleanEndArray.push(basicArray[i]);
             }else{
@@ -216,9 +216,6 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
         $scope.memberDataArray = $scope.sharedTimeData.setMemberData();
         console.log("response back (in else controller): ", $scope.memberDataArray);
     }
-<<<<<<< HEAD
-    //$scope.timeArray = $scope.sharedBookedNameData.setTime();
-=======
 
 
     $scope.thisMeeting = function(){
@@ -233,8 +230,6 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
         console.log("payment due", $scope.paymentDue);
     };
 
-
-
     $scope.nevermind = function(){
         $location.path("/defaultscreen");
     };
@@ -242,6 +237,4 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
         $location.path("/bookingscreen");
     };
 
-
->>>>>>> master
 }]);

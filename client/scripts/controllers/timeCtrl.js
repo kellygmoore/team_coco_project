@@ -49,8 +49,8 @@ myApp.controller('TimeCtrl', ["$scope", "$timeout", "$location", 'dateFilter','S
     $scope.bookingMember = "The Grinch";
     $scope.clock = "loading clock..."; // initialise the time variable
     $scope.tickInterval = 1000; //ms
-    $scope.startTime;
-    $scope.endTime;
+    $scope.startTime = undefined;
+    $scope.endTime = undefined;
     $scope.meetingTimesObject = $scope.sharedTimeData.retrieveConfirmedMeetingTimes;
 
 
