@@ -15,6 +15,8 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
     $scope.cleanArray = undefined;
     $scope.cleanEndArray = undefined;
     $scope.meetingDuration = undefined;
+    $scope.clickedHour = $scope.sharedTimeData.retrieveStartTime();
+    console.log("here's clickedHour:", $scope.clickedHour);
     //$scope.selectEndTime = null;
     var startTime = {};
     var endTime = {};
@@ -90,7 +92,8 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
         $scope.cleanArray = [];
         dirtyArray.map(
             function(obj){
-                 if((obj.milsec > Date.now()) && (obj.isBooked === false))
+                 //TURN BACK ON AT START OF DAY
+                 //if((obj.milsec > Date.now()) && (obj.isBooked === false))
                     if((obj.isBooked === false)){
                     $scope.cleanArray.push(obj);
                 }
@@ -137,7 +140,7 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
         }
         //console.log("this is cleanEndArray", $scope.cleanEndArray);
 
-        $scope.selectEndTime = null;
+        $scope.selectEndTime = $scope.cleanArray[1].stdTime;
         $scope.availableEndTime = $scope.cleanEndArray;
     };
 

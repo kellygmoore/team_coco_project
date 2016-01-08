@@ -1,4 +1,6 @@
+
 <div class="reserveBook" layout-align="center center">
+    <div ng-include="'/assets/views/templates/thetop.html'"></div>
 <div class="selectTime">
 
     <!--<div ng-controller="CalendarCtrl" class="title" layout="row" layout-align="center center">-->
@@ -13,29 +15,30 @@
 
     <div class="selectStartTime">
         <label for="selectStartTime"><h2>Start Time</h2></label>
-        <select required name="selectStartTime" id="selectStartTime"
+        <select name="selectStartTime" id="selectStartTime"
                 ng-model="data.selectStartTime"
                 ng-options="option.stdTime for option in cleanArray"
                 value="{{option}}"
-                ng-change= cleanEndTime()
-                placeholder="">
+                ng-change= cleanEndTime()>
+            <option value="">{{clickedHour}}</option>
         </select>
         </div>
 
     <div class="selectEndTime">
             <label for="selectEndTime"><h2>End Time</h2></label>
-            <select required name="selectEndTime" id="selectEndTime"
+            <select name="selectEndTime" id="selectEndTime"
                     ng-model="selectEndTime"
                     ng-options="option.stdTime for option in availableEndTime"
                     value="{{option}}"
                     ng-change=thisMeeting()
-                    placeholder="">
+                    >
+                <option value="">{{selectEndTime}}</option>
             </select>
     </div>
 
     <div class="selectAttendance">
             <label for="selectAttendance"><h2>Attendance</h2></label>
-            <select required name="selectAttendance"
+            <select name="selectAttendance"
                     id="selectAttendance"
                     ng-model="data.selectAttendance"
                     ng-options="option.attendees for option in stageArray"
