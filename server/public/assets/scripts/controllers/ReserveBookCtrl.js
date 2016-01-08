@@ -93,32 +93,46 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
         dirtyArray.map(
             function(obj){
                  //TURN BACK ON AT START OF DAY
-                 //if((obj.milsec > Date.now()) && (obj.isBooked === false))
-                    if((obj.isBooked === false)){
+                 if((obj.milsec > Date.now()) && (obj.isBooked === false)){
+                 //   if((obj.isBooked === false)){
                     $scope.cleanArray.push(obj);
                 }
             }
         )
+        return $scope.cleanArray;
     };
 
+    // uses side-effects to properly init $scope.cleanEndArray
+    function initializeCleanEndArray(){
+        $scope.cleanEndArray = [];
+        var fullClickedHourObject = findClickedHour(cleanArray, $scope.clickedHour);
+
+        searchForStart($scope.allStartTimes, fullClickedHourObject);
+        buildArray($scope.allStartTimes);
+        //thisMeeting();
+
+    };
 
     //The cleanEndTime function creates an array of available End Times
     //based on the start time selected in the drop down
-    $scope.cleanEndTime = function(){
-        $scope.cleanEndArray = [];
-        if($scope.data.selectStartTime!==null){
-            searchForStart($scope.allStartTimes);
-            buildArray($scope.allStartTimes);
+    $scope.cleanEndTime = initializeCleanEndArray;
 
+    var findClickedHour = function(array, clickedhour){
+        for(var i= 0; i < array.length; i++){
+            if(array[i].milTime === clickedhour) {
+                return array[i];
+            }
         }
+        console.log("uh oh");
     };
 
-    var searchForStart = function(basicArray) {
+
+    var searchForStart = function(basicArray, availableTimeInfo) {
         //console.log("$scope.data.selectStartTime", $scope.data.selectStartTime);
         for (var i = 0; i < basicArray.length; i++) {
             //console.log("milsec value in index ", i, " of basic array=", basicArray[i].milsec);
             //console.log("Index basicArray index 18", basicArray[18]);
-            if ((basicArray[i].milsec) === ($scope.data.selectStartTime.milsec)) {
+            if ((basicArray[i].milsec) === (availableTimeInfo.milsec)) {
                 console.log("I made a match!");
                 startIndex = i;
             }
@@ -140,8 +154,6 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
         }
         //console.log("this is cleanEndArray", $scope.cleanEndArray);
 
-        $scope.selectEndTime = $scope.cleanArray[1].stdTime;
-        $scope.availableEndTime = $scope.cleanEndArray;
     };
 
     var constructCapacityObject = function(){
@@ -155,13 +167,25 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
     console.log("here is room cap: ", roomCapacity);
     console.log("here is stage array: ", $scope.stageArray);
 
+    var cleanArray = cleanStartTime($scope.allStartTimes);
+    console.log("Here's cleanArray", cleanArray);
+
+
+    console.log("about to init cleanEndArray on initial load");
+    initializeCleanEndArray();
+    console.log("finished init-ing cleanEndArray on initial load", $scope.cleanEndArray);
+
     //This is the model used for the start time & attendance dropdown menu
     $scope.data = {
-        selectStartTime: null,
-        cleanArray: cleanStartTime($scope.allStartTimes),
+        cleanArray: cleanArray,
+        selectStartTime: findClickedHour(cleanArray, $scope.clickedHour),
+        selectEndTime: $scope.cleanEndArray[0],
+        availableEndTime: $scope.cleanEndArray,
         selectAttendance: null,
         availableCapacity: $scope.stageArray
     };
+
+
 
     //THIS CONTROLS THE BOOKING SUMMARY DIV ON RESERVEBOOK VIEW
 
@@ -169,7 +193,7 @@ myApp.controller('ReserveBookCtrl',['$scope', 'SharedTimeData', 'SharedBookedNam
 
     $scope.thisMeeting = function(){
         var durationMilliseconds;
-        durationMilliseconds = ($scope.selectEndTime.milsec) - ($scope.data.selectStartTime.milsec);
+        durationMilliseconds = ($scope.data.selectEndTime.milsec) - ($scope.data.selectStartTime.milsec);
         $scope.meetingDuration = ((durationMilliseconds)/3600000).toString();
         console.log("This meeting is", $scope.meetingDuration, "long");
     };

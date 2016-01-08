@@ -20,19 +20,18 @@
                 ng-options="option.stdTime for option in cleanArray"
                 value="{{option}}"
                 ng-change= cleanEndTime()>
-            <option value="">{{clickedHour}}</option>
+            <!--<option value="">{{data.selectStartTime}}</option>-->
         </select>
         </div>
 
     <div class="selectEndTime">
             <label for="selectEndTime"><h2>End Time</h2></label>
             <select name="selectEndTime" id="selectEndTime"
-                    ng-model="selectEndTime"
-                    ng-options="option.stdTime for option in availableEndTime"
+                    ng-model="data.selectEndTime"
+                    ng-options="option.stdTime for option in data.availableEndTime"
                     value="{{option}}"
                     ng-change=thisMeeting()
                     >
-                <option value="">{{selectEndTime}}</option>
             </select>
     </div>
 
