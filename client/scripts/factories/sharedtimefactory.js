@@ -35,11 +35,11 @@ myApp.factory('SharedTimeData', ["$http", function ($http) {
     //PUBLIC
     var publicTime = {
         retrieveStartTime: function () {
-            console.log("In retrieve, TimeData: ", meetingTime);
+            //console.log("In retrieve, TimeData: ", meetingTime);
             return meetingTime.clickedHour;
         },
         retrieveBookedTimes: function () {
-            console.log("bookedTimeArray: ", bookedTimeArray);
+            //console.log("bookedTimeArray: ", bookedTimeArray);
             return bookedTimeArray;
         },
         retrieveCapacity: function () {
@@ -62,20 +62,20 @@ myApp.factory('SharedTimeData', ["$http", function ($http) {
           return getMemberResponse()
                 .then(function (response) {
                     memberData = response.data;
-                    console.log("In factory, here is memberdata: ", memberData);
+                    //console.log("In factory, here is memberdata: ", memberData);
                     memberId = (memberData.id).toString();
                     memberName = memberData.firstName;
                     return getMemberData(memberId)
                         .then(function (response) {
                             memberMeetingData = response.data;
-                            console.log("TOP membermeetingdata: ", memberMeetingData);
+                            //console.log("TOP membermeetingdata: ", memberMeetingData);
                             return memberMeetingData;
                         });
                 }
             );
         },
         setMemberData: function () {
-            console.log("BOTTOM membermeetingdata: ", memberMeetingData);
+            //console.log("BOTTOM membermeetingdata: ", memberMeetingData);
             return memberMeetingData;
         }
 
