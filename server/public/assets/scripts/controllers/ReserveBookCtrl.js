@@ -17,6 +17,8 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
     $scope.cleanArray = undefined;
     $scope.cleanEndArray = undefined;
     $scope.meetingDuration = undefined;
+    $scope.clickedHour = $scope.sharedTimeData.retrieveStartTime();
+    console.log("here's clickedHour:", $scope.clickedHour);
     //$scope.selectEndTime = null;
     var startTime = {};
     var endTime = {};
@@ -92,46 +94,61 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
         $scope.cleanArray = [];
         dirtyArray.map(
             function(obj){
-                 if((obj.milsec > Date.now()) && (obj.isBooked === false))
-                    if((obj.isBooked === false)){
+                 //TURN BACK ON AT START OF DAY
+                 if((obj.milsec > Date.now()) && (obj.isBooked === false)){
+                 //   if((obj.isBooked === false)){
                     $scope.cleanArray.push(obj);
                 }
             }
         )
+        return $scope.cleanArray;
     };
 
+    //function thisMeeting(){
+    //    var durationMilliseconds;
+    //    durationMilliseconds = ($scope.data.selectEndTime.milsec) - ($scope.data.selectStartTime.milsec);
+    //    $scope.meetingDuration = ((durationMilliseconds)/3600000).toString();
+    //    console.log("This meeting is", $scope.meetingDuration, "long");
+    //};
+    //
+    //$scope.updateMeetingInfo = thisMeeting;
+
+    // uses side-effects to properly init $scope.cleanEndArray
+    function initializeCleanEndArray(){
+        $scope.cleanEndArray = [];
+        var fullClickedHourObject = findClickedHour(cleanArray, $scope.clickedHour);
+
+        searchForStart($scope.allStartTimes, fullClickedHourObject);
+        buildArray($scope.allStartTimes);
+
+        //thisMeeting();
+
+    };
 
     //The cleanEndTime function creates an array of available End Times
     //based on the start time selected in the drop down
-    $scope.cleanEndTime = function(){
-        $scope.cleanEndArray = [];
-        if($scope.data.selectStartTime!==null){
-            searchForStart($scope.allStartTimes);
-            buildArray($scope.allStartTimes);
+    $scope.cleanEndTime = initializeCleanEndArray;
 
+    var findClickedHour = function(array, clickedhour){
+        for(var i= 0; i < array.length; i++){
+            if(array[i].milTime === clickedhour) {
+                return array[i];
+            }
         }
+        console.log("uh oh");
     };
 
 
-    var searchForStart = function(basicArray) {
+
+    var searchForStart = function(basicArray, availableTimeInfo) {
 
         //console.log("$scope.data.selectStartTime", $scope.data.selectStartTime);
         for (var i = 0; i < basicArray.length; i++) {
             //console.log("milsec value in index ", i, " of basic array=", basicArray[i].milsec);
             //console.log("Index basicArray index 18", basicArray[18]);
-            if ((basicArray[i].milsec) === ($scope.data.selectStartTime.milsec)) {
-                //console.log("I made a match!");
-                startIndex = i;
-            }
 
-        //console.log("this is start index", startIndex);
-
-
-            //console.log("milsec value of selected start time =", $scope.data.selectStartTime);
-            //
-            //console.log("Index basicArray index 18", basicArray[18]);
-            if((basicArray[i].milsec) === ($scope.data.selectStartTime.milsec)){
-                //console.log("I made a match!");
+            if ((basicArray[i].milsec) === (availableTimeInfo.milsec)) {
+                console.log("I made a match!");
                 startIndex = i;
             }
         }
@@ -154,8 +171,6 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
         }
         //console.log("this is cleanEndArray", $scope.cleanEndArray);
 
-        $scope.selectEndTime = null;
-        $scope.availableEndTime = $scope.cleanEndArray;
     };
 
     var constructCapacityObject = function(){
@@ -169,10 +184,20 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
     //console.log("here is room cap: ", roomCapacity);
     //console.log("here is stage array: ", $scope.stageArray);
 
+    var cleanArray = cleanStartTime($scope.allStartTimes);
+    console.log("Here's cleanArray", cleanArray);
+
+
+    console.log("about to init cleanEndArray on initial load");
+    initializeCleanEndArray();
+    console.log("finished init-ing cleanEndArray on initial load", $scope.cleanEndArray);
+
     //This is the model used for the start time & attendance dropdown menu
     $scope.data = {
-        selectStartTime: null,
-        cleanArray: cleanStartTime($scope.allStartTimes),
+        cleanArray: cleanArray,
+        selectStartTime: findClickedHour(cleanArray, $scope.clickedHour),
+        selectEndTime: $scope.cleanEndArray[0],
+        availableEndTime: $scope.cleanEndArray,
         selectAttendance: null,
         availableCapacity: $scope.stageArray
     };
@@ -185,8 +210,8 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
     var chargeByHour = 25;
     $scope.paymentDue = chargeByHour * $scope.meetingDuration;
 
+    //THIS CONTROLS THE BOOKING SUMMARY DIV ON RESERVEBOOK VIEW
 
-   //change out to data from Bamboo
     $scope.memberDataArray = {};
 
     if($scope.sharedTimeData.setMemberData() === undefined){
@@ -223,6 +248,12 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
         $scope.paymentDue = chargeByHour * $scope.meetingDuration;
         console.log("payment due", $scope.paymentDue);
     };
+
+    //$scope.thisMeeting();
+
+    $scope.balance = $scope.available - $scope.meetingDuration;
+    var chargeByHour = 25;
+    $scope.paymentDue = chargeByHour * $scope.meetingDuration;
 
     $scope.nevermind = function(){
         $location.path("/defaultscreen");

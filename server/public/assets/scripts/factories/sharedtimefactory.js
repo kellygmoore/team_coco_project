@@ -53,6 +53,7 @@ myApp.factory('SharedTimeData', ["$http", function ($http) {
             bookedTimeArray = timeArray;
             roomCapacity = capacity;
             //console.log("In retrieve, TimeData: ", meetingTime);
+            return meetingTime;
         },
         setConfirmedMeetingTimes: function(startTime, endTime){
             console.log("set is called");
