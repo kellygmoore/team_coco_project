@@ -2,7 +2,7 @@
  * Created by kellygarskemoore on 12/10/15.
  */
 
-myApp.controller('TimeCtrl', ["$scope", "$timeout", "$location", function($scope, $timeout,$location,TimeOut) {
+myApp.controller('TimeCtrl', ["$scope", "$timeout", "$location", function($scope, $timeout, $location) {
 
     //Page will timeout back to default page based of config settings
 

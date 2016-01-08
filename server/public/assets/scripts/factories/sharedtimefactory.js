@@ -55,8 +55,10 @@ myApp.factory('SharedTimeData', ["$http", function ($http) {
             //console.log("In retrieve, TimeData: ", meetingTime);
         },
         setConfirmedMeetingTimes: function(startTime, endTime){
+            console.log("set is called");
             confirmedMeetingTimesObject.startTime = startTime;
             confirmedMeetingTimesObject.endTime = endTime;
+            //return confirmedMeetingTimesObject;
         },
         retrieveMemberData: function () {
           return getMemberResponse()

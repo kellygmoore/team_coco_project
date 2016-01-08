@@ -2,7 +2,8 @@
  * Created by samuelmoss on 1/4/16.
  */
 
-myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'SharedBookedNameData', 'dateFilter', 'TimeOut', function($scope, $location, SharedTimeData, SharedBookedNameData, dateFilter,TimeOut){
+myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'SharedBookedNameData', 'dateFilter', 'TimeOut',
+    function($scope, $location, SharedTimeData, SharedBookedNameData, dateFilter, TimeOut){
 
     //console.log("we are in the RBC");
     //RESERVEBOOK SCREEN
@@ -180,14 +181,6 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
 
     $scope.available = 10;
 
-    $scope.thisMeeting = function(){
-        var durationMilliseconds;
-        $scope.sharedTimeData.setConfirmedMeetingTimes($scope.data.selectStartTime.milsec, $scope.selectEndTime.milsec);
-        durationMilliseconds = ($scope.selectEndTime.milsec) - ($scope.data.selectStartTime.milsec);
-        $scope.meetingDuration = ((durationMilliseconds)/3600000).toString();
-        console.log("This meeting is", $scope.meetingDuration, "long");
-    };
-
     $scope.balance = $scope.available - $scope.meetingDuration;
     var chargeByHour = 25;
     $scope.paymentDue = chargeByHour * $scope.meetingDuration;
@@ -221,6 +214,7 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
     $scope.thisMeeting = function(){
         var durationMilliseconds;
         durationMilliseconds = ($scope.selectEndTime.milsec) - ($scope.data.selectStartTime.milsec);
+        $scope.sharedTimeData.setConfirmedMeetingTimes($scope.data.selectStartTime.milsec, $scope.selectEndTime.milsec);
         $scope.meetingDuration = ((durationMilliseconds)/3600000);
         console.log("This meeting is", $scope.meetingDuration, "long");
         $scope.balance = $scope.memberAvailableHour - $scope.meetingDuration;
