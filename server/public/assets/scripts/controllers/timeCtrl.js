@@ -1,7 +1,7 @@
 /**
  * Created by Zeo on 1/5/16.
  */
-myApp.controller('TimeCtrl', ["$scope", "$timeout", "$location",  'SharedRoomData', function($scope, $timeout,$location, SharedRoomData) {
+myApp.controller('TimeCtrl', ["$scope", "$timeout", "$location", 'dateFilter','SharedRoomData', 'SharedTimeData', function($scope, $timeout,$location, dateFilter, SharedRoomData, SharedTimeData) {
 
 
 
@@ -45,14 +45,28 @@ myApp.controller('TimeCtrl', ["$scope", "$timeout", "$location",  'SharedRoomDat
     //console.log("Shared room data: ", $scope.room);
 
     /////////////////////////////
+    $scope.sharedTimeData = SharedTimeData;
     $scope.bookingMember = "The Grinch";
     $scope.clock = "loading clock..."; // initialise the time variable
     $scope.tickInterval = 1000; //ms
+    $scope.startTime;
+    $scope.endTime;
+    $scope.meetingTimesObject = $scope.sharedTimeData.retrieveConfirmedMeetingTimes;
+
 
     var tick = function() {
         $scope.clock = Date.now(); // get the current time
         $timeout(tick, $scope.tickInterval); // reset the timer
     };
+
+    $scope.convertTimes = function(){
+      var format = 'hh:mm';
+        console.log("here is the meeting times object: ", $scope.meetingTimesObject);
+        $scope.startTime = dateFilter($scope.meetingTimesObject.startTime,format);
+        $scope.endTime = dateFilter($scope.meetingTimesObject.endTime,format);
+    };
+
+    $scope.convertTimes();
 
     // Start the timer
     $timeout(tick, $scope.tickInterval);

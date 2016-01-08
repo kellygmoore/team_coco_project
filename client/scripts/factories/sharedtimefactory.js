@@ -7,6 +7,7 @@ myApp.factory('SharedTimeData', ["$http", function ($http) {
     var memberId, memberName;
     var memberData = undefined;
     var memberMeetingData = undefined;
+    var confirmedMeetingTimesObject = {};
 
     var getMemberResponse = function () {
         return $http({
@@ -44,11 +45,18 @@ myApp.factory('SharedTimeData', ["$http", function ($http) {
         retrieveCapacity: function () {
             return roomCapacity;
         },
+        retrieveConfirmedMeetingTimes: function(){
+            return confirmedMeetingTimesObject;
+        },
         setTimeData: function (hour, timeArray, capacity) {
             meetingTime = {clickedHour: hour};
             bookedTimeArray = timeArray;
             roomCapacity = capacity;
             //console.log("In retrieve, TimeData: ", meetingTime);
+        },
+        setConfirmedMeetingTimes: function(startTime, endTime){
+            confirmedMeetingTimesObject.startTime = startTime;
+            confirmedMeetingTimesObject.endTime = endTime;
         },
         retrieveMemberData: function () {
           return getMemberResponse()

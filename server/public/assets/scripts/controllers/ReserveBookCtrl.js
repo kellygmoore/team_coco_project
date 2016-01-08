@@ -182,6 +182,7 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
 
     $scope.thisMeeting = function(){
         var durationMilliseconds;
+        $scope.sharedTimeData.setConfirmedMeetingTimes($scope.data.selectStartTime.milsec, $scope.selectEndTime.milsec);
         durationMilliseconds = ($scope.selectEndTime.milsec) - ($scope.data.selectStartTime.milsec);
         $scope.meetingDuration = ((durationMilliseconds)/3600000).toString();
         console.log("This meeting is", $scope.meetingDuration, "long");
@@ -215,11 +216,5 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
         $scope.memberDataArray = $scope.sharedTimeData.setMemberData();
         console.log("response back (in else controller): ", $scope.memberDataArray);
     }
-
-
-
     //$scope.timeArray = $scope.sharedBookedNameData.setTime();
-
-
-
 }]);
