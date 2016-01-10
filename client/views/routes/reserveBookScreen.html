@@ -61,11 +61,11 @@
             <div ng-show="showHoursAndChargeMethod">
                 <p>Available: <em>{{memberAvailableHour}}</em></p>
                 <p>This meeting: <em>{{meetingDuration}}</em></p>
-                <p>Payment Due: <em>${{paymentDue}}</em></p>
+                <p>Payment Due: <em>{{paymentDue | currency}}</em></p>
             </div>
             <div ng-show="showChargeMethod">
                 <p>This meeting: <em>{{meetingDuration}} hours</em></p>
-                <p>Payment Due: <em>${{paymentDue}}</em>  <span class="charge">(charged to your credit card on file)</span>
+                <p>Payment Due: <em>{{paymentDue | currency}}</em>  <span class="charge">(charged to your credit card on file)</span>
                 </p>
             </div>
             <div class="bookItButton">

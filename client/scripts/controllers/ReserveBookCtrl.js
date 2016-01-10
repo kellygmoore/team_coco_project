@@ -186,18 +186,7 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
             buildArray($scope.allStartTimes);
             console.log("In cleanEndTimeUpdate", $scope.data.selectEndTime);
         };
-    //
-    //    //CAPACITY OBJECT
-    //    var constructCapacityObject = function(){
-    //    for(var i = 2; i <= roomCapacity; i++){
-    //        $scope.attendObject = {};
-    //        $scope.attendObject.attendees = (i).toString();
-    //        $scope.stageArray.push($scope.attendObject);
-    //    }
-    //};
-    //constructCapacityObject();
-    //console.log("here is room cap: ", roomCapacity);
-    //console.log("here is stage array: ", $scope.stageArray);
+
 
     var cleanArray = cleanStartTime($scope.allStartTimes);
     console.log("Here's cleanArray", cleanArray);
@@ -232,17 +221,14 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
         $scope.memberDataArray = {};
 
         if($scope.sharedTimeData.setMemberData() === undefined){
-            //console.log("first set is undefined (in controller).");
             $scope.sharedTimeData.retrieveMemberData()
                 .then(function() {
-                    //console.log('retrieveMemberData:', data);
                     $scope.memberDataArray = $scope.sharedTimeData.setMemberData();
                     console.log("In controller retrieve member: ", $scope.memberDataArray);
                     $scope.memberAvailableHour = $scope.memberDataArray.remainingIncludedHours;
                     console.log("memberavailablehour: ", $scope.memberAvailableHour);
                 });
         } else {
-            //console.log("In else on controller");
             $scope.memberDataArray = $scope.sharedTimeData.setMemberData();
             console.log("response back (in else controller): ", $scope.memberDataArray);
         }
@@ -265,12 +251,17 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
             } else if($scope.memberAvailableHour < $scope.meetingDuration){
                 $scope.showHoursMethod = false;
                 $scope.showHoursAndChargeMethod = true;
-                $scope.paymentDue = chargeByHour * ($scope.meetingDuration - $scope.memberAvailableHour);
+                $scope.paymentDue = formatPrice(chargeByHour * ($scope.meetingDuration - $scope.memberAvailableHour));
             }
 
             $scope.balance = $scope.memberAvailableHour - $scope.meetingDuration;
             console.log("balance: ", $scope.balance);
             console.log("payment due", $scope.paymentDue);
+        };
+
+        //This function pulls in the price and formats it $DD.cc.
+        var formatPrice = function(price){
+
         };
 
     //THIS CONTROLS THE BOOKING SUMMARY DIV ON RESERVEBOOK VIEW
