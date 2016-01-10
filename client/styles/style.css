@@ -54,18 +54,18 @@
     /*border: 2px solid purple;*/
     /*padding-top: 250px;*/
     /*line-height: 100%;*/
-    margin-top: 60%;
+    margin-top: 80%;
 }
 
 .bottom-div p {
-    padding-bottom: 0;
-
+    /*padding-bottom: 0;*/
     text-shadow: 4px 4px 3px #55606F;
+    margin: auto;
 }
 
 .time {
     font-size: 100px;
-    height:300px;
+    /*height:300px;*/
     /*border: 1px dashed black;*/
 }
 
@@ -124,6 +124,7 @@ header {
     width: 800px;
     height: 1280px;
     margin: 20px;
+
 }
 
 table, th, td {
@@ -242,14 +243,6 @@ table, th, td {
     fill: #FF5962
 }
 
-#reserveHeader {
-    padding: 0 15px 0 15px;
-    height: auto;
-    background-color: #F3B449;
-    width: auto;
-    margin-top: 0;
-
-}
 #bookingSummary {
     border: 5px ridge #F3B449;
     width: 66%;
@@ -321,6 +314,10 @@ table, th, td {
     width: 90%;
     margin:auto;
     /*background-color:#25ae90;*/
+}
+
+.selectRoom {
+    width: 30%;
 }
 
 /*SUCCESS BOOKING MODAL*/
