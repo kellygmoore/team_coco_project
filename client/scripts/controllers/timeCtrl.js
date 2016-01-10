@@ -23,7 +23,7 @@ myApp.controller('TimeCtrl', ["$scope", "$timeout", "$location", 'dateFilter','S
     };
 
     $scope.convertTimes = function(){
-      var format = 'hh:mm';
+      var format = 'h:mm';
         console.log("here is the meeting times object: ", $scope.meetingTimesObject);
         $scope.startTime = dateFilter($scope.meetingTimesObject.startTime,format);
         $scope.endTime = dateFilter($scope.meetingTimesObject.endTime,format);
