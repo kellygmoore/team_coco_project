@@ -16,6 +16,10 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
     $scope.cleanArray = undefined;
     $scope.cleanEndArray = undefined;
     $scope.meetingDuration = undefined;
+    $scope.showHoursMethod = true;
+    $scope.showHoursAndChargeMethod = false;
+    $scope.showChargeMethod = false;
+
     //$scope.selectEndTime = null;
     var startTime = {};
     var endTime = {};
@@ -192,9 +196,7 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
                 console.log("memberavailablehour: ", $scope.memberAvailableHour);
         //THIS CONTROLS THE BOOKING SUMMARY DIV ON RESERVEBOOK VIEW
 
-                if($scope.memberAvailableHour === 0){
-                    $scope.showChargeMethod = true;
-                }
+
             });
     } else {
         //console.log("In else on controller");
@@ -205,15 +207,27 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
 
     $scope.thisMeeting = function(){
         var durationMilliseconds;
+        var chargeByHour = 25;
         durationMilliseconds = ($scope.selectEndTime.milsec) - ($scope.data.selectStartTime.milsec);
         $scope.meetingDuration = ((durationMilliseconds)/3600000);
-        console.log("This meeting is", $scope.meetingDuration, "long");
+        console.log("meetingDuration: ", $scope.meetingDuration);
+
+        if($scope.memberAvailableHour === 0){
+            $scope.showHoursMethod = false;
+            $scope.showChargeMethod = true;
+            $scope.paymentDue = chargeByHour * $scope.meetingDuration;
+            //$scope.showHoursAndChargeMethod = false;
+        } else if($scope.memberAvailableHour < $scope.meetingDuration){
+            $scope.showHoursMethod = false;
+            $scope.showHoursAndChargeMethod = true;
+            $scope.paymentDue = chargeByHour * ($scope.meetingDuration - $scope.memberAvailableHour);
+        }
+
         $scope.balance = $scope.memberAvailableHour - $scope.meetingDuration;
         console.log("balance: ", $scope.balance);
-        var chargeByHour = 25;
-        $scope.paymentDue = chargeByHour * $scope.meetingDuration;
         console.log("payment due", $scope.paymentDue);
     };
+
 
 
 
@@ -226,3 +240,8 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
 
 
 }]);
+
+
+//jason@foundrymakes.com / 64W955Aq
+
+//jason.spidle@gmail.com / LxLiWyE2
