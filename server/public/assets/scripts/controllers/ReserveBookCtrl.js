@@ -16,7 +16,7 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
     $scope.meetingTimesArray = undefined;
     $scope.cleanArray = undefined;
     $scope.cleanEndArray = undefined;
-    $scope.meetingDuration = undefined;
+    $scope.meetingDuration = '.25';
     $scope.clickedHour = $scope.sharedTimeData.retrieveStartTime();
     console.log("here's clickedHour:", $scope.clickedHour);
     $scope.showHoursMethod = true;
@@ -104,7 +104,7 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
                     $scope.cleanArray.push(obj);
                 }
             }
-        )
+        );
         return $scope.cleanArray;
     };
 
@@ -165,7 +165,7 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
         //The loop will create a new array of objects
 
     var buildArray = function(basicArray){
-        console.log("This is start index:", startIndex)
+        console.log("This is start index:", startIndex);
         for(var i = (startIndex + 1); i<basicArray.length; i++){
             if(basicArray[i].isBooked===false){
                 $scope.cleanEndArray.push(basicArray[i]);
@@ -250,12 +250,11 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
         $scope.thisMeeting = function(){
 
             $scope.sharedTimeData.setConfirmedMeetingTimes($scope.data.selectStartTime.milsec, $scope.data.selectEndTime.milsec);
-            $scope.meetingDuration = ((durationMilliseconds)/3600000);
             console.log("This meeting is", $scope.meetingDuration, "long");
             var durationMilliseconds;
             var chargeByHour = 25;
             durationMilliseconds = ($scope.data.selectEndTime.milsec) - ($scope.data.selectStartTime.milsec);
-            $scope.meetingDuration = ((durationMilliseconds)/3600000);
+            $scope.meetingDuration = (((durationMilliseconds)/3600000));
             console.log("meetingDuration: ", $scope.meetingDuration);
 
             if($scope.memberAvailableHour === 0){
