@@ -117,7 +117,6 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
     function initializeCleanEndArray(){
         $scope.cleanEndArray = [];
         var fullClickedHourObject = findClickedHour(cleanArray, $scope.clickedHour);
-
         searchForStart($scope.allStartTimes, fullClickedHourObject);
         buildArray($scope.allStartTimes);
 
@@ -125,9 +124,11 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
 
     };
 
-    //The cleanEndTime function creates an array of available End Times
+
+    //The cleanEndTime function creates an array of available End Times on page load
     //based on the start time selected in the drop down
     $scope.cleanEndTime = initializeCleanEndArray;
+
 
     var findClickedHour = function(array, clickedhour){
         for(var i= 0; i < array.length; i++){
@@ -137,8 +138,6 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
         }
         console.log("uh oh");
     };
-
-
 
     var searchForStart = function(basicArray, availableTimeInfo) {
 
@@ -150,37 +149,49 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
             if ((basicArray[i].milsec) === (availableTimeInfo.milsec)) {
                 console.log("I made a match!");
                 startIndex = i;
+
             }
         }
     };
 
         //console.log("this is start index", startIndex);
 
-        //This for loop loops through an array based on the startIndex point established above
+        //This buildArray function loops through an array based on the startIndex point established above
         //Start Index is the index point of the selectedStartTime
         //The loop will create a new array of objects
 
     var buildArray = function(basicArray){
+        console.log("This is start index:", startIndex)
         for(var i = (startIndex + 1); i<basicArray.length; i++){
             if(basicArray[i].isBooked===false){
                 $scope.cleanEndArray.push(basicArray[i]);
             }else{
                 $scope.cleanEndArray.push(basicArray[i]);
-                break;
+                //break;
             }
         }
-        //console.log("this is cleanEndArray", $scope.cleanEndArray);
+        console.log("this is cleanEndArray", $scope.cleanEndArray);
 
     };
+        //The cleanEndTimeUpdate is called on the ng-change of the start time drop down
+        //It's job is to update the End Time dropdown display.
 
-    var constructCapacityObject = function(){
-        for(var i = 2; i <= roomCapacity; i++){
-            $scope.attendObject = {};
-            $scope.attendObject.attendees = (i).toString();
-            $scope.stageArray.push($scope.attendObject);
-        }
-    };
-    constructCapacityObject();
+        $scope.cleanEndTimeUpdate = function(){
+            $scope.cleanEndArray = [];
+            searchForStart($scope.allStartTimes,$scope.data.selectEndTime);
+            buildArray($scope.allStartTimes);
+            console.log("In cleanEndTimeUpdate", $scope.data.selectEndTime);
+        };
+    //
+    //    //CAPACITY OBJECT
+    //    var constructCapacityObject = function(){
+    //    for(var i = 2; i <= roomCapacity; i++){
+    //        $scope.attendObject = {};
+    //        $scope.attendObject.attendees = (i).toString();
+    //        $scope.stageArray.push($scope.attendObject);
+    //    }
+    //};
+    //constructCapacityObject();
     //console.log("here is room cap: ", roomCapacity);
     //console.log("here is stage array: ", $scope.stageArray);
 
@@ -202,15 +213,34 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
         availableCapacity: $scope.stageArray
     };
 
+        //CAPACITY OBJECT
+        var constructCapacityObject = function(){
+            for(var i = 2; i <= roomCapacity; i++){
+                $scope.attendObject = {};
+                $scope.attendObject.attendees = (i).toString();
+                $scope.stageArray.push($scope.attendObject);
+            }
+        };
+        constructCapacityObject();
+        console.log("here is room cap: ", roomCapacity);
+        console.log("here is stage array: ", $scope.stageArray);
+
+        $scope.thisMeeting = function(){
+            var durationMilliseconds;
+            durationMilliseconds = ($scope.data.selectEndTime.milsec) - ($scope.data.selectStartTime.milsec);
+            $scope.sharedTimeData.setConfirmedMeetingTimes($scope.data.selectStartTime.milsec, $scope.data.selectEndTime.milsec);
+            $scope.meetingDuration = ((durationMilliseconds)/3600000);
+            console.log("This meeting is", $scope.meetingDuration, "long");
+            //$scope.balance = $scope.memberAvailableHour - $scope.meetingDuration;
+            //console.log("balance: ", $scope.balance);
+            //var chargeByHour = 25;
+            //$scope.paymentDue = chargeByHour * $scope.meetingDuration;
+            //console.log("payment due", $scope.paymentDue);
+        };
+
     //THIS CONTROLS THE BOOKING SUMMARY DIV ON RESERVEBOOK VIEW
 
     $scope.available = 10;
-
-    $scope.balance = $scope.available - $scope.meetingDuration;
-    var chargeByHour = 25;
-    $scope.paymentDue = chargeByHour * $scope.meetingDuration;
-
-    //THIS CONTROLS THE BOOKING SUMMARY DIV ON RESERVEBOOK VIEW
 
     $scope.memberDataArray = {};
 
@@ -223,7 +253,7 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
                 console.log("In controller retrieve member: ", $scope.memberDataArray);
                 $scope.memberAvailableHour = $scope.memberDataArray.remainingIncludedHours;
                 console.log("memberavailablehour: ", $scope.memberAvailableHour);
-        //THIS CONTROLS THE BOOKING SUMMARY DIV ON RESERVEBOOK VIEW
+
 
                 if($scope.memberAvailableHour === 0){
                     $scope.showChargeMethod = true;
@@ -235,21 +265,6 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
         console.log("response back (in else controller): ", $scope.memberDataArray);
     }
 
-
-    $scope.thisMeeting = function(){
-        var durationMilliseconds;
-        durationMilliseconds = ($scope.selectEndTime.milsec) - ($scope.data.selectStartTime.milsec);
-        $scope.sharedTimeData.setConfirmedMeetingTimes($scope.data.selectStartTime.milsec, $scope.selectEndTime.milsec);
-        $scope.meetingDuration = ((durationMilliseconds)/3600000);
-        console.log("This meeting is", $scope.meetingDuration, "long");
-        $scope.balance = $scope.memberAvailableHour - $scope.meetingDuration;
-        console.log("balance: ", $scope.balance);
-        var chargeByHour = 25;
-        $scope.paymentDue = chargeByHour * $scope.meetingDuration;
-        console.log("payment due", $scope.paymentDue);
-    };
-
-    //$scope.thisMeeting();
 
     $scope.balance = $scope.available - $scope.meetingDuration;
     var chargeByHour = 25;
