@@ -65,7 +65,7 @@ myApp.factory('SharedTimeData', ["$http", function ($http) {
           return getMemberResponse()
                 .then(function (response) {
                     memberData = response.data;
-                    //console.log("In factory, here is memberdata: ", memberData);
+                    console.log("In factory, here is memberdata: ", memberData);
                     memberId = (memberData.id).toString();
                     memberName = memberData.firstName;
                     return getMemberData(memberId)

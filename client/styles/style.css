@@ -13,7 +13,7 @@
 .md-button.md-raised:hover {
     color: black;
 }
-/*styles for default view*************************************/
+
 
 .screen {
     background-color: #25ae90;
@@ -264,6 +264,7 @@ table, th, td {
 
 .summaryDiv {
     background-color: white;
+    height: 325px;
 }
 
 .charge {

@@ -19,6 +19,10 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
     $scope.meetingDuration = undefined;
     $scope.clickedHour = $scope.sharedTimeData.retrieveStartTime();
     console.log("here's clickedHour:", $scope.clickedHour);
+    $scope.showHoursMethod = true;
+    $scope.showHoursAndChargeMethod = false;
+    $scope.showChargeMethod = false;
+
     //$scope.selectEndTime = null;
     var startTime = {};
     var endTime = {};
@@ -122,7 +126,7 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
 
         //thisMeeting();
 
-    };
+    }
 
 
     //The cleanEndTime function creates an array of available End Times on page load
@@ -225,50 +229,52 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
         console.log("here is room cap: ", roomCapacity);
         console.log("here is stage array: ", $scope.stageArray);
 
+        $scope.memberDataArray = {};
+
+        if($scope.sharedTimeData.setMemberData() === undefined){
+            //console.log("first set is undefined (in controller).");
+            $scope.sharedTimeData.retrieveMemberData()
+                .then(function() {
+                    //console.log('retrieveMemberData:', data);
+                    $scope.memberDataArray = $scope.sharedTimeData.setMemberData();
+                    console.log("In controller retrieve member: ", $scope.memberDataArray);
+                    $scope.memberAvailableHour = $scope.memberDataArray.remainingIncludedHours;
+                    console.log("memberavailablehour: ", $scope.memberAvailableHour);
+                });
+        } else {
+            //console.log("In else on controller");
+            $scope.memberDataArray = $scope.sharedTimeData.setMemberData();
+            console.log("response back (in else controller): ", $scope.memberDataArray);
+        }
+
         $scope.thisMeeting = function(){
-            var durationMilliseconds;
-            durationMilliseconds = ($scope.data.selectEndTime.milsec) - ($scope.data.selectStartTime.milsec);
+
             $scope.sharedTimeData.setConfirmedMeetingTimes($scope.data.selectStartTime.milsec, $scope.data.selectEndTime.milsec);
             $scope.meetingDuration = ((durationMilliseconds)/3600000);
             console.log("This meeting is", $scope.meetingDuration, "long");
-            //$scope.balance = $scope.memberAvailableHour - $scope.meetingDuration;
-            //console.log("balance: ", $scope.balance);
-            //var chargeByHour = 25;
-            //$scope.paymentDue = chargeByHour * $scope.meetingDuration;
-            //console.log("payment due", $scope.paymentDue);
+            var durationMilliseconds;
+            var chargeByHour = 25;
+            durationMilliseconds = ($scope.data.selectEndTime.milsec) - ($scope.data.selectStartTime.milsec);
+            $scope.meetingDuration = ((durationMilliseconds)/3600000);
+            console.log("meetingDuration: ", $scope.meetingDuration);
+
+            if($scope.memberAvailableHour === 0){
+                $scope.showHoursMethod = false;
+                $scope.showChargeMethod = true;
+                $scope.paymentDue = chargeByHour * $scope.meetingDuration;
+                //$scope.showHoursAndChargeMethod = false;
+            } else if($scope.memberAvailableHour < $scope.meetingDuration){
+                $scope.showHoursMethod = false;
+                $scope.showHoursAndChargeMethod = true;
+                $scope.paymentDue = chargeByHour * ($scope.meetingDuration - $scope.memberAvailableHour);
+            }
+
+            $scope.balance = $scope.memberAvailableHour - $scope.meetingDuration;
+            console.log("balance: ", $scope.balance);
+            console.log("payment due", $scope.paymentDue);
         };
 
     //THIS CONTROLS THE BOOKING SUMMARY DIV ON RESERVEBOOK VIEW
-
-    $scope.available = 10;
-
-    $scope.memberDataArray = {};
-
-    if($scope.sharedTimeData.setMemberData() === undefined){
-        //console.log("first set is undefined (in controller).");
-        $scope.sharedTimeData.retrieveMemberData()
-            .then(function() {
-                //console.log('retrieveMemberData:', data);
-                $scope.memberDataArray = $scope.sharedTimeData.setMemberData();
-                console.log("In controller retrieve member: ", $scope.memberDataArray);
-                $scope.memberAvailableHour = $scope.memberDataArray.remainingIncludedHours;
-                console.log("memberavailablehour: ", $scope.memberAvailableHour);
-
-
-                if($scope.memberAvailableHour === 0){
-                    $scope.showChargeMethod = true;
-                }
-            });
-    } else {
-        //console.log("In else on controller");
-        $scope.memberDataArray = $scope.sharedTimeData.setMemberData();
-        console.log("response back (in else controller): ", $scope.memberDataArray);
-    }
-
-
-    $scope.balance = $scope.available - $scope.meetingDuration;
-    var chargeByHour = 25;
-    $scope.paymentDue = chargeByHour * $scope.meetingDuration;
 
     $scope.nevermind = function(){
         $location.path("/defaultscreen");
@@ -278,3 +284,9 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
     };
 
 }]);
+
+
+//jason@foundrymakes.com / 64W955Aq
+
+//jason.spidle@gmail.com / LxLiWyE2
+

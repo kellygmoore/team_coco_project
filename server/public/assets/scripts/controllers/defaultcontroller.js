@@ -67,9 +67,6 @@ myApp.controller('DefaultCtrl', ["$scope", "$location", "SharedRoomData", "Share
         if($scope.meetingTimesArray.length > 0) {
             while (currentTime > $scope.meetingTimesArray[0].endTime) {
                 $scope.meetingTimesArray.shift();
-                if($scope.meetingTimesArray.length === 0){
-                    $scope.noScheduledMeetinglogic();
-                }
             }
             if(currentTime > $scope.meetingTimesArray[0].startTime){
                 $scope.activeMeetingLogic();

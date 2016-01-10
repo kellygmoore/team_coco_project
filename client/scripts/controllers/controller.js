@@ -82,7 +82,7 @@ myApp.controller('TimeCtrl', ["$scope", "$timeout", "$location", function($scope
                         //find room match, then push start times, end times, and name onto arrays
                         if ($scope.booking[i].meetingRoom.name === localStorage.selectRoomName) {
                             //save the names to new array
-                            bookedName.push($scope.booking[i].payor.fullName);
+                            //bookedName.push($scope.booking[i].payor.fullName);
                             //pull off the start dates into array
                             dateStartString[i] = $scope.booking[i].startDate;
                             //console.log("StartDate: ", dateStartString[i]);
@@ -147,7 +147,7 @@ myApp.controller('TimeCtrl', ["$scope", "$timeout", "$location", function($scope
                                             }
 
                                             //console.log("match true? ", $scope.timeArray[j].isBooked);
-                                            $scope.whoInRoom = $scope.nameInRoom[k];
+                                            $scope.whoInRoom = "";
                                         }
                                         //else {
                                         //$scope.timeArray.isBooked = true;
@@ -231,21 +231,21 @@ myApp.controller('TimeCtrl', ["$scope", "$timeout", "$location", function($scope
 
 //Controller for RESERVATION view page///////////////////////////////////////////////
 
-myApp.controller('ReserveCtrl', ["$scope", "$location", function($scope, $location){
-
-    //change out to data from Bamboo
-    $scope.available = 10;
-    $scope.thisMeeting = 2;
-    $scope.balance = $scope.available - $scope.thisMeeting;
-    var chargeByHour = 25;
-    $scope.paymentDue = chargeByHour * $scope.thisMeeting;
-
-    $scope.nevermind = function(){
-        $location.path("/defaultscreen");
-    };
-    $scope.goback = function(){
-        $location.path("/bookingscreen");
-    }
-}]);
+//myApp.controller('ReserveCtrl', ["$scope", "$location", function($scope, $location){
+//
+//    //change out to data from Bamboo
+//    $scope.available = 10;
+//    $scope.thisMeeting = 2;
+//    $scope.balance = $scope.available - $scope.thisMeeting;
+//    var chargeByHour = 25;
+//    $scope.paymentDue = chargeByHour * $scope.thisMeeting;
+//
+//    $scope.nevermind = function(){
+//        $location.path("/defaultscreen");
+//    };
+//    $scope.goback = function(){
+//        $location.path("/bookingscreen");
+//    }
+//}]);
 
 

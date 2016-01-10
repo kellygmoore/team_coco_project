@@ -53,13 +53,13 @@
             <h3>Booking Summary</h3>
         </div>
         <div class="summaryDiv" layout="column" layout-align="space-around center">
-            <div ng-hide="true">
-                <p>Available: <em>{{availableMemberHours}}</em></p>
+            <div ng-show="showHoursMethod">
+                <p>Available: <em>{{memberAvailableHour}}</em></p>
                 <p>This meeting: <em>{{meetingDuration}}</em></p>
                 <p>Balance: <em>{{balance}}</em></p>
             </div>
-            <div ng-hide="true">
-                <p>Available: <em>{{availableMemberHours}}</em></p>
+            <div ng-show="showHoursAndChargeMethod">
+                <p>Available: <em>{{memberAvailableHour}}</em></p>
                 <p>This meeting: <em>{{meetingDuration}}</em></p>
                 <p>Payment Due: <em>${{paymentDue}}</em></p>
             </div>
@@ -69,11 +69,10 @@
                 </p>
             </div>
             <div class="bookItButton">
-                <button class="md-button" ng-click="nevermind()">Nevermind</button>
+                <button class="md-button" ng-click="nevermind()">No thanks</button>
                 <button ng-controller="AppCtrl" ng-click="bookingSuccess()" class="md-button md-raised">Book It!</button>
             </div>
         </div>
     </div>
 </div>
-
 

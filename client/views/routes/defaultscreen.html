@@ -15,7 +15,7 @@
         </p>
     </div>
     <div class="next-mtg-div" ng-hide="roomBooked">
-        <p ng-hide="hasMeetings">next meeting at</p>
+        <p ng-show="meetingTimesArray[0]">next meeting at</p>
         <p class="time">{{nextMtgAt}}</p>
     </div>
     </div>

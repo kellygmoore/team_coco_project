@@ -153,26 +153,13 @@ myApp.controller('ConfigController', ["$scope","$http","$location","TimeOut", fu
                 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
             }
         }).success(function( response ) {
-
-
-
                 console.log("whats me",response);
                 //console.log("location respone", $scope.availableLocation);
-
-
 
             }
         );
 
     };
-
-
-
-
-
-
-
-
 
 }]);
 
