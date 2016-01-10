@@ -137,7 +137,6 @@ table, th, td {
     list-style-type: none;
     margin: auto;
     width: 750px;
-    overflow: scroll;
 }
 
 .timeSelectOval {
