@@ -19,6 +19,7 @@
     background-color: #25ae90;
     width: 800px;
     height: 1280px;
+    margin: auto;
 }
 
 .room-name-div {
@@ -123,7 +124,8 @@ header {
 .screenCalendar {
     width: 800px;
     height: 1280px;
-    margin: 20px;
+    /*margin: 20px;*/
+    margin: auto;
 
 }
 
@@ -191,7 +193,9 @@ table, th, td {
 
 .reserveBook {
     /*border: 5px ridge #F3B449;*/
-    width: 100%;
+    /*width: 100%;*/
+    width: 800px;
+    height: 1280px;
     margin: auto;
     background-color: #fcf0da;
 }
