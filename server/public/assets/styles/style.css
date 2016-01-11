@@ -78,10 +78,10 @@ header {
     /*border: 2px dashed red;*/
 }
 
-#reservationHeader {
-    width: 100%;
-    height: 10%;
-}
+/*#reservationHeader {*/
+    /*width: 100%;*/
+    /*height: 10%;*/
+/*}*/
 
 #login-button {
     background-color: #25ae90;
@@ -192,39 +192,38 @@ table, th, td {
 
 
 .reserveBook {
-    /*border: 5px ridge #F3B449;*/
     /*width: 100%;*/
     width: 800px;
     height: 1280px;
     margin: auto;
-    background-color: #fcf0da;
+    background-color: white;
 }
+
+
 
 .selectStartTime, .selectEndTime, .selectAttendance {
     width: 55%;
     margin: auto;
 }
 
-
-
-
-
-.incrementDiv {
-    /*border: 5px ridge #F3B449;*/
-
-}
 .selectTime{
     margin: auto;
-    /*border: 5px ridge #F3B449;*/
-    background-color: white;
+    border: 5px ridge #F3B449;
+    background-color: floralwhite;
     width: 66%;
     text-align: center;
     /*font-family: "Nothing You Could Do", Arial, sans-serif;*/
 }
 
 .selectTime h1{
+    font-family: "Nothing You Could Do", Arial, sans-serif;
     text-align: center;
-    padding: 10px;
+    padding: 15px;
+    margin-top: 0px;
+    background-color: #F3B449;
+    border-bottom: 5px ridge #F3B449;
+
+
 }
 
 .selectStartTime select, .selectEndTime select, .selectAttendance select{
@@ -238,26 +237,39 @@ table, th, td {
 
 #bookingSummary {
     border: 5px ridge #F3B449;
+    border-top: none;
     width: 66%;
     margin: auto;
-    font-size: 28px
+    font-size: 28px;
+    text-align: center;
+
 }
 
 .summaryHeader {
+    font-family: "Nothing You Could Do", Arial, sans-serif;
     background-color: #F3B449;
-    padding: 15px 0 0 0;
+    /*padding: 15px 0 0 0;*/
     border-bottom: 5px ridge #F3B449;
+    text-align: center;
+    padding-left: 105px;
+
 }
 
 .summaryHeader h3 {
     margin-top: 0;
+    margin-bottom: 0;
     text-align: center;
     font-size: 32px;
+    padding: 15px;
+
 }
 
 .summaryDiv {
-    background-color: white;
     height: 325px;
+    background-color: floralwhite;
+    text-align: left;
+    padding-left: 5px;
+
 }
 
 .charge {
