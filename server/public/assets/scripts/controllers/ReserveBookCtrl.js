@@ -2,8 +2,8 @@
  * Created by samuelmoss on 1/4/16.
  */
 
-myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'SharedBookedNameData', 'dateFilter', 'TimeOut',
-    function($scope, $location, SharedTimeData, SharedBookedNameData, dateFilter, TimeOut){
+myApp.controller('ReserveBookCtrl',['$scope', '$http','$mdDialog','$mdMedia','$location', 'SharedTimeData', 'SharedBookedNameData', 'dateFilter', 'TimeOut',
+    function($scope,$http,$mdDialog,$mdMedia, $location, SharedTimeData, SharedBookedNameData, dateFilter, TimeOut){
 
     //console.log("we are in the RBC");
     //RESERVEBOOK SCREEN
@@ -273,10 +273,104 @@ myApp.controller('ReserveBookCtrl',['$scope', '$location', 'SharedTimeData', 'Sh
         $location.path("/bookingscreen");
     };
 
+
+
+        //// Post call to book room for the selected amount of time
+        $scope.bookThatMeeting = function (memberId,startTime,endTime,numOfAttendees){
+            console.log("is this the start time?",$scope.data.selectStartTime.milTime);
+            console.log("is this the end time?",$scope.data.selectEndTime.milTime);
+            console.log("is this the end time?",$scope.data.selectAttendance.attendees);
+
+
+            ////Create the book Room Variables
+            //// Start and end Times need to be in 24 hours
+            var startDate = dateFilter(Date.now(),'yyyy-MM-dd');
+            var startTime= $scope.data.selectStartTime.milTime +":00";
+            var endDate = dateFilter(Date.now(),'yyyy-MM-dd');
+            var endTime=$scope.data.selectEndTime.milTime + ":00";
+            var meetingRoomId = localStorage.selectRoomId;
+            var numOfAttendees=$scope.data.selectAttendance.attendees;
+            var description="Request made from room Tablet";
+            var personId = $scope.sharedTimeData.setMemberData().memberId;
+
+            console.log("is this the start time?",startTime);
+            console.log("is this personid?",personId);
+            console.log("is this the end time?",$scope.data.selectAttendance.attendees);
+            console.log("is this memberdata?", $scope.sharedTimeData.setMemberData().memberId);
+
+            $http({
+                method: "POST",
+                url: "http://testing.bamboo.cocomsp.com/api/meetings",
+                data: "startDate="+ startDate +"T"+startTime+"&endDate=" +endDate+"T" +endTime+ "&meetingRoomId="
+                +meetingRoomId+"&numOfAttendees=" +numOfAttendees+ "&description="+description+ "&personId="+ personId,
+                withCredentials: true,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+                }
+            }).then(function successCallback(ev) {
+                console.log("hey it works");
+
+
+
+                $mdDialog.show({
+                    controller: okController,
+                    templateUrl: 'assets/views/routes/bookingSuccess.html',
+                    parent: angular.element(document.body),
+                    targetEvent: ev,
+                    clickOutsideToClose:true,
+                    fullscreen: $mdMedia('sm') && $scope.customFullscreen
+                });
+
+                $scope.$watch(function() {
+                    return $mdMedia('sm');
+                }, function(sm) {
+                    $scope.customFullscreen = (sm === true);
+                });
+
+
+
+
+
+                    // this callback will be called asynchronously
+                    // when the response is available
+                }, function errorCallback(response) {
+                console.log("Nopes");
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                });
+
+
+
+        };
+
+
+
+//This provides functionality in the booking success/failure modals(bookingSuccess.html & bookingFail.html).
+//When user clicks OK they will be redirected to the default screen.
+
+        function okController ($scope, $location, $mdDialog) {
+            $scope.gotoDefault = function(){
+                console.log("OK is clicked");
+                $location.path('/defaultscreen');
+                $scope.cancel = function() {
+                    $mdDialog.cancel();
+                };
+                $mdDialog.cancel();
+            }
+        }
+
+
+
+
+
 }]);
 
 
 //jason@foundrymakes.com / 64W955Aq
 
 //jason.spidle@gmail.com / LxLiWyE2
+
+
+
+
 

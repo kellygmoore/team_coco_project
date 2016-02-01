@@ -1,10 +1,14 @@
 //////*****CONTROLLER FOR MODAL WINDOWS: LOGIN/SUCCESSFUL BOOK & FAILED TO BOOK
 
-myApp.controller('AppCtrl', ['$scope', '$mdDialog', '$mdMedia', '$location', function($scope, $mdDialog, $mdMedia, $location){
+myApp.controller('AppCtrl', ['$scope', '$mdDialog', '$mdMedia', '$location','dateFilter','SharedTimeData', function($scope, $mdDialog, $mdMedia,dateFilter,SharedTimeData ,$location){
 
     $scope.status = '  ';
 
     $scope.customFullscreen = $mdMedia('sm');
+
+    //$scope.sharedTimeData = SharedTimeData;
+    //$scope.meetingTimesObject = $scope.sharedTimeData.retrieveConfirmedMeetingTimes();
+
 
     //Holds the number of people and hours of the meeting
 
@@ -52,6 +56,45 @@ myApp.controller('AppCtrl', ['$scope', '$mdDialog', '$mdMedia', '$location', fun
     //Modal displays if booking is successful
     $scope.bookingSuccess = function(ev) {
         console.log("show success booking");
+
+        //console.log("factory", $scope.meetingTimesObject);
+
+// Book Room POST
+//$scope.bookThatMeeting = function (memberId,startTime,endTime,numOfAttendees){
+//
+//
+//
+//        ////Create the book Room Variables
+//        //// Start and end Times need to be in 24 hours
+//        var startDate = dateFilter(Date.now(),'yyyy-MM-dd');
+//        //var startTime= "14:00:00";
+//        var endDate = dateFilter(Date.now(),'yyyy-MM-dd');
+//        //var endTime="14:30:00";
+//        var meetingRoomId = localStorage.selectRoomId;
+//        //var numOfAttendees="3";
+//        var description="Request made from room Tablet";
+//        var personId = memberId;
+//
+//
+//        //$http({
+//        //    method: "POST",
+//        //    url: "http://testing.bamboo.cocomsp.com/api/meetings",
+//        //    data: "startDate="+ startDate +"T"+startTime+"&endDate=" +endDate+"T" +endTime+ "&meetingRoomId="
+//        //    +meetingRoomId+"&numOfAttendees=" +numOfAttendees+ "&description="+description+ "&personId="+ personId,
+//        //    withCredentials: true,
+//        //    headers: {
+//        //        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+//        //    }
+//        //}).success(
+//        //    function( response ) {
+//        //        console.log("this is bookingroom response", response);
+//        //    }
+//        //);
+//
+//
+//
+//};
+
         $mdDialog.show({
             controller: okController,
             templateUrl: 'assets/views/routes/bookingSuccess.html',

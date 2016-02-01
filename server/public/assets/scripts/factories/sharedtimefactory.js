@@ -71,7 +71,8 @@ myApp.factory('SharedTimeData', ["$http", function ($http) {
                     return getMemberData(memberId)
                         .then(function (response) {
                             memberMeetingData = response.data;
-                            //console.log("TOP membermeetingdata: ", memberMeetingData);
+                            memberMeetingData.memberId=memberId;
+                            console.log("TOP membermeetingdata: ", memberMeetingData);
                             return memberMeetingData;
                         });
                 }
