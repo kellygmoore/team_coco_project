@@ -221,7 +221,7 @@ myApp.controller('TimeCtrl', ["$scope", "$timeout", "$location", function($scope
     $scope.sharedTimeData = SharedTimeData;
     //
     $scope.tapToBook=function(hour){
-
+        console.log("I'm tapped");
         $scope.sharedTimeData.setTimeData(hour, $scope.timeArray, $scope.booking[0].meetingRoom.maxOccupancy);
 
         $location.path("/reserveBookScreen");

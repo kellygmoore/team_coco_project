@@ -90,8 +90,8 @@ myApp.controller('ReserveBookCtrl',['$scope', '$http','$mdDialog','$mdMedia','$l
 
     //The following populates the dropdown menus on the reserveBookScreen
 
-   //The cleanStartTime function takes passes in the array of all available times for the room
-    //It takes out anytimes that are booked and makes a new array called cleanArray
+   //The cleanStartTime function passes in the array of all available times for the room
+    //It takes out any times that are booked and makes a new array called cleanArray
     //The cleanArray is used to display the available start times of a meeting
 
     var cleanStartTime = function(dirtyArray){
@@ -193,8 +193,10 @@ myApp.controller('ReserveBookCtrl',['$scope', '$http','$mdDialog','$mdMedia','$l
 
 
     console.log("about to init cleanEndArray on initial load");
-    initializeCleanEndArray();
-    console.log("finished init-ing cleanEndArray on initial load", $scope.cleanEndArray);
+
+        initializeCleanEndArray();
+
+        console.log("finished init-ing cleanEndArray on initial load", $scope.cleanEndArray);
 
     //This is the model used for the start time & attendance dropdown menu
     $scope.data = {
@@ -236,7 +238,6 @@ myApp.controller('ReserveBookCtrl',['$scope', '$http','$mdDialog','$mdMedia','$l
         $scope.thisMeeting = function(){
 
             $scope.sharedTimeData.setConfirmedMeetingTimes($scope.data.selectStartTime.milsec, $scope.data.selectEndTime.milsec);
-            console.log("This meeting is", $scope.meetingDuration, "long");
             var durationMilliseconds;
             var chargeByHour = 25;
             durationMilliseconds = ($scope.data.selectEndTime.milsec) - ($scope.data.selectStartTime.milsec);
@@ -345,7 +346,8 @@ myApp.controller('ReserveBookCtrl',['$scope', '$http','$mdDialog','$mdMedia','$l
 
 
 
-//This provides functionality in the booking success/failure modals(bookingSuccess.html & bookingFail.html).
+//This provides functionality in the booking success/failure modals
+// (bookingSuccess.html & bookingFail.html)
 //When user clicks OK they will be redirected to the default screen.
 
         function okController ($scope, $location, $mdDialog) {
