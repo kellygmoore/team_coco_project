@@ -4,12 +4,13 @@
         <h1>{{room}}</h1>
 
         <div class="displayName">
-            <h4 ng-hide="false">Badge or
+            <h4 ng-hide="true">Badge or
                 <button ng-controller="AppCtrl" id=login-button class="md-button md-raised" ng-click="showLogin($event)" flex-sm="100" flex-md="100" flex-gt-md="auto">
                     Login
                 </button>
             </h4>
-            <h4 ng-hide="true">Member: <span class="bookingMember">{{bookingMember}}</span></h4>
+            <!--<h4 ng-hide="false">Member: <span class="bookingMember">{{bookingMember}}</span></h4>-->
+            <h4 ng-hide="false">Welcome <span class="bookingMember">Kelly!</span></h4>
         </div>
 
 

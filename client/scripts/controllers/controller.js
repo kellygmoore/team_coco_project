@@ -120,7 +120,7 @@ myApp.controller('TimeCtrl', ["$scope", "$timeout", "$location", function($scope
 
                             $scope.timeStringArray = timeStringArray;
                             $scope.endTimeStringArray = endTimeStringArray;
-                            $scope.nameInRoom = bookedName;
+                            //$scope.nameInRoom = bookedName;
 
                             //as ng-repeat in calendarview.html is building calendar,
                             //loops over timeArray and timeStringArray to find matched hours
@@ -129,7 +129,7 @@ myApp.controller('TimeCtrl', ["$scope", "$timeout", "$location", function($scope
 
                             console.log("timestringarray: ", $scope.timeStringArray);
                             console.log("endtimestringarray: ", endTimeStringArray);
-                            console.log("timearray: ", $scope.timeArray);
+                            //console.log("timearray: ", $scope.timeArray);
                             for(k=0; k<$scope.timeStringArray.length; k++) {
                                 for(j=0; j<$scope.timeArray.length; j++){
 
