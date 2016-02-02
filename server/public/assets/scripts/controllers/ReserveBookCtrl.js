@@ -229,11 +229,16 @@ myApp.controller('ReserveBookCtrl',['$scope', '$http','$mdDialog','$mdMedia','$l
                     console.log("In controller retrieve member: ", $scope.memberDataArray);
                     $scope.memberAvailableHour = $scope.memberDataArray.remainingIncludedHours;
                     console.log("memberavailablehour: ", $scope.memberAvailableHour);
+                    $scope.balance = $scope.memberAvailableHour - $scope.meetingDuration;
                 });
         } else {
             $scope.memberDataArray = $scope.sharedTimeData.setMemberData();
             console.log("response back (in else controller): ", $scope.memberDataArray);
         }
+
+        //$scope.balance = $scope.memberAvailableHour - $scope.meetingDuration;
+        //console.log("balance: ", $scope.balance);
+        //console.log("payment due", $scope.paymentDue);
 
         $scope.thisMeeting = function(){
 
